@@ -1,0 +1,213 @@
+/*---------------------------------------------*/
+
+
+/* BASIC SETUP
+/*---------------------------------------------*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+	background-color: #fff;
+	color: #555;
+	font-family: 'Lato', 'Arial', sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	text-rendering: optimizeLegibility;
+	overflow-x: hidden;
+}
+
+.modal {
+	margin-top: 50px;
+}
+
+header {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/backGround.jpg);
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+}
+
+.page-heading {
+	position: absolute;
+	width: 1140px;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+	transform: translate(-50%, -50%);
+}
+
+h1 {
+	color: #fff;
+	font-size: 150%;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	word-spacing: 3px;
+}
+
+h2 {
+	color: #fff;
+	font-size: 150%;
+	font-weight: 300;
+	margin-top: 0;
+	text-transform: capitalize;
+	letter-spacing: 1px;
+	word-spacing: 3px;
+}
+
+.page-heading .signup-btn:link,
+.page-heading .signup-btn:visited {
+	display: inline-block;
+	padding: 10px 30px;
+	font-weight: 300;
+	text-decoration: none;
+	background-color: #e67e22;
+	border-radius: 200px;
+	color: #fff;
+}
+
+.page-heading .signup-btn:hover,
+.page-heading .signup-btn:active {
+	background-color: #cf6d17;
+}
+
+.navbar {
+	background-color: #4B77BE;
+}
+
+.navbar .nav-style a {
+	color: #fff;
+	text-transform: uppercase;
+}
+
+.navbar .nav-style a:hover,
+.navbar .nav-style a:active {
+	color: #fff;
+}
+
+.navbar .nav-style a:link,
+.navbar .nav-style a:visited {
+	color: #fff;
+}
+
+.navbar .nav-item-style li a {
+	color: #fff;
+}
+
+.navbar .nav-item-style li a:link,
+.navbar .nav-item-style li a:visited {
+	color: #fff;
+}
+
+.navbar .nav-item-style li a:hover,
+.navbar .nav-item-style li a:active {
+	color: #fff;
+}
+
+
+/*---------------------------------------------*/
+
+
+/* Create Group Styling
+/*---------------------------------------------*/
+
+.page-description {
+	height: 80px;
+	padding-left: 20px;
+	padding: 20px;
+	margin-bottom: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: #19B5FE;
+	color: #fff;
+}
+
+.group-txt-area {
+	width: 600px;
+	margin-bottom: 8px;
+}
+
+.add-member-title {
+	height: 70px;
+	width: 600px;
+	margin: 20px 270px;
+	border-bottom: 2px solid;
+	padding: 20px;
+	text-align: center;
+	text-transform: uppercase;
+	background-color: #000;
+	color: #fff;
+}
+
+footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 50px;
+	padding: 10px;
+	margin-top: 200px;
+	background-color: #BDC3C7;
+	color: #fff;
+	text-align: center;
+}
+
+.add-btn {
+	margin-bottom: 10px;
+}
+
+.next-members {
+	float: right;
+	margin-right: 200px;
+	clear: left;
+}
+
+
+/*---------------------------------------------*/
+
+
+/* Post Message Page Styling
+/*---------------------------------------------*/
+
+.select-group {
+	float: left;
+	width: 30%;
+}
+
+.select-group label,
+#msg-label {
+	background-color: #000;
+	padding: 10px;
+	color: #fff;
+}
+
+.message {
+	float: right;
+	width: 60%;
+}
+
+
+/*---------------------------------------------*/
+
+
+/* Show message styling
+/*---------------------------------------------*/
+
+.group-name {
+	height: 40px;
+	width: 200px;
+	padding: 10px;
+	text-align: center;
+	background-color: #000;
+	color: #fff;
+}
+
+#post-txt textarea {
+	padding: 10px;
+}
