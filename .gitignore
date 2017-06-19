@@ -6,5 +6,4 @@ routes/
 server/node_modules/
 node_modules/
 server/models/
-server/app.js
 
