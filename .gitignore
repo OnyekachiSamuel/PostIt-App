@@ -7,6 +7,6 @@ server/node_modules/
 node_modules/
 server/models/index.js
 server/models/messages.js
-server/models/groupMembers.js
+
 
 
