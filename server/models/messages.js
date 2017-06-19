@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
+import config from '../config';
 
-const sequelize = new Sequelize('postgres://ponsukiz:OhlSDPBe6FHbcChTF-HHmaVl68gMj5WP@stampy.db.elephantsql.com:5432/ponsukiz');
+const sequelize = new Sequelize(config.url);
 
 const Messages = sequelize.define('Messages', {
   id: {
@@ -26,7 +27,7 @@ const Messages = sequelize.define('Messages', {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
     references: {
-      model: 'Group',
+      model: 'Groups',
       key: 'id',
       as: 'groupId'
     }
@@ -39,7 +40,7 @@ const Messages = sequelize.define('Messages', {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
       });
-      Messages.belongsTo(models.Group, {
+      Messages.belongsTo(models.Groups, {
         foreignKey: 'groupId',
         onDelete: 'CASCADE',
       });

@@ -1,5 +1,7 @@
 import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
+import passport from 'passport';
+import { Strategy as LocalStrategy } from 'passport-local';
 import config from '../config';
 import Users from '../models/users';
 import Group from '../models/group';
@@ -52,9 +54,34 @@ export default class ApiController {
     });
   }
 
-  /* static signin(req, res, next) {
-    const username = req.body.username,
-      password = req.body.password;
+  static signin(req, res, next) {
+    passport.use(new LocalStrategy(
+      (username, password, done) => {
+        Users.findOne({ username }, (err, user) => {
+          if (err) { return done(err); }
+          if (!user) {
+            return done(null, false, { message: 'Incorrect username.' });
+          }
+          if (!user.validPassword(password)) {
+            return done(null, false, { message: 'Incorrect password.' });
+          }
+          return done(null, user);
+        });
+      }
+    ));
+
+    passport.serializeUser((user, done) => {
+      done(null, user.id);
+    });
+    passport.deserializeUser((id, done) => {
+      Users.findById(id, (err, user) => {
+        done(err, user);
+      });
+    });
+  }
+
+  /* static validPassword(password, databasePassword) {
+    return bcrypt.compareSync(password, databasePassword);
   }*/
 
   /**
@@ -65,14 +92,16 @@ export default class ApiController {
  * @return {obj} Returns success or failure message with data
  */
   static createGroup(req, res, next) {
-    return Group.create(req.body).then((group) => {
-      res.status(200).json({
-        status: 'success',
-        data: group,
-        message: 'Group Created'
+    return Group.sync({ force: true }).then(() => {
+      Group.create(req.body).then((group) => {
+        res.status(200).json({
+          status: 'success',
+          data: group,
+          message: 'Group Created'
+        });
+      }).catch((err) => {
+        next(err);
       });
-    }).catch((err) => {
-      next(err);
     });
   }
 
@@ -105,9 +134,8 @@ export default class ApiController {
  * @return {obj} Returns success message with data or failure message
  */
   static messages(req, res, next) {
-    const message = req.body.message;
     return Messages.sync({ force: true }).then(() => {
-      Messages.create(message).then((content) => {
+      Messages.create(req.body).then((content) => {
         res.status(200).json({
           status: 'success',
           data: content,
@@ -116,6 +144,30 @@ export default class ApiController {
       }).catch((err) => {
         next(err);
       });
+    });
+  }
+
+  /**
+ * @return {json} Success message with results or error message
+ * @param {obj} req
+ * @param {obj} res
+ * @param {obj} next
+ *
+ */
+  static getMessages(req, res, next) {
+    const groupId = req.params.groupId;
+    Messages.findAll({
+      where: {
+        groupId
+      }
+    }).then((result) => {
+      res.status(200).json({
+        status: 'Success',
+        data: result,
+        message: 'Message received'
+      });
+    }).catch((err) => {
+      next(err);
     });
   }
 }

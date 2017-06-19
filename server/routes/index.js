@@ -21,5 +21,7 @@ router.post('/group/:id/user', controller.groups);
 // Route to post messages to groups
 router.post('/group/:groupId/messages', controller.messages);
 
+// Route to get messages posted to groups
+router.get('/group/:groupId/messages', controller.getMessages);
 
 export default router;

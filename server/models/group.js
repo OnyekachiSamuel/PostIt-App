@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import config from '../config';
 
 const sequelize = new Sequelize(config.url);
-const Group = sequelize.define('Group', {
+const Group = sequelize.define('Groups', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -15,6 +15,9 @@ const Group = sequelize.define('Group', {
   },
   groupCategory: {
     type: Sequelize.STRING
+  },
+  users: {
+    type: Sequelize.INTEGER,
   },
   userId: {
     type: Sequelize.INTEGER,
@@ -29,7 +32,7 @@ const Group = sequelize.define('Group', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Group.belongsTo(models.Groups, {
+      Group.hasMany(models.GroupMembers, {
         foreignKey: 'groupId',
         as: 'groupId'
       });

@@ -26,7 +26,7 @@ const Users = sequelize.define('Users', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Users.hasMany(models.Group, {
+      Users.hasMany(models.Groups, {
         foreignKey: 'userId',
         as: 'userId'
       });

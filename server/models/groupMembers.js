@@ -26,7 +26,7 @@ const Groups = sequelize.define('GroupMembers', {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
     references: {
-      model: 'Group',
+      model: 'Groups',
       key: 'id',
       as: 'groupId'
     }

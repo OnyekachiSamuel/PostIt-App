@@ -3,7 +3,12 @@ client/
 migrations/
 server/node_modules/
 node_modules/
-server/models/index.js
+server/models/
+server/controllers/controller.js/
+server/app.js/
+server/config.js
+server/package.json
+server/routes/index.js
 
 
 

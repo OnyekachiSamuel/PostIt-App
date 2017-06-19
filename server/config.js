@@ -1,4 +1,4 @@
 module.exports = {
-  url: 'postgres://ponsukiz:OhlSDPBe6FHbcChTF-HHmaVl68gMj5WP@stampy.db.elephantsql.com:5432/ponsukiz'
+  url: 'postgres://ginrbijq:cNxkZwnHg7uO9sNoSAV0r6-stJmd_whH@pellefant.db.elephantsql.com:5432/ginrbijq'
 };
 
