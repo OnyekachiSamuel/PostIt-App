@@ -5,5 +5,9 @@ migrations/
 routes/
 server/node_modules/
 node_modules/
-server/models/
+server/models/group.js
+server/models/index.js
+server/models/messages.js
+server/models/groupMembers.js
+
 
