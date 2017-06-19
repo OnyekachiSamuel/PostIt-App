@@ -3,10 +3,6 @@ client/
 migrations/
 server/node_modules/
 node_modules/
-server/models/
-server/routes/
-server/app.js
-server/config.js
 server/tests/
 
 
