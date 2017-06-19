@@ -1,6 +1,5 @@
 template/
 client/
-controllers/
 migrations/
 routes/
 server/node_modules/
