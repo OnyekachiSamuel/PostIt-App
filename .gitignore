@@ -1,7 +1,6 @@
 template/
 client/
 migrations/
-routes/
 server/node_modules/
 node_modules/
 server/models/index.js
