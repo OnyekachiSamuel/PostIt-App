@@ -4,6 +4,7 @@ migrations/
 server/node_modules/
 node_modules/
 server/tests/
+server/controllers/
 
 
 
