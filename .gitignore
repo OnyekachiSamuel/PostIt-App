@@ -1,13 +1,9 @@
 template/
+server/app.js
 client/
 migrations/
 server/node_modules/
 node_modules/
 server/tests/
 server/controllers/
-
-
-
-
-
-
+server/routes/
