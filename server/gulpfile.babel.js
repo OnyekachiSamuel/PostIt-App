@@ -5,20 +5,28 @@ import istanbulReport from 'gulp-istanbul-report';
 import coveralls from 'gulp-coveralls';
 import istanbul from 'gulp-babel-istanbul';
 import injectModules from 'gulp-inject-modules';
+import jasmine from 'gulp-jasmine';
+import exit from 'gulp-exit';
 import mocha from 'gulp-mocha';
 // import babel from 'babel-register';
 
 
 
 gulp.task('transpile', () => {
-  gulp.src(['models/*js', 'routes/index.js', 'tests/*js', 'app.js', 'config.js'])
+  gulp.src(['models/*js', 'routes/index.js', 'spec/routesTestSpec.js', 'tests/*js', 'app.js', 'config.js'])
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(gulp.dest('dist/'));
 });
 
-
+// Run the tests
+gulp.task('run-test', ['transpile'], () => {
+  gulp.src(['dist/routesTestSpec.js'])
+    .pipe(babel())
+    .pipe(jasmine())
+    .pipe(exit());
+});
 
 
 

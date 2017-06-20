@@ -42,7 +42,7 @@ describe('Unit tests for the models that powers the application', () => {
   describe('Test for a user to post message to a group', () => {
     it('Should return a success message and the message posted if successful', (done) => {
       request.post('/api/group/2/messages')
-        .send({ groupId: 2, userId: 2, message: 'I am just testing you out'})
+        .send({ groupId: 2, userId: 2, message: 'I am just testing you out' })
         .expect(200)
         .end((err, res) => {
           expect(res.body.status === 'Success' && res.body.message === 'I am just testing you out');
@@ -55,7 +55,8 @@ describe('Unit tests for the models that powers the application', () => {
       request.get('/api/group/2/messages')
         .expect(200)
         .end((err, res) => {
-          expect(res.body.message === 'I am just testing you out' );
+          expect(res.body.message === 'I am just testing you out');
+          done(err);
         });
     });
   });
