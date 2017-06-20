@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+  - "7"
+before_script:
+  - npm install -g gulp
+script: 
+  - npm install
+  - gulp run-test
