@@ -7,21 +7,19 @@ import Messages from '../models/messages';
 import db from '../config/test_db_url.json';
 
 describe('Models test suite', () => {
-  beforeAll((done) => {
+  describe('Establish connection to the database', () => {
+      beforeAll((done) => {
     const sequelize = new Sequelize(db.url);
-    const connect = sequelize.authenticate().then(() => {
+    sequelize.authenticate().then(() => {
+      console.log('Connected');
       'Connected';
     }).catch((err) => {
       if (err) {
         return 'Unable to connect';
       }
     });
-    it('should established connection to the database', () => {
-      expect(connect).toBe('Connected');
-      done();
-    });
-    done();
-  }, 10000);
+  });
+  });
   describe('Users model', () => {
     beforeEach((done) => {
       const User = Users.sync({ force: true }).then(() => {

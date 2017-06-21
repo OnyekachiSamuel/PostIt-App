@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
-import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
+// import passport from 'passport';
+// import { Strategy as LocalStrategy } from 'passport-local';
 import config from '../config/db_url.json';
 import Users from '../models/users';
 import Group from '../models/group';
@@ -54,7 +54,7 @@ export default class ApiController {
     });
   }
 
-  static signin(req, res, next) {
+  /* static signin(req, res, next) {
     passport.use(new LocalStrategy(
       (username, password, done) => {
         Users.findOne({ username }, (err, user) => {
@@ -78,7 +78,7 @@ export default class ApiController {
         done(err, user);
       });
     });
-  }
+  }*/
 
   /* static validPassword(password, databasePassword) {
     return bcrypt.compareSync(password, databasePassword);

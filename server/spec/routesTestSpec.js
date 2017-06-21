@@ -14,7 +14,7 @@ describe('Test routes', () => {
         .expect(200)
         .end((err, res) => {
           console.log(res.body);
-          expect(res.body.data.username === 'Bona');
+          expect(res.body.username === 'Bona');
           done(err);
         });
     }, 10000);

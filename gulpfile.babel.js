@@ -13,7 +13,7 @@ import exit from 'gulp-exit';
 
 
 gulp.task('transpile', () => {
-  gulp.src(['models/*js', 'routes/index.js', 'controllers/controller.js', 'spec/*.js', 'tests/*js', 'app.js'])
+  gulp.src(['server/models/*js', 'server/routes/index.js', 'server/controllers/controller.js', 'server/spec/*.js', 'server/tests/*js', 'server/app.js'])
     .pipe(babel({
       presets: ['es2015']
     }))
@@ -44,11 +44,11 @@ gulp.task('serve', ['transpile'], () =>
 
 // Generate the coverage report
 gulp.task('coverage', (cb) => {
-  gulp.src(['routes/index.js', 'app.js'])
+  gulp.src(['server/routes/index.js', 'server/app.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src('spec/routesTestSpec.js')
+      gulp.src('server/spec/routesTestSpec.js')
         .pipe(babel())
         .pipe(injectModules())
         .pipe(jasmine())
@@ -57,17 +57,7 @@ gulp.task('coverage', (cb) => {
         .on('end', cb);
     });
 });
-/* gulp.task('jasmine', () => {
-  gulp.src('spec/*.js')
-    .pipe(cover.instrument({
-      pattern: ['models/*js', 'routes/index.js', 'app.js'],
-      debugDirectory: 'debug'
-    }))
-    .pipe(jasmine())
-    .pipe(cover.gather())
-    .pipe(cover.format())
-    .pipe(gulp.dest('reports'));
-});*/
+
 
 // Load code coverage to coveralls
 gulp.task('coveralls', ['coverage'], () => {
