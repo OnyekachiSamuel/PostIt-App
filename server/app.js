@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import passport from 'passport';
+// import passport from 'passport';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import env from 'dotenv';
@@ -22,12 +22,12 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-  secret: process.env.SECRET_KEY,
+  secret: 'yyuuuatsttgsbbbabbaNNANMSMKWKKZLALLLLZZNZN',
   resave: false,
   saveUninitialized: true
 }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
 app.use('/', routes);
