@@ -17,7 +17,7 @@ describe('Test routes', () => {
           expect(res.body.data.username === 'Bona');
           done(err);
         });
-    });
+    }, 10000);
   });
   describe('POST /api/group', () => {
     it('Should return an object containing the group created details', (done) => {
@@ -29,7 +29,7 @@ describe('Test routes', () => {
           expect(res.body.groupName === 'Andela Tech Group');
           done(err);
         });
-    });
+    }, 10000);
   });
   describe('POST /api/group/:groupId/user', () => {
     it('Should return a success message', (done) => {
@@ -40,7 +40,7 @@ describe('Test routes', () => {
           expect(res.body.message !== null && res.body.status === 'Success');
           done(err);
         });
-    });
+    }, 10000);
   });
   describe('POST /api/group/:groupId/messages', () => {
     it('Should return a success message ', (done) => {
@@ -52,7 +52,7 @@ describe('Test routes', () => {
           expect(res.body.status === 'Success' && res.body.message === 'I am just testing you out');
           done(err);
         });
-    });
+    }, 10000);
   });
   describe('GET /api/group/:groupId/mesages', () => {
     it('Should return a success message', (done) => {
@@ -63,7 +63,7 @@ describe('Test routes', () => {
           expect(res.body.message === 'I am just testing you out');
           done(err);
         });
-    });
+    }, 10000);
   });
 });
 
