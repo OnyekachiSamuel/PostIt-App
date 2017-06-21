@@ -2,10 +2,11 @@ template/
 client/
 migrations/
 server/node_modules/
-node_modules/
 server/tests/
 dist/
 coverage/
+node_modules/
+server/notGulp.js
 
 
 
