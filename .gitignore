@@ -5,6 +5,7 @@ server/node_modules/
 node_modules/
 server/tests/
 dist/
+coverage/
 
 
 
