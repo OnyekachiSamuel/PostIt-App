@@ -12,6 +12,9 @@ router.get('/', (req, res) => {
 // Route for user signup
 router.post('/signup', controller.signup);
 
+// Route for signin
+router.post('/signin', controller.signin);
+
 // Route to create group by users
 router.post('/group', controller.createGroup);
 
