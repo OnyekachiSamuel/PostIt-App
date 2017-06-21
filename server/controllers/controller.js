@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import bcrypt from 'bcrypt';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import config from '../config';
+import config from '../config/db_url.json';
 import Users from '../models/users';
 import Group from '../models/group';
 import GroupMembers from '../models/groupMembers';
