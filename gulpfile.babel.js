@@ -13,7 +13,7 @@ import exit from 'gulp-exit';
 
 
 gulp.task('transpile', () => {
-  gulp.src(['server/models/*js', 'server/routes/index.js', 'server/controllers/controller.js', 'server/spec/*.js', 'server/tests/*js', 'server/app.js'])
+  gulp.src(['server/spec/*.js', 'server/routes/index.js', 'server/models/*js', 'server/controllers/controller.js', 'server/tests/*js', 'server/app.js'])
     .pipe(babel({
       presets: ['es2015']
     }))
@@ -48,7 +48,7 @@ gulp.task('coverage', (cb) => {
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src('server/spec/routesTestSpec.js')
+      gulp.src('server/spec/modelsTestSpec.js')
         .pipe(babel())
         .pipe(injectModules())
         .pipe(jasmine())
