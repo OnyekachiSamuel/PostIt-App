@@ -38,7 +38,18 @@ export default class ApiController {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
-          Users.create({
+          Users.create({ name, username, email, password: hash })
+          .then(() => Users.findOrCreate({ where: { username } }))
+          .spread((user, created) => {
+            if (created) {
+              res.status(200).json({ status: 'Username is already taken' });
+            } else {
+              res.status(200).json({ status: 'Account created' });
+            }
+          }).catch((err) => {
+            next(err);
+          });
+         /* Users.create({
             name, username, email, password: hash
           }).then((User) => {
             res.status(200).json({
@@ -48,7 +59,7 @@ export default class ApiController {
             });
           }).catch((err) => {
             next(err);
-          });
+          });*/
         });
       });
     });
