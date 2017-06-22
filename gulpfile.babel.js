@@ -13,7 +13,7 @@ import exit from 'gulp-exit';
 
 
 gulp.task('transpile', () => {
-  gulp.src(['server/spec/*.js', 'server/routes/index.js', 'server/models/*js', 'server/controllers/controller.js', 'server/tests/*js', 'server/app.js'])
+  gulp.src(['./server/spec/*.js', './server/routes/index.js', './server/models/*js', './server/controllers/controller.js', './server/tests/*js', './server/app.js'])
     .pipe(babel({
       presets: ['es2015']
     }))
@@ -22,7 +22,7 @@ gulp.task('transpile', () => {
 
 // Run the tests
 gulp.task('run-test', ['transpile'], () => {
-  gulp.src(['dist/modelsTestSpec.js'])
+  gulp.src(['dist/routesTestSpec.js'])
     .pipe(babel())
     .pipe(jasmine())
     .pipe(exit());
