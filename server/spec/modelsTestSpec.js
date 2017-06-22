@@ -1,9 +1,9 @@
 import jasmine from 'jasmine';
 import Sequelize from 'sequelize';
 import { expect } from 'chai';
-// import Users from '../models/users';
-// import Group from '../models/group';
-// import GroupMembers from '../models/groupMembers';
+import Users from '../models/users';
+import Group from '../models/group';
+import GroupMembers from '../models/groupMembers';
 import Messages from '../models/messages';
 import db from '../config/test_db_url.json';
 
@@ -11,19 +11,19 @@ import db from '../config/test_db_url.json';
 
 
 describe('Models test suite', () => {
-  console.log('Yes');
- /*  describe('Establish connection to the database', () => {
+  describe('Establish connection to the database', () => {
     beforeAll((done) => {
-        const sequelize = new Sequelize(db.url);
-        sequelize.authenticate().then(() => {
-          console.log('Connected');
+      const sequelize = new Sequelize(db.url);
+      sequelize.authenticate().then(() => {
+        console.log('Connected');
           // 'Connected';
-        }).catch((err) => {
-          if (err) {
-            return 'Unable to connect';
-          }
-        });
+      }).catch((err) => {
+        if (err) {
+          return 'Unable to connect';
+        }
       });
+      done();
+    });
   });
   describe('Users model', () => {
     beforeEach((done) => {
@@ -101,6 +101,5 @@ describe('Models test suite', () => {
         done();
       });
     });
-  });*/
-
+  });
 });
