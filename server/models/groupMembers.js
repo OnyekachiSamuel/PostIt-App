@@ -9,11 +9,11 @@ const Groups = sequelize.define('GroupMembers', {
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  name: {
+  userId: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  userId: {
+  admin: {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
     references: {
