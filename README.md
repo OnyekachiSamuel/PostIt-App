@@ -1,1 +1,2 @@
 [![Build Status](https://travis-ci.org/OnyekachiSamuel/PostIt-App.svg?branch=master)](https://travis-ci.org/OnyekachiSamuel/PostIt-App)
+[![Coverage Status](https://coveralls.io/repos/github/OnyekachiSamuel/PostIt-App/badge.svg?branch=master)](https://coveralls.io/github/OnyekachiSamuel/PostIt-App?branch=master)
