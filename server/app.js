@@ -17,16 +17,16 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
-app.use(cookieParser());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(session({
   secret: 'yyuuuatsttgsbbbabbaNNANMSMKWKKZLALLLLZZNZN',
   resave: false,
   saveUninitialized: true
 }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+
 
 
 app.use('/', routes);
