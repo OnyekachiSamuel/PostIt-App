@@ -1,6 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// import passport from 'passport';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import env from 'dotenv';
@@ -37,7 +36,6 @@ app.listen(port, () => {
 });
 
 export default app;
-
 
 
 

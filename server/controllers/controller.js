@@ -1,7 +1,5 @@
 import Sequelize from 'sequelize';
-import bcrypt from 'bcrypt';
-// import passport from 'passport';
-// import { Strategy as LocalStrategy } from 'passport-local';
+import bcrypt from 'bcryptjs';
 import config from '../config/db_url.json';
 import Users from '../models/users';
 import Group from '../models/group';
@@ -54,35 +52,34 @@ export default class ApiController {
     });
   }
 
-  /* static signin(req, res, next) {
-    passport.use(new LocalStrategy(
-      (username, password, done) => {
-        Users.findOne({ username }, (err, user) => {
-          if (err) { return done(err); }
-          if (!user) {
-            return done(null, false, { message: 'Incorrect username.' });
-          }
-          if (!user.validPassword(password)) {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-          return done(null, user);
-        });
+ /**
+ *
+ * @param {obj} req
+ * @param {obj} res
+ * @param {obj} next
+ * @return {obj} Return success or failure message
+ */
+  static signin(req, res, next) {
+    const username = req.body.username,
+      password = req.body.password;
+    Users.findOne({ where: { username } }).then((response) => {
+      if (response.dataValues.username === username) {
+        const check = bcrypt.compareSync(password, response.dataValues.password);
+        if (check) {
+          res.status(200).json({
+            status: 'Success',
+            data: response,
+            message: 'Logged In'
+          });
+        } else {
+          res.status(401).json({ status: 'Invalid Password' });
+        }
       }
-    ));
-
-    passport.serializeUser((user, done) => {
-      done(null, user.id);
+    }).catch((err) => {
+      res.status(401).json({ status: 'Invalid password or Username' });
+      next(err);
     });
-    passport.deserializeUser((id, done) => {
-      Users.findById(id, (err, user) => {
-        done(err, user);
-      });
-    });
-  }*/
-
-  /* static validPassword(password, databasePassword) {
-    return bcrypt.compareSync(password, databasePassword);
-  }*/
+  }
 
   /**
  * This method is used for creating groups
