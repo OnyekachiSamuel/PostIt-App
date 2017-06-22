@@ -15,16 +15,30 @@ router.post('/signup', controller.signup);
 // Route for signin
 router.post('/signin', controller.signin);
 
-// Route to create group by users
-router.post('/group', controller.createGroup);
+// Middleware to create session for users once they are logged in
+router.use(controller.sessionHandler);
+
+// Route to get group creation page
+router.get('/group', controller.loggedIn, (req, res) => {
+  res.json({ status: 'You can then create a group' });
+});
+
+// Route to post group create info
+router.post('/group', controller.loggedIn, controller.createGroup);
 
 // Route to add users to group
-router.post('/group/:id/user', controller.groups);
+router.post('/group/:id/user', controller.loggedIn, controller.groups);
 
 // Route to post messages to groups
-router.post('/group/:groupId/messages', controller.messages);
+router.post('/group/:groupId/messages', controller.loggedIn, controller.messages);
 
 // Route to get messages posted to groups
-router.get('/group/:groupId/messages', controller.getMessages);
+router.get('/group/:groupId/messages', controller.loggedIn, controller.getMessages);
+
+// Route for logout
+router.get('/logout', (req, res) => {
+  req.session.reset();
+  res.redirect('/');
+});
 
 export default router;
