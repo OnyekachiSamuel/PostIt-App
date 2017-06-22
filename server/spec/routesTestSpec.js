@@ -13,7 +13,6 @@ describe('Test routes', () => {
         .send({ name: 'Eze', username: 'Bona', email: 'jcf@gmail.com', password: 'azundu' })
         .expect(200)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.body.username === 'Bona');
           done(err);
         });
@@ -25,7 +24,6 @@ describe('Test routes', () => {
         .send({ groupName: 'Andela Tech Group', groupCategory: 'Tech', userId: 1 })
         .expect(200)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.body.groupName === 'Andela Tech Group');
           done(err);
         });
@@ -34,9 +32,8 @@ describe('Test routes', () => {
   describe('POST /api/group/:groupId/user', () => {
     it('Should return a success message', (done) => {
       request.post('/api/group/:groupId/user')
-        .send({ groupId: 1, userId: 1, user: 'Victor' })
+        .send({ admin: 1, userId: 1, groupId: 1 })
         .end((err, res) => {
-          console.log(res.body);
           expect(res.body.message !== null && res.body.status === 'Success');
           done(err);
         });
@@ -48,7 +45,6 @@ describe('Test routes', () => {
         .send({ groupId: 1, userId: 1, message: 'I am just testing you out' })
         .expect(200)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.body.status === 'Success' && res.body.message === 'I am just testing you out');
           done(err);
         });
@@ -59,7 +55,6 @@ describe('Test routes', () => {
       request.get('/api/group/1/messages')
         .expect(200)
         .end((err, res) => {
-          console.log(res.body);
           expect(res.body.message === 'I am just testing you out');
           done(err);
         });
