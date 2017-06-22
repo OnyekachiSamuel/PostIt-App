@@ -52,6 +52,43 @@ export default class ApiController {
     });
   }
 
+/**
+ * @return {null} This method checks for user in session
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+  static sessionHandler(req, res, next) {
+    if (req.session.user) {
+      Users.findOne({ where: { username: req.session.user.username } })
+      .then((user) => {
+        if (user) {
+          req.user = user;
+          delete req.user.password;
+          req.session.user = user;
+          res.locals.user = user;
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  }
+
+/**
+ * @return {*} Returns Denial message or allows the next handler to execute
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ */
+  static loggedIn(req, res, next) {
+    if (!req.user) {
+      res.status(400).json({ status: 'Access denied' });
+    } else {
+      next();
+    }
+  }
+
  /**
  *
  * @param {obj} req
@@ -62,13 +99,15 @@ export default class ApiController {
   static signin(req, res, next) {
     const username = req.body.username,
       password = req.body.password;
-    Users.findOne({ where: { username } }).then((response) => {
-      if (response.dataValues.username === username) {
-        const check = bcrypt.compareSync(password, response.dataValues.password);
+    Users.findOne({ where: { username } }).then((user) => {
+      if (user.dataValues.username === username) {
+        const check = bcrypt.compareSync(password, user.dataValues.password);
         if (check) {
+          req.session.user = user;
+          console.log(req.session.user);
           res.status(200).json({
             status: 'Success',
-            data: response,
+            data: user,
             message: 'Logged In'
           });
         } else {
