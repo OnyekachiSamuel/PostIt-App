@@ -13,7 +13,7 @@ import exit from 'gulp-exit';
 
 
 gulp.task('transpile', () => {
-  gulp.src(['./server/spec/*.js', './server/routes/index.js', './server/models/*js', './server/controllers/controller.js', './server/tests/*js', './server/app.js'])
+  gulp.src(['./server/spec/*.js', './server/routes/index.js', './server/models/*js', './server/controllers/controller.js', 'server/app.js'])
     .pipe(babel({
       presets: ['es2015']
     }))
@@ -31,7 +31,8 @@ gulp.task('run-test', ['transpile'], () => {
 // Generate the coverage report
 gulp.task('test', () => {
   gulp.src('./coverage/coverage.json')
-    .pipe(istanbulReport());
+    .pipe(istanbulReport())
+    .pipe(exit());
 });
 
 gulp.task('serve', ['transpile'], () =>
@@ -54,7 +55,8 @@ gulp.task('coverage', (cb) => {
         .pipe(jasmine())
         .pipe(istanbul.writeReports())
         .pipe(istanbul.enforceThresholds({ thresholds: { global: 30 } }))
-        .on('end', cb);
+        .on('end', cb)
+        .pipe(exit());
     });
 });
 
