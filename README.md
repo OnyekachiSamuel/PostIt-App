@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/OnyekachiSamuel/PostIt-App.svg?branch=master)](https://travis-ci.org/OnyekachiSamuel/PostIt-App)
