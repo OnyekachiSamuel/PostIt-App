@@ -9,3 +9,4 @@ dist/
 server/coverage/
 template/
 node_modules/
+.vscode/
