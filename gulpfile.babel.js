@@ -22,7 +22,7 @@ gulp.task('transpile', () => {
 
 // Run the tests
 gulp.task('run-test', ['transpile'], () => {
-  gulp.src(['dist/routesTestSpec.js'])
+  gulp.src(['dist/routeSpec.js'])
     .pipe(babel())
     .pipe(jasmine())
     .pipe(exit());
@@ -45,11 +45,11 @@ gulp.task('serve', ['transpile'], () =>
 
 // Generate the coverage report
 gulp.task('coverage', (cb) => {
-  gulp.src(['server/routes/index.js', 'server/app.js'])
+  gulp.src(['server/routes/index.js', 'server/app.js', 'server/models/*js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src('server/spec/routesTestSpec.js')
+      gulp.src('server/spec/*js')
         .pipe(babel())
         .pipe(injectModules())
         .pipe(jasmine())
