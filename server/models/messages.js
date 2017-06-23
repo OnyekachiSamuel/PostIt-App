@@ -14,6 +14,9 @@ const Messages = sequelize.define('Messages', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  priority: {
+    type: Sequelize.STRING,
+  },
   userId: {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',

@@ -17,7 +17,7 @@ export default class ApiController {
   constructor() {
     this.sequelize = new Sequelize(config.url);
     this.sequelize.authenticate().then(() => { console.log('Connection has been established'); })
-      .catch((err) => { console.error('Unable to connect to the database'); });
+      .catch((err) => { console.error('Unable to connect to the database', err); });
   }
   /**
  * Users details are captured by this method on signup and persisted on the database
