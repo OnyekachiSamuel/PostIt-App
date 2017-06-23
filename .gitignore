@@ -1,1 +1,10 @@
 template/
+.vscode/
+coverage/
+node_modules/
+server/
+.hound.yml
+.travis.yml
+gulpfile.babel.js
+dist/
+.coveralls.yml
