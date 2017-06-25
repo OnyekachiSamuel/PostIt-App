@@ -1,0 +1,2 @@
+@mixin image($file,$color, $opacity) {
+	image: linear-gradient((rgba($color, $color, $color, $opacity), rgba($color, $color, $color, $opacity))), url(#{$file}.jpg);}
