@@ -1,12 +1,8 @@
 /*---------------------------------------------*/
 /* BASIC SETUP
 /*---------------------------------------------*/
-
-$style: 'Lato', 'Arial', sans-serif;
-$white: #fff; 
-@mixin image($file,$color, $opacity) {
-	image: linear-gradient((rgba($color, $color, $color, $opacity), rgba($color, $color, $color, $opacity))), url(#{$file}.jpg);}
-
+@import "helper/mixins";
+@import "helper/variables";
 * {
     margin: 0;
     padding: 0;
@@ -15,24 +11,18 @@ $white: #fff;
 
 html,
 body {
-    height: 100%;
-    background-color: $white;
-    color: #555;
-    overflow-x: hidden;
-    font: {
-    family: $style;
-    weight: 300;
-    size: 20px;
+	height: 100%;
+	background-color: #fff;
+	color: #555;
+	font-family: 'Lato', 'Arial', sans-serif;
+	font-weight: 300;
+	font-size: 20px;
+	text-rendering: optimizeLegibility;
+	overflow-x: hidden;
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
-}
-
-.modal {
-	margin-top: 50px;
-}
-
-/*---------------------------------------------*/
-/* Page header for landing page
-/*---------------------------------------------*/
 header {
 	background: {
 		@include image('img/backGround.jpg', 0, 0, 0, 0.7);
@@ -42,6 +32,21 @@ header {
 	height: 100vh;
 }
 
+footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 50px;
+	padding: 10px;
+	margin-top: 200px;
+	background-color: #BDC3C7;
+	color: #fff;
+	text-align: center;
+}
+/*---------------------------------------------*/
+/* Page header for landing page
+/*---------------------------------------------*/
 .page-heading {
 	position: absolute;
 	width: 1140px;
@@ -64,6 +69,9 @@ header {
 		background-color: #cf6d17;
 	}
 }
+.modal {
+	margin-top: 50px;
+}
 .navbar {
 	background-color: #4B77BE;
 	.nav-style a {
@@ -85,91 +93,44 @@ header {
 		color: $white;
 	}
 }
-
 /*---------------------------------------------*/
 /* Create Group Styling
 /*---------------------------------------------*/
-.page-description {
-	height: 80px;
-	padding-left: 20px;
-	padding: 20px;
-	margin-bottom: 30px;
-	text-align: center;
-	text-transform: uppercase;
-	background-color: #19B5FE;
-	color: #fff;
+.add {
+	margin-bottom: 65px;
+}
+.heading {
+	background-color: #1abc9c;
 }
 
-.group-txt-area {
-	width: 600px;
-	margin-bottom: 8px;
-}
-.add-member-title {
-	height: 70px;
-	width: 600px;
-	margin: 20px 270px;
-	border-bottom: 2px solid;
-	padding: 20px;
-	text-align: center;
-	text-transform: uppercase;
-	background-color: #000;
-	color: #fff;
-}
-footer {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50px;
-	padding: 10px;
-	margin-top: 200px;
-	background-color: #BDC3C7;
-	color: #fff;
-	text-align: center;
-}
+.gp-form {
+	margin-top: 50px;
 
+}
+.member {
+	margin-bottom: 20px;
+}
 .add-btn {
 	margin-bottom: 10px;
-}
-
-.next-members {
-	float: right;
-	margin-right: 200px;
-	clear: left;
 }
 
 /*---------------------------------------------*/
 /* Post Message Page Styling
 /*---------------------------------------------*/
-
-.select-group {
-	float: left;
-	width: 30%;
-}
-
-.select-group label,
-#msg-label {
-	background-color: #000;
-	padding: 10px;
-	color: #fff;
-}
 .message {
-	float: right;
-	width: 60%;
+	background-color: #c3f2d7;
+	
+}
+.message h4 {
+	color: #fff
+}
+.type-text {
+	height: 120px;
 }
 
 /*---------------------------------------------*/
 /* Show message styling
 /*---------------------------------------------*/
-
-.group-name {
-	height: 40px;
-	width: 200px;
-	padding: 10px;
-	text-align: center;
-	background-color: #000;
-	color: #fff;
-}
 #post-txt textarea {
 	padding: 10px;
 }

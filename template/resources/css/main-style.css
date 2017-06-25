@@ -24,27 +24,24 @@ body {
     min-height: 100vh;
     flex-direction: column;
 }
-
-.modal {
-	margin-top: 50px;
-}
-
 header {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/backGround.jpg);
 	background-size: cover;
 	background-position: center;
 	height: 100vh;
 }
-
-.page-heading {
+footer {
 	position: absolute;
-	width: 1140px;
-	top: 50%;
-	left: 50%;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 50px;
+	padding: 10px;
+	margin-top: 200px;
+	background-color: #BDC3C7;
+	color: #fff;
 	text-align: center;
-	transform: translate(-50%, -50%);
 }
-
 h1 {
 	color: #fff;
 	font-size: 150%;
@@ -64,17 +61,21 @@ h2 {
 	word-spacing: 3px;
 }
 
-h3 {
+h3, h4 {
 	color: #2ecc71;
 }
+/*---------------------------------------------*/
+/* Landing page
+/*---------------------------------------------*/
 
-h4 {
-	color: #2ecc71;
+.page-heading {
+	position: absolute;
+	width: 1140px;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+	transform: translate(-50%, -50%);
 }
-.title {
-	color: #2ecc71;
-}
-
 .page-heading .signup-btn:link,
 .page-heading .signup-btn:visited {
 	display: inline-block;
@@ -85,12 +86,16 @@ h4 {
 	border-radius: 200px;
 	color: #fff;
 }
-
 .page-heading .signup-btn:hover,
 .page-heading .signup-btn:active {
 	background-color: #cf6d17;
 }
-
+.modal {
+	margin-top: 50px;
+}
+.title {
+	color: #2ecc71;
+}
 .navbar, nav {
 	background-color: #169e83;
 }
@@ -121,33 +126,13 @@ h4 {
 .navbar .nav-item-style li a:active {
 	color: #fff;
 }
-
 /*---------------------------------------------*/
-
-
 /* Create Group Styling
 /*---------------------------------------------*/
 
-.ln a {
-	display: inline-block;
-	float: right;
-	text-align: center;
-	padding-top: 10px;
-}
 .add {
 	margin-bottom: 65px;
 }
-.page-description {
-	height: 80px;
-	padding-left: 20px;
-	padding: 20px;
-	margin-bottom: 30px;
-	text-align: center;
-	text-transform: uppercase;
-	background-color: #19B5FE;
-	color: #fff;
-}
-
 .heading {
 	background-color: #1abc9c;
 }
@@ -159,56 +144,12 @@ h4 {
 .member {
 	margin-bottom: 20px;
 }
-
-
-.group-txt-area {
-	width: 600px;
-	margin-bottom: 8px;
-}
-
-.add-member-title {
-	height: 70px;
-	width: 600px;
-	margin: 20px 270px;
-	border-bottom: 2px solid;
-	padding: 20px;
-	text-align: center;
-	text-transform: uppercase;
-	background-color: #000;
-	color: #fff;
-}
-
-footer {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	height: 50px;
-	padding: 10px;
-	margin-top: 200px;
-	background-color: #BDC3C7;
-	color: #fff;
-	text-align: center;
-}
-
 .add-btn {
 	margin-bottom: 10px;
 }
-
-.next-members {
-	float: right;
-	margin-right: 200px;
-	clear: left;
-}
-
-
 /*---------------------------------------------*/
-
-
 /* Post Message Page Styling
 /*---------------------------------------------*/
-
-
 .message {
 	background-color: #c3f2d7;
 	
@@ -219,36 +160,7 @@ footer {
 .type-text {
 	height: 120px;
 }
-.select-group {
-	float: left;
-	width: 30%;
-}
-
-.select-group label,
-#msg-label {
-	background-color: #000;
-	padding: 10px;
-	color: #fff;
-}
-
-
-
-
 /*---------------------------------------------*/
-
-
 /* Show message styling
 /*---------------------------------------------*/
 
-.group-name {
-	height: 40px;
-	width: 200px;
-	padding: 10px;
-	text-align: center;
-	background-color: #000;
-	color: #fff;
-}
-
-#post-txt textarea {
-	padding: 10px;
-}
