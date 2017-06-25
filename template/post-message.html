@@ -1,78 +1,89 @@
-<!Doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="favicon.ico">
+        
+		<title>Post message</title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="resources/css/main-style.css">
+        
+    </head>
 
-<head>
-	<title>Post it, Share It</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/main-style.css">
-</head>
-
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid nav-style">
-			<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" aria-expanded="false">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-				<a class="navbar-brand" href="#">Post it, Share It</a>
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse nav-item-style">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Welcome</a></li>
-					<li><a href="#">Sign Out</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-	<div class="container">
-		<div class="page-description">
-			<p> Post It, Share It <br> Let your voice be heard</p>
-		</div>
-		<div class="select-group">
-			<div class="form-group">
-				<label for="group">Select Group</label>
-				<select class="form-control" id="group">
-    						<option selected="selected">No created group yet</option>
-    						<option>Group one</option>
-    						<option>Group two</option>
-    						<option>Group three</option>
-  							</select>
-			</div>
-		</div>
-		<div class="message">
-			<label id="msg-label">Compose message</label>
-			<div class="form-group">
-				<label for="message">Message</label>
-				<textarea class="form-control" rows="5" id="message"></textarea>
-				<p>Select a priority</p>
-				<select class="form-control" id="sel1">
-    							<option selected="selected" >Priority</option>
-    							<option>Normal</option>
-    							<option>Urgent</option>
-    							<option>Critical</option>
-  								</select>
-			</div>
-			<button type="button" class="btn btn-success">Post</button>
-		</div>
+    <body>
+        <nav>
+	<div class="nav-wrapper"> <a href="#" style="padding-left: 10px;">POST IT, SHARE IT</a>
+	 <ul id="nav-mobile" class="right">
+	 <li><a href="#"><i class="material-icons">message</i></a></li>
+	 <li><a href="#">View Group Messages</a></li>
+	<li><a href="#"><i class="material-icons prefix">account_circle</i></a></li>
+	<li><a href="#">Sign Out</a></li>
+    </ul>	
 	</div>
-	<footer>
-		<div>
-			<p>Copyright &copy; PostIt App Inc 2017. All rights reserved.</p>
+    </nav>  
+    <div class="container">
+    	<div class="card-panel center">
+    		<h4>
+    			POST IT, SHARE IT
+			</h4>
+    	</div>
+    	<hr/>
+    	<br>
+    	<div class="card-panel center message">
+    		<h4>Compose message</h4>
+    	</div>
+    	
+    	<div class="input-field col s12">
+                     <form method="post" action="/index.js">
+                     <div>
+                     <textarea placeholder="Type in your message here" class="type-text" required ></textarea>
+                      <label for="textarea1"></label>
+                     </div>
+                <div>
+                	<select>
+                       <option value="" selected>Choose your priority option</option>
+                       <option value="1">Normal</option>
+                       <option value="2">Urgent</option>
+                       <option value="3">Critical</option>
+                    </select>
+                </div>
+                   <input type="submit" class="btn waves-effect waves-light col s12" value="Post Message">
+                     </form>
+                      
+                    </div>
+                    <div class="card-panel row">
+                      <h4 class="center">Messages</h4><hr/>
+     <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">explore</i>Critical</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">explore</i>Normal</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">explore</i>Normal</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
+                    	
+                    </div>
+    </div>  
 
-		</div>
-	</footer>
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
-
+    <footer>
+            <div class="container center">
+            <p>&copy; PostIt 2017</p>
+            </div>
+     </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+     <script src="resources/js/main.js"></script>
+	
+  
+    </body>
 </html>
