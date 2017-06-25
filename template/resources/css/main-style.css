@@ -44,16 +44,16 @@ footer {
 }
 h1 {
 	color: #fff;
-	font-size: 150%;
+	font-size: 140%;
 	font-weight: 300;
 	text-transform: uppercase;
 	letter-spacing: 1px;
-	word-spacing: 3px;
+	word-spacing: 2px;
 }
 
 h2 {
 	color: #fff;
-	font-size: 150%;
+	font-size: 120%;
 	font-weight: 300;
 	margin-top: 0;
 	text-transform: capitalize;
