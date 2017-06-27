@@ -38,8 +38,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "babel-node server/app",
-    "test": "gulp run-test",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "test": "gulp run-test"
   },
   "repository": {
     "type": "git",
