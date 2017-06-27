@@ -6,12 +6,13 @@ server/app.js
 server/controllers/*js
 server/dist/
 coverage/
-gulpfile.babel.js
+node_modules/
 server/
 dist/
+template/
 .vscode/
 .hound.yml
 .coveralls.yml
 .travis.yml
-node_modules/
+
 
