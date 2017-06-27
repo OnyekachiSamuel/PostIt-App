@@ -1,65 +1,42 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
-import nodemon from 'gulp-nodemon';
-import istanbulReport from 'gulp-istanbul-report';
+// import nodemon from 'gulp-nodemon';
+// import istanbulReport from 'gulp-istanbul-report';
 import coveralls from 'gulp-coveralls';
 import istanbul from 'gulp-babel-istanbul';
 import injectModules from 'gulp-inject-modules';
 import jasmine from 'gulp-jasmine';
-import cover from 'gulp-coverage';
+// import cover from 'gulp-coverage';
 import exit from 'gulp-exit';
 
 
-
-
-gulp.task('transpile', () => {
-  gulp.src(['./server/spec/*.js', './server/routes/index.js', './server/models/*js', './server/controllers/controller.js', 'server/app.js'])
-    .pipe(babel({
-      presets: ['es2015']
-    }))
-    .pipe(gulp.dest('dist/'));
-});
-
 // Run the tests
-gulp.task('run-test', ['transpile'], () => {
-  gulp.src(['dist/routeSpec.js'])
+gulp.task('run-test', () => {
+  gulp.src(['server/spec/routeSpec.js', 'server/spec/modelSpec.js'])
     .pipe(babel())
+    .pipe(injectModules())
     .pipe(jasmine())
     .pipe(exit());
 });
 
 // Generate the coverage report
-gulp.task('test', () => {
-  gulp.src('./coverage/coverage.json')
-    .pipe(istanbulReport())
-    .pipe(exit());
-});
-
-gulp.task('serve', ['transpile'], () =>
-  nodemon({
-    script: 'dist/app.js',
-    ext: 'js html',
-    env: { NODE_ENV: process.env.NODE_ENV }
-  })
-);
-
-// Generate the coverage report
-gulp.task('coverage', (cb) => {
-  gulp.src(['server/routes/index.js', 'server/app.js', 'server/models/*js'])
+gulp.task('coverage', () => {
+  gulp.src(['server/routes/index.js', 'server/app.js', 'server/models/*.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src('server/spec/*js')
+      gulp.src(['server/spec/routeSpec.js', 'server/spec/modelSpec.js'])
         .pipe(babel())
         .pipe(injectModules())
         .pipe(jasmine())
         .pipe(istanbul.writeReports())
         .pipe(istanbul.enforceThresholds({ thresholds: { global: 30 } }))
-        .on('end', cb)
-        .pipe(exit());
+        .on('end', () => {
+          gulp.src('coverage/lcov.info')
+            .pipe(coveralls());
+        });
     });
 });
-
 
 // Load code coverage to coveralls
 gulp.task('coveralls', ['coverage'], () => {
@@ -67,10 +44,9 @@ gulp.task('coveralls', ['coverage'], () => {
   if (!process.env.CI) {
     return;
   }
-
   return gulp.src('coverage/lcov.info')
     .pipe(coveralls());
 });
 
 
-gulp.task('default', ['transpile', 'run-test', 'coveralls', 'test', 'coverage']);
+gulp.task('default', ['run-test', 'coverage', 'coveralls']);
