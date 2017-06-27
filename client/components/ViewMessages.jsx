@@ -1,8 +1,7 @@
 import React from 'react';
-import NavBar from './CreateGroup/NavBar.jsx';
-import Title from './CreateGroup/Title.jsx';
-import CreateForm from './CreateGroup/CreateForm.jsx';
-import AddUser from './CreateGroup/AddUser.jsx';
+import NavBar from './ViewMessages/NavBar.jsx';
+import Title from './ViewMessages/Title.jsx';
+import Messages from './ViewMessages/Messages.jsx';
 import Footer from './Footer.jsx';
 
 export default class Home extends React.Component {
@@ -12,8 +11,7 @@ export default class Home extends React.Component {
         <NavBar/>
         <div className="container">
           <Title/>
-          <CreateForm/>
-          <AddUser/>
+          <Messages/>
           <Footer/>
         </div>
       </div>

@@ -10,30 +10,30 @@ export default class SignUpModal extends React.Component {
           <form className="col s12" method="post" action="#">
             <div className="row">
               <div className="input-field col s6">
-                <input id="name" placeholder="Name" type="text" className="validate" required/>
-                <label htmlFor="name"></label>
+                <input id="name" placeholder="" type="text" className="validate" required/>
+                <label htmlFor="name">Name</label>
               </div>
               <div className="input-field col s6">
-                <input id="user_name" placeholder="Username" type="text" className="validate" required/>
-                <label htmlFor="user_name"></label>
+                <input id="user_name" placeholder="" type="text" className="validate" required/>
+                <label htmlFor="user_name">Username</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="email" placeholder="Email" type="email" className="validate" required/>
-                <label htmlFor="email"></label>
+                <input id="email" placeholder="" type="email" className="validate" required/>
+                <label htmlFor="email">Email</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="password" placeholder="Password" type="password" className="validate" required/>
-                <label htmlFor="password"></label>
+                <input id="password" placeholder="" type="password" className="validate" required/>
+                <label htmlFor="password">Password</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="confirm_password" placeholder="Confirm password" type="password" className="validate" required/>
-                <label htmlFor="confirm_password"></label>
+                <input id="confirm_password" placeholder="" type="password" className="validate" required/>
+                <label htmlFor="confirm_password">Confirm password</label>
               </div>
             </div>
             <button className="btn waves-effect waves-light" type="submit" name="action">Submit

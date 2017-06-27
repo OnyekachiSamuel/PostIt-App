@@ -10,14 +10,14 @@ export default class SignInModal extends React.Component {
           <form className="col s12" method="post" action="#">
             <div className="row">
               <div className="input-field col s12">
-                <input id="username" placeholder="Username" type="text" className="validate" required/>
-                <label htmlFor="username"></label>
+                <input id="username" placeholder="" type="text" className="validate" required/>
+                <label htmlFor="username">Username</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="password" placeholder="Password" type="password" className="validate" required/>
-                <label htmlFor="password"></label>
+                <input id="password" placeholder="" type="password" className="validate" required/>
+                <label htmlFor="password">Password</label>
               </div>
             </div>
             <button className="btn waves-effect waves-light" type="submit" name="action">Submit
