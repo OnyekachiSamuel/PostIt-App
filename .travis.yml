@@ -6,4 +6,4 @@ before_script:
 script: 
   - npm install
   - gulp
-  - npm run run-test
+  - npm run test
