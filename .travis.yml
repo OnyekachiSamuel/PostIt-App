@@ -5,4 +5,5 @@ before_script:
   - npm install -g gulp
 script: 
   - npm install
-  - gulp run-test
+  - gulp
+  - npm run coveralls
