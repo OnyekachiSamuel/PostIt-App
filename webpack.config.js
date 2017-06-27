@@ -22,7 +22,7 @@ module.exports = {
         exclude: /(node_modules|server|.vscode|gulpfile.babel.js)/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader'
