@@ -21,7 +21,7 @@ gulp.task('run-test', () => {
 
 // Generate the coverage report
 gulp.task('coverage', () => {
-  gulp.src(['server/routes/index.js', 'server/app.js', 'server/models/*.js'])
+  gulp.src(['server/app.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
@@ -30,10 +30,10 @@ gulp.task('coverage', () => {
         .pipe(injectModules())
         .pipe(jasmine())
         .pipe(istanbul.writeReports())
-        .pipe(istanbul.enforceThresholds({ thresholds: { global: 30 } }))
+        .pipe(istanbul.enforceThresholds({ thresholds: { global: 50 } }))
         .on('end', () => {
           gulp.src('coverage/lcov.info')
-            .pipe(coveralls());
+            .pipe(coveralls()).pipe(exit());
         });
     });
 });
