@@ -3,7 +3,6 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import env from 'dotenv';
-// import path from 'path';
 import routes from './routes/index';
 
 env.config();
@@ -26,8 +25,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
-
-
 
 app.use('/', routes);
 app.use('/api/', routes);
