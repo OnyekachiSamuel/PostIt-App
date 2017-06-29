@@ -14,10 +14,18 @@ const Users = sequelize.define('Users', {
     type: Sequelize.STRING
   },
   username: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      is: /^[a-z0-9\\-]+$/i,
+    }
   },
   email: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: true
+    }
   },
   password: {
     type: Sequelize.STRING
