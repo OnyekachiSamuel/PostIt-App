@@ -52,17 +52,13 @@ export default class ApiController {
     });
   }
 
-/**
- * @return {null} This method checks for user in session
- * @param {*} req
- * @param {*} res
- * @param {*} next
- */
+/*
   static sessionHandler(req, res, next) {
     if (req.session.user) {
       Users.findOne({ where: { username: req.session.user.username } })
       .then((user) => {
         if (user) {
+          console.log('I did it', user);
           req.user = user;
           delete req.user.password;
           req.session.user = user;
@@ -74,20 +70,15 @@ export default class ApiController {
       next();
     }
   }
-
-/**
- * @return {*} Returns Denial message or allows the next handler to execute
- * @param {*} req
- * @param {*} res
- * @param {*} next
- */
+/*
   static loggedIn(req, res, next) {
+    console.log('Oppa', req.user);
     if (!req.user) {
       res.status(400).json({ status: 'Access denied' });
     } else {
       next();
     }
-  }
+  }*/
 
  /**
  *
@@ -104,7 +95,7 @@ export default class ApiController {
         const check = bcrypt.compareSync(password, user.dataValues.password);
         if (check) {
           req.session.user = user;
-          console.log(req.session.user);
+          // console.log('I am a user:', req.session.user);
           res.status(200).json({
             status: 'Success',
             data: user,
@@ -128,8 +119,11 @@ export default class ApiController {
  * @return {obj} Returns success or failure message with data
  */
   static createGroup(req, res, next) {
+    const groupName = req.body.groupName,
+      groupCategory = req.body.groupCategory,
+      userId = req.body.userId;
     return Group.sync({ force: true }).then(() => {
-      Group.create(req.body).then((group) => {
+      Group.create({ groupName, groupCategory, userId }).then((group) => {
         res.status(200).json({
           status: 'success',
           data: group,
@@ -200,7 +194,7 @@ export default class ApiController {
       res.status(200).json({
         status: 'Success',
         data: result,
-        message: 'Message received'
+        message: 'Received'
       });
     }).catch((err) => {
       next(err);
