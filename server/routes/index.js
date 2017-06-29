@@ -5,9 +5,6 @@ const router = express.Router();
 
 // Home page route
 
-router.get('/', (req, res) => {
-  res.send('Hello, welcome');
-});
 
 // Route for user signup
 router.post('/signup', controller.signup);
@@ -15,30 +12,29 @@ router.post('/signup', controller.signup);
 // Route for signin
 router.post('/signin', controller.signin);
 
-// Middleware to create session for users once they are logged in
-router.use(controller.sessionHandler);
-
-// Route to get group creation page
-router.get('/group', controller.loggedIn, (req, res) => {
-  res.json({ status: 'You can then create a group' });
-});
+// router.use(controller.sessionHandler);
 
 // Route to post group create info
-router.post('/group', controller.loggedIn, controller.createGroup);
+router.post('/group', controller.createGroup);
 
 // Route to add users to group
-router.post('/group/:id/user', controller.loggedIn, controller.groups);
+router.post('/group/:id/user', controller.groups);
 
 // Route to post messages to groups
-router.post('/group/:groupId/messages', controller.loggedIn, controller.messages);
+router.post('/group/:groupId/messages', controller.messages);
 
 // Route to get messages posted to groups
-router.get('/group/:groupId/messages', controller.loggedIn, controller.getMessages);
+router.get('/group/:groupId/messages', controller.getMessages);
 
 // Route for logout
-router.get('/logout', (req, res) => {
-  req.session.reset();
-  res.redirect('/');
-});
+/* router.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.json({ message: 'Logged out' });
+    }
+  });
+});*/
 
 export default router;
