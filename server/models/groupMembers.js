@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import config from '../config';
+import config from '../config/db_url.json';
 
 const sequelize = new Sequelize(config.url);
 const Groups = sequelize.define('GroupMembers', {
@@ -9,11 +9,11 @@ const Groups = sequelize.define('GroupMembers', {
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  name: {
+  userId: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  userId: {
+  admin: {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
     references: {
