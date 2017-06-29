@@ -1,8 +1,6 @@
 import Sequelize from 'sequelize';
-import bcrypt from 'bcrypt';
-// import passport from 'passport';
-// import { Strategy as LocalStrategy } from 'passport-local';
-import config from '../config';
+import bcrypt from 'bcryptjs';
+import config from '../config/db_url.json';
 import Users from '../models/users';
 import Group from '../models/group';
 import GroupMembers from '../models/groupMembers';
@@ -19,7 +17,7 @@ export default class ApiController {
   constructor() {
     this.sequelize = new Sequelize(config.url);
     this.sequelize.authenticate().then(() => { console.log('Connection has been established'); })
-      .catch((err) => { console.error('Unable to connect to the database'); });
+      .catch((err) => { console.error('Unable to connect to the database', err); });
   }
   /**
  * Users details are captured by this method on signup and persisted on the database
@@ -65,6 +63,34 @@ export default class ApiController {
     });
   }
 
+/*
+  static sessionHandler(req, res, next) {
+    if (req.session.user) {
+      Users.findOne({ where: { username: req.session.user.username } })
+      .then((user) => {
+        if (user) {
+          console.log('I did it', user);
+          req.user = user;
+          delete req.user.password;
+          req.session.user = user;
+          res.locals.user = user;
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  }
+/*
+  static loggedIn(req, res, next) {
+    console.log('Oppa', req.user);
+    if (!req.user) {
+      res.status(400).json({ status: 'Access denied' });
+    } else {
+      next();
+    }
+  }*/
+
  /**
  *
  * @param {obj} req
@@ -75,13 +101,15 @@ export default class ApiController {
   static signin(req, res, next) {
     const username = req.body.username,
       password = req.body.password;
-    Users.findOne({ where: { username } }).then((response) => {
-      if (response.dataValues.username === username) {
-        const check = bcrypt.compareSync(password, response.dataValues.password);
+    Users.findOne({ where: { username } }).then((user) => {
+      if (user.dataValues.username === username) {
+        const check = bcrypt.compareSync(password, user.dataValues.password);
         if (check) {
+          req.session.user = user;
+          // console.log('I am a user:', req.session.user);
           res.status(200).json({
             status: 'Success',
-            data: response,
+            data: user,
             message: 'Logged In'
           });
         } else {
@@ -102,8 +130,11 @@ export default class ApiController {
  * @return {obj} Returns success or failure message with data
  */
   static createGroup(req, res, next) {
+    const groupName = req.body.groupName,
+      groupCategory = req.body.groupCategory,
+      userId = req.body.userId;
     return Group.sync({ force: true }).then(() => {
-      Group.create(req.body).then((group) => {
+      Group.create({ groupName, groupCategory, userId }).then((group) => {
         res.status(200).json({
           status: 'success',
           data: group,
@@ -174,7 +205,7 @@ export default class ApiController {
       res.status(200).json({
         status: 'Success',
         data: result,
-        message: 'Message received'
+        message: 'Received'
       });
     }).catch((err) => {
       next(err);
