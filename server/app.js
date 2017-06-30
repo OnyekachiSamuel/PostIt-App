@@ -7,7 +7,7 @@ import routes from './routes/index';
 
 env.config();
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT;
 
 
 // Middlewares used
@@ -28,9 +28,7 @@ app.use(session({
 
 app.use('/', routes);
 app.use('/api/', routes);
-app.listen(port, () => {
-  console.log('Listening on port 3000');
-});
+app.listen(port);
 
 export default app;
 
