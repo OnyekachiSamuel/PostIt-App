@@ -52,7 +52,7 @@ export default class ApiController {
     });
   }
 
-/*
+
   static sessionHandler(req, res, next) {
     if (req.session.user) {
       Users.findOne({ where: { username: req.session.user.username } })
@@ -70,7 +70,7 @@ export default class ApiController {
       next();
     }
   }
-/*
+
   static loggedIn(req, res, next) {
     console.log('Oppa', req.user);
     if (!req.user) {
@@ -78,7 +78,7 @@ export default class ApiController {
     } else {
       next();
     }
-  }*/
+  }
 
  /**
  *
@@ -91,7 +91,7 @@ export default class ApiController {
     const username = req.body.username,
       password = req.body.password;
     Users.findOne({ where: { username } }).then((user) => {
-      if (user.dataValues.username === username) {
+      if (user && user.dataValues.username === username) {
         const check = bcrypt.compareSync(password, user.dataValues.password);
         if (check) {
           req.session.user = user;
@@ -104,6 +104,10 @@ export default class ApiController {
         } else {
           res.status(401).json({ status: 'Invalid Password' });
         }
+      } else {
+        res.status(404).json({
+          status: 'User not found'
+        })
       }
     }).catch((err) => {
       res.status(401).json({ status: 'Invalid password or Username' });
