@@ -3,15 +3,21 @@ engines:
     enabled: true
     config:
       languages:
-      - javascript
+      - javascript:
+    checks:
+      Similar code:
+        enabled: false
   eslint:
     enabled: true
-  fixme:
-    enabled: true
-ratings:
-  paths:
-  - "**.js"
+    checks:
+      import/extensions:
+        enabled: false
+      no-multiple-empty-lines:
+        enabled: false
 exclude_paths:
+- "templates/"
+ratings:
+   paths:
 - node_modules/**/*
 - server/spec/*
 
