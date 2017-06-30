@@ -35,8 +35,8 @@ describe('Test routes', () => {
         .send({ username: 'Keneta', password: 'kachi' })
         .expect(200)
         .end((err, res) => {
-          expect(res.body.status).toBe('Invalid password or Username');
-          done(err);
+          expect(res.body.status).toBe('User not found');
+          done();
         });
     }, 10000);
     it('Should be able to login to account created', (done) => {
