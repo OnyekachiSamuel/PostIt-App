@@ -48,4 +48,4 @@ gulp.task('coverage', () => {
 });*/
 
 
-gulp.task('default', ['coverage', 'coveralls']);
+gulp.task('default', ['coverage']);
