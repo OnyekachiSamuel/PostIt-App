@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import config from '../config/db_url.json';
 import Users from '../models/users';
 import Group from '../models/group';
@@ -16,8 +17,7 @@ export default class ApiController {
    */
   constructor() {
     this.sequelize = new Sequelize(config.url);
-    this.sequelize.authenticate().then(() => { console.log('Connection has been established'); })
-      .catch((err) => { console.error('Unable to connect to the database', err); });
+    this.sequelize.authenticate().then(() => { console.log('Connection has been established'); });
   }
   /**
  * Users details are captured by this method on signup and persisted on the database
@@ -27,7 +27,7 @@ export default class ApiController {
  * @return {JSON} Returns success or failure message with the data
  *
  */
-  static signup(req, res, next) {
+  static signup(req, res) {
     const name = req.body.name,
       username = req.body.username,
       email = req.body.email,
@@ -45,40 +45,15 @@ export default class ApiController {
               message: 'Account created'
             });
           }).catch((err) => {
-            next(err);
+            if (err) {
+              res.json({ status: 'User exists' });
+            }
           });
         });
       });
     });
   }
 
-
-  static sessionHandler(req, res, next) {
-    if (req.session.user) {
-      Users.findOne({ where: { username: req.session.user.username } })
-      .then((user) => {
-        if (user) {
-          console.log('I did it', user);
-          req.user = user;
-          delete req.user.password;
-          req.session.user = user;
-          res.locals.user = user;
-        }
-        next();
-      });
-    } else {
-      next();
-    }
-  }
-
-  static loggedIn(req, res, next) {
-    console.log('Oppa', req.user);
-    if (!req.user) {
-      res.status(400).json({ status: 'Access denied' });
-    } else {
-      next();
-    }
-  }
 
  /**
  *
@@ -87,33 +62,59 @@ export default class ApiController {
  * @param {obj} next
  * @return {obj} Return success or failure message
  */
-  static signin(req, res, next) {
+  static signin(req, res) {
     const username = req.body.username,
       password = req.body.password;
     Users.findOne({ where: { username } }).then((user) => {
       if (user && user.dataValues.username === username) {
         const check = bcrypt.compareSync(password, user.dataValues.password);
+        const payload = { username: user.dataValues.username };
         if (check) {
-          req.session.user = user;
-          // console.log('I am a user:', req.session.user);
+          const token = jwt.sign(payload, 'kitongifuuiiwtylkkksshdywywy', {
+            expiresIn: 60 * 60 * 24
+          });
           res.status(200).json({
             status: 'Success',
             data: user,
-            message: 'Logged In'
+            message: 'Logged In',
+            token
           });
         } else {
           res.status(401).json({ status: 'Invalid Password' });
         }
       } else {
-        res.status(404).json({
-          status: 'User not found'
-        })
+        res.json({ status: 'User not found' });
       }
-    }).catch((err) => {
-      res.status(401).json({ status: 'Invalid password or Username' });
-      next(err);
     });
   }
+
+/**
+ * @return {json} Returns request object containing message of if request is granted or denied
+ * @param {obj} req
+ * @param {obj} res
+ * @param {obj} next
+ */
+  static ensureToken(req, res, next) {
+    const token = req.body.token || req.query.token || req.headers['x-access-token'];
+  // decode token
+    if (token) {
+// verifies secret and checks exp
+      jwt.verify(token, 'kitongifuuiiwtylkkksshdywywy', (err, decoded) => {
+        if (err) {
+          return res.json({ success: false, message: 'Failed to authenticate token.' });
+        }
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      });
+    } else {
+      return res.status(403).send({
+        success: false,
+        message: 'Access denied. Login first'
+      });
+    }
+  }
+
 
   /**
  * This method is used for creating groups
@@ -122,19 +123,18 @@ export default class ApiController {
  * @param {obj} next
  * @return {obj} Returns success or failure message with data
  */
-  static createGroup(req, res, next) {
-    const groupName = req.body.groupName,
-      groupCategory = req.body.groupCategory,
-      userId = req.body.userId;
+  static createGroup(req, res) {
     return Group.sync({ force: true }).then(() => {
-      Group.create({ groupName, groupCategory, userId }).then((group) => {
+      Group.create(req.body).then((group) => {
         res.status(200).json({
           status: 'success',
           data: group,
           message: 'Group Created'
         });
       }).catch((err) => {
-        next(err);
+        if (err) {
+          res.json({ status: 'Invalid input type' });
+        }
       });
     });
   }
@@ -146,16 +146,21 @@ export default class ApiController {
    * @param {*} next
    * @return {obj} Returns a success message with data or failure message
    */
-  static groups(req, res, next) {
+  static groups(req, res) {
+    const groupId = req.params.groupId,
+      admin = req.body.admin,
+      userId = req.body.userId;
     return GroupMembers.sync({ force: true }).then(() => {
-      GroupMembers.create(req.body).then((data) => {
+      GroupMembers.create({ groupId, admin, userId }).then((data) => {
         res.status(200).json({
           status: 'success',
           data,
           message: 'User/Users added'
         });
       }).catch((err) => {
-        next(err);
+        if (err) {
+          res.json({ status: 'Invalid input type' });
+        }
       });
     });
   }
@@ -167,16 +172,22 @@ export default class ApiController {
  * @param {obj} next
  * @return {obj} Returns success message with data or failure message
  */
-  static messages(req, res, next) {
-    return Messages.sync({ force: true }).then(() => {
-      Messages.create(req.body).then((content) => {
+  static messages(req, res) {
+    const message = req.body.message,
+      priority = req.body.priority,
+      groupId = req.params.groupId,
+      userId = req.body.userId;
+    return Messages.sync({ force: false }).then(() => {
+      Messages.create({ userId, groupId, message, priority }).then((content) => {
         res.status(200).json({
           status: 'success',
           data: content,
           message: 'Message sent'
         });
       }).catch((err) => {
-        next(err);
+        if (err) {
+          res.json({ status: 'Input need not be empty' });
+        }
       });
     });
   }
@@ -188,20 +199,20 @@ export default class ApiController {
  * @param {obj} next
  *
  */
-  static getMessages(req, res, next) {
+  static getMessages(req, res) {
     const groupId = req.params.groupId;
     Messages.findAll({
       where: {
         groupId
       }
     }).then((result) => {
-      res.status(200).json({
-        status: 'Success',
-        data: result,
-        message: 'Received'
-      });
-    }).catch((err) => {
-      next(err);
+      if (result) {
+        res.status(200).json({
+          status: 'Success',
+          data: result,
+          message: 'Received'
+        });
+      }
     });
   }
 }
