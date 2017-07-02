@@ -54,6 +54,7 @@ export default class ApiController {
     });
   }
 
+
  /**
  *
  * @param {obj} req
@@ -215,4 +216,3 @@ export default class ApiController {
     });
   }
 }
-

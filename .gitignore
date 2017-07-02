@@ -1,12 +1,11 @@
+server/migrations/
+server/config/
 template/
-server/app.js
 client/
 migrations/
-server/node_modules/
-server/tests/
+node_modules/
 coverage/
 dist/
-server/coverage/
-template/
 .vscode/
-node_modules/
+
+

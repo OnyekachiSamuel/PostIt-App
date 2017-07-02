@@ -186,17 +186,13 @@ describe('ROUTE TESTING ', () => {
         done();
       });
     }, 10000);
-    /* it('Should NOT be able to create account with existing username', (done) => {
-      request.post('/api/signup')
-        .send({ name: 'James', username: 'Kenet', email: 'j@gmail.com', password: 'pppzundu' })
-        .expect(200)
-        .end((err, res) => {
-          expect('User exists').toBe(res.body.status);
-          done(err);
-        });
-    }, 10000);*/
   });
 });
+
+
+
+
+
 
 
 

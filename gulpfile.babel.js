@@ -1,14 +1,12 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
-// import nodemon from 'gulp-nodemon';
-// import istanbulReport from 'gulp-istanbul-report';
+import nodemon from 'gulp-nodemon';
 import coveralls from 'gulp-coveralls';
 import istanbul from 'gulp-babel-istanbul';
 import injectModules from 'gulp-inject-modules';
 import jasmine from 'gulp-jasmine';
 // import cover from 'gulp-coverage';
 import exit from 'gulp-exit';
-
 
 // Run the tests
 gulp.task('run-test', () => {
