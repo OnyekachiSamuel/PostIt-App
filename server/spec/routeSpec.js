@@ -116,11 +116,19 @@ describe('ROUTE TESTING ', () => {
           done(err);
         });
     }, 10000);
-    it('Should NOT be able to login with wrong password', (done) => {
+    it('Should NOT be able to login with wrong username', (done) => {
       request.post('/api/signin')
         .send({ username: 'enet', password: 'azundu' })
         .end((err, res) => {
           expect('User not found').toBe(res.body.status);
+          done(err);
+        });
+    }, 10000);
+    it('Should NOT be able to login with wrong password', (done) => {
+      request.post('/api/signin')
+        .send({ username: 'Kenet', password: 'zundu' })
+        .end((err, res) => {
+          expect('Invalid Password').toBe(res.body.status);
           done(err);
         });
     }, 10000);
@@ -185,6 +193,15 @@ describe('ROUTE TESTING ', () => {
         expect('Access denied. Login first').toBe(res.body.message);
         done();
       });
+    }, 10000);
+    it('Should NOT create account without submitting all form data', (done) => {
+      request.post('/api/signup')
+        .send({ name: 'Eze', email: 'jyyyu@gmail.com', password: 'azundu' })
+        .expect(200)
+        .end((err, res) => {
+          expect('Input field required').toBe(res.body.status);
+          done(err);
+        });
     }, 10000);
   });
 });

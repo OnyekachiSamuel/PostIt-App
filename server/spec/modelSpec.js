@@ -3,8 +3,8 @@ import Sequelize from 'sequelize';
 import expect from 'expect';
 import Users from '../models/tests/users';
 import Group from '../models/tests/group';
-import GroupMembers from '../models/groupMembers';
-import Messages from '../models/messages';
+import GroupMembers from '../models/tests/groupMembers';
+import Messages from '../models/tests/messages';
 import db from '../config/test_db_url.json';
 
 // TESTING all the models used in the application
