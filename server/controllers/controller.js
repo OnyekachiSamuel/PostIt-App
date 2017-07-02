@@ -1,7 +1,5 @@
-import Sequelize from 'sequelize';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import config from '../config/db_url.json';
 import Users from '../models/users';
 import Group from '../models/group';
 import GroupMembers from '../models/groupMembers';
@@ -12,13 +10,6 @@ import Messages from '../models/messages';
  * @class ApiController
  */
 export default class ApiController {
-  /**
-   * @constructor
-   */
-  constructor() {
-    this.sequelize = new Sequelize(config.url);
-    this.sequelize.authenticate().then(() => { console.log('Connection has been established'); });
-  }
   /**
  * Users details are captured by this method on signup and persisted on the database
  * @param {obj} req
@@ -46,7 +37,7 @@ export default class ApiController {
             });
           }).catch((err) => {
             if (err) {
-              res.json({ status: 'User exists' });
+              res.json({ status: 'Input field required' });
             }
           });
         });
@@ -176,7 +167,7 @@ export default class ApiController {
       priority = req.body.priority,
       groupId = req.params.groupId,
       userId = req.body.userId;
-    return Messages.sync({ force: false }).then(() => {
+    return Messages.sync({ force: true }).then(() => {
       Messages.create({ userId, groupId, message, priority }).then((content) => {
         res.status(200).json({
           status: 'success',
