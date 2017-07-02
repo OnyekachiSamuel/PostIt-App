@@ -1,7 +1,5 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import session from 'express-session';
-import cookieParser from 'cookie-parser';
 import env from 'dotenv';
 import routes from './routes/index';
 // import controller from './controllers/controller';
@@ -19,17 +17,9 @@ app.use((req, res, next) => {
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-/* app.use(cookieParser());
-app.use(session({
-  secret: 'yyuuuatsttgsbbbabbaNNANMSMKWKKZLALLLLZZNZN',
-  resave: false,
-  saveUninitialized: true
-}));*/
 
 app.use('/api/', routes);
-app.listen(port, () => {
-  console.log('Listening on port 3000');
-});
+app.listen(port);
 
 export default app;
 
