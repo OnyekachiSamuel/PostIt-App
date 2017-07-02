@@ -25,7 +25,7 @@ gulp.task('coverage', (cb) => {
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(['server/spec/routeSpec.js'])
+      gulp.src(['server/spec/*.js'])
         .pipe(babel())
         .pipe(injectModules())
         .pipe(jasmine())
