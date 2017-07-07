@@ -19,11 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/', routes);
-app.listen(port);
-
+app.listen(port, () => {
+  console.log('Listening on port 3000');
+});
 export default app;
-
-
-
-
-
