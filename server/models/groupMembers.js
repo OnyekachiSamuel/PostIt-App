@@ -11,7 +11,10 @@ const Groups = sequelize.define('GroupMembers', {
   },
   userId: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   admin: {
     type: Sequelize.INTEGER,

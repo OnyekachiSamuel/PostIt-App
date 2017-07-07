@@ -12,10 +12,14 @@ const Messages = sequelize.define('Messages', {
   },
   message: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   priority: {
     type: Sequelize.STRING,
+    defaultValue: false
   },
   userId: {
     type: Sequelize.INTEGER,
