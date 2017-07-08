@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 server/migrations/
 server/config/
 template/
@@ -7,5 +8,23 @@ node_modules/
 coverage/
 dist/
 .vscode/
+=======
+server/app.js
+server/spec/*
+server/models/*js
+server/routes/*js
+server/app.js
+server/controllers/*js
+server/dist/
+coverage/
+node_modules/
+server/
+dist/
+template/
+.vscode/
+.hound.yml
+.coveralls.yml
+.travis.yml
+>>>>>>> client-React
 
 
