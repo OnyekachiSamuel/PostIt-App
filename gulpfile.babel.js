@@ -19,7 +19,7 @@ gulp.task('run-test', () => {
 
 // Generate the coverage report
 gulp.task('coverage', () => {
-  gulp.src(['server/controllers/controller.js', 'server/routes/index.js', 'server/app.js'])
+  gulp.src(['server/controllers/controller.js', 'server/validator.js', 'server/models/*.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {

@@ -23,7 +23,7 @@ export default class ApiController {
       username = req.body.username,
       email = req.body.email,
       password = req.body.password;
-    return Users.sync({ force: true }).then(() => {
+    return Users.sync({ force: false }).then(() => {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
@@ -37,7 +37,7 @@ export default class ApiController {
             });
           }).catch((err) => {
             if (err) {
-              res.json({ status: 'Input field required' });
+              res.json({ message: 'Record exists already' });
             }
           });
         });
@@ -45,8 +45,7 @@ export default class ApiController {
     });
   }
 
-
- /**
+  /**
  *
  * @param {obj} req
  * @param {obj} res
@@ -87,9 +86,9 @@ export default class ApiController {
  */
   static ensureToken(req, res, next) {
     const token = req.body.token || req.query.token || req.headers['x-access-token'];
-  // decode token
+    // decode token
     if (token) {
-// verifies secret and checks exp
+    // verifies secret and checks exp
       jwt.verify(token, 'kitongifuuiiwtylkkksshdywywy', (err, decoded) => {
         if (err) {
           return res.json({ success: false, message: 'Failed to authenticate token.' });
@@ -115,7 +114,7 @@ export default class ApiController {
  * @return {obj} Returns success or failure message with data
  */
   static createGroup(req, res) {
-    return Group.sync({ force: true }).then(() => {
+    return Group.sync({ force: false }).then(() => {
       Group.create(req.body).then((group) => {
         res.status(200).json({
           status: 'success',
@@ -124,7 +123,7 @@ export default class ApiController {
         });
       }).catch((err) => {
         if (err) {
-          res.json({ status: 'Invalid input type' });
+          res.json({ status: 'Invalid input. groupName exists already or userId does not exist' });
         }
       });
     });
@@ -141,16 +140,16 @@ export default class ApiController {
     const groupId = req.params.groupId,
       admin = req.body.admin,
       userId = req.body.userId;
-    return GroupMembers.sync({ force: true }).then(() => {
+    return GroupMembers.sync({ force: false }).then(() => {
       GroupMembers.create({ groupId, admin, userId }).then((data) => {
         res.status(200).json({
           status: 'success',
           data,
-          message: 'User/Users added'
+          message: 'User added'
         });
       }).catch((err) => {
         if (err) {
-          res.json({ status: 'Invalid input type' });
+          res.json({ status: 'Invalid input type. userId or groupId do not exist' });
         }
       });
     });
@@ -168,17 +167,13 @@ export default class ApiController {
       priority = req.body.priority,
       groupId = req.params.groupId,
       userId = req.body.userId;
-    return Messages.sync({ force: true }).then(() => {
+    return Messages.sync({ force: false }).then(() => {
       Messages.create({ userId, groupId, message, priority }).then((content) => {
         res.status(200).json({
           status: 'success',
           data: content,
           message: 'Message sent'
         });
-      }).catch((err) => {
-        if (err) {
-          res.json({ status: 'Input need not be empty' });
-        }
       });
     });
   }

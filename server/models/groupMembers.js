@@ -9,11 +9,12 @@ const Groups = sequelize.define('GroupMembers', {
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  userId: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   admin: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 0
+  },
+  userId: {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
     references: {
@@ -37,11 +38,11 @@ const Groups = sequelize.define('GroupMembers', {
       // associations can be defined here
       Groups.belongsTo(models.Users, {
         foreignKey: 'userId',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       });
-      Groups.belongsTo(models.Group, {
+      Groups.belongsTo(models.Groups, {
         foreignKey: 'groupId',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }

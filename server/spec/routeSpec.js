@@ -8,7 +8,7 @@ const request = supertest(app);
 
 describe('ROUTE TESTING ', () => {
   beforeAll((done) => {
-    Users.destroy({ where: {} }).then((destroyed) => {
+    Users.destroy({ where: {} }, { truncate: true }).then((destroyed) => {
       if (destroyed) {
         console.log('Done deleting');
       }
@@ -16,6 +16,24 @@ describe('ROUTE TESTING ', () => {
     });
   });
   describe('SIGNUP', () => {
+    it('Should not be able to create a new account without any field', (done) => {
+      request.post('/api/signup')
+        .send({ username: 'Kenet', email: 'jyyyu@gmail.com', password: 'azundu' })
+        .expect(200)
+        .end((err, res) => {
+          expect('name, username, email and password fields are required').toBe(res.body.message);
+          done(err);
+        });
+    }, 10000);
+    it('Should not be able to create a new account without any empty input fields', (done) => {
+      request.post('/api/signup')
+        .send({ name: 'Eze', username: '', email: 'jyyyu@gmail.com', password: 'azundu' })
+        .expect(200)
+        .end((err, res) => {
+          expect('name, username, email, and password fields needs not be empty ').toBe(res.body.message);
+          done(err);
+        });
+    }, 10000);
     it('Should be able to create a new account', (done) => {
       request.post('/api/signup')
         .send({ name: 'Eze', username: 'Kenet', email: 'jyyyu@gmail.com', password: 'azundu' })
@@ -28,86 +46,189 @@ describe('ROUTE TESTING ', () => {
           done(err);
         });
     }, 10000);
+    it('Should not be able to create account with existing records', (done) => {
+      request.post('/api/signup')
+        .send({ name: 'Eze', username: 'Kenet', email: 'jyyyu@gmail.com', password: 'azundu' })
+        .expect(200)
+        .end((err, res) => {
+          expect('Record exists already').toBe(res.body.message);
+          done(err);
+        });
+    }, 10000);
   });
   describe('SIGNIN AND PERFORM OPERATIONS', () => {
+    let userId;
     let token;
+    let groupId;
+    it('Should not be able to login with a missing field', (done) => {
+      request.post('/api/signin')
+        .send({ password: 'azundu' })
+        .expect(200)
+        .end((err, res) => {
+          expect('Username and password fields are required').toBe(res.body.message);
+          done(err);
+        });
+    }, 10000);
+    it('Should not be able to login with empty input fields', (done) => {
+      request.post('/api/signin')
+        .send({ username: '', password: 'azundu' })
+        .expect(200)
+        .end((err, res) => {
+          expect('Username or password field must not be empty').toBe(res.body.message);
+          done(err);
+        });
+    }, 10000);
     it('Should be able to login to account created', (done) => {
       request.post('/api/signin')
         .send({ username: 'Kenet', password: 'azundu' })
         .expect(200)
         .end((err, res) => {
           token = res.body.token;
+          userId = res.body.data.id;
           expect(res.body.status).toBe('Success');
           expect(res.body.data.username).toBe('Kenet');
           expect(res.body.message).toBe('Logged In');
           done(err);
         });
     }, 10000);
+    it('Should not be able to create group with missing fields', (done) => {
+      request.post('/api/group')
+      .set('x-access-token', token)
+      .send({ description: 'Full stack with js', userId })
+      .expect(200)
+      .end((err, res) => {
+        expect('groupName, description and userId fields are required').toBe(res.body.message);
+        done();
+      });
+    }, 16000);
+    it('Should not be able to create group with empty input fields', (done) => {
+      request.post('/api/group')
+      .set('x-access-token', token)
+      .send({ groupName: '', description: 'Full stack with js', userId })
+      .expect(200)
+      .end((err, res) => {
+        expect('groupName, description, and userId fields should not be empty').toBe(res.body.message);
+        done();
+      });
+    }, 16000);
     it('Should be able to create group by registered user', (done) => {
       request.post('/api/group')
       .set('x-access-token', token)
-      .send({ groupName: 'Andela21', groupCategory: 'Full stack with js', userId: 1 })
+      .send({ groupName: 'Andela21', description: 'Full stack with js', userId })
       .expect(200)
       .end((err, res) => {
+        groupId = res.body.data.id;
         expect('success').toBe(res.body.status);
         expect('Group Created').toBe(res.body.message);
         done();
       });
     }, 16000);
-    it('Should be able to add a user to groups', (done) => {
-      request.post('/api/group/1/user')
+    it('Should not be able to create group with same groupName', (done) => {
+      request.post('/api/group')
       .set('x-access-token', token)
-      .send({ admin: 1, userId: 1 })
+      .send({ groupName: 'Andela21', description: 'Full stack with js', userId })
+      .expect(200)
+      .end((err, res) => {
+        expect('Invalid input. groupName exists already or userId does not exist').toBe(res.body.status);
+        done();
+      });
+    }, 16000);
+    it('Should not be able to add a user with missing input fields', (done) => {
+      request.post(`/api/group/${groupId}/user`)
+      .set('x-access-token', token)
+      .send({ userId })
+      .expect(200)
+      .end((err, res) => {
+        expect('userId and admin fields are required').toBe(res.body.message);
+        done();
+      });
+    }, 10000);
+    it('Should not be able to add a user with empty input fields', (done) => {
+      request.post(`/api/group/${groupId}/user`)
+      .set('x-access-token', token)
+      .send({ admin: '', userId })
+      .expect(200)
+      .end((err, res) => {
+        expect('userId and admin fields should not be empty').toBe(res.body.message);
+        done();
+      });
+    }, 10000);
+    it('Should be able to add a user to groups', (done) => {
+      request.post(`/api/group/${groupId}/user`)
+      .set('x-access-token', token)
+      .send({ admin: 1, userId })
       .expect(200)
       .end((err, res) => {
         expect('success').toBe(res.body.status);
-        expect('User/Users added').toBe(res.body.message);
+        expect('User added').toBe(res.body.message);
+        done();
+      });
+    }, 10000);
+    it('Should not be able to post message with missing input fields', (done) => {
+      request.post(`/api/group/${groupId}/messages`)
+      .set('x-access-token', token)
+      .expect(200)
+      .send({ priority: 'Normal', userId })
+      .end((err, res) => {
+        expect('message, priority and userId fields are required').toBe(res.body.message);
+        done();
+      });
+    }, 10000);
+    it('Should not be able to post message with empty input fields', (done) => {
+      request.post(`/api/group/${groupId}/messages`)
+      .set('x-access-token', token)
+      .expect(200)
+      .send({ message: '', priority: 'Normal', userId })
+      .end((err, res) => {
+        expect('message, priority and userId need not be empty').toBe(res.body.message);
         done();
       });
     }, 10000);
     it('Should be able to post message to created group', (done) => {
-      request.post('/api/group/1/messages')
+      request.post(`/api/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
-      .send({ message: 'Its working', priority: 'Normal', userId: 1 })
+      .send({ message: 'Its working', priority: 'Normal', userId })
       .end((err, res) => {
         expect('success').toBe(res.body.status);
         expect('Message sent').toBe(res.body.message);
-        expect(1).toBe(res.body.data.userId);
+        expect(userId).toBe(res.body.data.userId);
         expect('Normal').toBe(res.body.data.priority);
         expect('Its working').toBe(res.body.data.message);
         done();
       });
     }, 10000);
     it('Should be able to post another message to group', (done) => {
-      request.post('/api/group/1/messages')
+      request.post(`/api/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
-      .send({ message: 'Its pretty cool we consider React in this project', priority: 'Normal', userId: 1 })
+      .send({ message: 'Its pretty cool we consider React in this project', priority: 'Normal', userId })
       .end((err, res) => {
         expect('success').toBe(res.body.status);
         expect('Message sent').toBe(res.body.message);
-        expect(1).toBe(res.body.data.userId);
+        expect(userId).toBe(res.body.data.userId);
         expect('Normal').toBe(res.body.data.priority);
         expect('Its pretty cool we consider React in this project').toBe(res.body.data.message);
         done();
       });
     }, 10000);
     it('Should be able to get messages in a particular group', (done) => {
-      request.get('/api/group/1/messages')
+      request.get(`/api/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
-        expect('Its pretty cool we consider React in this project').toBe(res.body.data[0].message);
+        expect('Its working').toBe(res.body.data[0].message);
+        expect('Its pretty cool we consider React in this project').toBe(res.body.data[1].message);
         expect('Normal').toBe(res.body.data[0].priority);
-        expect(1).toBe(res.body.data[0].groupId);
-        expect(1).toBe(res.body.data[0].userId);
+        expect(groupId).toBe(res.body.data[0].groupId);
+        expect(userId).toBe(res.body.data[0].userId);
         done();
       });
     }, 1000);
   });
   describe('NEGATIVE TESTS', () => {
     let token2;
+    let userId2;
     it('Should NOT be able to login with wrong username', (done) => {
       request.post('/api/signin')
         .send({ username: 'enet', password: 'azundu' })
@@ -138,6 +259,7 @@ describe('ROUTE TESTING ', () => {
         .expect(200)
         .end((err, res) => {
           token2 = res.body.token;
+          userId2 = res.body.data.id;
           expect(res.body.status).toBe('Success');
           expect(res.body.data.username).toBe('Kenet');
           expect(res.body.message).toBe('Logged In');
@@ -147,30 +269,20 @@ describe('ROUTE TESTING ', () => {
     it('Should NOT be able to create group without group name', (done) => {
       request.post('/api/group')
       .set('x-access-token', token2)
-      .send({ groupCategory: 'Full stack with js', userId: 1 })
+      .send({ description: 'Full stack with js', userId2 })
       .expect(200)
       .end((err, res) => {
-        expect('Invalid input type').toBe(res.body.status);
+        expect('groupName, description and userId fields are required').toBe(res.body.message);
         done();
       });
     }, 16000);
-    it('Should NOT be able add user to others group', (done) => {
+    it('Should NOT be able add user with invalid idsto others group', (done) => {
       request.post('/api/group/4/user')
       .set('x-access-token', token2)
       .send({ admin: 1, userId: 1 })
       .expect(200)
       .end((err, res) => {
-        expect('Invalid input type').toBe(res.body.status);
-        done();
-      });
-    }, 10000);
-    it('Should NOT be able to post empty message to group', (done) => {
-      request.post('/api/group/1/messages')
-      .set('x-access-token', token2)
-      .expect(200)
-      .send({ priority: 'Normal', userId: 1 })
-      .end((err, res) => {
-        expect('Input need not be empty').toBe(res.body.status);
+        expect('Invalid input type. userId or groupId do not exist').toBe(res.body.status);
         done();
       });
     }, 10000);
@@ -199,7 +311,7 @@ describe('ROUTE TESTING ', () => {
         .send({ name: 'Eze', email: 'jyyyu@gmail.com', password: 'azundu' })
         .expect(200)
         .end((err, res) => {
-          expect('Input field required').toBe(res.body.status);
+          expect('name, username, email and password fields are required').toBe(res.body.message);
           done(err);
         });
     }, 10000);

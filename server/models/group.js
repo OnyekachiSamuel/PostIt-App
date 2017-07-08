@@ -11,13 +11,11 @@ const Group = sequelize.define('Groups', {
   },
   groupName: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true
   },
-  groupCategory: {
+  description: {
     type: Sequelize.STRING
-  },
-  users: {
-    type: Sequelize.INTEGER,
   },
   userId: {
     type: Sequelize.INTEGER,

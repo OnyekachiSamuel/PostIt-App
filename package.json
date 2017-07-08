@@ -34,12 +34,14 @@
     "pg": "^6.3.1",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.1.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "validator": "^7.2.0"
   },
   "devDependencies": {},
   "scripts": {
     "start": "babel-node server/app",
-    "test": "gulp run-test"
+    "test": "gulp run-test",
+    "babel-version": "babel --version"
   },
   "repository": {
     "type": "git",
