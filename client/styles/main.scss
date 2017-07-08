@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background-color: #fff;
+  color: #555;
+  font-family: 'Lato', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://i.imgur.com/5E5anV2.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  padding: 10px;
+  margin-top: 200px;
+  background-color: #BDC3C7;
+  color: #fff;
+  text-align: center;
+}
+
+h1 {
+  color: #fff;
+  font-size: 140%;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+}
+
+h2 {
+  color: #fff;
+  font-size: 120%;
+  font-weight: 300;
+  margin-top: 0;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+}
+
+h3, h4 {
+  color: #2ecc71;
+}
+
+/*---------------------------------------------*/
+/* Landing page
+/*---------------------------------------------*/
+
+.nav-wrapper a {
+  padding-left: 10px;
+}
+
+.page-heading {
+  position: absolute;
+  width: 1140px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  .signup-btn {
+    &:link, &:visited {
+      display: inline-block;
+      padding: 10px 30px;
+      font-weight: 300;
+      text-decoration: none;
+      background-color: #e67e22;
+      border-radius: 200px;
+      color: #fff;
+    }
+    &:hover, &:active {
+      background-color: #cf6d17;
+    }
+  }
+}
+
+.modal {
+  margin-top: 50px;
+}
+
+.title {
+  color: #2ecc71;
+}
+
+.navbar, nav {
+  background-color: #169e83;
+}
+
+.navbar {
+  .nav-style a {
+    color: #fff;
+    &:hover, &:active, &:link, &:visited {
+      color: #fff;
+    }
+  }
+  .nav-item-style li a {
+    color: #fff;
+    &:link, &:visited, &:hover, &:active {
+      color: #fff;
+    }
+  }
+}
+
+/*---------------------------------------------*/
+/* Create Group Styling
+/*---------------------------------------------*/
+
+.add {
+  margin-bottom: 65px;
+}
+
+.heading {
+  background-color: #1abc9c;
+}
+
+.gp-form {
+  margin-top: 50px;
+}
+
+.member {
+  margin-bottom: 20px;
+}
+
+.add-btn {
+  margin-bottom: 10px;
+}
+
+/*---------------------------------------------*/
+/* Post Message Page Styling
+/*---------------------------------------------*/
+
+.message {
+  background-color: #c3f2d7;
+  h4 {
+    color: #fff;
+  }
+}
+
+.type-text {
+  height: 120px;
+}
+
+/*---------------------------------------------*/
+/* Show message styling
+/*---------------------------------------------*/
