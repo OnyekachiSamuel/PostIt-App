@@ -1,18 +1,12 @@
-server/app.js
-server/spec/*
-server/models/*js
-server/routes/*js
-server/app.js
-server/controllers/*js
-server/dist/
-coverage/
-node_modules/
-server/
-dist/
+server/migrations/
+server/config/
 template/
+client/
+migrations/
+node_modules/
+coverage/
+dist/
 .vscode/
-.hound.yml
-.coveralls.yml
-.travis.yml
+
 
 
