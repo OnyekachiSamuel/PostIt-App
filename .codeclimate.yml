@@ -1,25 +1,24 @@
 engines:
-  eslint:
-    enabled: true
-    config:
-      config: .eslintrc
   duplication:
     enabled: true
     config:
       languages:
-      - javascript
+      - javascript:
     checks:
       Similar code:
         enabled: false
-  fixme:
+  eslint:
     enabled: true
-ratings:
-  paths:
-- server/spec/*
+    checks:
+      import/extensions:
+        enabled: false
+      no-multiple-empty-lines:
+        enabled: false
 exclude_paths:
 - "templates/"
-- node_modules/**/*
-
-
+ratings:
+   paths:
+   - "server/**/*"
+   - "server/*"
 
 
