@@ -68,4 +68,7 @@ To get all messages posted on the group, use the link https://postico.herokuapp.
 - Commit your changes: git commit -m 'Add some feature'
 - Push to the branch: git push origin my-new-feature
 - Submit a pull request 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7fb5ce6b665849f986f00285cc0ac0bf5088f373
