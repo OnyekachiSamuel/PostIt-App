@@ -12,34 +12,23 @@ const Users = sequelize.define('Users', {
   },
   name: {
     type: Sequelize.STRING,
-    unique: true,
-    validate: {
-      is: ['^[a-z]+$', 'i'],
-      notEmpty: true,
-      notNull: true
-    } },
+    allowNull: false
+  },
   username: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
-    validate: {
-      is: ['^[a-z]+$', 'i'],
-      notEmpty: true
-    }
+    unique: true
   },
   email: {
     type: Sequelize.STRING,
+    unique: true,
     validate: {
-      isEmail: true,
-      notEmpty: true
+      isEmail: true
     }
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    allowNull: false
   }
 }, {
   classMethods: {

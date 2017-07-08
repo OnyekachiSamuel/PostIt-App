@@ -18,8 +18,7 @@ const Messages = sequelize.define('Messages', {
     }
   },
   priority: {
-    type: Sequelize.STRING,
-    defaultValue: false
+    type: Sequelize.STRING
   },
   userId: {
     type: Sequelize.INTEGER,

@@ -12,16 +12,10 @@ const Group = sequelize.define('Groups', {
   groupName: {
     type: Sequelize.STRING,
     allowNull: false,
-    validate: {
-      is: ['^[a-z]+$', 'i'],
-      notEmpty: true
-    }
+    unique: true
   },
   description: {
     type: Sequelize.STRING
-  },
-  users: {
-    type: Sequelize.INTEGER,
   },
   userId: {
     type: Sequelize.INTEGER,
