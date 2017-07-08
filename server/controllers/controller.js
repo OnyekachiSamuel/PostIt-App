@@ -1,6 +1,5 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import validator from 'validator';
 import Users from '../models/users';
 import Group from '../models/group';
 import GroupMembers from '../models/groupMembers';
@@ -24,9 +23,6 @@ export default class ApiController {
       username = req.body.username,
       email = req.body.email,
       password = req.body.password;
-    if (!req.body.name) {
-      console.log('It occured');
-    }
     return Users.sync({ force: false }).then(() => {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
@@ -41,38 +37,13 @@ export default class ApiController {
             });
           }).catch((err) => {
             if (err) {
-              res.json({ status: 'Input field required' });
+              res.json({ message: 'Record exists already' });
             }
           });
         });
       });
     });
   }
-
-
-  static signupValidator(req, res, next) {
-    const wrongInput = [];
-    const emptyInput = [];
-    if (!req.body.name) {
-      wrongInput.push(' name');
-    }
-    if (!req.body.username) {
-      wrongInput.push(' username');
-    }
-    if (!req.body.password) {
-      wrongInput.push(' password');
-    }
-    if (!req.body.email) {
-      wrongInput.push(' email');
-    }
-    if (!req.body.confirmPassword) {
-      wrongInput.push(' confirmPassword');
-    }
-    if (wrongInput.length !== 0) {
-      res.json({ message: `${wrongInput.toString()} are required field(s)` });
-    }
-  }
-
 
   /**
  *
@@ -152,7 +123,7 @@ export default class ApiController {
         });
       }).catch((err) => {
         if (err) {
-          res.json({ status: 'Invalid input type' });
+          res.json({ status: 'Invalid input. groupName exists already or userId does not exist' });
         }
       });
     });
@@ -174,11 +145,11 @@ export default class ApiController {
         res.status(200).json({
           status: 'success',
           data,
-          message: 'User/Users added'
+          message: 'User added'
         });
       }).catch((err) => {
         if (err) {
-          res.json({ status: 'Invalid input type' });
+          res.json({ status: 'Invalid input type. userId or groupId do not exist' });
         }
       });
     });
@@ -203,10 +174,6 @@ export default class ApiController {
           data: content,
           message: 'Message sent'
         });
-      }).catch((err) => {
-        if (err) {
-          res.json({ status: 'Input need not be empty' });
-        }
       });
     });
   }
