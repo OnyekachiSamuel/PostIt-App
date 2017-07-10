@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "7.0"
+before_script:
+  - npm install -g gulp
+script: 
+  - npm install
+  - gulp
+  - npm run test
+after_success:
+  - codeclimate < ./coverage/lcov.info
+addons:
+  code_climate:
+    repo_token:
+      secure: 6d542628571e7389e87e9036ebd395750f2c8969a82c304512663d3674a0c5bd

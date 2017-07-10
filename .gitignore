@@ -1,23 +1,11 @@
-server/app.js
+server/migrations/
+server/config/
+template/
 client/
-server/spec/*
-server/models/*js
-server/routes/*js
-server/app.js
-server/controllers/*js
-server/dist/
-coverage/
+migrations/
 node_modules/
-gulpfile.babel.js
-server/
+coverage/
 dist/
 .vscode/
-.hound.yml
-.coveralls.yml
-.travis.yml
-.babelrc
-package.json
-.eslintrc
-README.models
 
 
