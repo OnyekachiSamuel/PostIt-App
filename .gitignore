@@ -17,5 +17,7 @@ dist/
 .travis.yml
 .babelrc
 package.json
+.eslintrc
+README.models
 
 
