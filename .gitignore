@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 server/app.js
 server/spec/*
 server/models/*js
@@ -15,5 +16,16 @@ template/
 .coveralls.yml
 .travis.yml
 
+=======
+server/migrations/
+server/config/
+template/
+client/
+migrations/
+node_modules/
+coverage/
+dist/
+.vscode/
+>>>>>>> b04a82628f4c10645b3a7b32cfcd9a9ec09cb517
 
 

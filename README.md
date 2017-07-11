@@ -69,6 +69,9 @@ To get all messages posted on the group, use the link https://postico.herokuapp.
 - Push to the branch: git push origin my-new-feature
 - Submit a pull request 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 7fb5ce6b665849f986f00285cc0ac0bf5088f373
+=======
+>>>>>>> b04a82628f4c10645b3a7b32cfcd9a9ec09cb517

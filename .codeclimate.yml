@@ -20,5 +20,3 @@ ratings:
    paths:
    - "server/**/*"
    - "server/*"
-
-

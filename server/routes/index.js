@@ -1,6 +1,6 @@
 import express from 'express';
 import controller from '../controllers/controller';
-import Validate from '../validator';
+import Validate from '../middlewares/validator';
 
 const router = express.Router();
 
