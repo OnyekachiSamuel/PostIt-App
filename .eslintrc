@@ -1,4 +1,9 @@
 {
+   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "root": true,
   "extends": "airbnb-base",
   "env": {
@@ -31,3 +36,4 @@
     }]
   }
 }
+
