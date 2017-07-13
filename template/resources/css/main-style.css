@@ -44,8 +44,8 @@ footer {
 }
 h1 {
 	color: #fff;
-	font-size: 140%;
-	font-weight: 300;
+	font-size: 5.9vw;
+	font-weight: 200;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	word-spacing: 2px;
@@ -53,7 +53,7 @@ h1 {
 
 h2 {
 	color: #fff;
-	font-size: 120%;
+	font-size: 3.0vh;
 	font-weight: 300;
 	margin-top: 0;
 	text-transform: capitalize;
@@ -63,6 +63,7 @@ h2 {
 
 h3, h4 {
 	color: #2ecc71;
+    font-size: 24px;
 }
 /*---------------------------------------------*/
 /* Landing page
@@ -92,6 +93,17 @@ h3, h4 {
 }
 .modal {
 	margin-top: 50px;
+}
+.modal-title {
+    float: left;
+    clear: right;
+    margin-right: 160px;
+    
+    
+}
+.close-modal:first-child {
+    float: right;
+    vertical-align: top;
 }
 .title {
 	color: #2ecc71;
