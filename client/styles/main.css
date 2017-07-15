@@ -13,7 +13,7 @@
 html,
 body {
 	height: 100%;
-	background-color: #ECECEC;
+	background-color: #fff;
 	color: #555;
 	font-family: 'Lato', 'Arial', sans-serif;
 	font-weight: 300;
@@ -25,7 +25,7 @@ body {
     flex-direction: column;
 }
 header {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://i.imgur.com/5MD10l3.jpg);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://i.imgur.com/5E5anV2.jpg);
 	background-size: cover;
 	background-position: center;
 	height: 100vh;
@@ -38,14 +38,14 @@ footer {
 	height: 50px;
 	padding: 10px;
 	margin-top: 200px;
-	background-color: #F2F1EF;
-	color: #34495E;
+	background-color: #BDC3C7;
+	color: #fff;
 	text-align: center;
 }
 h1 {
 	color: #fff;
-	font-size: 5.9vw;
-	font-weight: 200;
+	font-size: 140%;
+	font-weight: 300;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	word-spacing: 2px;
@@ -53,7 +53,7 @@ h1 {
 
 h2 {
 	color: #fff;
-	font-size: 3.0vh;
+	font-size: 120%;
 	font-weight: 300;
 	margin-top: 0;
 	text-transform: capitalize;
@@ -63,14 +63,14 @@ h2 {
 
 h3, h4 {
 	color: #2ecc71;
-    font-size: 24px;
-}
-#main {
-    color: #6C7A89;
 }
 /*---------------------------------------------*/
 /* Landing page
 /*---------------------------------------------*/
+
+.nav-wrapper a {
+	padding-left: 10px;
+}
 
 .page-heading {
 	position: absolute;
@@ -97,22 +97,11 @@ h3, h4 {
 .modal {
 	margin-top: 50px;
 }
-.modal-title {
-    float: left;
-    clear: right;
-    margin-right: 160px;
-    
-    
-}
-.close-modal:first-child {
-    float: right;
-    vertical-align: top;
-}
 .title {
 	color: #2ecc71;
 }
 .navbar, nav {
-	background-color: #4475A6;
+	background-color: #169e83;
 }
 
 .navbar .nav-style a {
