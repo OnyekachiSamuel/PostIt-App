@@ -13,7 +13,7 @@
 html,
 body {
 	height: 100%;
-	background-color: #ECECEC;
+	background-color: #f3f4f4;
 	color: #555;
 	font-family: 'Lato', 'Arial', sans-serif;
 	font-weight: 300;
@@ -61,9 +61,13 @@ h2 {
 	word-spacing: 3px;
 }
 
-h3, h4 {
-	color: #2ecc71;
-    font-size: 24px;
+h3 {
+	color: #4f575e;
+    font-size: 27px;
+}
+h4 {
+	color: #fff;
+    font-size: 27px;
 }
 #main {
     color: #6C7A89;
@@ -71,7 +75,6 @@ h3, h4 {
 /*---------------------------------------------*/
 /* Landing page
 /*---------------------------------------------*/
-
 .page-heading {
 	position: absolute;
 	width: 1140px;
@@ -98,21 +101,22 @@ h3, h4 {
 	margin-top: 50px;
 }
 .modal-title {
-    float: left;
-    clear: right;
-    margin-right: 160px;
-    
-    
+    height: 40px;
+    background-color: #3e7293;  
 }
-.close-modal:first-child {
+.close-modal {
     float: right;
-    vertical-align: top;
+    margin-right: 10px
+}
+.close-modal a {
+    color: #fff;
+    font-size: 18px;
 }
 .title {
 	color: #2ecc71;
 }
 .navbar, nav {
-	background-color: #4475A6;
+	background-color: #3e7293;
 }
 
 .navbar .nav-style a {
@@ -149,7 +153,8 @@ h3, h4 {
 	margin-bottom: 65px;
 }
 .heading {
-	background-color: #1abc9c;
+	background-color: #fff;
+    height: 60px;
 }
 
 .gp-form {
@@ -161,6 +166,53 @@ h3, h4 {
 }
 .add-btn {
 	margin-bottom: 10px;
+}
+.left {
+    float: left;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 24px;
+}
+.right { 
+    float: right;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+button .right {
+    color: #56ad55
+}
+
+.input-group{
+  display:table;
+  width:100%;
+}
+.input-group .input-field,
+.input-group .input-group-addon{
+  display:table-cell;
+}
+.search {
+    margin-top: 80px;
+    background-color: #fff;
+}
+.groups {
+    margin-top: 80px;
+}
+.group-lists {
+    
+}
+.radio-btn {
+    display: inline-block;
+    float: right;
+}
+.gp {
+    margin-bottom: 5px;
+}
+.gp-title, post-title {
+    text-align: center;
+    color: #897755;
+    height: 30px;
+    width: auto;
+    margin-bottom: 10px;
 }
 /*---------------------------------------------*/
 /* Post Message Page Styling
@@ -175,7 +227,17 @@ h3, h4 {
 .type-text {
 	height: 120px;
 }
+.messages {
+    margin-bottom: 100px;
+    margin-top: 60px;
+}
 /*---------------------------------------------*/
 /* Show message styling
 /*---------------------------------------------*/
 
+.gp-messages {
+    margin-top: 35px;
+}
+.acordion {
+    margin-bottom: 120px;
+}
