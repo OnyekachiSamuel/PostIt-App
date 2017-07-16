@@ -1,31 +1,14 @@
-<<<<<<< HEAD
-server/app.js
-server/spec/*
-server/models/*js
-server/routes/*js
-server/app.js
-server/controllers/*js
-server/dist/
-coverage/
-node_modules/
-server/
-dist/
-template/
-.vscode/
-.hound.yml
-.coveralls.yml
-.travis.yml
-
-=======
 server/migrations/
-server/config/
 template/
 client/
+server/models/index.js
+server/config/db.json
+package-lock.json
+webpack.config.json
 migrations/
 node_modules/
 coverage/
 dist/
 .vscode/
->>>>>>> b04a82628f4c10645b3a7b32cfcd9a9ec09cb517
 
 
