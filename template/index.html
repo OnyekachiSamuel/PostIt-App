@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Post it</title>
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,300,300i,400" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="resources/css/main-style.css"> 
+    </head>
+    <body> 
+    <header>
+    	       <!-- Page navigation -->
+    <nav>
+	<div class="nav-wrapper"> <a href="#" style="padding-left: 10px;">POST IT</a>
+	 <ul id="nav-mobile" class="right">
+		 <li><a class="waves-effect waves-light" href="#modal1">Sign Up</a> </li>
+		 <li><a class="waves-effect waves-light" href="#modal2">Sign In</a></li>
+    </ul>	
+	</div>
+    </nav>
+    
+    <!--Page description -->
+	<div class="page-heading">
+			<h1>We have got you connected.</h1>
+			
+			<!-- Sign up Link -->
+	<h2><b>share it by posting it today.</b></h2> <a class="waves-effect waves-light signup-btn" href="#modal1">Sign Up Now</a> 
+   </div>
+    
+    <!-- Sign up modal -->
+     <div class="row modal" id="modal1">
+   <div class="modal-content">
+   <div class="modal-title row">
+       <div class="col s6 m6">
+           <h4>Sign up</h4>
+       </div>
+       <div class="close-modal">
+           <a href="#" class="modal-close">Close</a>
+       </div> 
+       </div>
+    <form class="col s12" method="post" action="#">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name" type="text" class="validate" required>
+          <label for="name">Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="user_name" type="text" class="validate" required>
+          <label for="user_name">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate" required>
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="confirm_password" type="password" class="validate" required>
+          <label for="confirm_password">Confirm password</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+  <div class="modal-footer">
+    <a href="#!"></a>
+  </div>
+    </form>
+    </div>
+  </div>
+    <!-- Sign in modal -->
+   <div class="row modal" id="modal2">
+   <div class="modal-content">
+   <div class="modal-title row">
+       <div class="col s6 m6">
+           <h4>Sign in</h4>
+       </div>
+       <div class="close-modal">
+           <a href="#" class="modal-close">Close</a>
+       </div> 
+       </div>
+    <form class="col s12" method="post" action="#">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text" class="validate" required>
+          <label for="username">Username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+  <div class="modal-footer">
+    <a href="#!"></a>
+  </div>
+    </form>
+    </div>
+  </div>
+    </header>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+    <script src="resources/js/main.js"></script>     
+    </body>
+</html>
