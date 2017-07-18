@@ -1,11 +1,11 @@
 server/migrations/
 server/config/
-template/
 client/
 migrations/
 node_modules/
 coverage/
 dist/
 .vscode/
+server/
 
 
