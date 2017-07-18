@@ -2,6 +2,11 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].[contenthash].css',
+  disable: process.env.NODE_ENV === 'development'
+});
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/index.html',
   filename: 'index.html',
@@ -22,15 +27,22 @@ module.exports = {
         exclude: /(node_modules|server|.vscode|gulpfile.babel.js)/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
+        test: /\.scss$/,
+        use: extractSass.extract({
+          use: [{
+            loader: 'css-loader'
+          }, {
+            loader: 'sass-loader'
+          }],
+                // use style-loader in development
+          fallback: 'style-loader'
+
+        }
+        )
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig, new ExtractTextPlugin('styles.css')],
+  plugins: [HtmlWebpackPluginConfig, extractSass],
   devServer: {
     historyApiFallback: true
   }

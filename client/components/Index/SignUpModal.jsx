@@ -29,7 +29,14 @@ export default class SignUpModal extends React.Component {
     return (
       <div className="row modal" id="modal1">
         <div className="modal-content">
-          <h4>Sign Up</h4>
+          <div className="modal-title row">
+        <div className="col s6 m6">
+           <h4>Sign up</h4>
+       </div>
+       <div className="close-modal">
+           <a href="#" className="modal-close">Close</a>
+       </div>
+       </div>
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row">
               <div className="input-field col s6">
@@ -60,11 +67,9 @@ export default class SignUpModal extends React.Component {
                 <label htmlFor="confirm_password">Confirm password</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-              <i className="material-icons right">send</i>
-            </button>
+            <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
             <div className="modal-footer">
-              <a href="#!" className=" btn modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+              <a href="#!"></a>
             </div>
           </form>
         </div>
