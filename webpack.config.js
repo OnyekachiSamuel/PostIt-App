@@ -24,7 +24,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|server|.vscode|gulpfile.babel.js)/ },
+        exclude: /(node_modules|server|.vscode|template|gulpfile.babel.js)/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
         test: /\.scss$/,
