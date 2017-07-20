@@ -11,7 +11,7 @@ router.post('/signup', Validate.signupInputs, controller.signup);
 router.post('/signin', Validate.signinInputs, controller.signin);
 
 // Middleware to protect routes
-router.use(controller.ensureToken);
+// router.use(controller.ensureToken);
 
 // Route to post group create info
 router.post('/group', Validate.createGroupInputs, controller.createGroup);

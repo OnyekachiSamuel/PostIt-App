@@ -1,7 +1,11 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-export default function userSignupRequest(userData) {
-  // return (dispatch) => {
-   // axios.post('/api/signup', userData);
-  console.log('Good to go', userData);
+export function userSignupRequest(userData) {
+  return (dispatch) => {
+    axios.post('http://localhost:3000/api/signup', userData).then((user) => {
+      console.log(user.data.message);
+    }).catch((error) => {
+      throw error;
+    });
+  };
 }
