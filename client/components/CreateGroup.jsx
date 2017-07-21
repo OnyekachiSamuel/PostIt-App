@@ -4,6 +4,7 @@ import Title from './CreateGroup/Title.jsx';
 import CreateForm from './CreateGroup/CreateForm.jsx';
 import AddUser from './CreateGroup/AddUser.jsx';
 import Footer from './Footer.jsx';
+import FlashMessagesList from './FlashMessagesList.jsx';
 
 export default class Home extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class Home extends React.Component {
         <NavBar/>
         <div className="container">
           <Title/>
+          <FlashMessagesList/>
           <CreateForm/>
           <AddUser/>
           <Footer/>

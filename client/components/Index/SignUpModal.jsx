@@ -1,5 +1,8 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import classnames from 'classnames';
 
 
 class SignUpModal extends React.Component {
@@ -10,17 +13,24 @@ class SignUpModal extends React.Component {
       username: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      errors: {},
+      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   onSubmit(e) {
+   // this.setState({ errors: {}, isLoading: true });
     e.preventDefault();
-    this.props.signupRequest(this.state);
-  }
-  onHandle(e) {
-
+    this.props.signupRequest(this.state).then((data) => {
+      if (data.data.message) {
+        this.props.loginSuccess();
+        // this.setState({ redirect: true });
+        // this.props.history.push('/group');
+      }
+      // this.setState({ errors: data.data.errors, isLoading: false });
+    });
   }
   onChange(e) {
     const state = this.state;
@@ -28,6 +38,15 @@ class SignUpModal extends React.Component {
     this.setState(state);
   }
   render() {
+    const { redirect, errors } = this.state;
+    console.log(this.props);
+    /* if (redirect) {
+      this.props.flashMessage({
+        type: 'success',
+        text: 'You signed up successfully. Welcome'
+      });
+      return <Redirect to='/group'/>;
+    }*/
     return (
       <div className="row modal" id="modal1">
         <div className="modal-content">
@@ -41,35 +60,40 @@ class SignUpModal extends React.Component {
        </div>
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row">
-              <div className="input-field col s6">
+              <div className="input-field col s12">
                 <input id="name" name='name' value={this.state.name}
                 type="text" onChange={this.onChange} className="validate"/>
                 <label htmlFor="name">Name</label>
+                { errors.name && <span>{}</span>}
               </div>
-              <div className="input-field col s6">
+              <div className="input-field col s12">
                 <input id="user_name" name="username" value={this.state.username} onChange={this.onChange} type="text" className="validate"/>
                 <label htmlFor="user_name">Username</label>
+                { errors.username && <span>{ errors.username }</span>}
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input id="email" name="email" value={this.state.email} onChange={this.onChange} type="email" className="validate"/>
                 <label htmlFor="email">Email</label>
+                { errors.email && <span>{ errors.email }</span>}
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input id="password" name='password' value={this.state.password} onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="password">Password</label>
+                { errors.password && <span>{ errors.password }</span>}
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input id="confirm_password" name='confirmPassword' value={this.state.confirmPassword} onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="confirm_password">Confirm password</label>
+                { errors.confirmPassword && <span>{ errors.name }</span>}
               </div>
             </div>
-            <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+            <button className="btn waves-effect waves-light" disabled={this.state.isLoading} type="submit" name="action">Submit</button>
             <div className="modal-footer">
               <a href="#!"></a>
             </div>
@@ -82,7 +106,8 @@ class SignUpModal extends React.Component {
 }
 
 SignUpModal.propTypes = {
-  userSignupRequest: PropTypes.func
+  userSignupRequest: PropTypes.func,
+  addFlashMessage: PropTypes.func
 };
 
-export default SignUpModal;
+export default withRouter(SignUpModal);

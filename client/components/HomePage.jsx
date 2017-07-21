@@ -7,10 +7,15 @@ import SignUpModal from './Index/SignUpModal.jsx';
 import SignInModal from './Index/SignInModal.jsx';
 import Title from './Index/Title.jsx';
 import { userSignupRequest } from './actions/signupAction';
+import { addFlashMessage } from './actions/flashMessage';
 
 class Home extends React.Component {
+  loginSuccess() {
+    this.props.history.push('/group');
+  }
   render() {
     const signupRequest = this.props.userSignupRequest;
+    const flashMessage = this.props.addFlashMessage;
     return (
       <Router>
         <header>
@@ -21,7 +26,9 @@ class Home extends React.Component {
             </div>
           </nav>
           <Title/>
-          <SignUpModal signupRequest={ signupRequest }/>
+          <SignUpModal
+            loginSuccess={this.loginSuccess.bind(this)}
+           signupRequest={ signupRequest } flashMessage={flashMessage}/>
           <SignInModal/>
         </header>
       </Router>
@@ -30,7 +37,8 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  userSignupRequest: PropTypes.func
+  userSignupRequest: PropTypes.func,
+  addFlashMessage: PropTypes.func
 };
 
-export default connect((state) => { return {}; }, { userSignupRequest })(Home);
+export default connect(null, { userSignupRequest, addFlashMessage })(Home);

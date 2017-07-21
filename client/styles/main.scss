@@ -100,8 +100,12 @@ h4 {
 	  background-color: #cf6d17;
 	}
 }	
+.modal { 
+	width: 37% !important ; 
+	max-height: 90% !important ; 
+	}
 .modal {
-	margin-top: 50px;
+	margin-top: 10px;
 }
 .modal-title {
     height: 40px;
