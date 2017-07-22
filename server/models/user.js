@@ -1,9 +1,8 @@
 import Sequelize from 'sequelize';
-import config from '../config/db.json';
+import config from '../configuration/db.json';
 
 const sequelize = new Sequelize(config.url);
-
-const Users = sequelize.define('Users', {
+const User = sequelize.define('User', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -33,21 +32,19 @@ const Users = sequelize.define('Users', {
 }, {
   classMethods: {
     associate: (models) => {
-      // associations can be defined here
-      Users.hasMany(models.Groups, {
+      User.hasMany(models.Group, {
         foreignKey: 'userId',
         as: 'userId'
       });
-      Users.hasMany(models.GroupMembers, {
+      User.belongsTo(models.UsersGroup, {
         foreignKey: 'userId',
         as: 'userId'
       });
-      Users.hasMany(models.Messages, {
+      User.hasMany(models.Message, {
         foreignKey: 'userId',
         as: 'userId'
       });
     }
   }
 });
-
-export default Users;
+export default User;

@@ -1,9 +1,9 @@
 import jasmine from 'jasmine';
 import expect from 'expect';
-import Users from '../models/users';
+import Users from '../models/user';
 import Group from '../models/group';
-import GroupMembers from '../models/groupMembers';
-import Messages from '../models/messages';
+import GroupMembers from '../models/usersgroup';
+import Messages from '../models/message';
 
 
 // TESTING all the models used in the application
@@ -30,7 +30,7 @@ describe('Model test suite', () => {
   }, 10000);
   it('I should be able to create a new group with this model', (done) => {
     Group.sync({ force: true }).then(() => {
-      Group.create({ groupName: 'Zikites', description: 'Class of 2015', userId: 1 })
+      Group.create({ groupName: 'Zikites', description: 'Class of 2015', userId: '2' })
         .then((group) => {
           expect('Zikites').toNotBe('Zike');
           expect('Class of 2015').toBe(group.dataValues.description);
@@ -41,7 +41,7 @@ describe('Model test suite', () => {
   }, 10000);
   it('I should be able to add users to group I created', (done) => {
     GroupMembers.sync({ force: true }).then(() => {
-      GroupMembers.create({ userId: 1, admin: 1, groupId: 1 })
+      GroupMembers.create({ userId: '1', admin: '1', groupId: '1' })
         .then((members) => {
           expect(members.dataValues.userId.toString()).toBe('1');
           expect(members.dataValues.admin.toString()).toBe('1');
@@ -54,7 +54,7 @@ describe('Model test suite', () => {
   }, 10000);
   it('I should be able to post message to groups with this model', (done) => {
     Messages.sync({ force: true }).then(() => {
-      Messages.create({ message: 'I knew it will happened', userId: 1, groupId: 1 })
+      Messages.create({ message: 'I knew it will happened', userId: '1', groupId: '1' })
         .then((message) => {
           expect(message.dataValues.message).toBe('I knew it will happened');
           expect(message.dataValues.userId.toString()).toBe('1');

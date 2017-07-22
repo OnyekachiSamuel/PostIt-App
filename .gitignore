@@ -8,8 +8,11 @@ webpack.config.json
 migrations/
 node_modules/
 coverage/
+template/
 dist/
-.vscode/
-server/
-
+server/config/
+server/OrigModel/
+package-lock.json
+webpack.config.json
+.env
 

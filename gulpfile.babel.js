@@ -19,11 +19,11 @@ gulp.task('run-test', () => {
 
 // Generate the coverage report
 gulp.task('coverage', () => {
-  gulp.src(['server/controllers/controller.js', 'server/middlewares/validator.js', 'server/models/*.js'])
+  gulp.src(['server/controllers/controller.js', 'server/middlewares/validator.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(['server/spec/*.js'])
+      gulp.src(['server/spec/routeSpec.js'])
         .pipe(babel())
         .pipe(injectModules())
         .pipe(jasmine())

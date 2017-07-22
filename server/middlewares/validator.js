@@ -15,9 +15,10 @@ export default class Validator {
     const name = req.body.name,
       username = req.body.username,
       email = req.body.email,
-      password = req.body.password;
-    if (name === undefined || username === undefined || password === undefined || email === undefined) {
-      res.json({ message: 'name, username, email, password and confirmPassword fields are required' });
+      password = req.body.password,
+      confirmPassword = req.body.confirmPassword;
+    if (name === undefined || username === undefined || password === undefined || email === undefined || confirmPassword === undefined) {
+      res.json({ message: 'Name, Username, Email, Password and ConfirmPassword fields are required' });
     } else {
       if (validator.toInt(req.body.name)) {
         errors.name = 'Only alphabets are allowed in this field';
@@ -61,13 +62,13 @@ export default class Validator {
   static signinInputs(req, res, next) {
     const errors = {};
     if (req.body.username === undefined || req.body.password === undefined) {
-      res.json({ message: 'username and password fields are required' });
+      res.json({ message: 'Username and Password fields are required' });
     } else {
       if (validator.isEmpty(req.body.username)) {
-        errors.username = 'This is a required field';
+        errors.username = 'Username field should not be empty';
       }
       if (validator.isEmpty(req.body.password)) {
-        errors.password = 'This is a required field';
+        errors.password = 'Password field should not be empty';
       }
       if (validator.toInt(req.body.username)) {
         errors.username = 'Only alphabets are allowed in this field';
@@ -89,23 +90,14 @@ export default class Validator {
      */
   static createGroupInputs(req, res, next) {
     const errors = {};
-    if (req.body.groupName === undefined || req.body.description === undefined || req.body.userId === undefined) {
-      res.json({ message: 'groupName, description and userId fields are required' });
+    if (req.body.groupName === undefined) {
+      res.json({ message: 'Group name field is required' });
     } else {
       if (validator.isEmpty(req.body.groupName)) {
-        errors.groupName = 'This is a required field';
-      }
-      if (validator.isEmpty(req.body.description)) {
-        errors.description = 'This is a required field';
+        errors.groupName = 'Group Name field should not be empty';
       }
       if (validator.toInt(req.body.groupName)) {
         errors.groupName = 'Only alphabets are allowed in this field';
-      }
-      if (validator.toInt(req.body.description)) {
-        errors.description = 'Only alphabets are allowed in this field';
-      }
-      if (validator.isEmpty(req.body.userId)) {
-        errors.userId = 'This is a required field';
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
@@ -124,14 +116,11 @@ export default class Validator {
      */
   static groupsInputs(req, res, next) {
     const errors = {};
-    if (req.body.admin === undefined || req.body.userId === undefined) {
-      res.json({ message: 'admin and userId fields are required' });
+    if (req.body.username === undefined) {
+      res.json({ message: 'Username field is required' });
     } else {
-      if (validator.isEmpty(req.body.admin)) {
-        errors.admin = 'This is a required field';
-      }
-      if (validator.isEmpty(req.body.userId)) {
-        errors.userId = 'This is a required field';
+      if (validator.isEmpty(req.body.username)) {
+        errors.username = 'Username field should not be empty';
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
@@ -150,17 +139,11 @@ export default class Validator {
      */
   static messagesInputs(req, res, next) {
     const errors = {};
-    if (req.body.message === undefined || req.body.priority === undefined || req.body.userId === undefined) {
-      res.json({ message: 'message, priority and userId fields are required' });
+    if (req.body.message === undefined) {
+      res.json({ message: 'Message field is required' });
     } else {
       if (validator.isEmpty(req.body.message)) {
-        errors.message = 'This is a required field';
-      }
-      if (validator.isEmpty(req.body.priority)) {
-        errors.priority = 'This is a required field';
-      }
-      if (validator.isEmpty(req.body.userId)) {
-        errors.userId = 'This is a required field';
+        errors.message = 'Message field should not be empty';
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {

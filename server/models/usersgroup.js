@@ -1,24 +1,13 @@
 import Sequelize from 'sequelize';
-import config from '../config/db_url.json';
+import config from '../configuration/db.json';
 
 const sequelize = new Sequelize(config.url);
-
-const Messages = sequelize.define('Messages', {
+const UsersGroup = sequelize.define('UsersGroup', {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: Sequelize.INTEGER
-  },
-  message: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
-  },
-  priority: {
-    type: Sequelize.STRING
   },
   userId: {
     type: Sequelize.INTEGER,
@@ -42,17 +31,15 @@ const Messages = sequelize.define('Messages', {
   classMethods: {
     associate: (models) => {
       // associations can be defined here
-      Messages.belongsTo(models.Users, {
+      UsersGroup.belongsTo(models.User, {
         foreignKey: 'userId',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       });
-      Messages.belongsTo(models.Groups, {
+      UsersGroup.belongsTo(models.Group, {
         foreignKey: 'groupId',
-        onDelete: 'CASCADE',
+        onDelete: 'CASCADE'
       });
     }
   }
 });
-
-export default Messages;
-
+export default UsersGroup;
