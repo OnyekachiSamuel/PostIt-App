@@ -1,11 +1,13 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Users from '../models/users';
+import env from 'dotenv';
+import User from '../models/user';
 import Group from '../models/group';
-import GroupMembers from '../models/groupMembers';
-import Messages from '../models/messages';
+import UsersGroup from '../models/usersgroup';
+import Messages from '../models/message';
 
 
+env.config();
 /**
  * @class ApiController
  */
@@ -23,17 +25,29 @@ export default class ApiController {
       username = req.body.username,
       email = req.body.email,
       password = req.body.password;
-    return Users.sync({ force: false }).then(() => {
+    return User.sync({ force: false }).then(() => {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
-          Users.create({
+          User.create({
             name, username, email, password: hash
-          }).then((User) => {
+          }).then((user) => {
+            const payload = { username: user.username,
+              userId: user.id
+            };
+            const token = jwt.sign(payload, process.env.SECRET_KEY, {
+              expiresIn: 60 * 60 * 24
+            });
             res.status(200).json({
               status: 'success',
-              data: User,
-              message: 'Account created'
+              data: {
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                email: user.email
+              },
+              message: 'Account created',
+              token
             });
           }).catch((err) => {
             if (err) {
@@ -55,17 +69,24 @@ export default class ApiController {
   static signin(req, res) {
     const username = req.body.username,
       password = req.body.password;
-    Users.findOne({ where: { username } }).then((user) => {
+    User.findOne({ where: { username } }).then((user) => {
       if (user && user.dataValues.username === username) {
         const check = bcrypt.compareSync(password, user.dataValues.password);
-        const payload = { username: user.dataValues.username };
+        const payload = { username: user.dataValues.username,
+          userId: user.dataValues.id
+        };
         if (check) {
-          const token = jwt.sign(payload, 'kitongifuuiiwtylkkksshdywywy', {
+          const token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: 60 * 60 * 24
           });
           res.status(200).json({
-            status: 'Success',
-            data: user,
+            status: 'success',
+            data: {
+              userId: user.dataValues.id,
+              username: user.dataValues.username,
+              email: user.dataValues.email,
+
+            },
             message: 'Logged In',
             token
           });
@@ -78,34 +99,6 @@ export default class ApiController {
     });
   }
 
-/**
- * @return {json} Returns request object containing message of if request is granted or denied
- * @param {obj} req
- * @param {obj} res
- * @param {obj} next
- */
-  static ensureToken(req, res, next) {
-    const token = req.body.token || req.query.token || req.headers['x-access-token'];
-    // decode token
-    if (token) {
-    // verifies secret and checks exp
-      jwt.verify(token, 'kitongifuuiiwtylkkksshdywywy', (err, decoded) => {
-        if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });
-        }
-        // if everything is good, save to request for use in other routes
-        req.decoded = decoded;
-        next();
-      });
-    } else {
-      return res.status(403).send({
-        success: false,
-        message: 'Access denied. Login first'
-      });
-    }
-  }
-
-
   /**
  * This method is used for creating groups
  * @param {obj} req
@@ -114,18 +107,32 @@ export default class ApiController {
  * @return {obj} Returns success or failure message with data
  */
   static createGroup(req, res) {
+    const groupName = req.body.groupName,
+      description = req.body.description,
+      userId = req.decoded.userId;
     return Group.sync({ force: false }).then(() => {
-      Group.create(req.body).then((group) => {
-        res.status(200).json({
-          status: 'success',
-          data: group,
-          message: 'Group Created'
+      Group.create({ groupName, description, userId })
+        .then((group) => {
+          if (group) {
+            return UsersGroup.sync({ force: false }).then(() => {
+              UsersGroup.create({ groupId: group.id, userId });
+            }).then(() => {
+              res.json({
+                status: 'success',
+                data: {
+                  groupId: group.id,
+                  groupName: group.groupName,
+                  description: group.description
+                },
+                message: 'Group successfully created'
+              });
+            });
+          }
+        }).catch((err) => {
+          if (err) {
+            res.json({ message: 'Group already exist' });
+          }
         });
-      }).catch((err) => {
-        if (err) {
-          res.json({ status: 'Invalid input. groupName exists already or userId does not exist' });
-        }
-      });
     });
   }
 
@@ -136,23 +143,27 @@ export default class ApiController {
    * @param {*} next
    * @return {obj} Returns a success message with data or failure message
    */
-  static groups(req, res) {
+  static addUser(req, res) {
     const groupId = req.params.groupId,
-      admin = req.body.admin,
-      userId = req.body.userId;
-    return GroupMembers.sync({ force: false }).then(() => {
-      GroupMembers.create({ groupId, admin, userId }).then((data) => {
-        res.status(200).json({
-          status: 'success',
-          data,
-          message: 'User added'
+      username = req.body.username;
+    User.findOne({ where: { username } }).then((user) => {
+      if (!user) {
+        res.json({ message: 'Username does not exits' });
+      } else {
+        console.log(user.id, 'I ammmsmmsm')
+        return UsersGroup.sync({ force: false }).then(() => {
+          UsersGroup.findOrCreate({ where: { userId: user.id, groupId } })
+          .spread((user, created) => {
+            if (created) {
+              res.json({ message: 'User successfully added' });
+            } else {
+              res.json({ message: 'User already exist in this group' });
+            }
+          });
         });
-      }).catch((err) => {
-        if (err) {
-          res.json({ status: 'Invalid input type. userId or groupId do not exist' });
-        }
-      });
-    });
+      }
+    }
+    );
   }
 
   /**
@@ -166,12 +177,16 @@ export default class ApiController {
     const message = req.body.message,
       priority = req.body.priority,
       groupId = req.params.groupId,
-      userId = req.body.userId;
+      userId = req.decoded.userId;
     return Messages.sync({ force: false }).then(() => {
       Messages.create({ userId, groupId, message, priority }).then((content) => {
         res.status(200).json({
           status: 'success',
-          data: content,
+          data: {
+            groupId: content.groupId,
+            message: content.message,
+            priority: content.priority
+          },
           message: 'Message sent'
         });
       });
@@ -187,17 +202,57 @@ export default class ApiController {
  */
   static getMessages(req, res) {
     const groupId = req.params.groupId;
-    Messages.findAll({
+    Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId'],
       where: {
         groupId
       }
-    }).then((result) => {
-      if (result) {
+    }).then((data) => {
+      if (data) {
         res.status(200).json({
-          status: 'Success',
-          data: result,
+          status: 'success',
+          data,
           message: 'Received'
         });
+      }
+    });
+  }
+  /**
+   * @return {array} Returns array of objects
+   * @param {*} req
+   * @param {*} res
+   */
+  static getUsersInGroup(req, res) {
+    const groupId = req.params.groupId;
+    UsersGroup.findAll({
+      attributes: ['userId'], where: { groupId }
+    }).then((users) => {
+      if (users) {
+        const allUsers = [];
+        users.forEach((user) => {
+          allUsers.push(user.userId);
+        });
+        User.findAll({
+          attributes: ['username'],
+          where: {
+            id: allUsers
+          }
+        }).then((allUser) => {
+          res.json({ allUser });
+        });
+      }
+    });
+  }
+
+/**
+ * @return {array} Returns array of objects
+ * @param {*} req
+ * @param {*} res
+ */
+  static getAllUsers(req, res) {
+    User.findAll({ attributes: ['name', 'username', 'email'] })
+    .then((users) => {
+      if (users) {
+        res.json({ users });
       }
     });
   }
