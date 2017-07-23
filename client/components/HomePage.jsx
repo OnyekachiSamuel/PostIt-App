@@ -6,8 +6,8 @@ import NavLink from './Index/NavLink.jsx';
 import SignUpModal from './Index/SignUpModal.jsx';
 import SignInModal from './Index/SignInModal.jsx';
 import Title from './Index/Title.jsx';
-import { userSignupRequest } from './actions/signupAction';
-import { addFlashMessage } from './actions/flashMessage';
+import { userSignupRequest } from '../actions/signupAction';
+// import { addFlashMessage } from '../actions/flashMessage';
 
 class Home extends React.Component {
   loginSuccess() {
@@ -15,7 +15,7 @@ class Home extends React.Component {
   }
   render() {
     const signupRequest = this.props.userSignupRequest;
-    const flashMessage = this.props.addFlashMessage;
+    // const flashMessage = this.props.addFlashMessage;
     return (
       <Router>
         <header>
@@ -28,7 +28,7 @@ class Home extends React.Component {
           <Title/>
           <SignUpModal
             loginSuccess={this.loginSuccess.bind(this)}
-           signupRequest={ signupRequest } flashMessage={flashMessage}/>
+           signupRequest={ signupRequest } />
           <SignInModal/>
         </header>
       </Router>
@@ -37,8 +37,7 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  userSignupRequest: PropTypes.func,
-  addFlashMessage: PropTypes.func
+  userSignupRequest: PropTypes.func
 };
 
-export default connect(null, { userSignupRequest, addFlashMessage })(Home);
+export default connect(null, { userSignupRequest })(Home);
