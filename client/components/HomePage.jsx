@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavLink from './Index/NavLink.jsx';
@@ -15,9 +16,8 @@ class Home extends React.Component {
   }
   render() {
     const signupRequest = this.props.userSignupRequest;
-    // const flashMessage = this.props.addFlashMessage;
     return (
-      <Router>
+      <div>
         <header>
           <nav>
             <div className="nav-wrapper" >
@@ -31,7 +31,7 @@ class Home extends React.Component {
            signupRequest={ signupRequest } />
           <SignInModal/>
         </header>
-      </Router>
+      </div>
     );
   }
 }

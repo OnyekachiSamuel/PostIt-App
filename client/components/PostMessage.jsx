@@ -5,7 +5,7 @@ import PostForm from './PostMessage/PostForm.jsx';
 import PostedMessage from './PostMessage/PostedMessage.jsx';
 import Footer from './Footer.jsx';
 
-export default class Home extends React.Component {
+export default class BroadcastMessage extends React.Component {
   render() {
     return (
       <div>

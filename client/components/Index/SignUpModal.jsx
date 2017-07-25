@@ -27,6 +27,8 @@ class SignUpModal extends React.Component {
       } /* else if (data.data.errors) {
         this.setState({ errors: data.data.errors, isLoading: false });
       }*/
+    }).catch((err) => {
+      
     });
   }
   onChange(e) {

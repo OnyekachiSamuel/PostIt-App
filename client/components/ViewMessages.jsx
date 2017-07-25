@@ -4,7 +4,7 @@ import Title from './ViewMessages/Title.jsx';
 import Messages from './ViewMessages/Messages.jsx';
 import Footer from './Footer.jsx';
 
-export default class Home extends React.Component {
+export default class ViewMessages extends React.Component {
   render() {
     return (
       <div>

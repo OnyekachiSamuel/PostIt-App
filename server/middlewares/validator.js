@@ -49,7 +49,7 @@ export default class Validator {
         isValid: isEmpty(errors)
       };
       if (!result.isValid) {
-        res.json({ errors });
+        res.status(403).json({ errors });
       } else {
         next();
       }
@@ -79,7 +79,7 @@ export default class Validator {
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
-        res.json({ errors });
+        res.status(403).json({ errors });
       } else {
         next();
       }
@@ -114,7 +114,7 @@ export default class Validator {
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
-        res.json({ errors });
+        res.status(403).json({ errors });
       } else {
         next();
       }
@@ -140,7 +140,7 @@ export default class Validator {
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
-        res.json({ errors });
+        res.status(403).json({ errors });
       } else {
         next();
       }
@@ -169,7 +169,7 @@ export default class Validator {
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
-        res.json({ errors });
+        res.status(403).json({ errors });
       } else {
         next();
       }
