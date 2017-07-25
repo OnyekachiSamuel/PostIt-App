@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import config from '../configuration/db.json';
+import config from '../config/db.json';
 
 const sequelize = new Sequelize(config.url);
 const Message = sequelize.define('Message', {

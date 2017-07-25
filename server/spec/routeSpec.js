@@ -299,7 +299,7 @@ describe('ROUTE TESTING', () => {
       request.post('/api/signin')
         .send(user)
         .end((err, res) => {
-          expect('User not found').toBe(res.body.status);
+          expect('User not found').toBe(res.body.message);
           done(err);
         });
     }, 10000);

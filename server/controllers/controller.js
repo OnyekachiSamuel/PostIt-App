@@ -51,7 +51,9 @@ export default class ApiController {
             });
           }).catch((err) => {
             if (err) {
-              res.json({ message: 'Record exists already' });
+              res.json({
+                status: 'failed',
+                message: 'Record exists already' });
             }
           });
         });
@@ -94,7 +96,8 @@ export default class ApiController {
           res.status(401).json({ status: 'Invalid Password' });
         }
       } else {
-        res.json({ status: 'User not found' });
+        res.json({ status: 'failed',
+          message: 'User not found' });
       }
     });
   }
@@ -130,7 +133,8 @@ export default class ApiController {
           }
         }).catch((err) => {
           if (err) {
-            res.json({ message: 'Group already exist' });
+            res.json({ status: 'failed',
+              message: 'Group already exist' });
           }
         });
     });
@@ -150,14 +154,15 @@ export default class ApiController {
       if (!user) {
         res.json({ message: 'Username does not exits' });
       } else {
-        console.log(user.id, 'I ammmsmmsm')
         return UsersGroup.sync({ force: false }).then(() => {
           UsersGroup.findOrCreate({ where: { userId: user.id, groupId } })
           .spread((user, created) => {
             if (created) {
-              res.json({ message: 'User successfully added' });
+              res.json({ status: 'success',
+                message: 'User successfully added' });
             } else {
-              res.json({ message: 'User already exist in this group' });
+              res.json({ status: 'failed',
+                message: 'User already exist in this group' });
             }
           });
         });
@@ -237,7 +242,7 @@ export default class ApiController {
             id: allUsers
           }
         }).then((allUser) => {
-          res.json({ allUser });
+          res.json({ status: 'success', allUser });
         });
       }
     });
@@ -252,7 +257,7 @@ export default class ApiController {
     User.findAll({ attributes: ['name', 'username', 'email'] })
     .then((users) => {
       if (users) {
-        res.json({ users });
+        res.json({ status: 'success', users });
       }
     });
   }
