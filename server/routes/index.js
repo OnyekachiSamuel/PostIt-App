@@ -29,7 +29,7 @@ router.get('/group/:groupId/messages', controller.getMessages);
 // Route to fetch all users in a group
 router.get('/group/:groupId/all', controller.getUsersInGroup);
 
-// Route to fetch all users 
+// Route to fetch all users
 router.get('/all/users', controller.getAllUsers);
 
 export default router;
