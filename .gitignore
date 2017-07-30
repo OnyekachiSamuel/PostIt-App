@@ -10,8 +10,9 @@ node_modules/
 coverage/
 template/
 dist/
-server/config/
 server/OrigModel/
+server/models/index.js
+server/config/db.json
 package-lock.json
 webpack.config.json
 .env
