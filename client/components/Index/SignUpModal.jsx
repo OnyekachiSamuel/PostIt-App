@@ -40,7 +40,6 @@ class SignUpModal extends React.Component {
   }
   render() {
     const { errors } = this.state;
-    console.log(this.state);
     return (
       <div className="row modal" id="modal1">
         <div className="modal-content">

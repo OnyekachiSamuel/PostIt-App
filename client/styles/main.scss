@@ -214,9 +214,13 @@ button .right {
     width: auto;
     margin-bottom: 10px;
 }
-.autocomplete {
+.group-list {
     max-width: 60%;
     margin-left: 20% !important;
+    margin-bottom: 5px;
+    background-color: #fff;
+    height: 40px;
+    color: #26a69a;
 }
 /*---------------------------------------------*/
 /* Post Message Page Styling

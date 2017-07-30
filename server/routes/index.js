@@ -27,7 +27,7 @@ router.get('/group/:groupId/messages', Verify.token, controller.getMessages);
 router.get('/group/:groupId/all', Verify.token, controller.getUsersInGroup);
 
 // Route to fetch all users
-router.get('/all/users', Verify.token, controller.getAllUsers);
+router.get('/users', Verify.token, controller.getAllUsers);
 
 // Route to get all groups created by a user
 router.get('/groups/:username', Verify.token, controller.getUserGroups);
