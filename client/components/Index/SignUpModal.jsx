@@ -13,22 +13,24 @@ class SignUpModal extends React.Component {
       password: '',
       confirmPassword: '',
       errors: {},
-      isLoading: false
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
   onSubmit(e) {
-    this.setState({ errors: {}, isLoading: true });
+    this.setState({ errors: {} });
     e.preventDefault();
-    this.props.signupRequest(this.state).then((data) => {
-      if (data.data.message) {
+    this.props.signupRequest(this.state).then((res) => {
+      if (res.data.status === 'success') {
+        localStorage.setItem('token', res.data.token);
         this.props.loginSuccess();
-      } /* else if (data.data.errors) {
-        this.setState({ errors: data.data.errors, isLoading: false });
-      }*/
-    }).catch((err) => {
-      
+      } else if (res.data.status === 'failed') {
+        Materialize.toast(res.data.message, 2000, 'green');
+      } else if (res.data.errors) {
+        this.setState({ errors: res.data.errors }, () => {
+          console.log('===STATE===', this.state)
+        });
+      }
     });
   }
   onChange(e) {
@@ -38,6 +40,7 @@ class SignUpModal extends React.Component {
   }
   render() {
     const { errors } = this.state;
+    console.log(this.state);
     return (
       <div className="row modal" id="modal1">
         <div className="modal-content">
@@ -81,7 +84,7 @@ class SignUpModal extends React.Component {
               <div className="input-field col s12">
                 <input id="confirm_password" name='confirmPassword' value={this.state.confirmPassword} onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="confirm_password">Confirm password</label>
-                { errors.confirmPassword && <span>{ errors.name }</span>}
+                { errors.confirmPassword && <span>{ errors.confirmPassword }</span>}
               </div>
             </div>
             <button className="btn waves-effect waves-light" disabled={this.state.isLoading} type="submit" name="action">Submit</button>

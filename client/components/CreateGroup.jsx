@@ -1,23 +1,39 @@
 import React from 'react';
-import NavBar from './CreateGroup/NavBar.jsx';
-import Title from './CreateGroup/Title.jsx';
-import CreateForm from './CreateGroup/CreateForm.jsx';
+import NavBar from './CreateGroup/NavLink.jsx';
+import Title from './CreateGroup/TitleHeader.jsx';
 import AddUser from './CreateGroup/AddUser.jsx';
+import SelectGroup from './CreateGroup/SelectGroup.jsx';
+import GroupModal from './CreateGroup/GroupModal.jsx';
 import Footer from './Footer.jsx';
-// import FlashMessagesList from './FlashMessagesList.jsx';
 
-export default class CreateGroup extends React.Component {
-  render() {
+class CreateGroup extends React.Component {
+  componentDidMount() {
+    $('.modal').modal({
+      dismissible: true,
+      opacity: 0.5,
+      inDuration: 300,
+      outDuration: 200,
+      startingTop: '4%',
+      endingTop: '10%',
+      ready: function (modal, trigger) {
+        console.log(modal, trigger);
+      },
+      complete: function () { }
+    }
+  );
+  }
+   render() {
     return (
       <div>
         <NavBar/>
-        <div className="container">
-          <Title/>
-          <CreateForm/>
-          <AddUser/>
-          <Footer/>
-        </div>
+        <Title/>
+        <AddUser/>
+        <GroupModal/>
+        <SelectGroup/>
+        <Footer/>
       </div>
     );
   }
 }
+
+export default CreateGroup;

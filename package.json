@@ -61,9 +61,11 @@
     "style-loader": "^0.18.2",
     "supertest": "^3.0.0",
     "validator": "^8.0.0",
-    "webpack": "^3.0.0"
+    "webpack": "^3.0.0",
+    "webpack-dev-middleware": "^1.11.0"
   },
   "devDependencies": {
+    "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {

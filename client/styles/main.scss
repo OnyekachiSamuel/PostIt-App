@@ -199,10 +199,10 @@ button .right {
     background-color: #fff;
 }
 .groups {
-    margin-top: 80px;
+    margin-top: 120px;
 }
 .radio-btn {
-    display: inline-block;
+	float: right;
 }
 .gp {
     margin-bottom: 5px;
@@ -213,6 +213,10 @@ button .right {
     height: 30px;
     width: auto;
     margin-bottom: 10px;
+}
+.autocomplete {
+    max-width: 60%;
+    margin-left: 20% !important;
 }
 /*---------------------------------------------*/
 /* Post Message Page Styling

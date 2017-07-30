@@ -8,14 +8,19 @@ import SignUpModal from './Index/SignUpModal.jsx';
 import SignInModal from './Index/SignInModal.jsx';
 import Title from './Index/Title.jsx';
 import { userSignupRequest } from '../actions/signupAction';
-// import { addFlashMessage } from '../actions/flashMessage';
+import { userSigninRequest } from '../actions/signinAction';
 
 class Home extends React.Component {
+  componentDidMount() {
+    $('.modal').modal();
+  }
   loginSuccess() {
     this.props.history.push('/group');
+    window.location.reload();
   }
   render() {
     const signupRequest = this.props.userSignupRequest;
+    const signinRequest = this.props.userSigninRequest;
     return (
       <div>
         <header>
@@ -29,7 +34,8 @@ class Home extends React.Component {
           <SignUpModal
             loginSuccess={this.loginSuccess.bind(this)}
            signupRequest={ signupRequest } />
-          <SignInModal/>
+          <SignInModal signinRequest = { signinRequest }
+          loginSuccess={this.loginSuccess.bind(this)} />
         </header>
       </div>
     );
@@ -37,7 +43,8 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  userSignupRequest: PropTypes.func
+  userSignupRequest: PropTypes.func,
+  userSigninpRequest: PropTypes.func
 };
 
-export default connect(null, { userSignupRequest })(Home);
+export default connect(null, { userSignupRequest, userSigninRequest })(Home);
