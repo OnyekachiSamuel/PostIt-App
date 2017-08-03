@@ -15,5 +15,6 @@ server/models/index.js
 server/config/db.json
 package-lock.json
 webpack.config.json
+dist/
 .env
 
