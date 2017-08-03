@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import NavBar from './CreateGroup/NavLink.jsx';
 import Title from './CreateGroup/TitleHeader.jsx';
 import AddUser from './CreateGroup/AddUser.jsx';
@@ -7,6 +8,9 @@ import GroupModal from './CreateGroup/GroupModal.jsx';
 import Footer from './Footer.jsx';
 
 class CreateGroup extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     $('.modal').modal({
       dismissible: true,
@@ -21,11 +25,16 @@ class CreateGroup extends React.Component {
       complete: function () { }
     }
   );
+  $('select').material_select();
   }
+signOut() {
+  this.props.history.push('/');
+}
+
    render() {
     return (
       <div>
-        <NavBar/>
+        <NavBar signOut={ this.signOut.bind(this) }/>
         <Title/>
         <AddUser/>
         <GroupModal/>
@@ -33,7 +42,7 @@ class CreateGroup extends React.Component {
         <Footer/>
       </div>
     );
-  }
+   }
 }
 
-export default CreateGroup;
+export default withRouter(CreateGroup);

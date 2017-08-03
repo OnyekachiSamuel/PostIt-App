@@ -157,7 +157,7 @@ export default class ApiController {
       } else {
         return UsersGroup.sync({ force: false }).then(() => {
           UsersGroup.findOrCreate({ where: { userId: user.id, groupId } })
-          .spread((user, created) => {
+          .spread((usergg, created) => {
             if (created) {
               res.json({ status: 'success',
                 message: 'User successfully added' });

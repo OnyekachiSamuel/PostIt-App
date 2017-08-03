@@ -17,11 +17,18 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token');
   next();
 });
-// app.use(webpackMiddleware(webpack(webpackConfig)));
+app.use(webpackMiddleware(webpack(webpackConfig)));
+// app.use(express.static('dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/', routes);
+app.get('/', (req, res) => {
+  res.sendFile(`${process.cwd()}/dist/index.html`);
+});
+app.get('*', (req, res) => {
+  res.sendFile(`${process.cwd()}/dist/index.html`);
+});
 app.listen(port, () => {
   console.log('Listening on port 3000');
 });

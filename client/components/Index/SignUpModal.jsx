@@ -20,18 +20,7 @@ class SignUpModal extends React.Component {
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
-    this.props.signupRequest(this.state).then((res) => {
-      if (res.data.status === 'success') {
-        localStorage.setItem('token', res.data.token);
-        this.props.loginSuccess();
-      } else if (res.data.status === 'failed') {
-        Materialize.toast(res.data.message, 2000, 'green');
-      } else if (res.data.errors) {
-        this.setState({ errors: res.data.errors }, () => {
-          console.log('===STATE===', this.state)
-        });
-      }
-    });
+    this.props.signupRequest(this.state);
   }
   onChange(e) {
     const state = this.state;

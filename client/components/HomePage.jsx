@@ -13,6 +13,7 @@ import { userSigninRequest } from '../actions/signinAction';
 class Home extends React.Component {
   componentDidMount() {
     $('.modal').modal();
+    $('.collapsible').collapsible();
   }
   loginSuccess() {
     this.props.history.push('/group');

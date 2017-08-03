@@ -1,4 +1,4 @@
-$(document).ready(() => {
-  $('select').material_select();
-  $('.collapsible').collapsible();
-});
+// $(document).ready(() => {
+//   // $('select').material_select();
+//   // $('.collapsible').collapsible();
+// });

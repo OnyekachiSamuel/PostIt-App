@@ -68,7 +68,8 @@
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "babel-node server/app",
+    "build": "webpack --config ./webpack.config.js --progress --colors --watch"
   },
   "repository": {
     "type": "git",

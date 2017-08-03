@@ -1,17 +1,37 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 import NavBar from './PostMessage/NavBar.jsx';
 import Title from './PostMessage/Title.jsx';
 import PostForm from './PostMessage/PostForm.jsx';
 import PostedMessage from './PostMessage/PostedMessage.jsx';
+import ViewMembers from './PostMessage/ViewModal.jsx';
 import Footer from './Footer.jsx';
 
-export default class BroadcastMessage extends React.Component {
+class BroadcastMessage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
+    $('.collapsible').collapsible();
+    $('select').material_select();
+    $('.modal').modal();
+  }
+
+  // componentWillRecieveProps(nextProps) {
+  //   if (this.props !== nextProps) {
+      
+  //   }
+  // }
+  signOut() {
+    this.props.history.push('/');
+  }
   render() {
     return (
       <div>
-        <NavBar/>
+        <NavBar signOut={this.signOut.bind(this)}/>
         <div className="container">
           <Title/>
+          <ViewMembers/>
           <PostForm/>
           <PostedMessage/>
           <Footer/>
@@ -20,3 +40,5 @@ export default class BroadcastMessage extends React.Component {
     );
   }
 }
+
+export default withRouter(BroadcastMessage);

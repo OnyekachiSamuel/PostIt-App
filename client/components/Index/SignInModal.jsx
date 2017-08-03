@@ -17,20 +17,9 @@ class SignInModal extends React.Component {
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
-    this.props.signinRequest(this.state);
-    // this.props.loginSuccess();
-  //   .then((res) => {
-  //     console.log(res);
-  //     if (res.data.status === 'success') {
-  //       localStorage.setItem('token', res.data.token);
-  //       this.props.loginSuccess();
-  //     } else if (res.data.status === 'failed') {
-  //       Materialize.toast(res.data.message, 2000, 'green');
-  //     } else if (res.data.errors) {
-  //       this.setState({ errors: res.data.errors });
-  //     }
-  //   });
-  // }
+    this.props.signinRequest(this.state).then((data) => {
+      console.log(data, 'jjdjdjdjjdjdjdjjd');
+    });
   }
   onChange(e) {
     const state = this.state;
