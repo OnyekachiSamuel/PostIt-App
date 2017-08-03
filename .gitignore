@@ -1,11 +1,10 @@
-server/migrations/
 template/
 client/
 server/models/index.js
 server/config/db.json
 package-lock.json
 webpack.config.json
-migrations/
+server/migrations/
 node_modules/
 coverage/
 template/
