@@ -2,7 +2,6 @@ client/
 node_modules/
 coverage/
 template/
-server/config/
 server/models/index.js
 package-lock.json
 webpack.config.json

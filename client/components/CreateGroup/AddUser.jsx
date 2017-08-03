@@ -48,6 +48,11 @@ class AddUser extends Component {
         groupId: this.state.groupId
       };
       this.props.addUserRequest(ids, this.state.groupId);
+      this.state.groupId = '';
+      this.state.username = '';
+      this.setState({ users: [] });
+    } else {
+      Materialize.toast('You must select a group and a user before clicking the add button', 2000, 'green white-text rounded');
     }
   }
   render() {
