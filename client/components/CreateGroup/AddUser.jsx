@@ -56,13 +56,13 @@ class AddUser extends Component {
     }
   }
   render() {
-    const { group } = this.props;
+    const { groups } = this.props;
     const { users } = this.state;
     let groupComponent;
-    if (group.length > 0) {
-      groupComponent = group.map((element) => {
+    if (groups && groups.length > 0) {
+      groupComponent = groups.map((group, index) => {
         return (
-                <option value={element.groupId} key= {element.groupId} ref= {element.groupId}>{element.groupName}</option>
+                <option value={group.groupId} key= {index} ref= {group.groupId}>{group.groupName}</option>
         );
       });
     } else {
@@ -101,10 +101,10 @@ class AddUser extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { group } = state;
+  const { groups } = state;
   const { users } = state;
   return {
-    group,
+    groups,
     users
   };
 };

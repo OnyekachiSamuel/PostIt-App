@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { signoutRequest } from '../../actions/signoutAction';
+
+var man = 'kskskks';
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -11,6 +15,9 @@ class NavBar extends React.Component {
     };
     this.onClick = this.onClick.bind(this);
   }
+  /**
+   * 
+   */
   onClick() {
     this.props.signoutRequest(this.state);
     this.props.signOut();
@@ -21,8 +28,7 @@ class NavBar extends React.Component {
         <div className="nav-wrapper"> <Link to="#">POST IT</Link>
           <ul id="nav-mobile" className="right">
             <li><Link to="#"><i className="material-icons">message</i></Link></li>
-            <li><Link to="#">Messages</Link></li>
-            <li><Link to="#"><i className="material-icons prefix">account_circle</i></Link></li>
+            <li><Link to="/messages">Messages</Link></li>
             <li><Link to="#" onClick={this.onClick}>Sign Out</Link></li>
           </ul>
         </div>
@@ -31,4 +37,9 @@ class NavBar extends React.Component {
   }
 }
 
-export default connect(null, { signoutRequest })(NavBar);
+NavBar.propTypes = {
+  signoutRequest: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired
+};
+
+export default connect(null, { signoutRequest })(withRouter(NavBar));

@@ -17,11 +17,6 @@ class BroadcastMessage extends React.Component {
     $('.modal').modal();
   }
 
-  // componentWillRecieveProps(nextProps) {
-  //   if (this.props !== nextProps) {
-      
-  //   }
-  // }
   signOut() {
     this.props.history.push('/');
   }
@@ -29,10 +24,10 @@ class BroadcastMessage extends React.Component {
     return (
       <div>
         <NavBar signOut={this.signOut.bind(this)}/>
-        <div className="container">
           <Title/>
           <ViewMembers/>
           <PostForm/>
+          <div className="container">
           <PostedMessage/>
           <Footer/>
         </div>

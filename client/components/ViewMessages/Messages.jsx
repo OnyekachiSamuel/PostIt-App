@@ -1,29 +1,35 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default class Messages extends React.Component {
+class Messages extends React.Component {
   render() {
+    const { groupPost } = this.props;
+    const groupPostComponent = groupPost.map((group, index) => {
+      return (
+        <li key={index}>
+              <div className="collapsible-header"><i className="material-icons">
+                  explore</i>{group.priority}</div>
+              <div className="collapsible-body"><span>{group.message}</span></div>
+            </li>
+      );
+    });
     return (
       <div className="row">
         <div className="col s12 m12 l12">
           <ul className="collapsible" data-collapsible="accordion">
-            <li>
-              <div className="collapsible-header"><i className="material-icons">
-                  explore</i>Andela 21 Group</div>
-              <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-              <div className="collapsible-header"><i className="material-icons">explore</i>
-              Bootcamp Group</div>
-              <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
-            <li>
-              <div className="collapsible-header"><i className="material-icons">
-                  explore</i>AndelaNairaland Group</div>
-              <div className="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-            </li>
+            {groupPostComponent}
           </ul>
         </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  const { groupPost } = state;
+  return {
+    groupPost
+  };
+};
+
+export default connect(mapStateToProps)(Messages);

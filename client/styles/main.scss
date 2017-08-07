@@ -75,6 +75,7 @@ h4 {
 /*---------------------------------------------*/
 /* Landing page
 /*---------------------------------------------*/
+// .modal { width: 75% !important ; height: 75% !important ; } 
 .nav-wrapper a {
 	padding-left: 10px;
 }
@@ -250,4 +251,10 @@ button .right {
 }
 .acordion {
     margin-bottom: 120px;
+}
+.select-group {
+	max-width: 60%;
+    margin-left: 20% !important;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }

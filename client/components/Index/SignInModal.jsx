@@ -2,7 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 
-
+/**
+ * @class
+ */
 class SignInModal extends React.Component {
   constructor(props) {
     super(props);
@@ -17,9 +19,14 @@ class SignInModal extends React.Component {
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
-    this.props.signinRequest(this.state).then((data) => {
-      console.log(data, 'jjdjdjdjjdjdjdjjd');
-    });
+    this.props.signinRequest(this.state).then(
+      () => {
+
+      },
+      (errors) => {
+        console.log(errors);
+      }
+    );
   }
   onChange(e) {
     const state = this.state;
@@ -63,6 +70,6 @@ class SignInModal extends React.Component {
 }
 
 SignInModal.propTypes = {
-  userSigninRequest: PropTypes.func,
+  signinRequest: PropTypes.func.isRequired
 };
 export default withRouter(SignInModal);

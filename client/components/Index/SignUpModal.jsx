@@ -20,7 +20,15 @@ class SignUpModal extends React.Component {
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
-    this.props.signupRequest(this.state);
+    this.props.signupRequest(this.state).then(
+      () => {
+
+      },
+      (errors) => {
+        console.log(errors, '============');
+        debugger;
+      }
+    );
   }
   onChange(e) {
     const state = this.state;
@@ -41,35 +49,29 @@ class SignUpModal extends React.Component {
        </div>
        </div>
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
-            <div className="row">
-              <div className="input-field col s12">
+            <div className="row test">
+              <div className="input-field col s12 test">
                 <input id="name" name='name' value={this.state.name}
                 type="text" onChange={this.onChange} className="validate"/>
                 <label htmlFor="name">Name</label>
                 { errors.name && <span>{ errors.name }</span>}
               </div>
-              <div className="input-field col s12">
+              <div className="input-field col s12 test">
                 <input id="user_name" name="username" value={this.state.username} onChange={this.onChange} type="text" className="validate"/>
                 <label htmlFor="user_name">Username</label>
                 { errors.username && <span>{ errors.username }</span>}
               </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
+              <div className="input-field col s12 test">
                 <input id="email" name="email" value={this.state.email} onChange={this.onChange} type="email" className="validate"/>
                 <label htmlFor="email">Email</label>
                 { errors.email && <span>{ errors.email }</span>}
               </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
+              <div className="input-field col s12 test">
                 <input id="password" name='password' value={this.state.password} onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="password">Password</label>
                 { errors.password && <span>{ errors.password }</span>}
               </div>
-            </div>
-            <div className="row">
-              <div className="input-field col s12">
+              <div className="input-field col s12 test">
                 <input id="confirm_password" name='confirmPassword' value={this.state.confirmPassword} onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="confirm_password">Confirm password</label>
                 { errors.confirmPassword && <span>{ errors.confirmPassword }</span>}
@@ -88,7 +90,7 @@ class SignUpModal extends React.Component {
 }
 
 SignUpModal.propTypes = {
-  userSignupRequest: PropTypes.func,
+  signupRequest: PropTypes.func.isRequired
 };
 
 export default withRouter(SignUpModal);

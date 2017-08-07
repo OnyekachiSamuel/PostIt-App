@@ -23,13 +23,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/', routes);
-app.get('/', (req, res) => {
-  res.sendFile(`${process.cwd()}/dist/index.html`);
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(`${process.cwd()}/dist/index.html`);
+// });
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
 app.listen(port, () => {
-  console.log('Listening on port 3000');
+  console.log(`Listening on port ${port} in ${app.get('env')}`);
 });
 export default app;
