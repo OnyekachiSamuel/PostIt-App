@@ -8,20 +8,12 @@ import ViewMembers from './PostMessage/ViewModal.jsx';
 import Footer from './Footer.jsx';
 
 class BroadcastMessage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     $('.collapsible').collapsible();
     $('select').material_select();
     $('.modal').modal();
   }
 
-  // componentWillRecieveProps(nextProps) {
-  //   if (this.props !== nextProps) {
-      
-  //   }
-  // }
   signOut() {
     this.props.history.push('/');
   }
@@ -29,10 +21,10 @@ class BroadcastMessage extends React.Component {
     return (
       <div>
         <NavBar signOut={this.signOut.bind(this)}/>
-        <div className="container">
           <Title/>
           <ViewMembers/>
           <PostForm/>
+          <div className="container">
           <PostedMessage/>
           <Footer/>
         </div>

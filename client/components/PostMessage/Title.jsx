@@ -1,12 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Title extends React.Component {
   render() {
     return (
+      <div>
       <div className="heading">
-        <div className="right">
-                <a className="waves-effect waves-light btn" href="#modal4">View members</a>
+        <div className="left">
         </div>
+        <div className="right">
+                <Link className="waves-effect waves-light btn" to="#modal4">View members</Link>
+        </div>
+      </div>
       </div>
     );
   }

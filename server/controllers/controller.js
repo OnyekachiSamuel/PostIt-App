@@ -134,7 +134,7 @@ export default class ApiController {
           }
         }).catch((err) => {
           if (err) {
-            res.json({ status: 'failed',
+            res.status(422).json({ status: 'failed',
               message: 'Group already exist' });
           }
         });
@@ -208,19 +208,44 @@ export default class ApiController {
  */
   static getMessages(req, res) {
     const groupId = req.params.groupId;
-    Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId'],
-      where: {
-        groupId
-      }
-    }).then((data) => {
-      if (data) {
-        res.status(200).json({
-          status: 'success',
-          data,
-          message: 'Received'
-        });
-      }
-    });
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isGroupId) {
+      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority'],
+        where: {
+          groupId
+        }
+      }).then((data) => {
+        if (data) {
+          res.status(200).json({
+            status: 'success',
+            data,
+            message: 'Received'
+          });
+        }
+      });
+    }
+  }
+
+  static getUserMessages(req, res) {
+    const userId = req.params.userId,
+      groupId = req.params.groupId;
+    const isUserId = Number.isInteger(parseInt(userId, 10));
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isUserId && isGroupId) {
+      Messages.findAll({ attributes: ['groupId', 'message', 'priority'],
+        where: {
+          groupId, userId
+        }
+      }).then((data) => {
+        if (data) {
+          res.status(200).json({
+            status: 'success',
+            data,
+            message: 'Received'
+          });
+        }
+      });
+    }
   }
   /**
    * @return {array} Returns array of objects
@@ -229,24 +254,27 @@ export default class ApiController {
    */
   static getUsersInGroup(req, res) {
     const groupId = req.params.groupId;
-    UsersGroup.findAll({
-      attributes: ['userId'], where: { groupId }
-    }).then((users) => {
-      if (users) {
-        const allUsers = [];
-        users.forEach((user) => {
-          allUsers.push(user.userId);
-        });
-        User.findAll({
-          attributes: ['username'],
-          where: {
-            id: allUsers
-          }
-        }).then((allUser) => {
-          res.json({ status: 'success', allUser });
-        });
-      }
-    });
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isGroupId) {
+      UsersGroup.findAll({
+        attributes: ['userId'], where: { groupId }
+      }).then((users) => {
+        if (users) {
+          const allUsers = [];
+          users.forEach((user) => {
+            allUsers.push(user.userId);
+          });
+          User.findAll({
+            attributes: ['username'],
+            where: {
+              id: allUsers
+            }
+          }).then((allUser) => {
+            res.json({ status: 'success', allUser });
+          });
+        }
+      });
+    }
   }
 
 /**
@@ -275,10 +303,5 @@ export default class ApiController {
     });
     });
   }
-
-  static addUsers(req, res) {
-    const data = req.body.data;
-    console.log(data.split(/[ ,]+/));
-        // UsersGroup.bulkCreate();
-  }
 }
+

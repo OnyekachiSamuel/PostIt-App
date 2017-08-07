@@ -23,6 +23,7 @@ class PostForm extends React.Component {
   onSubmit(e) {
     e.preventDefault();
     this.props.postRequest(this.state, this.groupId);
+    this.setState({ message: '' });
   }
   render() {
     return (
@@ -34,7 +35,7 @@ class PostForm extends React.Component {
               <div className="input-field col s12">
                 <form onSubmit={this.onSubmit} >
                 <div>
-                  <textarea placeholder="Type in your message here" name="message" onChange={this.onChange} className="type-text" required ></textarea>
+                  <textarea placeholder="Type in your message here" name="message" value={this.state.message} ref="message" onChange={this.onChange} className="type-text" required ></textarea>
                       <label htmlFor="textarea1"></label>
                      </div>
                 <div>

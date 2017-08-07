@@ -18,9 +18,12 @@ class NavBar extends React.Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper"> <Link to="#">POST IT</Link>
+        <div className="nav-wrapper">
+          <Link to="#">POST IT</Link>
           <ul id="nav-mobile" className="right">
-            <li><Link to="#" onClick={this.onClick}>Sign Out</Link></li>
+            <li>
+              <Link to="#" onClick={this.onClick}>Sign Out</Link>
+            </li>
           </ul>
         </div>
       </nav>

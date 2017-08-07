@@ -24,7 +24,7 @@ router.post('/group/:groupId/messages', Validate.messagesInputs, Verify.token, c
 router.get('/group/:groupId/messages', Verify.token, controller.getMessages);
 
 // Route to fetch all users in a group
-router.get('/group/:groupId/all', Verify.token, controller.getUsersInGroup);
+router.get('/group/:groupId', Verify.token, controller.getUsersInGroup);
 
 // Route to fetch all users
 router.get('/users', Verify.token, controller.getAllUsers);
@@ -32,6 +32,13 @@ router.get('/users', Verify.token, controller.getAllUsers);
 // Route to get all groups created by a user
 router.get('/groups/:username', Verify.token, controller.getUserGroups);
 
-router.post('/post/users', controller.addUsers);
+// Route to add users to a group
+// router.post('/post/users', Verify.token, controller.addUsers);
+
+// Route to get all posts by a particular user
+router.get('/posts', Verify.token, controller.getUserMessages);
+
+// Route to get all posts in a particular group
+router.get('/post/messages/:groupId', controller.getMessages);
 
 export default router;

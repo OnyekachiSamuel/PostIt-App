@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchUsersRequest } from '../../actions/fetchUsers';
 import { addUserRequest } from '../../actions/addUserAction';
 
@@ -56,13 +57,13 @@ class AddUser extends Component {
     }
   }
   render() {
-    const { group } = this.props;
+    const { groups } = this.props;
     const { users } = this.state;
     let groupComponent;
-    if (group.length > 0) {
-      groupComponent = group.map((element) => {
+    if (groups && groups.length > 0) {
+      groupComponent = groups.map((group, index) => {
         return (
-                <option value={element.groupId} key= {element.groupId} ref= {element.groupId}>{element.groupName}</option>
+                <option value={group.groupId} key= {index} ref= {group.groupId}>{group.groupName}</option>
         );
       });
     } else {
@@ -100,11 +101,16 @@ class AddUser extends Component {
   }
 }
 
+AddUser.propTypes = {
+  fetchUsersRequest: PropTypes.func.isRequired,
+  addUserRequest: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => {
-  const { group } = state;
+  const { groups } = state;
   const { users } = state;
   return {
-    group,
+    groups,
     users
   };
 };

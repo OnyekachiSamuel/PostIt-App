@@ -1,9 +1,8 @@
-client/
+server/
+dist/
 node_modules/
 coverage/
 template/
-server/models/index.js
 package-lock.json
 webpack.config.json
-dist/
-
+.env
