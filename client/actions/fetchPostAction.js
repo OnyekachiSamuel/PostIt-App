@@ -16,7 +16,7 @@ export const fetchPostRequest = (userData) => {
     const config = { headers: {
       'x-access-token': token
     } };
-    return axios.get(`http://localhost:3000/api/posts/${userData}/${userId}`).then((payload) => {
+    return axios.get(`/api/posts/${userData}/${userId}`).then((payload) => {
       if (payload.data.status === 'success') {
         dispatch(fetchPostSuccess(payload.data.data));
       }

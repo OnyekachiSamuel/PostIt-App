@@ -47335,7 +47335,7 @@ var fetchGroupRequest = exports.fetchGroupRequest = function fetchGroupRequest()
         'x-access-token': token
       } };
     console.log(_jsonwebtoken2.default.decode(token), '=======i AM A TOKEN');
-    return _axios2.default.get('http://localhost:3000/api/groups/' + username).then(function (payload) {
+    return _axios2.default.get('/api/groups/' + username).then(function (payload) {
       dispatch(fetchGroup(payload));
     });
   };
@@ -63977,7 +63977,7 @@ var signupFailure = function signupFailure(userData) {
 
 var userSignupRequest = exports.userSignupRequest = function userSignupRequest(userData) {
   return function (dispatch) {
-    return _axios2.default.post('http://localhost:3000/api/signup', userData).then(function (payload) {
+    return _axios2.default.post('/api/signup', userData).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(signUp(payload));
         localStorage.setItem('token', payload.data.token);
@@ -64895,7 +64895,7 @@ var setUser = function setUser(payload) {
 
 var userSigninRequest = exports.userSigninRequest = function userSigninRequest(userData) {
   return function (dispatch) {
-    return _axios2.default.post('http://localhost:3000/api/signin', userData).then(function (payload) {
+    return _axios2.default.post('/api/signin', userData).then(function (payload) {
       if (payload.data.status === 'success') {
         window.localStorage.setItem('token', payload.data.token);
         window.localStorage.setItem('username', payload.data.data.username);
@@ -79367,7 +79367,7 @@ var fetchUsersRequest = exports.fetchUsersRequest = function fetchUsersRequest()
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.get('http://localhost:3000/api/users').then(function (payload) {
+    return _axios2.default.get('/api/users').then(function (payload) {
       dispatch(fetchUsers(payload));
     });
   };
@@ -79413,7 +79413,7 @@ var addUserRequest = exports.addUserRequest = function addUserRequest(userData, 
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.post('http://localhost:3000/api/group/' + groupId + '/user', userData).then(function (payload) {
+    return _axios2.default.post('/api/group/' + groupId + '/user', userData).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(addUserSuccess(payload.data.data));
         Materialize.toast(payload.data.message, 2000, 'green white-text rounded');
@@ -79748,7 +79748,7 @@ var createRequest = exports.createRequest = function createRequest(userData) {
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.post('http://localhost:3000/api/group', userData).then(function (res) {
+    return _axios2.default.post('/api/group', userData).then(function (res) {
       if (res.data.status === 'success') {
         dispatch(createGroupSuccess(res.data.data));
       }
@@ -80210,7 +80210,7 @@ var postRequest = exports.postRequest = function postRequest(userData, groupId) 
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.post('http://localhost:3000/api/group/' + groupId + '/messages', userData).then(function (payload) {
+    return _axios2.default.post('/api/group/' + groupId + '/messages', userData).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(postedMessage(payload.data.data));
         Materialize.toast('Message sent', 2000, 'green white-text rounded');
@@ -80367,7 +80367,7 @@ var fetchPostRequest = exports.fetchPostRequest = function fetchPostRequest(user
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.get('http://localhost:3000/api/posts/' + userData + '/' + userId).then(function (payload) {
+    return _axios2.default.get('/api/posts/' + userData + '/' + userId).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(fetchPostSuccess(payload.data.data));
       }
@@ -80539,7 +80539,7 @@ var fetchMembersRequest = exports.fetchMembersRequest = function fetchMembersReq
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.get('http://localhost:3000/api/group/' + groupId).then(function (payload) {
+    return _axios2.default.get('/api/group/' + groupId).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(fetchMembers(payload.data));
       }
@@ -80992,7 +80992,7 @@ var fetchGroupPostRequest = function fetchGroupPostRequest(groupId) {
     var config = { headers: {
         'x-access-token': token
       } };
-    return _axios2.default.get('http://localhost:3000/api/group/' + groupId + '/messages').then(function (payload) {
+    return _axios2.default.get('/api/group/' + groupId + '/messages').then(function (payload) {
       dispatch(fetchPost(payload.data));
     });
   };

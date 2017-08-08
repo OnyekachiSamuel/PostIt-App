@@ -21,7 +21,7 @@ export const addUserRequest = (userData, groupId) => {
     const config = { headers: {
       'x-access-token': token
     } };
-    return axios.post(`http://localhost:3000/api/group/${groupId}/user`, userData).then((payload) => {
+    return axios.post(`/api/group/${groupId}/user`, userData).then((payload) => {
       if (payload.data.status === 'success') {
         dispatch(addUserSuccess(payload.data.data));
         Materialize.toast(payload.data.message, 2000, 'green white-text rounded');

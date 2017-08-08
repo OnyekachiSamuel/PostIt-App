@@ -16,7 +16,7 @@ const signupFailure = (userData) => {
 
 export const userSignupRequest = (userData) => {
   return (dispatch) => {
-    return axios.post('http://localhost:3000/api/signup', userData).then((payload) => {
+    return axios.post('/api/signup', userData).then((payload) => {
       if (payload.data.status === 'success') {
         dispatch(signUp(payload));
         localStorage.setItem('token', payload.data.token);
@@ -26,9 +26,6 @@ export const userSignupRequest = (userData) => {
         dispatch(signupFailure(payload));
         Materialize.toast(payload.data.message, 2000, 'green');
       }
-      // else if (payload.data.errors) {
-      //   console.log('ERROR');
-      // }
     });
   };
 };

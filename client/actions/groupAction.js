@@ -21,7 +21,7 @@ export const createRequest = (userData) => {
     const config = { headers: {
       'x-access-token': token
     } };
-    return axios.post('http://localhost:3000/api/group', userData).then((res) => {
+    return axios.post('/api/group', userData).then((res) => {
       if (res.data.status === 'success') {
         dispatch(createGroupSuccess(res.data.data));
       }
