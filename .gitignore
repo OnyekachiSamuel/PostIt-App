@@ -1,8 +1,5 @@
-server/
-dist/
 node_modules/
 coverage/
 template/
 package-lock.json
-webpack.config.json
 .env
