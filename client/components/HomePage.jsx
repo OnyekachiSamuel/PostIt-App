@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NavLink from './Index/NavLink.jsx';
@@ -49,3 +48,4 @@ Home.propTypes = {
 };
 
 export default connect(null, { userSignupRequest, userSigninRequest })(Home);
+

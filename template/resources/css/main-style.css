@@ -1,33 +1,32 @@
 /*---------------------------------------------*/
+
+
 /* BASIC SETUP
 /*---------------------------------------------*/
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 }
+
 html,
 body {
 	height: 100%;
 	background-color: #f3f4f4;
-	color: #555;
-    font: {
-        family: 'Lato', 'Arial', sans-serif;
-        weight: 300;
-        size: 20px;
-    }
+	font-family: 'Lato', 'Arial', sans-serif;
+	font-weight: 300;
+	font-size: 20px;
 	text-rendering: optimizeLegibility;
 	overflow-x: hidden;
 	display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    min-height: 100vh;
+    flex-direction: column;
 }
 header {
-    background: {
-        image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://i.imgur.com/5MD10l3.jpg);
-        size: cover;
-        position: center;
-    }
+	background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(img/backGround.jpg);
+	background-size: cover;
+	background-position: center;
 	height: 100vh;
 }
 footer {
@@ -69,17 +68,9 @@ h4 {
 	color: #fff;
     font-size: 27px;
 }
-#main {
-    color: #6C7A89;
-}
 /*---------------------------------------------*/
 /* Landing page
 /*---------------------------------------------*/
-// .modal { width: 75% !important ; height: 75% !important ; } 
-
-.nav-wrapper a {
-	padding-left: 10px;
-}
 .page-heading {
 	position: absolute;
 	width: 1140px;
@@ -87,27 +78,23 @@ h4 {
 	left: 50%;
 	text-align: center;
 	transform: translate(-50%, -50%);
-    & .signup-btn:link,
-    & .signup-btn:visited { 
-    display: inline-block;
-	  padding: 10px 30px;
-	  font-weight: 300;
-	  text-decoration: none;
-	  background-color: #e67e22;
-	  border-radius: 200px;
-	  color: #fff;
-	}
-	& .signup-btn:hover,
-	& .signup-btn:active {
-	  background-color: #cf6d17;
-	}
-}	
-.modal { 
-	width: 37% !important ; 
-	max-height: 90% !important ; 
-	}
+}
+.page-heading .signup-btn:link,
+.page-heading .signup-btn:visited {
+	display: inline-block;
+	padding: 10px 30px;
+	font-weight: 300;
+	text-decoration: none;
+	background-color: #e67e22;
+	border-radius: 200px;
+	color: #fff;
+}
+.page-heading .signup-btn:hover,
+.page-heading .signup-btn:active {
+	background-color: #cf6d17;
+}
 .modal {
-	margin-top: 10px;
+	margin-top: 50px;
 }
 .modal-title {
     height: 40px;
@@ -115,51 +102,49 @@ h4 {
 }
 .close-modal {
     float: right;
-    margin-right: 10px;
-    & a {
-      color: #fff;
-      font-size: 18px;
-    }
+    margin-right: 10px
+}
+.close-modal a {
+    color: #fff;
+    font-size: 18px;
 }
 .title {
 	color: #2ecc71;
 }
-
 .navbar, nav {
 	background-color: #3e7293;
 }
 
-.navbar, nav {
-	background-color: #3e7293;
-}
 .navbar .nav-style a {
 	color: #fff;
-	&:hover,
-	&:active {
-	  color: #fff;
-	}
-	&:link,
-	&:visited {
-	  color: #fff;
-	}
 }
+.navbar .nav-style a:hover,
+.navbar .nav-style a:active {
+	color: #fff;
+}
+
+.navbar .nav-style a:link,
+.navbar .nav-style a:visited {
+	color: #fff;
+}
+
 .navbar .nav-item-style li a {
 	color: #fff;
-	&:link,
-	&:visited {
-	  color: #fff;
-	}
-	&:hover,
-	&:active {
-	  color: #fff;
-	}
+}
+
+.navbar .nav-item-style li a:link,
+.navbar .nav-item-style li a:visited {
+	color: #fff;
+}
+
+.navbar .nav-item-style li a:hover,
+.navbar .nav-item-style li a:active {
+	color: #fff;
 }
 /*---------------------------------------------*/
 /* Create Group Styling
 /*---------------------------------------------*/
-.tt {
-	margin-bottom: 150px;
-}
+
 .add {
 	margin-bottom: 65px;
 }
@@ -167,6 +152,7 @@ h4 {
 	background-color: #fff;
     height: 60px;
 }
+
 .gp-form {
 	margin-top: 50px;
 
@@ -191,6 +177,7 @@ h4 {
 button .right {
     color: #56ad55
 }
+
 .input-group{
   display:table;
   width:100%;
@@ -204,10 +191,14 @@ button .right {
     background-color: #fff;
 }
 .groups {
-    margin-top: 120px;
+    margin-top: 80px;
+}
+.group-lists {
+    
 }
 .radio-btn {
-	float: right;
+    display: inline-block;
+    float: right;
 }
 .gp {
     margin-bottom: 5px;
@@ -219,26 +210,15 @@ button .right {
     width: auto;
     margin-bottom: 10px;
 }
-.group-list {
-    max-width: 60%;
-    margin-left: 20% !important;
-    margin-bottom: 5px;
-    background-color: #fff;
-    height: 40px;
-    color: #26a69a;
-}
 /*---------------------------------------------*/
 /* Post Message Page Styling
 /*---------------------------------------------*/
-.heading {
-	background-color: #fff;
-    height: 60px;
-}
 .message {
 	background-color: #c3f2d7;
-	& h4 {
-	  color: #fff;
-	}
+	
+}
+.message h4 {
+	color: #fff
 }
 .type-text {
 	height: 120px;
@@ -250,15 +230,10 @@ button .right {
 /*---------------------------------------------*/
 /* Show message styling
 /*---------------------------------------------*/
+
 .gp-messages {
     margin-top: 35px;
 }
 .acordion {
     margin-bottom: 120px;
-}
-.select-group {
-	max-width: 60%;
-    margin-left: 20% !important;
-	margin-top: 40px;
-	margin-bottom: 40px;
 }

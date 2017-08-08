@@ -226,6 +226,11 @@ export default class ApiController {
     }
   }
 
+/**
+ * @return {array} Array of objects
+ * @param {obj} req
+ * @param {obj} res
+ */
   static getUserMessages(req, res) {
     const userId = req.params.userId,
       groupId = req.params.groupId;
@@ -249,8 +254,8 @@ export default class ApiController {
   }
   /**
    * @return {array} Returns array of objects
-   * @param {*} req
-   * @param {*} res
+   * @param {obj} req
+   * @param {obj} res
    */
   static getUsersInGroup(req, res) {
     const groupId = req.params.groupId;
@@ -291,6 +296,11 @@ export default class ApiController {
     });
   }
 
+/**
+ * @return {Array} Array of objects containing groups a user belongs to
+ * @param {obj} req
+ * @param {obj} res
+ */
   static getUserGroups(req, res) {
     User.findOne({ attributes: ['id'], where: { username: req.params.username } })
     .then((user) => {

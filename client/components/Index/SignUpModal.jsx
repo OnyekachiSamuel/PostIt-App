@@ -95,3 +95,4 @@ SignUpModal.propTypes = {
 };
 
 export default withRouter(SignUpModal);
+
