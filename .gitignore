@@ -3,3 +3,4 @@ coverage/
 template/
 package-lock.json
 .env
+template/
