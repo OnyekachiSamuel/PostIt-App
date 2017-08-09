@@ -11,13 +11,13 @@ const fetchPostSuccess = (payload) => {
 
 export const fetchPostRequest = (userData) => {
   return (dispatch) => {
-    const token = localStorage.getItem('token');
+    debugger;
     const userId = localStorage.getItem('userId');
-    const config = { headers: {
-      'x-access-token': token
-    } };
-    return axios.get(`http://localhost:3000/api/posts/${userData}/${userId}`).then((payload) => {
+    console.log(userData, userId, '==============');
+    return axios.get(`/api/posts/${userData}/${userId}`).then((payload) => {
       if (payload.data.status === 'success') {
+        console.log(payload);
+        debugger;
         dispatch(fetchPostSuccess(payload.data.data));
       }
     });

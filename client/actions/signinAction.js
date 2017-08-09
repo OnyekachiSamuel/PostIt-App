@@ -12,7 +12,7 @@ const setUser = (payload) => {
 
 export const userSigninRequest = (userData) => {
   return (dispatch) => {
-    return axios.post('http://localhost:3000/api/signin', userData).then((payload) => {
+    return axios.post('/api/signin', userData).then((payload) => {
       if (payload.data.status === 'success') {
         window.localStorage.setItem('token', payload.data.token);
         window.localStorage.setItem('username', payload.data.data.username);
