@@ -1,19 +1,8 @@
-template/
-client/
-server/models/index.js
-server/config/db.json
-package-lock.json
-webpack.config.json
-server/migrations/
 node_modules/
 coverage/
-template/
-dist/
+server/models/index.js
+server/migrations/
+node_modules/
 server/OrigModel/
 server/models/index.js
-server/config/db.json
-package-lock.json
-webpack.config.json
-dist/
-.env
 

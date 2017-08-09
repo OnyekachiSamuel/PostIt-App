@@ -75,6 +75,8 @@ h4 {
 /*---------------------------------------------*/
 /* Landing page
 /*---------------------------------------------*/
+// .modal { width: 75% !important ; height: 75% !important ; } 
+
 .nav-wrapper a {
 	padding-left: 10px;
 }
@@ -100,8 +102,12 @@ h4 {
 	  background-color: #cf6d17;
 	}
 }	
+.modal { 
+	width: 37% !important ; 
+	max-height: 90% !important ; 
+	}
 .modal {
-	margin-top: 50px;
+	margin-top: 10px;
 }
 .modal-title {
     height: 40px;
@@ -151,6 +157,9 @@ h4 {
 /*---------------------------------------------*/
 /* Create Group Styling
 /*---------------------------------------------*/
+.tt {
+	margin-bottom: 150px;
+}
 .add {
 	margin-bottom: 65px;
 }
@@ -195,10 +204,10 @@ button .right {
     background-color: #fff;
 }
 .groups {
-    margin-top: 80px;
+    margin-top: 120px;
 }
 .radio-btn {
-    display: inline-block;
+	float: right;
 }
 .gp {
     margin-bottom: 5px;
@@ -210,9 +219,21 @@ button .right {
     width: auto;
     margin-bottom: 10px;
 }
+.group-list {
+    max-width: 60%;
+    margin-left: 20% !important;
+    margin-bottom: 5px;
+    background-color: #fff;
+    height: 40px;
+    color: #26a69a;
+}
 /*---------------------------------------------*/
 /* Post Message Page Styling
 /*---------------------------------------------*/
+.heading {
+	background-color: #fff;
+    height: 60px;
+}
 .message {
 	background-color: #c3f2d7;
 	& h4 {
@@ -234,4 +255,10 @@ button .right {
 }
 .acordion {
     margin-bottom: 120px;
+}
+.select-group {
+	max-width: 60%;
+    margin-left: 20% !important;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }

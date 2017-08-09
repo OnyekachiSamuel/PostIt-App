@@ -311,7 +311,7 @@ describe('ROUTE TESTING', () => {
       request.post('/api/signin')
         .send(user)
         .end((err, res) => {
-          expect('Invalid Password').toBe(res.body.status);
+          expect('failed').toBe(res.body.status);
           done(err);
         });
     }, 10000);

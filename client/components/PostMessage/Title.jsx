@@ -1,17 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Title extends React.Component {
   render() {
-    return(
+    return (
       <div>
-        <div className="card-panel center">
-          <h4>POST IT, SHARE IT</h4>
+      <div className="heading">
+        <div className="left">
         </div>
-        <hr/>
-        <br/>
-        <div className="card-panel center message">
-          <h4>Compose message</h4>
+        <div className="right">
+                <Link className="waves-effect waves-light btn" to="#modal4">View members</Link>
         </div>
+      </div>
       </div>
     );
   }

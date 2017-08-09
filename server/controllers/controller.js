@@ -93,7 +93,8 @@ export default class ApiController {
             token
           });
         } else {
-          res.status(401).json({ status: 'Invalid Password' });
+          res.json({ status: 'failed',
+            message: 'Invalid Password' });
         }
       } else {
         res.json({ status: 'failed',
@@ -133,7 +134,7 @@ export default class ApiController {
           }
         }).catch((err) => {
           if (err) {
-            res.json({ status: 'failed',
+            res.status(422).json({ status: 'failed',
               message: 'Group already exist' });
           }
         });
@@ -156,7 +157,7 @@ export default class ApiController {
       } else {
         return UsersGroup.sync({ force: false }).then(() => {
           UsersGroup.findOrCreate({ where: { userId: user.id, groupId } })
-          .spread((user, created) => {
+          .spread((usergg, created) => {
             if (created) {
               res.json({ status: 'success',
                 message: 'User successfully added' });
@@ -207,45 +208,78 @@ export default class ApiController {
  */
   static getMessages(req, res) {
     const groupId = req.params.groupId;
-    Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId'],
-      where: {
-        groupId
-      }
-    }).then((data) => {
-      if (data) {
-        res.status(200).json({
-          status: 'success',
-          data,
-          message: 'Received'
-        });
-      }
-    });
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isGroupId) {
+      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority'],
+        where: {
+          groupId
+        }
+      }).then((data) => {
+        if (data) {
+          res.status(200).json({
+            status: 'success',
+            data,
+            message: 'Received'
+          });
+        }
+      });
+    }
+  }
+
+/**
+ * @return {array} Array of objects
+ * @param {obj} req
+ * @param {obj} res
+ */
+  static getUserMessages(req, res) {
+    const userId = req.params.userId,
+      groupId = req.params.groupId;
+    const isUserId = Number.isInteger(parseInt(userId, 10));
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isUserId && isGroupId) {
+      Messages.findAll({ attributes: ['groupId', 'message', 'priority'],
+        where: {
+          groupId, userId
+        }
+      }).then((data) => {
+        if (data) {
+          res.status(200).json({
+            status: 'success',
+            data,
+            message: 'Received'
+          });
+        }
+      });
+    }
   }
   /**
    * @return {array} Returns array of objects
-   * @param {*} req
-   * @param {*} res
+   * @param {obj} req
+   * @param {obj} res
    */
   static getUsersInGroup(req, res) {
     const groupId = req.params.groupId;
-    UsersGroup.findAll({
-      attributes: ['userId'], where: { groupId }
-    }).then((users) => {
-      if (users) {
-        const allUsers = [];
-        users.forEach((user) => {
-          allUsers.push(user.userId);
-        });
-        User.findAll({
-          attributes: ['username'],
-          where: {
-            id: allUsers
-          }
-        }).then((allUser) => {
-          res.json({ status: 'success', allUser });
-        });
-      }
-    });
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isGroupId) {
+      UsersGroup.findAll({
+        attributes: ['userId'], where: { groupId }
+      }).then((users) => {
+        if (users) {
+          const allUsers = [];
+          users.forEach((user) => {
+            allUsers.push(user.userId);
+          });
+          User.findAll({
+            attributes: ['username'],
+            where: {
+              id: allUsers
+            }
+          }).then((allUser) => {
+            res.json({ status: 'success', allUser });
+          });
+        }
+      });
+    }
   }
 
 /**
@@ -254,11 +288,30 @@ export default class ApiController {
  * @param {*} res
  */
   static getAllUsers(req, res) {
-    User.findAll({ attributes: ['name', 'username', 'email'] })
+    User.findAll({ attributes: ['id', 'username'] })
     .then((users) => {
       if (users) {
         res.json({ status: 'success', users });
       }
     });
   }
+
+/**
+ * @return {Array} Array of objects containing groups a user belongs to
+ * @param {obj} req
+ * @param {obj} res
+ */
+  static getUserGroups(req, res) {
+    User.findOne({ attributes: ['id'], where: { username: req.params.username } })
+    .then((user) => {
+      const userId = user.id;
+      Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { userId } })
+    .then((groups) => {
+      if (groups) {
+        res.json({ groups });
+      }
+    });
+    });
+  }
 }
+

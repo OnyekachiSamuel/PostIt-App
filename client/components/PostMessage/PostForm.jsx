@@ -1,28 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
+import { postRequest } from '../../actions/postAction';
 
-export default class PostForm extends React.Component {
+class PostForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: '',
+      priority: ''
+    };
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.groupId = '';
+  }
+  onChange(event) {
+    this.groupId = this.props.match.params.groupId;
+    const state = this.state;
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  }
+  onSubmit(e) {
+    e.preventDefault();
+    this.props.postRequest(this.state, this.groupId);
+    this.setState({ message: '' });
+  }
   render() {
-    return(
-      <div className="input-field col s12">
-        <form method="post" action="#">
-          <div>
-            <textarea placeholder="Type in your message here" className="type-text" required >
-            </textarea>
-            <label for="textarea1"></label>
-          </div>
-          <div>
-            <select>
-              <option value="" selected>Choose your priority option</option>
-              <option value="1">Normal</option>
-              <option value="2">Urgent</option>
-              <option value="3">Critical</option>
-            </select>
-          </div>
-          <button className="btn waves-effect waves-light" type="submit" name="action">Post
-            <i className="material-icons right">send</i>
-          </button>
-        </form>
-      </div>
+    return (
+          <div className="container">
+            <br/>
+            <div className="post-title center">
+              <h3>Compose message</h3>
+              </div>
+              <div className="input-field col s12">
+                <form onSubmit={this.onSubmit} >
+                <div>
+                  <textarea placeholder="Type in your message here" name="message" value={this.state.message} ref="message" onChange={this.onChange} className="type-text" required ></textarea>
+                      <label htmlFor="textarea1"></label>
+                     </div>
+                <div>
+                  <select className="browser-default" name="priority" onChange={this.onChange}>
+                       <option value="Normal" defaultValue>Normal</option>
+                       <option value="Urgent">Urgent</option>
+                       <option value="Critical">Critical</option>
+                    </select>
+                </div>
+                   <input type="submit" className="btn waves-effect waves-light col s12" value="Post"/>
+                     </form>
+                      </div>
+                    </div>
     );
   }
 }
+
+export default connect(null, { postRequest })(withRouter(PostForm));

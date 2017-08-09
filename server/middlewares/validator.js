@@ -27,19 +27,25 @@ export default class Validator {
         errors.username = 'Only alphabets are allowed in this field';
       }
       if (validator.isEmpty(req.body.name)) {
-        errors.name = 'This field is required';
+        errors.name = 'Name field should not be empty';
       }
       if (validator.isEmpty(req.body.username)) {
-        errors.username = 'This field is required';
+        errors.username = 'Username field should not be empty';
       }
       if (validator.isEmpty(req.body.email)) {
-        errors.email = 'This field is required';
+        errors.email = 'Email field should not be empty';
       }
-      if (!validator.isEmail(req.body.email)) {
+      if (!validator.isEmail(req.body.email) && email.length > 1) {
         errors.email = 'Email is invalid';
       }
       if (validator.isEmpty(req.body.password)) {
-        errors.password = 'This field is required';
+        errors.password = 'Password field should not be empty';
+      }
+      if (validator.isEmpty(req.body.confirmPassword)) {
+        errors.confirmPassword = 'Confirm password field should not be empty';
+      }
+      if (!validator.equals(password, confirmPassword)) {
+        errors.confirmPassword = 'Password mismatch. Retype your password';
       }
       const result = {
         errors,
@@ -52,6 +58,7 @@ export default class Validator {
       }
     }
   }
+
 
 /**
      * @return {json} Validates the inputs before allowing access to the db
