@@ -13,12 +13,7 @@ const fetchGroup = (payload) => {
 
 export const fetchGroupRequest = () => {
   return (dispatch) => {
-    const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-    const config = { headers: {
-      'x-access-token': token
-    } };
-    console.log(jwt.decode(token), '=======i AM A TOKEN');
     return axios.get(`/api/groups/${username}`).then((payload) => {
       dispatch(fetchGroup(payload));
     });

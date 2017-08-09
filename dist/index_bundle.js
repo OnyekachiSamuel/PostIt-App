@@ -6609,7 +6609,7 @@ module.exports = __webpack_require__(39);
 
 
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -11089,12 +11089,6 @@ module.exports = ReactComponentTreeHook;
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(509);
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /* WEBPACK VAR INJECTION */(function(Buffer, process) {// Load modules
 
 var Crypto = __webpack_require__(181);
@@ -12092,7 +12086,7 @@ exports.shallow = function (source) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2).Buffer, __webpack_require__(1)))
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12136,7 +12130,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 module.exports = emptyFunction;
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12166,7 +12160,7 @@ module.exports = { debugTool: debugTool };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12183,6 +12177,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(509);
 
 /***/ }),
 /* 23 */
@@ -13095,7 +13095,7 @@ exports.shr64_lo = shr64_lo;
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Ref = __webpack_require__(38);
 var Errors = __webpack_require__(31);
 var Alternatives = null;                // Delay-loaded to prevent circular dependencies
@@ -14016,7 +14016,7 @@ var _assign = __webpack_require__(8);
 
 var PooledClass = __webpack_require__(35);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var warning = __webpack_require__(5);
 
 var didWarnForAddedNewProperty = false;
@@ -14273,7 +14273,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
 
 // Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Language = __webpack_require__(623);
 
 
@@ -15559,7 +15559,7 @@ function forEach(xs, f) {
 
 // Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 
 
 // Declare internals
@@ -15810,7 +15810,7 @@ module.exports = reactProdInvariant;
 
 
 var ReactRef = __webpack_require__(366);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 
 var warning = __webpack_require__(5);
 
@@ -17919,7 +17919,7 @@ base.Node = __webpack_require__(601);
 
 // Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Ref = __webpack_require__(38);
 
 // Type modules are delay-loaded to prevent circular dependencies
@@ -20596,7 +20596,7 @@ module.exports = getEventModifierState;
 var DOMLazyTree = __webpack_require__(42);
 var Danger = __webpack_require__(377);
 var ReactDOMComponentTree = __webpack_require__(9);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(87);
 var setInnerHTML = __webpack_require__(65);
@@ -21269,7 +21269,7 @@ var _prodInvariant = __webpack_require__(7);
 
 var ReactCurrentOwner = __webpack_require__(26);
 var ReactInstanceMap = __webpack_require__(48);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 var ReactUpdates = __webpack_require__(27);
 
 var invariant = __webpack_require__(3);
@@ -21507,7 +21507,7 @@ module.exports = ReactUpdateQueue;
 
 var _assign = __webpack_require__(8);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var warning = __webpack_require__(5);
 
 var validateDOMNesting = emptyFunction;
@@ -24362,7 +24362,7 @@ hash.ripemd160 = hash.ripemd.ripemd160;
 var Any = __webpack_require__(29);
 var Errors = __webpack_require__(31);
 var Ref = __webpack_require__(38);
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Moment = __webpack_require__(0);
 
 
@@ -24533,7 +24533,7 @@ module.exports = new internals.Date();
 
 // Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Any = __webpack_require__(29);
 var Cast = __webpack_require__(59);
 var Ref = __webpack_require__(38);
@@ -24697,13 +24697,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.signoutRequest = undefined;
 
-var _axios = __webpack_require__(18);
-
-var _axios2 = _interopRequireDefault(_axios);
-
 var _actionTypes = __webpack_require__(13);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var signout = function signout(payload) {
   return {
@@ -25405,7 +25399,7 @@ module.exports = function(isValidElement) {
 
 
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var invariant = __webpack_require__(3);
 var warning = __webpack_require__(5);
 
@@ -26703,7 +26697,7 @@ module.exports = CSSProperty;
 
 var DOMProperty = __webpack_require__(32);
 var ReactDOMComponentTree = __webpack_require__(9);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 
 var quoteAttributeValueForBrowser = __webpack_require__(391);
 var warning = __webpack_require__(5);
@@ -27643,7 +27637,7 @@ module.exports = traverseAllChildren;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -27909,7 +27903,7 @@ var ReactDOMContainerInfo = __webpack_require__(433);
 var ReactDOMFeatureFlags = __webpack_require__(434);
 var ReactFeatureFlags = __webpack_require__(134);
 var ReactInstanceMap = __webpack_require__(48);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 var ReactMarkupChecksum = __webpack_require__(435);
 var ReactReconciler = __webpack_require__(41);
 var ReactUpdateQueue = __webpack_require__(93);
@@ -45641,7 +45635,7 @@ return zhTw;
 /* WEBPACK VAR INJECTION */(function(Buffer) {// Load modules
 
 var Net = __webpack_require__(336);
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Isemail = __webpack_require__(625);
 var Any = __webpack_require__(29);
 var Ref = __webpack_require__(38);
@@ -46304,7 +46298,7 @@ module.exports = internals.rfc3986;
 var Any = __webpack_require__(29);
 var Ref = __webpack_require__(38);
 var Errors = __webpack_require__(31);
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 
 
 // Declare internals
@@ -46493,7 +46487,7 @@ module.exports = new internals.Number();
 
 var Any = __webpack_require__(29);
 var Errors = __webpack_require__(31);
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 
 
 // Declare internals
@@ -46538,7 +46532,7 @@ module.exports = new internals.Boolean();
 
 // Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 var Topo = __webpack_require__(629);
 var Any = __webpack_require__(29);
 var Cast = __webpack_require__(59);
@@ -47304,7 +47298,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchGroupRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -47329,12 +47323,7 @@ var fetchGroup = function fetchGroup(payload) {
 
 var fetchGroupRequest = exports.fetchGroupRequest = function fetchGroupRequest() {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
     var username = localStorage.getItem('username');
-    var config = { headers: {
-        'x-access-token': token
-      } };
-    console.log(_jsonwebtoken2.default.decode(token), '=======i AM A TOKEN');
     return _axios2.default.get('/api/groups/' + username).then(function (payload) {
       dispatch(fetchGroup(payload));
     });
@@ -47356,7 +47345,7 @@ var _reactDom = __webpack_require__(357);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _configureStore = __webpack_require__(163);
 
@@ -47405,7 +47394,7 @@ _reactDom2.default.render(_react2.default.createElement(
 var PooledClass = __webpack_require__(344);
 var ReactElement = __webpack_require__(34);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var traverseAllChildren = __webpack_require__(345);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -49444,7 +49433,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  var ReactInstrumentation = __webpack_require__(21);
+  var ReactInstrumentation = __webpack_require__(20);
   var ReactDOMUnknownPropertyHook = __webpack_require__(440);
   var ReactDOMNullInputValuePropHook = __webpack_require__(441);
   var ReactDOMInvalidARIAHook = __webpack_require__(442);
@@ -51656,7 +51645,7 @@ var DOMLazyTree = __webpack_require__(42);
 var ExecutionEnvironment = __webpack_require__(14);
 
 var createNodesFromMarkup = __webpack_require__(378);
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var invariant = __webpack_require__(3);
 
 var Danger = {
@@ -52084,11 +52073,11 @@ var ReactDOMInput = __webpack_require__(394);
 var ReactDOMOption = __webpack_require__(395);
 var ReactDOMSelect = __webpack_require__(143);
 var ReactDOMTextarea = __webpack_require__(396);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 var ReactMultiChild = __webpack_require__(397);
 var ReactServerRenderingTransaction = __webpack_require__(406);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var escapeTextContentForBrowser = __webpack_require__(66);
 var invariant = __webpack_require__(3);
 var isEventSupported = __webpack_require__(83);
@@ -53111,7 +53100,7 @@ module.exports = AutoFocusUtils;
 
 var CSSProperty = __webpack_require__(140);
 var ExecutionEnvironment = __webpack_require__(14);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 
 var camelizeStyleName = __webpack_require__(385);
 var dangerousStyleValue = __webpack_require__(387);
@@ -54379,13 +54368,13 @@ var _prodInvariant = __webpack_require__(7);
 
 var ReactComponentEnvironment = __webpack_require__(89);
 var ReactInstanceMap = __webpack_require__(48);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 
 var ReactCurrentOwner = __webpack_require__(26);
 var ReactReconciler = __webpack_require__(41);
 var ReactChildReconciler = __webpack_require__(398);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var flattenChildren = __webpack_require__(405);
 var invariant = __webpack_require__(3);
 
@@ -54994,7 +54983,7 @@ var ReactComponentEnvironment = __webpack_require__(89);
 var ReactCurrentOwner = __webpack_require__(26);
 var ReactErrorUtils = __webpack_require__(81);
 var ReactInstanceMap = __webpack_require__(48);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 var ReactNodeTypes = __webpack_require__(145);
 var ReactReconciler = __webpack_require__(41);
 
@@ -56199,7 +56188,7 @@ var _assign = __webpack_require__(8);
 
 var PooledClass = __webpack_require__(35);
 var Transaction = __webpack_require__(63);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 var ReactServerUpdateQueue = __webpack_require__(407);
 
 /**
@@ -56816,7 +56805,7 @@ var _assign = __webpack_require__(8);
 var ReactUpdates = __webpack_require__(27);
 var Transaction = __webpack_require__(63);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -57133,7 +57122,7 @@ var CallbackQueue = __webpack_require__(133);
 var PooledClass = __webpack_require__(35);
 var ReactBrowserEventEmitter = __webpack_require__(67);
 var ReactInputSelection = __webpack_require__(150);
-var ReactInstrumentation = __webpack_require__(21);
+var ReactInstrumentation = __webpack_require__(20);
 var Transaction = __webpack_require__(63);
 var ReactUpdateQueue = __webpack_require__(93);
 
@@ -58230,7 +58219,7 @@ var SyntheticTransitionEvent = __webpack_require__(431);
 var SyntheticUIEvent = __webpack_require__(47);
 var SyntheticWheelEvent = __webpack_require__(432);
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var getEventCharCode = __webpack_require__(95);
 var invariant = __webpack_require__(3);
 
@@ -59594,7 +59583,7 @@ function createProvider() {
 
 
 
-var emptyFunction = __webpack_require__(20);
+var emptyFunction = __webpack_require__(19);
 var invariant = __webpack_require__(3);
 var ReactPropTypesSecret = __webpack_require__(79);
 
@@ -60934,7 +60923,7 @@ var postReducer = function postReducer() {
     case _actionTypes.POST_MESSAGE_SUCCESSFUL:
       return [].concat(_toConsumableArray(state), [action.payload]);
     case _actionTypes.FETCH_POST_SUCCESS:
-      return [].concat(_toConsumableArray(action.payload));
+      return [].concat(_toConsumableArray(state), _toConsumableArray(action.payload));
     default:
       return state;
   }
@@ -63335,7 +63324,7 @@ var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _NavLink = __webpack_require__(504);
 
@@ -63954,7 +63943,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userSignupRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -63987,9 +63976,6 @@ var userSignupRequest = exports.userSignupRequest = function userSignupRequest(u
         dispatch(signupFailure(payload));
         Materialize.toast(payload.data.message, 2000, 'green');
       }
-      // else if (payload.data.errors) {
-      //   console.log('ERROR');
-      // }
     });
   };
 };
@@ -64874,7 +64860,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.userSigninRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -77687,7 +77673,7 @@ module.exports = internals.Ip;
 
 // Load modules
 
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 
 
 // Declare internals
@@ -77927,7 +77913,7 @@ internals.Topo.prototype._sort = function () {
 var Any = __webpack_require__(29);
 var Cast = __webpack_require__(59);
 var Errors = __webpack_require__(31);
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 
 
 // Declare internals
@@ -78449,7 +78435,7 @@ module.exports = new internals.Array();
 
 var Any = __webpack_require__(29);
 var Errors = __webpack_require__(31);
-var Hoek = __webpack_require__(19);
+var Hoek = __webpack_require__(18);
 
 
 // Declare internals
@@ -78991,7 +78977,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(15);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _signoutAction = __webpack_require__(120);
 
@@ -79143,7 +79129,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _propTypes = __webpack_require__(10);
 
@@ -79346,7 +79332,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchUsersRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -79363,10 +79349,6 @@ var fetchUsers = function fetchUsers(payload) {
 
 var fetchUsersRequest = exports.fetchUsersRequest = function fetchUsersRequest() {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
-    var config = { headers: {
-        'x-access-token': token
-      } };
     return _axios2.default.get('/api/users').then(function (payload) {
       dispatch(fetchUsers(payload));
     });
@@ -79385,7 +79367,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.addUserRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -79409,10 +79391,6 @@ var addUserFailure = function addUserFailure(payload) {
 
 var addUserRequest = exports.addUserRequest = function addUserRequest(userData, groupId) {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
-    var config = { headers: {
-        'x-access-token': token
-      } };
     return _axios2.default.post('/api/group/' + groupId + '/user', userData).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(addUserSuccess(payload.data.data));
@@ -79446,9 +79424,9 @@ var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -79577,7 +79555,7 @@ var _propTypes = __webpack_require__(10);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _groupAction = __webpack_require__(642);
 
@@ -79720,7 +79698,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -79744,16 +79722,11 @@ var createGroupFailure = function createGroupFailure(errors) {
 
 var createRequest = exports.createRequest = function createRequest(userData) {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
-    var config = { headers: {
-        'x-access-token': token
-      } };
     return _axios2.default.post('/api/group', userData).then(function (res) {
       if (res.data.status === 'success') {
         dispatch(createGroupSuccess(res.data.data));
       }
     }).catch(function (err) {
-      // console.log(err.data, 'I got here again');
       Materialize.toast('Group exist already', 2000, 'green white-text rounded');
     });
   };
@@ -79873,7 +79846,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _propTypes = __webpack_require__(10);
 
@@ -80067,7 +80040,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _reactRouter = __webpack_require__(11);
 
@@ -80189,7 +80162,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.postRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -80206,10 +80179,6 @@ var postedMessage = function postedMessage(payload) {
 
 var postRequest = exports.postRequest = function postRequest(userData, groupId) {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
-    var config = { headers: {
-        'x-access-token': token
-      } };
     return _axios2.default.post('/api/group/' + groupId + '/messages', userData).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(postedMessage(payload.data.data));
@@ -80236,7 +80205,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _reactRouter = __webpack_require__(11);
 
@@ -80300,7 +80269,7 @@ var PostedMessage = function (_React$Component) {
       }
       return _react2.default.createElement(
         'div',
-        { className: 'container' },
+        { className: 'container bottom-margin' },
         _react2.default.createElement(
           'div',
           { className: 'card-panel row messages' },
@@ -80345,7 +80314,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchPostRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -80362,13 +80331,12 @@ var fetchPostSuccess = function fetchPostSuccess(payload) {
 
 var fetchPostRequest = exports.fetchPostRequest = function fetchPostRequest(userData) {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
+    debugger;
     var userId = localStorage.getItem('userId');
-    var config = { headers: {
-        'x-access-token': token
-      } };
+    console.log(userData, userId, '==============');
     return _axios2.default.get('/api/posts/' + userData + '/' + userId).then(function (payload) {
       if (payload.data.status === 'success') {
+        debugger;
         dispatch(fetchPostSuccess(payload.data.data));
       }
     });
@@ -80394,7 +80362,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(15);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _reactRouter = __webpack_require__(11);
 
@@ -80518,7 +80486,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.fetchMembersRequest = undefined;
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -80535,10 +80503,6 @@ var fetchMembers = function fetchMembers(payload) {
 
 var fetchMembersRequest = exports.fetchMembersRequest = function fetchMembersRequest(groupId) {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
-    var config = { headers: {
-        'x-access-token': token
-      } };
     return _axios2.default.get('/api/group/' + groupId).then(function (payload) {
       if (payload.data.status === 'success') {
         dispatch(fetchMembers(payload.data));
@@ -80647,7 +80611,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(15);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _signoutAction = __webpack_require__(120);
 
@@ -80793,7 +80757,7 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(22);
+var _reactRedux = __webpack_require__(21);
 
 var _fetchGroup = __webpack_require__(341);
 
@@ -80971,7 +80935,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -80988,10 +80952,6 @@ var fetchPost = function fetchPost(payload) {
 
 var fetchGroupPostRequest = function fetchGroupPostRequest(groupId) {
   return function (dispatch) {
-    var token = localStorage.getItem('token');
-    var config = { headers: {
-        'x-access-token': token
-      } };
     return _axios2.default.get('/api/group/' + groupId + '/messages').then(function (payload) {
       dispatch(fetchPost(payload.data));
     });
@@ -81061,7 +81021,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _axios = __webpack_require__(18);
+var _axios = __webpack_require__(22);
 
 var _axios2 = _interopRequireDefault(_axios);
 

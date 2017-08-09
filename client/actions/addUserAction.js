@@ -17,10 +17,6 @@ const addUserFailure = (payload) => {
 
 export const addUserRequest = (userData, groupId) => {
   return (dispatch) => {
-    const token = localStorage.getItem('token');
-    const config = { headers: {
-      'x-access-token': token
-    } };
     return axios.post(`/api/group/${groupId}/user`, userData).then((payload) => {
       if (payload.data.status === 'success') {
         dispatch(addUserSuccess(payload.data.data));

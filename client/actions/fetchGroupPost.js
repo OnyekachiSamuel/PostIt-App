@@ -12,10 +12,6 @@ const fetchPost = (payload) => {
 
 const fetchGroupPostRequest = (groupId) => {
   return (dispatch) => {
-    const token = localStorage.getItem('token');
-    const config = { headers: {
-      'x-access-token': token
-    } };
     return axios.get(`/api/group/${groupId}/messages`)
     .then((payload) => {
       dispatch(fetchPost(payload.data));

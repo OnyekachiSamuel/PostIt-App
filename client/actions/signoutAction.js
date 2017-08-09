@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { SIGN_OUT_SUCCESS } from './actionTypes';
 
 const signout = (payload) => {

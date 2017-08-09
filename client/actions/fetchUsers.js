@@ -11,10 +11,6 @@ const fetchUsers = (payload) => {
 
 export const fetchUsersRequest = () => {
   return (dispatch) => {
-    const token = localStorage.getItem('token');
-    const config = { headers: {
-      'x-access-token': token
-    } };
     return axios.get('/api/users').then((payload) => {
       dispatch(fetchUsers(payload));
     });
