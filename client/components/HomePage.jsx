@@ -9,7 +9,7 @@ import Title from './Index/Title.jsx';
 import { userSignupRequest } from '../actions/signupAction';
 import { userSigninRequest } from '../actions/signinAction';
 
-class Home extends React.Component {
+export class HomePage extends React.Component {
   componentDidMount() {
     $('.modal').modal();
     $('.collapsible').collapsible();
@@ -42,10 +42,10 @@ class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
+HomePage.propTypes = {
   userSignupRequest: PropTypes.func,
   userSigninpRequest: PropTypes.func
 };
 
-export default connect(null, { userSignupRequest, userSigninRequest })(Home);
+export default connect(null, { userSignupRequest, userSigninRequest })(HomePage);
 

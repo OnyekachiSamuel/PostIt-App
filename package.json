@@ -14,7 +14,6 @@
     "babel-register": "^6.24.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
-    "chai": "^4.0.2",
     "classnames": "^2.2.5",
     "cookie-parser": "^1.4.3",
     "css-loader": "^0.28.4",
@@ -22,7 +21,6 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-plugin-import": "^2.6.0",
-    "expect": "^1.20.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "extract-text-webpack-plugin": "^2.1.2",
@@ -51,7 +49,6 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.0",
-    "react-dom": "^15.6.1",
     "react-materialize": "^1.0.6",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.2",
@@ -65,14 +62,24 @@
     "webpack-dev-middleware": "^1.11.0"
   },
   "devDependencies": {
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.1.0",
+    "expect": "^1.20.2",
+    "jasmine-enzyme": "^3.6.1",
+    "jsdom": "11.1.0",
+    "jsdom-global": "3.0.2",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
+    "sinon": "^3.1.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
     "start": "babel-node server/app",
-    "build": "webpack --config ./webpack.config.js --progress --colors --watch"
+    "build": "webpack --config ./webpack.config.js --progress --colors --watch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",

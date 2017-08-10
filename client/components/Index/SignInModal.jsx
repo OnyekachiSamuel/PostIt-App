@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 /**
  * @class
  */
-class SignInModal extends React.Component {
+export class SignInModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
