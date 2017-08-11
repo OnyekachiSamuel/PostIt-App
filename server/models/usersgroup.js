@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import config from '../config/db_url.json';
+import config from '../config/db.json';
 
 const sequelize = new Sequelize(config.url);
 const UsersGroup = sequelize.define('UsersGroup', {

@@ -68,8 +68,10 @@
     "eslint-plugin-react": "^7.1.0",
     "expect": "^1.20.2",
     "jasmine-enzyme": "^3.6.1",
+    "jest": "^20.0.4",
     "jsdom": "11.1.0",
     "jsdom-global": "3.0.2",
+    "react-addons-test-utils": "^15.6.0",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "sinon": "^3.1.0",
@@ -79,7 +81,7 @@
   "scripts": {
     "start": "babel-node server/app",
     "build": "webpack --config ./webpack.config.js --progress --colors --watch",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",

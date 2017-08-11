@@ -22589,13 +22589,17 @@ exports.createVerify = function createVerify(opts) {
 var buffer = __webpack_require__(2)
 var Buffer = buffer.Buffer
 
+// alternative to using Object.keys for old browsers
+function copyProps (src, dst) {
+  for (var key in src) {
+    dst[key] = src[key]
+  }
+}
 if (Buffer.from && Buffer.alloc && Buffer.allocUnsafe && Buffer.allocUnsafeSlow) {
   module.exports = buffer
 } else {
   // Copy properties from require('buffer')
-  Object.keys(buffer).forEach(function (prop) {
-    exports[prop] = buffer[prop]
-  })
+  copyProps(buffer, exports)
   exports.Buffer = SafeBuffer
 }
 
@@ -22604,9 +22608,7 @@ function SafeBuffer (arg, encodingOrOffset, length) {
 }
 
 // Copy static methods from Buffer
-Object.keys(Buffer).forEach(function (prop) {
-  SafeBuffer[prop] = Buffer[prop]
-})
+copyProps(Buffer, SafeBuffer)
 
 SafeBuffer.from = function (arg, encodingOrOffset, length) {
   if (typeof arg === 'number') {
@@ -63322,6 +63324,7 @@ NavLink.defaultProps = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.HomePage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -63365,16 +63368,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Home = function (_React$Component) {
-  _inherits(Home, _React$Component);
+var HomePage = exports.HomePage = function (_React$Component) {
+  _inherits(HomePage, _React$Component);
 
-  function Home() {
-    _classCallCheck(this, Home);
+  function HomePage() {
+    _classCallCheck(this, HomePage);
 
-    return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (HomePage.__proto__ || Object.getPrototypeOf(HomePage)).apply(this, arguments));
   }
 
-  _createClass(Home, [{
+  _createClass(HomePage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
       $('.modal').modal();
@@ -63422,15 +63425,15 @@ var Home = function (_React$Component) {
     }
   }]);
 
-  return Home;
+  return HomePage;
 }(_react2.default.Component);
 
-Home.propTypes = {
+HomePage.propTypes = {
   userSignupRequest: _propTypes2.default.func,
   userSigninpRequest: _propTypes2.default.func
 };
 
-exports.default = (0, _reactRedux.connect)(null, { userSignupRequest: _signupAction.userSignupRequest, userSigninRequest: _signinAction.userSigninRequest })(Home);
+exports.default = (0, _reactRedux.connect)(null, { userSignupRequest: _signupAction.userSignupRequest, userSigninRequest: _signinAction.userSigninRequest })(HomePage);
 
 /***/ }),
 /* 504 */
@@ -63442,6 +63445,7 @@ exports.default = (0, _reactRedux.connect)(null, { userSignupRequest: _signupAct
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.NavLink = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -63462,7 +63466,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /**
  * @class
  */
-var NavLink = function (_React$Component) {
+var NavLink = exports.NavLink = function (_React$Component) {
   _inherits(NavLink, _React$Component);
 
   function NavLink() {
@@ -63726,6 +63730,7 @@ exports.default = (0, _reactRouter.withRouter)(SignUpModal);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.SignInModal = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -63752,7 +63757,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 /**
  * @class
  */
-var SignInModal = function (_React$Component) {
+var SignInModal = exports.SignInModal = function (_React$Component) {
   _inherits(SignInModal, _React$Component);
 
   function SignInModal(props) {
@@ -63868,7 +63873,7 @@ var SignInModal = function (_React$Component) {
 }(_react2.default.Component);
 
 SignInModal.propTypes = {
-  signinRequest: _propTypes2.default.func.isRequired
+  signinRequest: _propTypes2.default.func
 };
 exports.default = (0, _reactRouter.withRouter)(SignInModal);
 
@@ -63987,9 +63992,6 @@ var userSignupRequest = exports.userSignupRequest = function userSignupRequest(u
         dispatch(signupFailure(payload));
         Materialize.toast(payload.data.message, 2000, 'green');
       }
-      // else if (payload.data.errors) {
-      //   console.log('ERROR');
-      // }
     });
   };
 };
@@ -64887,6 +64889,7 @@ var _actionTypes = __webpack_require__(13);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var setUser = function setUser(payload) {
+  debugger;
   return {
     type: _actionTypes.SET_CURRENT_USER,
     payload: payload
@@ -64900,7 +64903,9 @@ var userSigninRequest = exports.userSigninRequest = function userSigninRequest(u
         window.localStorage.setItem('token', payload.data.token);
         window.localStorage.setItem('username', payload.data.data.username);
         window.localStorage.setItem('userId', payload.data.data.userId);
+        debugger;
         dispatch(setUser(_jsonwebtoken2.default.decode(payload.data.token)));
+        debugger;
         location.href = '/group';
       } else if (payload.data.status === 'failed') {
         Materialize.toast(payload.data.message, 2000, 'green white-text rounded');

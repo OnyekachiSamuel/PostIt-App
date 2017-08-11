@@ -71,6 +71,6 @@ export class SignInModal extends React.Component {
 }
 
 SignInModal.propTypes = {
-  signinRequest: PropTypes.func.isRequired
+  signinRequest: PropTypes.func
 };
 export default withRouter(SignInModal);
