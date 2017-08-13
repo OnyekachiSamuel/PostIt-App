@@ -5,8 +5,6 @@ const postReducer = (state = [], action) => {
     case POST_MESSAGE_SUCCESSFUL:
       return [...state, action.payload];
     case FETCH_POST_SUCCESS:
-    debugger;
-    console.log(action.payload, '======its=====');
       return [...action.payload];
     default:
       return state;
