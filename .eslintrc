@@ -25,6 +25,21 @@
   },
   "rules": {
     "one-var": 0,
+    "arrow-body-style": ["error", "always"],
+    "class-methods-use-this": ["error", {
+      "exceptMethods": [
+        "render",
+        "getInitialState",
+        "getDefaultProps",
+        "componentWillMount",
+        "componentDidMount",
+        "componentWillReceiveProps",
+        "shouldComponentUpdate",
+       "componentWillUpdate",
+       "componentDidUpdate",
+       "componentWillUnmount"
+     ]
+   }],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "one-var-declaration-per-line": 0,
@@ -50,4 +65,6 @@
     }]
   }
 }
+
+
 
