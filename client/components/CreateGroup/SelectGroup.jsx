@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { fetchGroupRequest } from '../../actions/fetchGroup';
 
-
+/**
+ * @class
+ */
 class SelectGroup extends Component {
-  componentWillMount() {
-    console.log(this.props, '====****===')
-  }
+  /**
+   * @return {null} triggers action to fetch groups when component has mounted
+   */
   componentDidMount() {
-    this.props.fetchGroupRequest();
+    if (localStorage.token) {
+      this.props.fetchGroupRequest();
+    }
   }
+  /**
+   * @return {String} HTML markup for view component of SelectGroup
+   */
   render() {
     const { groups } = this.props;
-    const { signin } = this.props;
-    console.log(signin, '======signin====');
     let groupComponent;
     if (groups.length > 0) {
       groupComponent = groups.map((group, index) => {
@@ -51,10 +55,8 @@ SelectGroup.propTypes = {
 
 const mapStateToProps = (state) => {
   const { groups } = state;
-  const { signin } = state;
   return {
-    groups,
-    signin
+    groups
   };
 };
 

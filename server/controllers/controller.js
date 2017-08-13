@@ -132,8 +132,8 @@ export default class ApiController {
               });
             });
           }
-        }).catch((err) => {
-          if (err) {
+        }).catch((error) => {
+          if (error) {
             res.status(422).json({ status: 'failed',
               message: 'Group already exist' });
           }
@@ -184,6 +184,7 @@ export default class ApiController {
       priority = req.body.priority,
       groupId = req.params.groupId,
       userId = req.decoded.userId;
+      // username = req.decoded.username;
     return Messages.sync({ force: false }).then(() => {
       Messages.create({ userId, groupId, message, priority }).then((content) => {
         res.status(200).json({

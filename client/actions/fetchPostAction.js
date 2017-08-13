@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FETCH_POST_SUCCESS } from './actionTypes';
 
 
-const fetchPostSuccess = (payload) => {
+export const fetchPostSuccess = (payload) => {
   return {
     type: FETCH_POST_SUCCESS,
     payload
@@ -11,11 +11,7 @@ const fetchPostSuccess = (payload) => {
 
 export const fetchPostRequest = (userData) => {
   return (dispatch) => {
-    const token = localStorage.getItem('token');
     const userId = localStorage.getItem('userId');
-    const config = { headers: {
-      'x-access-token': token
-    } };
     return axios.get(`/api/posts/${userData}/${userId}`).then((payload) => {
       if (payload.data.status === 'success') {
         dispatch(fetchPostSuccess(payload.data.data));
@@ -23,4 +19,3 @@ export const fetchPostRequest = (userData) => {
     });
   };
 };
-

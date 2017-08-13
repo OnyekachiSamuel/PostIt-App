@@ -5,4 +5,5 @@ server/migrations/
 node_modules/
 server/OrigModel/
 server/models/index.js
+__tests__/
 

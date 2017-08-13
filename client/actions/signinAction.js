@@ -1,10 +1,10 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER } from './actionTypes';
+import { SIGN_IN_SUCCESS } from './actionTypes';
 
-const setUser = (payload) => {
+export const signIn = (payload) => {
   return {
-    type: SET_CURRENT_USER,
+    type: SIGN_IN_SUCCESS,
     payload
   };
 };
@@ -17,7 +17,7 @@ export const userSigninRequest = (userData) => {
         window.localStorage.setItem('token', payload.data.token);
         window.localStorage.setItem('username', payload.data.data.username);
         window.localStorage.setItem('userId', payload.data.data.userId);
-        dispatch(setUser(jwt.decode(payload.data.token)));
+        dispatch(signIn(jwt.decode(payload.data.token)));
         location.href = '/group';
       } else if (payload.data.status === 'failed') {
         Materialize.toast(payload.data.message, 2000, 'green white-text rounded');

@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * @class Title
+ */
 export default class Title extends React.Component {
+  /**
+   * @return {String} HTML markup for view component of Title
+   */
   render() {
     return (
       <div className="page-heading">

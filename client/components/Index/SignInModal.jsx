@@ -7,6 +7,10 @@ import PropTypes from 'prop-types';
  * @class
  */
 export class SignInModal extends React.Component {
+  /**
+   * @return {null} Initializes the state and methods bindings
+   * @param {props} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -17,6 +21,10 @@ export class SignInModal extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * @return {null} Triggers the signinRequest action on click of submit button
+   * @param {e} e
+   */
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
@@ -24,16 +32,23 @@ export class SignInModal extends React.Component {
       () => {
 
       },
-      (errors) => {
-        console.log(errors);
+      () => {
+        // console.log(errors);
       }
     );
   }
+  /**
+   * @return {null} Updates the state as the user types into the input the fields
+   * @param {e} e
+   */
   onChange(e) {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
+/**
+ * @return {String} HTML markup for view component SignInModal
+ */
   render() {
     return (
       <div className="row modal" id="modal2">
@@ -49,17 +64,20 @@ export class SignInModal extends React.Component {
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row">
               <div className="input-field col s12">
-                <input id="username" name="username" value={this.state.username} onChange={this.onChange} type="text" className="validate" required />
+                <input id="username" name="username" value={this.state.username}
+                onChange={this.onChange} type="text" className="validate" required />
                 <label htmlFor="username">Username</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="password" name="password" value={this.state.password} onChange={this.onChange} type="password" className="validate" required />
+                <input id="password" name="password" value={this.state.password}
+                onChange={this.onChange} type="password" className="validate" required />
                 <label htmlFor="password">Password</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+            <button className="btn waves-effect waves-light"
+            type="submit" name="action">Submit</button>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -71,6 +89,6 @@ export class SignInModal extends React.Component {
 }
 
 SignInModal.propTypes = {
-  signinRequest: PropTypes.func
+  signinRequest: PropTypes.func,
 };
 export default withRouter(SignInModal);

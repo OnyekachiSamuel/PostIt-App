@@ -1,18 +1,19 @@
-import axios from 'axios';
 import { SIGN_OUT_SUCCESS } from './actionTypes';
+import setAuthorizationToken from '../utils/setAuthorizationToken';
 
-const signout = (payload) => {
+export const signout = (payload) => {
   return {
     type: SIGN_OUT_SUCCESS,
     payload
   };
 };
 
-export const signoutRequest = (payload) => {
+export const signoutRequest = () => {
   return (dispatch) => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
-    dispatch(signout(payload));
+    setAuthorizationToken(false);
+    dispatch(signout({}));
   };
 };
