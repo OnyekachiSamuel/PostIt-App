@@ -1,9 +1,7 @@
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
-import store from '../store/configureStore';
 import { FETCH_GROUP_SUCCESS } from './actionTypes';
 
-const fetchGroup = (payload) => {
+export const fetchGroup = (payload) => {
   return {
     type: FETCH_GROUP_SUCCESS,
     payload

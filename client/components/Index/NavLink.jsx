@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 /**
  * @class
  */
-export default class NavLink extends React.Component {
+export class NavLink extends React.Component {
+  /**
+   * @return {String} HTML markup for view component of NavLink
+   */
   render() {
     return (
       <ul id="nav-mobile" className="right">
@@ -14,3 +17,5 @@ export default class NavLink extends React.Component {
     );
   }
 }
+
+export default NavLink;
