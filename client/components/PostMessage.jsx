@@ -7,16 +7,27 @@ import PostedMessage from './PostMessage/PostedMessage.jsx';
 import ViewMembers from './PostMessage/ViewModal.jsx';
 import Footer from './Footer.jsx';
 
+/**
+ * @class BroadcastMessage
+ */
 class BroadcastMessage extends React.Component {
+  /**
+   * @return {null} makes the jQuery function available on component mount
+   */
   componentDidMount() {
     $('.collapsible').collapsible();
     $('select').material_select();
     $('.modal').modal();
   }
-
+/**
+   * @return {null} navigates to the landing page
+   */
   signOut() {
     this.props.history.push('/');
   }
+  /**
+   * @return {String} HTML markup for view component of PostMessage
+   */
   render() {
     return (
       <div>

@@ -1,6 +1,12 @@
 import React from 'react';
 
+/**
+ * @class Title
+ */
 export default class Title extends React.Component {
+  /**
+   * @return {String} HTML markup for view component of Title
+   */
   render() {
     return (
 

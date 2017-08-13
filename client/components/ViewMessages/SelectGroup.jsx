@@ -7,6 +7,10 @@ import fetchGroupPostRequest from '../../actions/fetchGroupPost';
  * @class
  */
 class SelectGroup extends React.Component {
+  /**
+   * @return {null} Initializes the state
+   * @param {obj} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -15,19 +19,34 @@ class SelectGroup extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
+  /**
+   * @return {null} Triggers the fetchGroupRequest action to fetch groups on component mount
+   */
   componentDidMount() {
-    this.props.fetchGroupRequest();
+    if (localStorage.token) {
+      this.props.fetchGroupRequest();
+    }
   }
+  /**
+   * @return {null} Updates the state
+   * @param {e} e
+   */
   onChange(e) {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
+  /**
+   * @return {null} Triggers the action to fetch all posts in a particular group
+   */
   onClick() {
     if (this.state.groupId) {
       this.props.fetchGroupPostRequest(this.state.groupId);
     }
   }
+  /**
+   * @return {String} HTML markup for view component of SelectGroup
+   */
   render() {
     const { groups } = this.props;
     const { groupPost } = this.props;
@@ -43,8 +62,9 @@ class SelectGroup extends React.Component {
       groupPostComponent = groupPost.map((post, index) => {
         return (
         <li key={index}>
-              <div className="collapsible-header"><i className="material-icons">explore</i>{post.priority}</div>
-              <div className="collapsible-body"><span>{post.message}</span></div>
+          <div className="collapsible-header">
+            <i className="material-icons">explore</i>{post.priority}</div>
+          <div className="collapsible-body"><span>{post.message}</span></div>
             </li>
         );
       });
@@ -59,7 +79,7 @@ class SelectGroup extends React.Component {
             </select>
             <div/>
             <div className="center">
-                <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
+              <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
             </div>
         </div>
     </div>
