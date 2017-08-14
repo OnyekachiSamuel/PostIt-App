@@ -22,8 +22,9 @@ export const createRequest = (userData) => {
         dispatch(createGroupSuccess(res.data.data));
       }
     }).catch((error) => {
-      dispatch(createGroupFailure(error.data.error.message));
-      Materialize.toast('Group exist already', 2000, 'green white-text rounded');
+      dispatch(createGroupFailure(error.response.data));
+      Materialize.toast(error.response.data.message, 2000, 'green white-text rounded');
+      throw error;
     });
   };
 };
