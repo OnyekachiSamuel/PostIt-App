@@ -6,4 +6,6 @@ node_modules/
 server/OrigModel/
 server/models/index.js
 __tests__/
+.DS_Store
+.env
 
