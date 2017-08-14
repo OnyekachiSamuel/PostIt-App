@@ -37,7 +37,7 @@ router.get('/groups/:username', Verify.token, controller.getUserGroups);
 // router.post('/post/users', Verify.token, controller.addUsers);
 
 // Route to get all posts by a particular user
-router.get('/posts', Verify.token, controller.getUserMessages);
+router.get('/posts/:groupId/:userId', Verify.token, controller.getUserMessages);
 
 // Route to get all posts in a particular group
 router.get('/post/messages/:groupId', Verify.token, controller.getMessages);

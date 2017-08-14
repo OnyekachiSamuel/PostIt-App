@@ -76109,8 +76109,6 @@ var postReducer = function postReducer() {
     case _actionTypes.POST_MESSAGE_SUCCESSFUL:
       return [].concat(_toConsumableArray(state), [action.payload]);
     case _actionTypes.FETCH_POST_SUCCESS:
-      debugger;
-      console.log(action.payload, '======its=====');
       return [].concat(_toConsumableArray(action.payload));
     default:
       return state;
@@ -81701,7 +81699,7 @@ var PostedMessage = function (_React$Component) {
       }
       return _react2.default.createElement(
         'div',
-        { className: 'container' },
+        { className: 'container bottom-margin' },
         _react2.default.createElement(
           'div',
           { className: 'card-panel row messages' },

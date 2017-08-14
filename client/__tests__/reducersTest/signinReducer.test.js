@@ -8,7 +8,6 @@ describe('Sign In Reducer', () => {
     const userData = {
       username: 'Samuel',
       password: 'sam',
-      isLoggedOut: false
     };
     const initialState = {};
     const action = signIn(userData);
@@ -20,13 +19,14 @@ describe('Sign In Reducer', () => {
   it('should update the state on SIGN_OUT_SUCCESS', () => {
     const initialState = {};
     const userData = {
+      isAuthenticated: false,
       username: 'Samuel',
       password: 'sam',
       isLoggedOut: true
     };
     const action = signout(userData);
     const newState = signinReducer(initialState, action);
-    expect(newState.isLoggedOut).toBe(true);
+    expect(newState.user.isAuthenticated).toBe(false);
   });
   it('should return default state when no action Type is matched', () => {
     const newState = signinReducer({}, {

@@ -34,7 +34,7 @@ class PostedMessage extends React.Component {
       });
     }
     return (
-      <div className="container">
+      <div className="container bottom-margin">
         <div className="card-panel row messages">
           <h3 className="center">Messages</h3><hr/>
           <ul className="collapsible" data-collapsible="accordion">

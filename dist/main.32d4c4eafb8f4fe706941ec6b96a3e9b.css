@@ -136,6 +136,9 @@ h4 {
 /*---------------------------------------------*/
 /* Create Group Styling
 /*---------------------------------------------*/
+.test {
+  margin: 0; }
+
 .tt {
   margin-bottom: 150px; }
 
@@ -208,6 +211,9 @@ button .right {
 /*---------------------------------------------*/
 /* Post Message Page Styling
 /*---------------------------------------------*/
+.bottom-margin {
+  margin-bottom: 40px; }
+
 .heading {
   background-color: #fff;
   height: 60px; }
