@@ -1,16 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import NavBar from './CreateGroup/NavLink.jsx';
+import NavLink from './CreateGroup/NavLink.jsx';
 import Title from './CreateGroup/TitleHeader.jsx';
 import AddUser from './CreateGroup/AddUser.jsx';
 import SelectGroup from './CreateGroup/SelectGroup.jsx';
 import GroupModal from './CreateGroup/GroupModal.jsx';
 import Footer from './Footer.jsx';
 
+/**
+ * @class CreateGroup
+ */
 class CreateGroup extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  /**
+   * @return {null} makes the jQuery function available on component mount
+   */
   componentDidMount() {
     $('.modal').modal({
       dismissible: true,
@@ -25,16 +28,21 @@ class CreateGroup extends React.Component {
       complete: function () { }
     }
   );
-  $('select').material_select();
+    $('select').material_select();
   }
-signOut() {
-  this.props.history.push('/');
-}
-
-   render() {
+  /**
+   * @return {null} navigates to the landing page
+   */
+  signOut() {
+    this.props.history.push('/');
+  }
+  /**
+   * @return {String} HTML markup for view component of CreateGroup
+   */
+  render() {
     return (
       <div>
-        <NavBar signOut={ this.signOut.bind(this) }/>
+        <NavLink signOut={ this.signOut.bind(this) }/>
         <Title/>
         <AddUser/>
         <GroupModal/>
@@ -42,7 +50,7 @@ signOut() {
         <Footer/>
       </div>
     );
-   }
+  }
 }
 
 export default withRouter(CreateGroup);

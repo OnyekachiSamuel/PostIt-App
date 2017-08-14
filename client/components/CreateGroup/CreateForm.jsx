@@ -1,6 +1,12 @@
 import React from 'react';
 
+/**
+ * @class
+ */
 export default class CreateForm extends React.Component {
+  /**
+   * @return {String} HTML markup for view component of CreateForm
+   */
   render() {
     return (
       <div className="row gp-form">

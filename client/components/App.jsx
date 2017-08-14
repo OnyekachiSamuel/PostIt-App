@@ -10,14 +10,17 @@ import requireAuth from '../utils/requireAuth';
  * @class
  */
 export default class App extends React.Component {
+  /**
+   * @return {String} HTML markup
+   */
   render() {
     return (
       <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/group" component={requireAuth(CreateGroup)} />
-        <Route path="/messages" component={ViewMessages} />
-        <Route path="/:groupId" component={PostMessage} />
+        <Route path="/messages" component={requireAuth(ViewMessages)} />
+        <Route path="/:groupId" component={requireAuth(PostMessage)} />
       </Switch>
       </BrowserRouter>
     );

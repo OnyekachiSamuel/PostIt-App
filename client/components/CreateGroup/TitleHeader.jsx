@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export default class Title extends Component {
+/**
+ * @class TitleHeader
+ */
+export default class TitleHeader extends Component {
+  /**
+   * @return {String} HTML markup for view component of TitleHeader
+   */
   render() {
     return (
            <div>

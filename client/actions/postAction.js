@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { POST_MESSAGE_SUCCESSFUL } from './actionTypes';
 
-const postedMessage = (payload) => {
+export const postedMessage = (payload) => {
   return {
     type: POST_MESSAGE_SUCCESSFUL,
     payload

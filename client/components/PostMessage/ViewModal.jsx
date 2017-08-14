@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchMembersRequest } from '../../actions/fetchMembers';
@@ -14,8 +14,10 @@ class ViewMembers extends React.Component {
    * @return {*} Triggers asyn action that updates the store with group members data
    */
   componentDidMount() {
-    const groupId = this.props.match.params.groupId;
-    this.props.fetchMembersRequest(groupId);
+    if (localStorage.token) {
+      const groupId = this.props.match.params.groupId;
+      this.props.fetchMembersRequest(groupId);
+    }
   }
    /**
    * Renders view component of members
