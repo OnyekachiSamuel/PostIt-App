@@ -30,12 +30,8 @@ export class SignInModal extends React.Component {
     e.preventDefault();
     this.props.signinRequest(this.state).then(
       () => {
-
-      },
-      () => {
-        // console.log(errors);
       }
-    );
+    ).catch((error) => { Materialize.toast(error, 2000, 'green white-text rounded'); });
   }
   /**
    * @return {null} Updates the state as the user types into the input the fields
