@@ -23,10 +23,11 @@ export const userSignupRequest = (userData) => {
         localStorage.setItem('token', payload.data.token);
         localStorage.setItem('username', payload.data.data.username);
         location.href = '/group';
-      } else if (payload.data.status === 'failed') {
-        dispatch(signupFailure(payload.data.data));
-        Materialize.toast(payload.data.message, 2000, 'green');
       }
+    }).catch((error) => {
+      dispatch(signupFailure(error.response.data.message));
+      Materialize.toast(error.response.data.message, 2000, 'green');
+      throw error;
     });
   };
 };

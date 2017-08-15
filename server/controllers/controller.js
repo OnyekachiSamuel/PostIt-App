@@ -51,7 +51,7 @@ export default class ApiController {
             });
           }).catch((err) => {
             if (err) {
-              res.json({
+              res.status(422).json({
                 status: 'failed',
                 message: 'Record exists already' });
             }
