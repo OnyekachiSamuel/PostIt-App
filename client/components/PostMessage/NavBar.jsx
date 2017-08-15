@@ -5,9 +5,14 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { signoutRequest } from '../../actions/signoutAction';
 
-var man = 'kskskks';
-
+/**
+ * @class NavBar
+ */
 class NavBar extends React.Component {
+  /**
+   * @return {null} Initializes the state and binds methods
+   * @param {obj} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -16,12 +21,15 @@ class NavBar extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * 
+   * @return {null} Triggers the signoutRequest action on click of signout button
    */
   onClick() {
     this.props.signoutRequest(this.state);
     this.props.signOut();
   }
+  /**
+   * @return {String} HTML markup for view component of NavBar
+   */
   render() {
     return (
       <nav>

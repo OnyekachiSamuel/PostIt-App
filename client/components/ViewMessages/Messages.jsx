@@ -1,7 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+/**
+ * @class Messages
+ */
 class Messages extends React.Component {
+  /**
+   * @return {String} HTML markup for view component of Messages
+   */
   render() {
     const { groupPost } = this.props;
     const groupPostComponent = groupPost.map((group, index) => {

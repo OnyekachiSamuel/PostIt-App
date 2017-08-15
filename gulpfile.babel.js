@@ -17,6 +17,15 @@ gulp.task('run-test', () => {
     .pipe(exit());
 });
 
+// Run client-side test
+gulp.task('client-test', () => {
+  gulp.src(['client/tests/HomePage.test.js'])
+    .pipe(babel())
+    .pipe(injectModules())
+    .pipe(jasmine())
+    .pipe(exit());
+});
+
 // Generate the coverage report
 gulp.task('coverage', () => {
   gulp.src(['server/controllers/controller.js', 'server/middlewares/validator.js'])

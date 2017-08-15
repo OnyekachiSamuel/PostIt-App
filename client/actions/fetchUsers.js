@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_USERS_SUCCESS } from './actionTypes';
 
-const fetchUsers = (payload) => {
+export const fetchUsers = (payload) => {
   return {
     type: FETCH_USERS_SUCCESS,
     payload

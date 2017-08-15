@@ -3,8 +3,14 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-
+/**
+ * @class SignUpModal
+ */
 class SignUpModal extends React.Component {
+  /**
+   * @return {null} Initializes the state and method binding
+   * @param {obj} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -18,6 +24,10 @@ class SignUpModal extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  /**
+   * @return {null} Triggers the signupRequest action on submit button click
+   * @param {e} e
+   */
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
@@ -25,17 +35,22 @@ class SignUpModal extends React.Component {
       () => {
 
       },
-      (errors) => {
-        console.log(errors, '============');
-        debugger;
+      () => {
       }
     );
   }
+  /**
+   * @return {null} Updates the state as the user types into the input field
+   * @param {e} e
+   */
   onChange(e) {
     const state = this.state;
     state[e.target.name] = e.target.value;
     this.setState(state);
   }
+  /**
+   * @return {String} HTML markup for view component of SignUpModal
+   */
   render() {
     const { errors } = this.state;
     return (
@@ -58,27 +73,33 @@ class SignUpModal extends React.Component {
                 { errors.name && <span>{ errors.name }</span>}
               </div>
               <div className="input-field col s12 test">
-                <input id="user_name" name="username" value={this.state.username} onChange={this.onChange} type="text" className="validate"/>
+                <input id="user_name" name="username" value={this.state.username}
+                onChange={this.onChange} type="text" className="validate"/>
                 <label htmlFor="user_name">Username</label>
                 { errors.username && <span>{ errors.username }</span>}
               </div>
               <div className="input-field col s12 test">
-                <input id="email" name="email" value={this.state.email} onChange={this.onChange} type="email" className="validate"/>
+                <input id="email" name="email" value={this.state.email}
+                onChange={this.onChange} type="email" className="validate"/>
                 <label htmlFor="email">Email</label>
                 { errors.email && <span>{ errors.email }</span>}
               </div>
               <div className="input-field col s12 test">
-                <input id="password" name='password' value={this.state.password} onChange={this.onChange} type="password" className="validate"/>
+                <input id="password" name='password' value={this.state.password}
+                onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="password">Password</label>
                 { errors.password && <span>{ errors.password }</span>}
               </div>
               <div className="input-field col s12 test">
-                <input id="confirm_password" name='confirmPassword' value={this.state.confirmPassword} onChange={this.onChange} type="password" className="validate"/>
+                <input id="confirm_password" name='confirmPassword'
+                value={this.state.confirmPassword}
+                onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="confirm_password">Confirm password</label>
                 { errors.confirmPassword && <span>{ errors.confirmPassword }</span>}
               </div>
             </div>
-            <button className="btn waves-effect waves-light" disabled={this.state.isLoading} type="submit" name="action">Submit</button>
+            <button className="btn waves-effect waves-light"
+            disabled={this.state.isLoading} type="submit" name="action">Submit</button>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>

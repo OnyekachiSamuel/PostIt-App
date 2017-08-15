@@ -3,14 +3,22 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchPostRequest } from '../../actions/fetchPostAction';
 
+/**
+ * @class PostedMessage
+ */
 class PostedMessage extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  /**
+   * @return {null} Updates the store with group posts by triggering the fetchPostRequest action
+   */
   componentDidMount() {
-    const groupId = this.props.match.params.groupId;
-    this.props.fetchPostRequest(groupId);
+    if (localStorage.token) {
+      const groupId = this.props.match.params.groupId;
+      this.props.fetchPostRequest(groupId);
+    }
   }
+  /** object destructing of messages from the props
+   * @return {String} HTML markup for view component of PostedMessage
+   */
   render() {
     const { messages } = this.props;
     let messageComponent;
@@ -18,7 +26,8 @@ class PostedMessage extends React.Component {
       messageComponent = messages.map((element, index) => {
         return (
            <li key={index}>
-              <div className="collapsible-header"><i className="material-icons">explore</i>{element.priority}</div>
+              <div className="collapsible-header">
+                <i className="material-icons">explore</i>{element.priority}</div>
               <div className="collapsible-body"><span>{element.message}</span></div>
         </li>
         );
