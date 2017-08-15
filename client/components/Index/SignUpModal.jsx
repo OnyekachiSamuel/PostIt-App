@@ -33,11 +33,7 @@ class SignUpModal extends React.Component {
     e.preventDefault();
     this.props.signupRequest(this.state).then(
       () => {
-
-      },
-      () => {
-      }
-    );
+      }).catch((error) => { Materialize.toast(error, 2000, 'green'); });
   }
   /**
    * @return {null} Updates the state as the user types into the input field
