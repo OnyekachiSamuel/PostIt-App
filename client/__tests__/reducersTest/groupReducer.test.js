@@ -1,4 +1,3 @@
-import expect from 'expect';
 import { createGroupSuccess, createGroupFailure } from '../../actions/groupAction';
 import { fetchGroup } from '../../actions/fetchGroup';
 import groupReducer from '../../reducers/groupReducer';
@@ -55,5 +54,11 @@ describe('Group Reducer', () => {
     expect(newState[1].description).toBe('Hope for Africa');
     expect(newState[2].groupName).toBe('Team 4');
     expect(newState[2].description).toBe('Programming for fun');
+  });
+  it('should return default state when no action Type is matched', () => {
+    const newState = groupReducer([], {
+      type: 'NO_ACTION_MATCH'
+    });
+    expect(newState).toEqual([]);
   });
 });

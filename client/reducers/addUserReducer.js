@@ -1,12 +1,12 @@
 import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from '../actions/actionTypes';
 
-const initialState = [];
+const initialState = {};
 const addUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER_SUCCESS:
-      return [...state, action.payload];
+      return Object.assign({}, state, action.payload);
     case ADD_USER_FAILURE:
-      return [...state, action.userData];
+      return Object.assign({}, state, action.payload);
     default:
       return state;
   }

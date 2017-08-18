@@ -1,4 +1,6 @@
-let localStorage = {};
+let localStorage = {
+  userId: 9
+};
 
 export default {
   setItem(key, value) {

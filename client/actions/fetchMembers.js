@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { FETCH_MEMBERS } from './actionTypes';
 
-const fetchMembers = (payload) => {
+export const fetchMembers = (payload) => {
   return {
     type: FETCH_MEMBERS,
     payload
