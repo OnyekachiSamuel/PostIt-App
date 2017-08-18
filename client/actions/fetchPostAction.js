@@ -12,7 +12,10 @@ export const fetchPostSuccess = (payload) => {
 export const fetchPostRequest = (userData) => {
   return (dispatch) => {
     const userId = localStorage.getItem('userId');
-    return axios.get(`/api/posts/${userData}/${userId}`).then((payload) => {
+    console.log(userId);
+    console.log(userData);
+    return axios.get(`api/posts/${userData}/${userId}`)
+    .then((payload) => {
       if (payload.data.status === 'success') {
         dispatch(fetchPostSuccess(payload.data.data));
       }

@@ -2,16 +2,16 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import { SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from './actionTypes';
 
-export const signUp = (userData) => {
+export const signUp = (payload) => {
   return {
     type: SIGN_UP_SUCCESS,
-    userData
+    payload
   };
 };
-export const signupFailure = (userData) => {
+export const signupFailure = (payload) => {
   return {
     type: SIGN_UP_FAILURE,
-    userData
+    payload
   };
 };
 

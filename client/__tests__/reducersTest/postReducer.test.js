@@ -1,4 +1,4 @@
-import expect from 'expect';
+// import expect from 'expect';
 import { postedMessage } from '../../actions/postAction';
 import { fetchPostSuccess } from '../../actions/fetchPostAction';
 import postReducer from '../../reducers/postReducer';
@@ -41,9 +41,9 @@ describe('Post Message Reducer', () => {
     expect(newState[2].priority).toBe('Critical');
   });
   it('should return default state when no action Type is matched', () => {
-    const newState = postReducer({}, {
+    const newState = postReducer([], {
       type: 'NO_ACTION_MATCH'
     });
-    expect(newState).toContain([]);
+    expect(newState).toEqual([]);
   });
 });
