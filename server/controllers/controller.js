@@ -1,13 +1,17 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
+import Jusibe from 'jusibe';
+import nodemailer from 'nodemailer';
 import User from '../models/user';
 import Group from '../models/group';
 import UsersGroup from '../models/usersgroup';
 import Messages from '../models/message';
+import { getUsersPhoneEmail } from '../controllers/helper/getUsersPhoneEmail';
 
 
 env.config();
+
 /**
  * @class ApiController
  */
@@ -24,16 +28,19 @@ export default class ApiController {
     const name = req.body.name,
       username = req.body.username,
       email = req.body.email,
-      password = req.body.password;
+      password = req.body.password,
+      phone = req.body.phone;
     return User.sync({ force: false }).then(() => {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
           User.create({
-            name, username, email, password: hash
+            name, username, email, phone, password: hash
           }).then((user) => {
             const payload = { username: user.username,
-              userId: user.id
+              userId: user.id,
+              email: user.email,
+              name: user.name
             };
             const token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 60 * 60 * 24
@@ -44,7 +51,8 @@ export default class ApiController {
                 id: user.id,
                 name: user.name,
                 username: user.username,
-                email: user.email
+                email: user.email,
+                phone: user.phone
               },
               message: 'Account created',
               token
@@ -75,7 +83,9 @@ export default class ApiController {
       if (user && user.dataValues.username === username) {
         const check = bcrypt.compareSync(password, user.dataValues.password);
         const payload = { username: user.dataValues.username,
-          userId: user.dataValues.id
+          userId: user.dataValues.id,
+          email: user.dataValues.email,
+          name: user.dataValues.name
         };
         if (check) {
           const token = jwt.sign(payload, process.env.SECRET_KEY, {
@@ -183,10 +193,88 @@ export default class ApiController {
     const message = req.body.message,
       priority = req.body.priority,
       groupId = req.params.groupId,
-      userId = req.decoded.userId;
-      // username = req.decoded.username;
+      userId = req.decoded.userId,
+      username = req.decoded.username;
     return Messages.sync({ force: false }).then(() => {
-      Messages.create({ userId, groupId, message, priority }).then((content) => {
+      Messages.create({ userId, groupId, message, priority, username }).then((content) => {
+        if (priority === 'Critical') {
+          // Fetch users emails and phone numbers
+          getUsersPhoneEmail(groupId, (result) => {
+            const { phoneNumbers, emails } = result;
+            const jusibe = new Jusibe(process.env.PUBLIC_KEY, process.env.ACCESS_TOKEN);
+            phoneNumbers.forEach((number) => {
+              const payload = {
+                to: number,
+                from: req.decoded.username,
+                message: content.message
+              };
+              jusibe.sendSMS(payload)
+            .then((res) => {
+              console.log(res.body);
+            })
+            .catch((err) => {
+              console.log(err.body);
+            });
+            });
+          // Send emails to users
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              port: 25,
+              secure: false, // secure:true for port 465, secure:false for port 587
+              auth: {
+                user: 'postit028@gmail.com',
+                pass: process.env.G_PASSWORD
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+            const mailOptions = {
+              from: `${req.decoded.name} <${req.decoded.email}>`, // sender address
+              to: emails.toString(), // list of receivers
+              subject: priority, // Subject line
+              // text: content.message, // plain text body
+              html: `<b>${content.message}</b>`
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log('Message %s sent: %s', info.messageId, info.response);
+            });
+          });
+        } else if (priority === 'Urgent') {
+          // Fetch users emails and phone numbers
+          getUsersPhoneEmail(groupId, (result) => {
+            const { emails } = result;
+          // Send emails to users
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              port: 25,
+              secure: false, // secure:true for port 465, secure:false for port 587
+              auth: {
+                user: 'postit028@gmail.com',
+                pass: process.env.G_PASSWORD
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+            const mailOptions = {
+              from: `${req.decoded.username} <${req.decoded.email}>`, // sender address
+              to: emails.toString(), // list of receivers
+              subject: priority, // Subject line
+              // text: content.message, // plain text body
+              html: `<b>${content.message}</b>`
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log('Message %s sent: %s', info.messageId, info.response);
+            });
+          });
+        }
         res.status(200).json({
           status: 'success',
           data: {
@@ -196,6 +284,10 @@ export default class ApiController {
           },
           message: 'Message sent'
         });
+      }).catch((error) => {
+        if (error) {
+          res.json({ status: 'failed', message: 'Message sending failed' });
+        }
       });
     });
   }
