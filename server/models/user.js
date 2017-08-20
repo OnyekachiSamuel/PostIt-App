@@ -1,7 +1,12 @@
 import Sequelize from 'sequelize';
-import config from '../config/db.json';
+// import config from '../config/db.json';
+import get from '../config/config';
 
-const sequelize = new Sequelize(config.url);
+const config = get(process.env.NODE_ENV);
+console.log(config.database, '=====database=======');
+
+const sequelize = new Sequelize(config.database);
+
 const User = sequelize.define('User', {
   id: {
     allowNull: false,
@@ -17,6 +22,10 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
     allowNull: false,
     unique: true
+  },
+  phone: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   email: {
     type: Sequelize.STRING,
@@ -48,3 +57,19 @@ const User = sequelize.define('User', {
   }
 });
 export default User;
+
+
+User.associate = (models) => {
+  User.hasMany(models.Group, {
+    foreignKey: 'userId',
+    as: 'userId'
+  });
+  User.belongsTo(models.UsersGroup, {
+    foreignKey: 'userId',
+    as: 'userId'
+  });
+  User.hasMany(models.Message, {
+    foreignKey: 'userId',
+    as: 'userId'
+  });
+};

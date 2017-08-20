@@ -1,7 +1,10 @@
 import Sequelize from 'sequelize';
-import config from '../config/db.json';
+// import config from '../config/db.json';
+import get from '../config/config';
 
-const sequelize = new Sequelize(config.url);
+const config = get(process.env.NODE_ENV);
+
+const sequelize = new Sequelize(config.database);
 
 const Group = sequelize.define('Group', {
   id: {
@@ -27,20 +30,17 @@ const Group = sequelize.define('Group', {
       as: 'userId'
     }
   }
-}, {
-  classMethods: {
-    associate: (models) => {
-      // associations can be defined here
-      Group.hasMany(models.UsersGroup, {
-        foreignKey: 'groupId',
-        as: 'groupId'
-      });
-      Group.belongsTo(models.User, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-      });
-    }
-  }
 });
+
+Group.associate = (models) => {
+  Group.hasMany(models.UsersGroup, {
+    foreignKey: 'groupId',
+    as: 'groupId'
+  });
+  Group.belongsTo(models.User, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE',
+  });
+};
 export default Group;
 
