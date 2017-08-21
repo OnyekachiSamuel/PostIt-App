@@ -46,7 +46,6 @@ export default class ApiController {
               expiresIn: 60 * 60 * 24
             });
             res.status(200).json({
-              status: 'success',
               data: {
                 id: user.id,
                 name: user.name,

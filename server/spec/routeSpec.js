@@ -21,33 +21,35 @@ describe('ROUTE TESTING', () => {
         name: 'Obinna',
         username: 'Obinna',
         email: 'obinna@gmail.com',
+        phone: '07062489846',
         password: 'obinna',
         confirmPassword: 'obinna'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
-          expect('success').toBe(res.body.status);
+          expect('200').toEqual(res.status);
           expect('Account created').toBe(res.body.message);
           expect('Jane').toNotBe(res.body.data.name);
           expect('Obinna').toBe(res.body.data.username);
           done(err);
         });
     }, 10000);
-    it('Should be able to another account', (done) => {
+    it('Should be able to create another account', (done) => {
       const user = {
         name: 'Eze',
         username: 'Kenet',
         email: 'ken@gmail.com',
+        phone: '07062489846',
         password: 'azundu',
         confirmPassword: 'azundu'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
-          expect('success').toBe(res.body.status);
+          expect('200').toEqual(res.status);
           expect('Account created').toBe(res.body.message);
           expect('Jane').toNotBe(res.body.data.name);
           expect('Kenet').toBe(res.body.data.username);
@@ -61,10 +63,11 @@ describe('ROUTE TESTING', () => {
         name: '',
         username: '',
         email: '',
+        phone: '',
         password: '',
         confirmPassword: ''
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -80,10 +83,11 @@ describe('ROUTE TESTING', () => {
         name: '35353',
         username: '666373',
         email: 'tstsys@gmail.com',
+        phone: '07062489846',
         password: 'henk',
         confirmPassword: 'henk'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -98,7 +102,7 @@ describe('ROUTE TESTING', () => {
         email: 'hshsh@gmail.com',
         password: 'azundu'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -111,10 +115,11 @@ describe('ROUTE TESTING', () => {
         name: '003838hhdhd',
         username: '00992jsjsj',
         email: 'hshsh@gmail.com',
+        phone: '07062489846',
         password: 'azundu',
         confirmPassword: 'azundu'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -128,10 +133,11 @@ describe('ROUTE TESTING', () => {
         name: 'Eze',
         username: 'Kenet',
         email: 'ken@gmail.com',
+        phone: '07062489846',
         password: 'azundu',
         confirmPassword: 'azundu'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -144,10 +150,11 @@ describe('ROUTE TESTING', () => {
         name: 'Kenet',
         username: 'Kenet',
         email: 'hshs',
+        phone: '07062489846',
         password: 'azundu',
         confirmPassword: 'azundu'
       };
-      request.post('/api/signup')
+      request.post('/api/v1/signup')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -166,7 +173,7 @@ describe('ROUTE TESTING', () => {
         username: 'Kenet',
         password: 'azundu'
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -183,7 +190,7 @@ describe('ROUTE TESTING', () => {
         groupName: 'ANDELA21',
         description: 'Full stack project discussion group'
       };
-      request.post('/api/group')
+      request.post('/api/v1/group')
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -198,7 +205,7 @@ describe('ROUTE TESTING', () => {
       user = {
         username: 'Obinna'
       };
-      request.post(`/api/group/${groupId}/user`)
+      request.post(`/api/v1/group/${groupId}/user`)
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -213,7 +220,7 @@ describe('ROUTE TESTING', () => {
         priority: 'Normal',
         userId: `${userId}`
       };
-      request.post(`/api/group/${groupId}/messages`)
+      request.post(`/api/v1/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
       .send(user)
@@ -232,7 +239,7 @@ describe('ROUTE TESTING', () => {
         priority: 'Normal',
         userId: `${userId}`
       };
-      request.post(`/api/group/${groupId}/messages`)
+      request.post(`/api/v1/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
       .send(user)
@@ -246,7 +253,7 @@ describe('ROUTE TESTING', () => {
       });
     }, 10000);
     it('Should be able to get messages in a particular group', (done) => {
-      request.get(`/api/group/${groupId}/messages`)
+      request.get(`/api/v1/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
@@ -264,7 +271,7 @@ describe('ROUTE TESTING', () => {
         username: 'Obinna',
         password: 'obinna'
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -280,7 +287,7 @@ describe('ROUTE TESTING', () => {
         groupName: 'Programming for fun',
         description: 'Full stack project discussion group'
       };
-      request.post('/api/group')
+      request.post('/api/v1/group')
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -296,7 +303,7 @@ describe('ROUTE TESTING', () => {
         username: 'enet',
         password: 'azundu'
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .end((err, res) => {
           expect('User not found').toBe(res.body.message);
@@ -308,7 +315,7 @@ describe('ROUTE TESTING', () => {
         username: 'Kenet',
         password: 'zundu'
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .end((err, res) => {
           expect('failed').toBe(res.body.status);
@@ -319,7 +326,7 @@ describe('ROUTE TESTING', () => {
       user = {
         password: 'azundu'
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -332,7 +339,7 @@ describe('ROUTE TESTING', () => {
         username: '',
         password: ''
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -346,7 +353,7 @@ describe('ROUTE TESTING', () => {
         username: '838839',
         password: 'azundu'
       };
-      request.post('/api/signin')
+      request.post('/api/v1/signin')
         .send(user)
         .expect(200)
         .end((err, res) => {
@@ -358,7 +365,7 @@ describe('ROUTE TESTING', () => {
       user = {
         priority: 'Normal',
       };
-      request.post(`/api/group/${groupId}/messages`)
+      request.post(`/api/v1/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
       .send(user)
@@ -372,7 +379,7 @@ describe('ROUTE TESTING', () => {
         message: '',
         priority: ''
       };
-      request.post(`/api/group/${groupId}/messages`)
+      request.post(`/api/v1/group/${groupId}/messages`)
       .set('x-access-token', token)
       .expect(200)
       .send(user)
@@ -385,7 +392,7 @@ describe('ROUTE TESTING', () => {
       user = {
         description: 'Full stack with js'
       };
-      request.post('/api/group')
+      request.post('/api/v1/group')
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -399,7 +406,7 @@ describe('ROUTE TESTING', () => {
         groupName: '',
         description: ''
       };
-      request.post('/api/group')
+      request.post('/api/v1/group')
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -413,7 +420,7 @@ describe('ROUTE TESTING', () => {
         groupName: 'Programming for fun',
         description: 'Full stack project discussion group'
       };
-      request.post('/api/group')
+      request.post('/api/v1/group')
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -426,7 +433,7 @@ describe('ROUTE TESTING', () => {
       user = {
         username: ''
       };
-      request.post(`/api/group/${groupId}/user`)
+      request.post(`/api/v1/group/${groupId}/user`)
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -439,7 +446,7 @@ describe('ROUTE TESTING', () => {
       user = {
         username: 'Janet'
       };
-      request.post(`/api/group/${groupId}/user`)
+      request.post(`/api/v1/group/${groupId}/user`)
       .set('x-access-token', token)
       .send(user)
       .expect(200)
@@ -450,7 +457,7 @@ describe('ROUTE TESTING', () => {
     }, 10000);
     it('Should NOT be able to post message with wrong token', (done) => {
       const token3 = 'hhgggUUjjkkkKddds';
-      request.post('/api/group/1/messages')
+      request.post('/api/v1/group/1/messages')
       .set('x-access-token', token3)
       .expect(200)
       .send({ message: 'Yea, its ok', priority: 'Normal' })
@@ -460,7 +467,7 @@ describe('ROUTE TESTING', () => {
       });
     }, 10000);
     it('Should be denied access to route without token', (done) => {
-      request.post('/api/group/1/messages')
+      request.post('/api/v1/group/1/messages')
       .expect(200)
       .send({ message: 'Good to go', priority: 'Normal', userId: `${1}` })
       .end((err, res) => {
