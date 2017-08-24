@@ -1,5 +1,4 @@
 import Sequelize from 'sequelize';
-// import config from '../config/db.json';
 import get from '../config/config';
 
 const config = get(process.env.NODE_ENV);
