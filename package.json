@@ -85,7 +85,8 @@
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
-    "start": "babel-node server/app",
+    "start": "NODE_ENV='production' babel-node server/app",
+    "start-dev": "babel-node server/app",
     "build": "webpack --config ./webpack.config.js --progress --colors --watch",
     "test": "jest --coverage cli"
   },
