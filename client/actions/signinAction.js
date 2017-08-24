@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-import { SIGN_IN_SUCCESS } from './actionTypes';
+import { SIGN_IN_SUCCESS, SIGN_IN_FAILURE } from './actionTypes';
 
 export const signIn = (payload) => {
   return {
@@ -9,19 +9,29 @@ export const signIn = (payload) => {
   };
 };
 
+export const signInFailure = (payload) => {
+  return {
+    type: SIGN_IN_FAILURE,
+    payload
+  };
+};
 
-export const userSigninRequest = (userData) => {
+
+export const userSignInRequest = (userData) => {
   return (dispatch) => {
-    return axios.post('/api/signin', userData).then((payload) => {
-      if (payload.data.status === 'success') {
-        window.localStorage.setItem('token', payload.data.token);
-        window.localStorage.setItem('username', payload.data.data.username);
-        window.localStorage.setItem('userId', payload.data.data.userId);
-        dispatch(signIn(jwt.decode(payload.data.token)));
+    return axios.post('/api/v1/signin', userData).then((response) => {
+      if (response.status === 200) {
+        const {
+          token
+        } = response.data;
+        window.localStorage.setItem('token', token);
+        dispatch(signIn(jwt.decode(token)));
         location.href = '/group';
-      } else if (payload.data.status === 'failed') {
-        Materialize.toast(payload.data.message, 2000, 'green white-text rounded');
       }
+    }).catch((error) => {
+      const data = error.response.data;
+      signInFailure(data.message);
+      Materialize.toast(data.message, 2000, 'red white-text rounded');
     });
   };
 };

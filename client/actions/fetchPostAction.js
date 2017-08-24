@@ -9,15 +9,13 @@ export const fetchPostSuccess = (payload) => {
   };
 };
 
-export const fetchPostRequest = (userData) => {
+export const fetchPostRequest = (groupId, userId) => {
   return (dispatch) => {
-    const userId = localStorage.getItem('userId');
-    console.log(userId);
-    console.log(userData);
-    return axios.get(`api/posts/${userData}/${userId}`)
-    .then((payload) => {
-      if (payload.data.status === 'success') {
-        dispatch(fetchPostSuccess(payload.data.data));
+    return axios.get(`api/v1/posts/${groupId}/${userId}`)
+    .then((response) => {
+      if (response.status === 200) {
+        const { data } = response.data;
+        dispatch(fetchPostSuccess(data));
       }
     });
   };

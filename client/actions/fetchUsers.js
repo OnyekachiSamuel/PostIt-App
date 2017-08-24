@@ -11,8 +11,8 @@ export const fetchUsers = (payload) => {
 
 export const fetchUsersRequest = () => {
   return (dispatch) => {
-    return axios.get('/api/users').then((payload) => {
-      dispatch(fetchUsers(payload));
+    return axios.get('/api/v1/users').then((response) => {
+      dispatch(fetchUsers(response));
     });
   };
 };

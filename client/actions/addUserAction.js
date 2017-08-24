@@ -17,14 +17,14 @@ export const addUserFailure = (payload) => {
 
 export const addUserRequest = (userData, groupId) => {
   return (dispatch) => {
-    return axios.post(`/api/group/${groupId}/user`, userData).then((payload) => {
-      if (payload.data.status === 'success') {
-        dispatch(addUserSuccess(payload.data));
-        Materialize.toast(payload.data.message, 2000, 'green white-text rounded');
-      } else if (payload.data.status === 'failed') {
-        dispatch(addUserFailure(payload.data));
-        Materialize.toast(payload.data.message, 2000, 'green white-text rounded');
+    return axios.post(`/api/v1/group/${groupId}/user`, userData).then((response) => {
+      if (response.status === 200) {
+        dispatch(addUserSuccess(response.data));
+        Materialize.toast(response.data.message, 2000, 'green white-text rounded');
       }
+    }).catch((error) => {
+      dispatch(addUserFailure(error.response.data.message));
+      Materialize.toast(error.response.data.message, 2000, 'red lighten-4 white-text rounded');
     });
   };
 };
