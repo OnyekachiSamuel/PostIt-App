@@ -17,6 +17,7 @@ class SignUpModal extends React.Component {
       name: '',
       username: '',
       email: '',
+      phone: '',
       password: '',
       confirmPassword: '',
       errors: {},
@@ -31,9 +32,15 @@ class SignUpModal extends React.Component {
   onSubmit(e) {
     this.setState({ errors: {} });
     e.preventDefault();
-    this.props.signupRequest(this.state).then(
-      () => {
-      }).catch((error) => { Materialize.toast(error, 2000, 'green'); });
+    this.props.signUpRequest(this.state);
+    this.setState({
+      name: '',
+      username: '',
+      email: '',
+      phone: '',
+      password: '',
+      confirmPassword: ''
+    });
   }
   /**
    * @return {null} Updates the state as the user types into the input field
@@ -54,7 +61,7 @@ class SignUpModal extends React.Component {
         <div className="modal-content">
           <div className="modal-title row">
         <div className="col s6 m6">
-           <h4>Sign up</h4>
+           <Link to="#" className="white-text">Sign up</Link>
        </div>
        <div className="close-modal">
            <Link to="#" className="modal-close">Close</Link>
@@ -65,9 +72,9 @@ class SignUpModal extends React.Component {
               <div className="input-field col s12 test">
                 <input id="name" name='name' value={this.state.name}
                 type="text" onChange={this.onChange} className="validate"/>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Full name</label>
                 { errors.name && <span>{ errors.name }</span>}
-              </div>
+                </div>
               <div className="input-field col s12 test">
                 <input id="user_name" name="username" value={this.state.username}
                 onChange={this.onChange} type="text" className="validate"/>
@@ -80,18 +87,26 @@ class SignUpModal extends React.Component {
                 <label htmlFor="email">Email</label>
                 { errors.email && <span>{ errors.email }</span>}
               </div>
-              <div className="input-field col s12 test">
+                 <div className="input-field col s12 test">
+                <input id="phone" name="phone" value={this.state.phone}
+                onChange={this.onChange} type="tel" className="validate"/>
+                <label htmlFor="phone">Phone number</label>
+                { errors.phone && <span>{ errors.phone }</span>}
+              </div>
+              <div className="row col s12">
+              <div className="input-field col s6 test">
                 <input id="password" name='password' value={this.state.password}
                 onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="password">Password</label>
                 { errors.password && <span>{ errors.password }</span>}
               </div>
-              <div className="input-field col s12 test">
+              <div className="input-field col s6 test">
                 <input id="confirm_password" name='confirmPassword'
                 value={this.state.confirmPassword}
                 onChange={this.onChange} type="password" className="validate"/>
                 <label htmlFor="confirm_password">Confirm password</label>
                 { errors.confirmPassword && <span>{ errors.confirmPassword }</span>}
+              </div>
               </div>
             </div>
             <button className="btn waves-effect waves-light"
@@ -108,7 +123,7 @@ class SignUpModal extends React.Component {
 }
 
 SignUpModal.propTypes = {
-  signupRequest: PropTypes.func.isRequired
+  signUpRequest: PropTypes.func.isRequired
 };
 
 export default withRouter(SignUpModal);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import NavBar from './ViewMessages/NavBar.jsx';
-import Title from './ViewMessages/Title.jsx';
+import NavBar from '../components//NavBar.jsx';
+import WhiteBar from '../components/WhiteBar.jsx';
 import SelectGroup from './ViewMessages/SelectGroup.jsx';
 import Footer from './Footer.jsx';
 
@@ -27,10 +27,10 @@ class ViewMessages extends React.Component {
   render() {
     return (
       <div>
-        <NavBar signOut={this.signOut.bind(this)}/>
-          <Title/>
+        <NavBar signOut={this.signOut.bind(this)} />
+          <WhiteBar />
           <SelectGroup />
-          <Footer/>
+          <Footer />
       </div>
     );
   }
