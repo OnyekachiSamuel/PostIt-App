@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
-import signup from './signupReducer';
-import signin from './signinReducer';
+import signup from './signUpReducer';
+import signin from './signInReducer';
 import groups from './groupReducer';
 import users from './fetchUsersReducer';
 import post from './postReducer';
 import addUser from './addUserReducer';
 import fetchMembers from './fetchGroupMembers';
 import groupPost from './groupPostReducer';
+import forgetPassword from './forgetPasswordReducer';
 
 
 const rootReducer = combineReducers({ signup,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({ signup,
   post,
   addUser,
   fetchMembers,
-  groupPost
+  groupPost,
+  forgetPassword
 });
 
 export default rootReducer;
