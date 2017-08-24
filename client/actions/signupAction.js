@@ -8,25 +8,28 @@ export const signUp = (payload) => {
     payload
   };
 };
-export const signupFailure = (payload) => {
+export const signUpFailure = (payload) => {
   return {
     type: SIGN_UP_FAILURE,
     payload
   };
 };
 
-export const userSignupRequest = (userData) => {
+export const userSignUpRequest = (userData) => {
   return (dispatch) => {
-    return axios.post('/api/signup', userData).then((payload) => {
-      if (payload.data.status === 'success') {
-        dispatch(signUp(jwt.decode(payload.data.token)));
-        localStorage.setItem('token', payload.data.token);
-        localStorage.setItem('username', payload.data.data.username);
+    return axios.post('/api/v1/signup', userData).then((response) => {
+      if (response.status === 200) {
+        const {
+          token
+        } = response.data;
+        dispatch(signUp(jwt.decode(token)));
+        localStorage.setItem('token', token);
         location.href = '/group';
-      } else if (payload.data.status === 'failed') {
-        dispatch(signupFailure(payload.data.data));
-        Materialize.toast(payload.data.message, 2000, 'green');
       }
+    }).catch((error) => {
+      const data = error.response.data;
+      dispatch(signUpFailure(data));
+      Materialize.toast(data.message, 2000, 'red white-text rounded');
     });
   };
 };

@@ -15,15 +15,15 @@ export const createGroupFailure = (errors) => {
   };
 };
 
-export const createRequest = (userData) => {
+export const createGroupRequest = (groupData) => {
   return (dispatch) => {
-    return axios.post('/api/group', userData).then((res) => {
-      if (res.data.status === 'success') {
+    return axios.post('/api/v1/group', groupData).then((res) => {
+      if (res.status === 200) {
         dispatch(createGroupSuccess(res.data.data));
       }
     }).catch((error) => {
       dispatch(createGroupFailure(error.response.data));
-      Materialize.toast(error.response.data.message, 2000, 'green white-text rounded');
+      Materialize.toast(error.response.data.message, 2000, 'red white-text rounded');
       throw error;
     });
   };

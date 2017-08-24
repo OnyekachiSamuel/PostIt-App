@@ -11,9 +11,9 @@ export const fetchMembers = (payload) => {
 
 export const fetchMembersRequest = (groupId) => {
   return (dispatch) => {
-    return axios.get(`/api/group/${groupId}`).then((payload) => {
-      if (payload.data.status === 'success') {
-        dispatch(fetchMembers(payload.data));
+    return axios.get(`/api/v1/group/${groupId}`).then((response) => {
+      if (response.status === 200) {
+        dispatch(fetchMembers(response.data));
       }
     });
   };
