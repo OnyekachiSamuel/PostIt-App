@@ -58,8 +58,7 @@ export default class ApiController {
             });
           }).catch((err) => {
             if (err) {
-              res.json({
-                status: 'failed',
+              res.status(409).json({
                 message: 'Record exists already' });
             }
           });
@@ -91,7 +90,6 @@ export default class ApiController {
             expiresIn: 60 * 60 * 24
           });
           res.status(200).json({
-            status: 'success',
             data: {
               userId: user.dataValues.id,
               username: user.dataValues.username,
@@ -106,7 +104,7 @@ export default class ApiController {
             message: 'Invalid Password' });
         }
       } else {
-        res.json({ status: 'failed',
+        res.status(404).json({
           message: 'User not found' });
       }
     });
@@ -130,8 +128,7 @@ export default class ApiController {
             return UsersGroup.sync({ force: false }).then(() => {
               UsersGroup.create({ groupId: group.id, userId });
             }).then(() => {
-              res.json({
-                status: 'success',
+              res.status(200).json({
                 data: {
                   groupId: group.id,
                   groupName: group.groupName,
@@ -143,7 +140,7 @@ export default class ApiController {
           }
         }).catch((error) => {
           if (error) {
-            res.status(422).json({ status: 'failed',
+            res.status(409).json({ status: 'failed',
               message: 'Group already exist' });
           }
         });
@@ -168,10 +165,10 @@ export default class ApiController {
           UsersGroup.findOrCreate({ where: { userId: user.id, groupId } })
           .spread((usergg, created) => {
             if (created) {
-              res.json({ status: 'success',
+              res.status(200).json({
                 message: 'User successfully added' });
             } else {
-              res.json({ status: 'failed',
+              res.status(409).json({ status: 'failed',
                 message: 'User already exist in this group' });
             }
           });
@@ -275,17 +272,18 @@ export default class ApiController {
           });
         }
         res.status(200).json({
-          status: 'success',
           data: {
+            username: content.username,
             groupId: content.groupId,
             message: content.message,
-            priority: content.priority
+            priority: content.priority,
+            createdAt: content.createdAt
           },
           message: 'Message sent'
         });
       }).catch((error) => {
         if (error) {
-          res.json({ status: 'failed', message: 'Message sending failed' });
+          res.status(400).json({ message: 'Message sending failed' });
         }
       });
     });
@@ -302,14 +300,13 @@ export default class ApiController {
     const groupId = req.params.groupId;
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isGroupId) {
-      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority'],
+      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
         where: {
           groupId
         }
       }).then((data) => {
         if (data) {
           res.status(200).json({
-            status: 'success',
             data,
             message: 'Received'
           });
@@ -329,14 +326,13 @@ export default class ApiController {
     const isUserId = Number.isInteger(parseInt(userId, 10));
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isUserId && isGroupId) {
-      Messages.findAll({ attributes: ['groupId', 'message', 'priority'],
+      Messages.findAll({ attributes: ['groupId', 'message', 'priority', 'createdAt', 'username'],
         where: {
           groupId, userId
         }
       }).then((data) => {
         if (data) {
           res.status(200).json({
-            status: 'success',
             data,
             message: 'Received'
           });
@@ -367,7 +363,7 @@ export default class ApiController {
               id: allUsers
             }
           }).then((allUser) => {
-            res.json({ status: 'success', allUser });
+            res.status(200).json({ allUser });
           });
         }
       });
@@ -383,7 +379,7 @@ export default class ApiController {
     User.findAll({ attributes: ['id', 'username'] })
     .then((users) => {
       if (users) {
-        res.json({ status: 'success', users });
+        res.status(200).json({ users });
       }
     });
   }
@@ -400,9 +396,27 @@ export default class ApiController {
       Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { userId } })
     .then((groups) => {
       if (groups) {
-        res.json({ groups });
+        res.status(200).json({ groups });
       }
     });
+    });
+  }
+  static usersGroup(req, res) {
+    const userId = req.params.userId;
+    UsersGroup.findAll({ attributes: ['groupId'], where: { userId } })
+    .then((groupIds) => {
+      if (groupIds) {
+        const ids = [];
+        groupIds.forEach((group) => {
+          ids.push(group.dataValues.groupId);
+        });
+        Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { id: ids } })
+        .then((groups) => {
+          if (groups) {
+            res.status(200).json({ groups });
+          }
+        });
+      }
     });
   }
 }
