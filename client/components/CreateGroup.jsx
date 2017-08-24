@@ -1,11 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import NavLink from './CreateGroup/NavLink.jsx';
-import Title from './CreateGroup/TitleHeader.jsx';
-import AddUser from './CreateGroup/AddUser.jsx';
-import SelectGroup from './CreateGroup/SelectGroup.jsx';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import NavBar from '../components/NavBar.jsx';
+import WhiteBar from '../components/WhiteBar.jsx';
 import GroupModal from './CreateGroup/GroupModal.jsx';
+import GroupList from './CreateGroup/GroupList.jsx';
+import AddUser from './CreateGroup/AddUser.jsx';
 import Footer from './Footer.jsx';
+import { fetchUserGroupRequest } from '../actions/fetchUserGroups';
 
 /**
  * @class CreateGroup
@@ -15,6 +18,8 @@ class CreateGroup extends React.Component {
    * @return {null} makes the jQuery function available on component mount
    */
   componentDidMount() {
+    const { signin } = this.props;
+    this.props.fetchUserGroupRequest(signin.user.userId);
     $('.modal').modal({
       dismissible: true,
       opacity: 0.5,
@@ -42,15 +47,28 @@ class CreateGroup extends React.Component {
   render() {
     return (
       <div>
-        <NavLink signOut={ this.signOut.bind(this) }/>
-        <Title/>
-        <AddUser/>
+        <NavBar signOut={ this.signOut.bind(this) }/>
+        <WhiteBar/>
+        <div>
+          <GroupList />
+          <AddUser />
+         </div>
         <GroupModal/>
-        <SelectGroup/>
         <Footer/>
       </div>
     );
   }
 }
 
-export default withRouter(CreateGroup);
+CreateGroup.propTypes = {
+  signInRequest: PropTypes.func,
+  forgetPasswordRequest: PropTypes.func
+};
+const mapStateToProps = (state) => {
+  const { signin } = state;
+  return {
+    signin
+  };
+};
+
+export default connect(mapStateToProps, { fetchUserGroupRequest })(withRouter(CreateGroup));

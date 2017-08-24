@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchGroupRequest } from '../../actions/fetchGroup';
-import fetchGroupPostRequest from '../../actions/fetchGroupPost';
+import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
+import { fetchGroupPostRequest } from '../../actions/fetchGroupPost';
 
 /**
  * @class
@@ -24,7 +24,8 @@ class SelectGroup extends React.Component {
    */
   componentDidMount() {
     if (localStorage.token) {
-      this.props.fetchGroupRequest();
+      const { signin } = this.props;
+      this.props.fetchUserGroupRequest(signin.user.userId);
     }
   }
   /**
@@ -61,35 +62,42 @@ class SelectGroup extends React.Component {
     if (groupPost.length > 0) {
       groupPostComponent = groupPost.map((post, index) => {
         return (
-        <li key={index}>
-          <div className="collapsible-header">
-            <i className="material-icons">explore</i>{post.priority}</div>
-          <div className="collapsible-body"><span>{post.message}</span></div>
-            </li>
+        <div className="input-field container" key={index}>
+            <input disabled value={post.message} id="disabled" type="text"
+            className="validate" />
+            <div className="post"><p><b>posted by {post.username}</b></p></div>
+            <div className="post-date"><p>{new Date(post.createdAt).toLocaleString()}</p></div>
+        </div>
         );
       });
+    } else {
+      groupPostComponent = <p className="center">Select a group to view posted messages</p>;
     }
     return (
       <div>
-    <div className="select-group">
+      <div className="whitespace">
+    <div className="shift-left">
         <div className="center container">
             <select className="browser-default" name="groupId" onChange={this.onChange}>
                 <option value="" defaultValue>Select Group</option>
                 {selectGroup}
             </select>
             <div/>
-            <div className="center">
+            <div className="center view-btn">
               <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
             </div>
         </div>
     </div>
-    <div className="container">
-        <div className="card-panel row messages">
-          <h3 className="center">Messages</h3><hr/>
-          <ul className="collapsible" data-collapsible="accordion">
-            {groupPostComponent}
-          </ul>
+    </div>
+    <div className="whitespace">
+    <div className="shift-right">
+        <div>
+        <h3 className="center">Message Board</h3>
+        <div>
+          {groupPostComponent}
         </div>
+      </div>
+      </div>
       </div>
       </div>
     );
@@ -99,13 +107,16 @@ class SelectGroup extends React.Component {
 
 const mapStateToProps = (state) => {
   const { groups } = state;
-  const { groupPost } = state;
+  const { groupPost } = state,
+    { signin } = state;
   return {
     groups,
-    groupPost
+    groupPost,
+    signin
   };
 };
 
 
-export default connect(mapStateToProps, { fetchGroupPostRequest, fetchGroupRequest })(SelectGroup);
+export default
+connect(mapStateToProps, { fetchGroupPostRequest, fetchUserGroupRequest })(SelectGroup);
 

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { fetchPostRequest } from '../../actions/fetchPostAction';
@@ -6,14 +7,15 @@ import { fetchPostRequest } from '../../actions/fetchPostAction';
 /**
  * @class PostedMessage
  */
-class PostedMessage extends React.Component {
-  /**
+class PostedMessage extends Component {
+    /**
    * @return {null} Updates the store with group posts by triggering the fetchPostRequest action
    */
   componentDidMount() {
     if (localStorage.token) {
       const groupId = this.props.match.params.groupId;
-      this.props.fetchPostRequest(groupId);
+      const { signin } = this.props;
+      this.props.fetchPostRequest(groupId, signin.user.userId);
     }
   }
   /** object destructing of messages from the props
@@ -22,34 +24,41 @@ class PostedMessage extends React.Component {
   render() {
     const { messages } = this.props;
     let messageComponent;
-    if (messages.length > 0) {
+    if (messages && messages.length > 0) {
       messageComponent = messages.map((element, index) => {
         return (
-           <li key={index}>
-              <div className="collapsible-header">
-                <i className="material-icons">explore</i>{element.priority}</div>
-              <div className="collapsible-body"><span>{element.message}</span></div>
-        </li>
+        <div className="input-field container" key={index}>
+            <input disabled value={element.message} id="disabled" type="text"
+            className="validate" />
+            <div className="post"><p><b>posted by {element.username}</b></p></div>
+            <div className="post-date"><p>{new Date(element.createdAt).toLocaleString()}</p></div>
+        </div>
         );
       });
+    } else {
+      messageComponent = <p className="center">No message posted yet</p>;
     }
     return (
-      <div className="container bottom-margin">
-        <div className="card-panel row messages">
-          <h3 className="center">Messages</h3><hr/>
-          <ul className="collapsible" data-collapsible="accordion">
-            {messageComponent}
-          </ul>
-        </div>
-      </div>
+  <div className="shift-right">
+    <Link className="waves-effect waves-light btn create-btn"
+    to="/messages">View message board</Link>
+  <div>
+    <h3 className="center">Messages</h3>
+    <div>
+      {messageComponent}
+    </div>
+</div>
+</div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   const { post } = state;
+  const { signin } = state;
   return {
-    messages: post
+    messages: post,
+    signin
   };
 };
 
