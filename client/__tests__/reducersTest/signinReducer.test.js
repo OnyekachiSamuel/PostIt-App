@@ -1,8 +1,8 @@
 import expect from 'expect';
-import signinReducer from '../../reducers/signinReducer';
-import { signIn } from '../../actions/signinAction';
-import { signUp } from '../../actions/signupAction';
-import { signout } from '../../actions/signoutAction';
+import signinReducer from '../../reducers/signInReducer';
+import { signIn } from '../../actions/signInAction';
+import { signUp } from '../../actions/signUpAction';
+import { signout } from '../../actions/signOutAction';
 
 describe('Sign In Reducer', () => {
   it('should update the state on SIGN_UP_SUCCESS', () => {

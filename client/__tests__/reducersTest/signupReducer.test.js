@@ -1,6 +1,6 @@
 import expect from 'expect';
-import signupReducer from '../../reducers/signupReducer';
-import { signupFailure } from '../../actions/signupAction';
+import signupReducer from '../../reducers/signUpReducer';
+import { signupFailure } from '../../actions/signUpAction';
 
 
 describe('SignUp reducer for failure', () => {
