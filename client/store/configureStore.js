@@ -1,13 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import rootReducer from '../reducers/index';
+  import configureStoreProd from './configureStore.prod';
+  import configureStoreDev from './configureStore.dev';
 
-/**
- * @return {obj} returns the object of stores
- */
-export default function configureStore() {
-  return createStore(rootReducer, compose(applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-  ));
-}
-
+  if (process.env.NODE_ENV === 'production') {
+    module.exports = configureStoreProd;
+  } else {
+    module.exports = configureStoreDev;
+  }
