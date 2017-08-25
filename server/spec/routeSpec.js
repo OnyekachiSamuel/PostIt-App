@@ -179,7 +179,6 @@ describe('ROUTE TESTING', () => {
         .end((err, res) => {
           token = res.body.token;
           userId = res.body.data.id;
-          expect(res.body.status).toBe('success');
           expect(res.body.data.username).toBe('Kenet');
           expect(res.body.message).toBe('Logged In');
           done(err);
@@ -196,7 +195,7 @@ describe('ROUTE TESTING', () => {
       .expect(200)
       .end((err, res) => {
         groupId = res.body.data.groupId;
-        expect('success').toBe(res.body.status);
+        expect(200).toBe(res.status);
         expect('Group successfully created').toBe(res.body.message);
         done();
       });
@@ -225,7 +224,7 @@ describe('ROUTE TESTING', () => {
       .expect(200)
       .send(user)
       .end((err, res) => {
-        expect('success').toBe(res.body.status);
+        expect(200).toBe(res.status);
         expect('Message sent').toBe(res.body.message);
         expect(userId).toBe(res.body.data.userId);
         expect('Normal').toBe(res.body.data.priority);
@@ -244,7 +243,7 @@ describe('ROUTE TESTING', () => {
       .expect(200)
       .send(user)
       .end((err, res) => {
-        expect('success').toBe(res.body.status);
+        expect(200).toBe(res.status);
         expect('Message sent').toBe(res.body.message);
         expect(userId).toBe(res.body.data.userId);
         expect('Normal').toBe(res.body.data.priority);
@@ -276,7 +275,7 @@ describe('ROUTE TESTING', () => {
         .expect(200)
         .end((err, res) => {
           token = res.body.token;
-          expect(res.body.status).toBe('success');
+          expect(200).toBe(res.status);
           expect(res.body.data.username).toBe('Obinna');
           expect(res.body.message).toBe('Logged In');
           done(err);
@@ -293,7 +292,7 @@ describe('ROUTE TESTING', () => {
       .expect(200)
       .end((err, res) => {
         groupId = res.body.data.groupId;
-        expect('success').toBe(res.body.status);
+        expect(200).toBe(res.status);
         expect('Group successfully created').toBe(res.body.message);
         done();
       });
