@@ -9,8 +9,6 @@ script:
   - npm run test
 after_success:       
   - codeclimate-test-reporter < ./coverage/lcov.info
-services:
-  - postgresql
 addons:
   code_climate:
     repo_token:
