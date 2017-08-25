@@ -2,7 +2,7 @@ import Sequelize from 'sequelize';
 import get from '../config/config';
 
 const config = get(process.env.NODE_ENV);
-
+console.log(config.database, '========');
 const sequelize = new Sequelize(config.database, {
   dialect: 'postgres'
 });
