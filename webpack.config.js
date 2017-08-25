@@ -44,7 +44,8 @@ module.exports = {
   },
   plugins: [HtmlWebpackPluginConfig, extractSass],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    contentBase: './dist'
   },
   node: {
     net: 'empty',
