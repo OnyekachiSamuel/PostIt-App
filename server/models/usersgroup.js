@@ -3,7 +3,9 @@ import get from '../config/config';
 
 const config = get(process.env.NODE_ENV);
 
-const sequelize = new Sequelize(config.database);
+const sequelize = new Sequelize(config.database, {
+  dialect: 'postgres'
+});
 
 const UsersGroup = sequelize.define('UsersGroup', {
   id: {
