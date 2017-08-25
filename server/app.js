@@ -23,16 +23,14 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(webpackMiddleware(webpack(webpackConfig)));
-// app.use(express.static('dist'));
+// app.use(webpackMiddleware(webpack(webpackConfig)));
+app.use(express.static('dist'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/api/v1/', routes);
-// app.get('/', (req, res) => {
-//   res.sendFile(`${process.cwd()}/dist/index.html`);
-// });
+
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
