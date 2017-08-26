@@ -2,7 +2,6 @@ import Sequelize from 'sequelize';
 import get from '../config/config';
 
 const config = get(process.env.NODE_ENV);
-console.log(config.database, '========');
 const sequelize = new Sequelize(config.database, {
   dialect: 'postgres'
 });
@@ -24,8 +23,7 @@ const User = sequelize.define('User', {
     unique: true
   },
   phone: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING,
@@ -36,28 +34,8 @@ const User = sequelize.define('User', {
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false
-  }
-}, {
-  classMethods: {
-    associate: (models) => {
-      User.hasMany(models.Group, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.belongsTo(models.UsersGroup, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.hasMany(models.Message, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-    }
   }
 });
-export default User;
-
 
 User.associate = (models) => {
   User.hasMany(models.Group, {
@@ -73,3 +51,5 @@ User.associate = (models) => {
     as: 'userId'
   });
 };
+export default User;
+
