@@ -26,7 +26,7 @@ export default class ApiController {
  */
   static signup(req, res) {
     const name = req.body.name,
-      username = req.body.username,
+      username = req.body.username.toLowerCase(),
       email = req.body.email,
       password = req.body.password,
       phone = req.body.phone;
@@ -75,7 +75,7 @@ export default class ApiController {
  * @return {obj} Return success or failure message
  */
   static signin(req, res) {
-    const username = req.body.username,
+    const username = req.body.username.toLowerCase(),
       password = req.body.password;
     User.findOne({ where: { username } }).then((user) => {
       if (user && user.dataValues.username === username) {
@@ -415,6 +415,49 @@ export default class ApiController {
           if (groups) {
             res.status(200).json({ groups });
           }
+        });
+      }
+    });
+  }
+  static googleAuth(req, res) {
+    const name = req.body.name, username = req.body.username.toLowerCase(), email = req.body.email;
+    User.findOne({ where: { email } }).then((user) => {
+      console.log(user, '========I got here ======');
+      if (!user) {
+        User.sync({ force: false }).then(() => {
+          User.create({ name, username, email }).then((userDetail) => {
+            const payload = { username: userDetail.username,
+              userId: userDetail.id,
+              email: userDetail.email,
+              name: userDetail.name
+            };
+            const token = jwt.sign(payload, process.env.SECRET_KEY, {
+              expiresIn: 60 * 60 * 24
+            });
+            res.status(200).json({
+              message: 'Account created',
+              token
+            });
+          }).catch((err) => {
+            if (err) {
+              res.status(500).json({
+                message: 'Oops, operation failed'
+              });
+            }
+          });
+        });
+      } else {
+        const payload = { username: user.dataValues.username,
+          userId: user.dataValues.id,
+          email: user.dataValues.email,
+          name: user.dataValues.name
+        };
+        const token = jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: 60 * 60 * 24
+        });
+        res.status(200).json({
+          message: 'Logged In',
+          token
         });
       }
     });

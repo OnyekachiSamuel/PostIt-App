@@ -51,4 +51,7 @@ router.put('/reset/:token/:email', resetPassword);
 
 // Route to get groups a users has been added to or belongs to
 router.get('/groups/user/:userId', Verify.token, controller.usersGroup);
+
+// Route for google signup and  login
+router.post('/auth/google', controller.googleAuth);
 export default router;
