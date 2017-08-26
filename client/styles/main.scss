@@ -24,7 +24,7 @@ body {
 }
 header {
     background: {
-        image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://i.imgur.com/5MD10l3.jpg);
+        image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.imgur.com/5MD10l3.jpg);
         size: cover;
         position: center;
     }
@@ -153,6 +153,26 @@ h4 {
 	&:active {
 	  color: #fff;
 	}
+}
+.sign-btn {
+	background-color: #3e7293 !important;
+	height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}
+.sign-btn:hover,
+.signup-btn:active {
+	background-color: #3e7293 !important;
+}
+.signup-btn:link,
+.signup-btn:visited {
+	background-color: #3e7293 !important;
+}
+.google-login {
+	margin-bottom: 15px;
+}
+.test {
+	height: 60px;
 }
 /*---------------------------------------------*/
 /* Create Group Styling

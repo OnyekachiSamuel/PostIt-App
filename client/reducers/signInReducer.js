@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS, SIGN_UP_SUCCESS } from '../actions/actionTypes';
+import { SIGN_IN_SUCCESS, SIGN_OUT_SUCCESS, SIGN_UP_SUCCESS, GOOGLE_AUTH_SUCCESS } from '../actions/actionTypes';
 
 
 const initialState = {
@@ -16,6 +16,11 @@ const signinReducer = (state = initialState, action) => {
         user: action.payload
       };
     case SIGN_UP_SUCCESS:
+      return {
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
+      };
+    case GOOGLE_AUTH_SUCCESS:
       return {
         isAuthenticated: !isEmpty(action.payload),
         user: action.payload
