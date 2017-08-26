@@ -3,7 +3,9 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import GoogleLogin from 'react-google-login';
 import { forgetPasswordRequest } from '../../actions/forgetPasswordAction';
+import { googleAuthRequest } from '../../actions/googleAction';
 
 /**
  * @class
@@ -26,6 +28,7 @@ export class SignInModal extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onClickLogin = this.onClickLogin.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
   /**
    * @return {null} Triggers the signinRequest action on click of submit button
@@ -68,6 +71,18 @@ export class SignInModal extends React.Component {
    */
   onClickLogin() {
     this.setState({ visible: false });
+  }
+
+/**
+ * @return {null} Gets the user data from google api
+ * @param {obj} response
+ */
+  responseGoogle(response) {
+    this.setState({ name: response.profileObj.name,
+      username: response.profileObj.givenName,
+      email: response.profileObj.email,
+      password: '' });
+    this.props.googleAuthRequest(this.state);
   }
 /**
  * @return {String} HTML markup for view component SignInModal
@@ -117,6 +132,14 @@ export class SignInModal extends React.Component {
               <div style={{ marginBottom: '7px' } }><span>Want to login ? Click
               <Link to="#" onClick={this.onClickLogin}> here
             </Link> to login</span></div>}
+            <div className="center google-login">
+              <GoogleLogin
+                clientId="195109658910-hgbqa30ei6r1bd58o0i8q1u77j0l15vt.apps.googleusercontent.com"
+                buttonText="+Google Login"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                />
+            </div>
             <button className="btn waves-effect waves-light modal-close"
             type="submit" name="action">Submit</button>
             <div className="modal-footer">
@@ -131,7 +154,8 @@ export class SignInModal extends React.Component {
 
 SignInModal.propTypes = {
   signInRequest: PropTypes.func,
-  forgetPasswordRequest: PropTypes.func
+  forgetPasswordRequest: PropTypes.func,
+  googleAuthRequest: PropTypes.func
 };
 const mapStateToProps = (state) => {
   const { forgetPassword } = state;
@@ -139,4 +163,5 @@ const mapStateToProps = (state) => {
     forgetPassword
   };
 };
-export default connect(mapStateToProps, { forgetPasswordRequest })(withRouter(SignInModal));
+export default
+connect(mapStateToProps, { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));

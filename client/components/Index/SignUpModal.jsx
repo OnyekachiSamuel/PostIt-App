@@ -2,6 +2,10 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import GoogleLogin from 'react-google-login';
+import { googleAuthRequest } from '../../actions/googleAction';
+
 
 /**
  * @class SignUpModal
@@ -24,6 +28,7 @@ class SignUpModal extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.responseGoogle = this.responseGoogle.bind(this);
   }
   /**
    * @return {null} Triggers the signupRequest action on submit button click
@@ -52,6 +57,19 @@ class SignUpModal extends React.Component {
     this.setState(state);
   }
   /**
+ * @return {null} Gets the user data from google api
+ * @param {obj} response
+ */
+  responseGoogle(response) {
+    this.setState({ name: response.profileObj.name.toLowerCase(),
+      username: response.profileObj.givenName,
+      email: response.profileObj.email,
+      password: '',
+      confirmPassword: '',
+      phone: '' });
+    this.props.googleAuthRequest(this.state);
+  }
+  /**
    * @return {String} HTML markup for view component of SignUpModal
    */
   render() {
@@ -70,44 +88,45 @@ class SignUpModal extends React.Component {
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row test">
               <div className="input-field col s12 test">
-                <input id="name" name='name' value={this.state.name}
+                <input id="name" name='name' value={this.state.name} placeholder="Full name"
                 type="text" onChange={this.onChange} className="validate"/>
-                <label htmlFor="name">Full name</label>
                 { errors.name && <span>{ errors.name }</span>}
                 </div>
               <div className="input-field col s12 test">
                 <input id="user_name" name="username" value={this.state.username}
-                onChange={this.onChange} type="text" className="validate"/>
-                <label htmlFor="user_name">Username</label>
+                onChange={this.onChange} type="text" placeholder="Username" className="validate"/>
                 { errors.username && <span>{ errors.username }</span>}
               </div>
               <div className="input-field col s12 test">
-                <input id="email" name="email" value={this.state.email}
+                <input id="email" name="email" value={this.state.email} placeholder="Email"
                 onChange={this.onChange} type="email" className="validate"/>
-                <label htmlFor="email">Email</label>
                 { errors.email && <span>{ errors.email }</span>}
               </div>
                  <div className="input-field col s12 test">
-                <input id="phone" name="phone" value={this.state.phone}
+                <input id="phone" name="phone" value={this.state.phone} placeholder="Phone number"
                 onChange={this.onChange} type="tel" className="validate"/>
-                <label htmlFor="phone">Phone number</label>
                 { errors.phone && <span>{ errors.phone }</span>}
               </div>
-              <div className="row col s12">
-              <div className="input-field col s6 test">
+              <div className="input-field col s12 test">
                 <input id="password" name='password' value={this.state.password}
+                placeholder="Password"
                 onChange={this.onChange} type="password" className="validate"/>
-                <label htmlFor="password">Password</label>
                 { errors.password && <span>{ errors.password }</span>}
               </div>
-              <div className="input-field col s6 test">
+              <div className="input-field col s12 test">
                 <input id="confirm_password" name='confirmPassword'
-                value={this.state.confirmPassword}
+                value={this.state.confirmPassword} placeholder="Confirm password"
                 onChange={this.onChange} type="password" className="validate"/>
-                <label htmlFor="confirm_password">Confirm password</label>
                 { errors.confirmPassword && <span>{ errors.confirmPassword }</span>}
               </div>
-              </div>
+            </div>
+             <div className="center google-login">
+              <GoogleLogin
+                clientId="195109658910-hgbqa30ei6r1bd58o0i8q1u77j0l15vt.apps.googleusercontent.com"
+                buttonText="+Google SignUp"
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                />
             </div>
             <button className="btn waves-effect waves-light"
             disabled={this.state.isLoading} type="submit" name="action">Submit</button>
@@ -123,8 +142,9 @@ class SignUpModal extends React.Component {
 }
 
 SignUpModal.propTypes = {
-  signUpRequest: PropTypes.func.isRequired
+  signUpRequest: PropTypes.func.isRequired,
+  googleAuthRequest: PropTypes.func.isRequired
 };
 
-export default withRouter(SignUpModal);
+export default connect(null, { googleAuthRequest })(withRouter(SignUpModal));
 
