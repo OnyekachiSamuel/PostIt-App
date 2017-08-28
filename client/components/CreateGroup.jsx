@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import io from 'socket.io-client';
 import PropTypes from 'prop-types';
 import NavBar from '../components/NavBar.jsx';
 import WhiteBar from '../components/WhiteBar.jsx';
@@ -9,6 +10,7 @@ import GroupList from './CreateGroup/GroupList.jsx';
 import AddUser from './CreateGroup/AddUser.jsx';
 import Footer from './Footer.jsx';
 import { fetchUserGroupRequest } from '../actions/fetchUserGroups';
+import { testAction } from '../actions/addUserAction';
 
 /**
  * @class CreateGroup
@@ -35,12 +37,23 @@ class CreateGroup extends React.Component {
   );
     $('select').material_select();
   }
+  // componentWillMount() {
+  //   const token = localStorage.getItem('token');
+  //   this.props.testAction({ token });
+  // }
   /**
    * @return {null} navigates to the landing page
    */
   signOut() {
     this.props.history.push('/');
   }
+  // initSocket() {
+  //   const socket = io(socketUrl);
+  //   socket.on('connect', () => {
+  //     console.log('Connected');
+  //   });
+  //   this.setState({ socket });
+  // }
   /**
    * @return {String} HTML markup for view component of CreateGroup
    */
@@ -62,7 +75,8 @@ class CreateGroup extends React.Component {
 
 CreateGroup.propTypes = {
   signInRequest: PropTypes.func,
-  forgetPasswordRequest: PropTypes.func
+  forgetPasswordRequest: PropTypes.func,
+  testAction: PropTypes.func
 };
 const mapStateToProps = (state) => {
   const { signin } = state;
@@ -72,3 +86,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchUserGroupRequest })(withRouter(CreateGroup));
+
