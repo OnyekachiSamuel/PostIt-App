@@ -267,7 +267,7 @@ describe('ROUTE TESTING', () => {
 
     it('Should be able to login to account created', (done) => {
       user = {
-        username: 'Obinna',
+        username: 'obinna',
         password: 'obinna'
       };
       request.post('/api/v1/signin')
