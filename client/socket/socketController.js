@@ -5,7 +5,6 @@ class SocketController {
     this.dispatch = null;
     this.socket = null;
     this.handleMessage = this.handleMessage.bind(this);
-    this.handleGroupMessage = this.handleGroupMessage(this);
   }
 
   /**
@@ -26,11 +25,14 @@ class SocketController {
 
   configureSocket(socket) {
     socket.on('message', this.handleMessage);
-    socket.on('new message', this.handleGroupMessage);
+    console.log('soc id - ', socket.id);
+    socket.on('connect', () => {
+      console.log('socket connected - ', socket.id);
+    })
   }
 
   getSocket() {
-    console.log('get socket called with socket ', this.socket);
+    console.log('get socket called with socket ', this.socket.connected);
     if (this.socket === null) {
       throw new Error('Configure socket controller first');
     }
@@ -39,11 +41,8 @@ class SocketController {
 
   handleMessage(message) {
     // at this point we have our dispatcher and can update our store
-    this.dispatch({ type: 'test-message', payload: 'test payload' });
+    this.dispatch({ type: 'SENT_MESSAGE', payload: message });
     console.log('message from server - ', message);
-  }
-  handleGroupMessage(message) {
-    console.log(message, '======group message======');
   }
 }
 

@@ -20,6 +20,8 @@ class CreateGroup extends React.Component {
    * @return {null} makes the jQuery function available on component mount
    */
   componentDidMount() {
+    const token = localStorage.getItem('token');
+    this.props.testAction({ token });
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
     $('.modal').modal({
@@ -37,30 +39,19 @@ class CreateGroup extends React.Component {
   );
     $('select').material_select();
   }
-  // componentWillMount() {
-  //   const token = localStorage.getItem('token');
-  //   this.props.testAction({ token });
-  // }
   /**
    * @return {null} navigates to the landing page
    */
   signOut() {
     this.props.history.push('/');
   }
-  // initSocket() {
-  //   const socket = io(socketUrl);
-  //   socket.on('connect', () => {
-  //     console.log('Connected');
-  //   });
-  //   this.setState({ socket });
-  // }
   /**
    * @return {String} HTML markup for view component of CreateGroup
    */
   render() {
     return (
       <div>
-        <NavBar signOut={ this.signOut.bind(this) }/>
+        <NavBar signOut={ this.signOut.bind(this)} redirectUrl = {'/'}/>
         <WhiteBar/>
         <div>
           <GroupList />
@@ -85,5 +76,5 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserGroupRequest })(withRouter(CreateGroup));
+export default connect(mapStateToProps, { fetchUserGroupRequest, testAction })(withRouter(CreateGroup));
 

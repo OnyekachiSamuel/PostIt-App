@@ -321,7 +321,7 @@ button .right {
   margin-top: 10px; }
 
 .view-btn button {
-  background-color: #56ad55;
+  background-color: #56ad55 !important;
   color: #fff; }
 
 .align-middle {
@@ -330,3 +330,20 @@ button .right {
   margin-right: 30%;
   margin-top: 90px;
   color: #fff; }
+
+.count {
+  background-color: #56ad55 !important; }
+
+.div-color {
+  background-color: #73a4c4;
+  width: 30%;
+  color: #fff; }
+
+.notification {
+  background-color: #afcbdd;
+  color: #000;
+  width: 40%;
+  margin-right: 10px !important;
+  padding-left: 8px;
+  max-height: 50px;
+  overflow-y: scroll; }

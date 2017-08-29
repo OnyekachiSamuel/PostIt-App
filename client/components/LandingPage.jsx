@@ -31,7 +31,6 @@ export class LandingPage extends React.Component {
    * @return {String} HTML markup for view component of HomePage
    */
   render() {
-    console.log(this.props)
     const signUpRequest = this.props.userSignUpRequest;
     const signInRequest = this.props.userSignInRequest;
     return (

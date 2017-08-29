@@ -73,6 +73,7 @@
   },
   "devDependencies": {
     "axios-mock-adapter": "^1.9.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
     "eslint-plugin-jsx-a11y": "^6.0.2",
