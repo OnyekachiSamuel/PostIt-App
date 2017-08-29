@@ -10,11 +10,9 @@ export const addUserSuccess = (payload) => {
 };
 export const testAction = (payload) => {
   const socket = sC.getSocket();
-  console.log('socket with id ', socket.connected, ' sent message', socket);
   setTimeout(() => {
     socket.emit('register-groups', Object.assign({}, { socketId: socket.id }, payload));
   }, 0);
-  console.log('socket with id ', socket.connected, ' sent message', socket.disconnected);
   return {
     type: 'null'
   };
