@@ -3,7 +3,7 @@ import { POST_MESSAGE_SUCCESSFUL, FETCH_POST_SUCCESS } from '../actions/actionTy
 const postReducer = (state = [], action) => {
   switch (action.type) {
     case POST_MESSAGE_SUCCESSFUL:
-      return [...state, action.payload];
+      return [action.payload, ...state];
     case FETCH_POST_SUCCESS:
       return [...action.payload];
     default:

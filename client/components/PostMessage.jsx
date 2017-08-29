@@ -31,7 +31,7 @@ class BroadcastMessage extends React.Component {
   render() {
     return (
       <div>
-        <NavBar signOut={this.signOut.bind(this)}/>
+        <NavBar signOut={this.signOut.bind(this)} redirectUrl = {'/group'}/>
           <WhiteBar />
           <ViewMembers />
           <ComposeMessage />
