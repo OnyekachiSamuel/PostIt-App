@@ -14,6 +14,7 @@ class ViewMessages extends React.Component {
    */
   componentDidMount() {
     $('.collapsible').collapsible();
+    $('.modal').modal();
   }
   /**
    * @return {null} navigates to the landing page
