@@ -19,7 +19,6 @@ export const googleAuthFailure = (payload) => {
 export const googleAuthRequest = (userData) => {
   return (dispatch) => {
     return axios.post('/api/v1/auth/google', userData).then((response) => {
-      console.log(response, '======user data=====');
       if (response.status === 200) {
         const {
           token
