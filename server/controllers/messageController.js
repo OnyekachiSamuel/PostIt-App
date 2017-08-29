@@ -2,6 +2,7 @@ import env from 'dotenv';
 import Jusibe from 'jusibe';
 import nodemailer from 'nodemailer';
 import Messages from '../models/message';
+import Group from '../models/group'
 import { getUsersPhoneEmail } from '../controllers/helper/getUsersPhoneEmail';
 
 env.config();
@@ -131,18 +132,39 @@ export default class MessageController {
  */
   static getMessages(req, res) {
     const groupId = req.params.groupId;
+    const userId = req.decoded.userId;
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isGroupId) {
-      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
-        where: {
-          groupId
-        },
-        order: [['createdAt', 'DESC']]
-      }).then((data) => {
-        if (data) {
-          res.status(200).json({
-            data,
-            message: 'Received'
+      Group.findOne({ attributes: ['groupName', 'userId'], where: { id: groupId } }).then((groupCreator) => {
+        if (groupCreator.dataValues.userId === userId) {
+          Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
+            where: {
+              groupId, archived: false
+            },
+            order: [['createdAt', 'DESC']]
+          }).then((data) => {
+            if (data) {
+              res.status(200).json({
+                data,
+                message: 'Received',
+                groupCreator: true
+              });
+            }
+          });
+        } else {
+          Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
+            where: {
+              groupId, archived: false
+            },
+            order: [['createdAt', 'DESC']]
+          }).then((data) => {
+            if (data) {
+              res.status(200).json({
+                data,
+                message: 'Received',
+                groupCreator: false
+              });
+            }
           });
         }
       });
@@ -162,7 +184,7 @@ export default class MessageController {
     if (isUserId && isGroupId) {
       Messages.findAll({ attributes: ['groupId', 'message', 'priority', 'createdAt', 'username'],
         where: {
-          groupId, userId
+          groupId, userId, archived: false
         },
         order: [['createdAt', 'DESC']]
       }).then((data) => {
@@ -174,6 +196,14 @@ export default class MessageController {
         }
       });
     }
+  }
+  static archiveMessage(req, res) {
+    const groupId = req.params.groupId;
+    Messages.update({ archived: true }, { where: { groupId } }).then((result) => {
+      if (result) {
+        res.status(200).json({ result });
+      }
+    });
   }
 }
 

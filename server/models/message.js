@@ -27,6 +27,10 @@ const Message = sequelize.define('Message', {
   priority: {
     type: Sequelize.STRING
   },
+  archived: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   userId: {
     type: Sequelize.INTEGER,
     onDelete: 'CASCADE',
