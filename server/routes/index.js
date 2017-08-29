@@ -54,4 +54,7 @@ router.get('/groups/user/:userId', Verify.token, controller.usersGroup);
 
 // Route for google signup and  login
 router.post('/auth/google', controller.googleAuth);
+
+// Route for archive message
+router.put('/group/archive/messages/:groupId', messageController.archiveMessage);
 export default router;
