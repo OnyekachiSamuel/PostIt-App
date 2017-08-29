@@ -136,7 +136,8 @@ export default class MessageController {
       Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
         where: {
           groupId
-        }
+        },
+        order: [['createdAt', 'DESC']]
       }).then((data) => {
         if (data) {
           res.status(200).json({
@@ -162,7 +163,8 @@ export default class MessageController {
       Messages.findAll({ attributes: ['groupId', 'message', 'priority', 'createdAt', 'username'],
         where: {
           groupId, userId
-        }
+        },
+        order: [['createdAt', 'DESC']]
       }).then((data) => {
         if (data) {
           res.status(200).json({

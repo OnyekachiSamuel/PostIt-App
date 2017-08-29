@@ -45,7 +45,7 @@ class SocketController {
         const sock = sockets[socketId];
         sock.join(groupId);
         console.log(socketId, ' joint group ', groupId);
-        sock.emit('message', { msg: `you have joined group ${groupId}` });
+        // sock.emit('message', { msg: `you have joined group ${groupId}` });
       });
     });
   }
