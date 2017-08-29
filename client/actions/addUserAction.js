@@ -1,10 +1,28 @@
 import axios from 'axios';
-import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from './actionTypes';
+import sC from '../socket/socketController';
+import { ADD_USER_SUCCESS, ADD_USER_FAILURE, RESET_COUNT } from './actionTypes';
 
 export const addUserSuccess = (payload) => {
   return {
     type: ADD_USER_SUCCESS,
     payload
+  };
+};
+export const testAction = (payload) => {
+  const socket = sC.getSocket();
+  console.log('socket with id ', socket.connected, ' sent message', socket);
+  setTimeout(() => {
+    socket.emit('register-groups', Object.assign({}, { socketId: socket.id }, payload));
+  }, 0);
+  console.log('socket with id ', socket.connected, ' sent message', socket.disconnected);
+  return {
+    type: 'null'
+  };
+};
+
+export const resetCount = () => {
+  return {
+    type: RESET_COUNT
   };
 };
 
