@@ -5,6 +5,7 @@ import CreateGroup from './CreateGroup.jsx';
 import PostMessage from './PostMessage.jsx';
 import ViewMessages from './ViewMessages.jsx';
 import requireAuth from '../utils/requireAuth';
+import requireAuthLogin from '../utils/requireAuthLogin';
 import ForgetPasswordPage from '../components//ForgetPasswordPage.jsx';
 
 /**
@@ -19,7 +20,7 @@ export default class App extends React.Component {
       <BrowserRouter>
       <Switch>
         <Route exact path="/forgetPassword/:token/:email" component={ForgetPasswordPage} />
-        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/" component={requireAuthLogin(LandingPage)} />
         <Route path="/group" component={requireAuth(CreateGroup)} />
         <Route path="/messages" component={requireAuth(ViewMessages)} />
         <Route path="/:groupId" component={requireAuth(PostMessage)} />

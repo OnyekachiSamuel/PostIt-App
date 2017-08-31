@@ -30,7 +30,6 @@ class SocketController {
     delete sockets[sId];
   }
   static handleGroupMessage(data) {
-    console.log('group message', data);
     const sock = sockets[data.socketId];
     sock.join(data.groupId);
     sock.broadcast.to(data.groupId).emit('message', data.payload);
@@ -45,7 +44,6 @@ class SocketController {
         const sock = sockets[socketId];
         sock.join(groupId);
         console.log(socketId, ' joint group ', groupId);
-        // sock.emit('message', { msg: `you have joined group ${groupId}` });
       });
     });
   }

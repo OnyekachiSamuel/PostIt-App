@@ -13,6 +13,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: 'source-map',
   entry: './client/index.jsx',
   output: {
     path: path.resolve('dist'),

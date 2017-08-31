@@ -11,7 +11,6 @@ const requireAuth = (ComposedComponent) => {
       }
     }
     render() {
-      console.log(this.props);
       return (
             <ComposedComponent {...this.props} />
       );
