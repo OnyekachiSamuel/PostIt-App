@@ -88,15 +88,10 @@
     "webpack-dev-server": "^2.5.0"
   },
   "scripts": {
-<<<<<<< HEAD
-    "start": "babel-node server/app",
-    "build": "webpack --config ./webpack.config.js --progress --colors --watch",
-=======
     "start": "NODE_ENV='production' babel-node server/app",
     "start-dev": "babel-node server/app",
     "build-dev": "webpack --config ./webpack.config.js --progress --colors --watch",
     "build": "babel-node build/build.js",
->>>>>>> setup webpack to minify js files for production
     "test": "jest --coverage cli"
   },
   "repository": {

@@ -9,3 +9,4 @@ __tests__/
 .DS_Store
 .env
 template/
+package-lock.json

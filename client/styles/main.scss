@@ -287,3 +287,77 @@ button .right {
 	margin-top: 40px;
 	margin-bottom: 40px;
 }
+
+
+/*---------------------------------------------*/
+/* IMPLEMENT FEEDBACK ---- STYLE FOR CREATE GROUP PAGE
+/*---------------------------------------------*/
+.shift-left {
+    float: left;
+    height: 100vh;
+    width: 40%;
+}
+.shift-right {
+    float: right;
+    height: 100vh;
+    width: 50%;
+}
+.create-btn {
+    margin-top: 32px;
+    left: 30%;
+    background-color: #56ad55 !important;
+    color: #fff !important;
+}
+.btn-margin {
+    margin-bottom: 8px;
+    background-color: #fff;
+}
+.select-margin {
+    margin-bottom: 8px;
+}
+.input-group-addon {
+    background-color: #56ad55 !important;
+    color: #fff !important;
+}
+.modal-btn {
+    background-color: #56ad55 !important;
+    color: #fff !important;
+}
+#search-site {
+    background-color: #fff;
+}
+
+
+/*---------------------------------------------*/
+/* POST MESSAGE IMPLEMENTATION OF FEEDBACK
+/*---------------------------------------------*/
+
+.bottom-margin {
+    margin-bottom: 150px;
+    clear: both;
+}
+.post {
+	float: left;
+}
+.post-date {
+	float: right;
+}
+.whitespace {
+	margin-bottom: 50px;
+}
+.view-btn {
+	margin-top: 10px;
+}
+.view-btn button {
+	background-color: #56ad55;
+	color: #fff;
+}
+.align-middle {
+	top: 70%;
+	margin-left: 30%;
+	margin-right: 30%;
+	margin-top: 90px;
+	color: #fff;
+}
+
+
