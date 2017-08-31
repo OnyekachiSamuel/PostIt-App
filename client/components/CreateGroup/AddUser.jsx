@@ -19,10 +19,12 @@ class AddUser extends Component {
       users: [],
       username: '',
       groupId: '',
+      usernames: []
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSelectUser = this.onSelectUser.bind(this);
   }
   /**
    *@return {null} Triggers the action to fetch all users after the render method has been executed
@@ -63,19 +65,25 @@ class AddUser extends Component {
     state[event.target.name] = event.target.value;
     this.setState(state);
   }
+  onSelectUser(event) {
+  const state = this.state;
+  this.state.usernames.push(event.target.value);
+}
   /**
    * @return {null} triggers an addUserRequest action on click of submit button
    * @param {e} e
    */
   onSubmit(e) {
     e.preventDefault();
-    if (this.state.username && this.state.groupId) {
-      const ids = {
-        username: this.state.username,
+    if (this.state.usernames && this.state.groupId) {
+      this.state.usernames.forEach((user) => {
+       const ids = {
+        username: user,
         groupId: this.state.groupId
       };
       this.props.addUserRequest(ids, this.state.groupId);
-      this.setState({ users: [] });
+    });
+    this.setState({ users: [], usernames: [] });
     } else {
       Materialize.toast('You must select a group and a user before clicking the add button',
        2000, 'green white-text rounded');
@@ -103,7 +111,7 @@ class AddUser extends Component {
     const filteredUsers = users.map((user, index) => {
       return (
       <p key={index}>
-        <input type="checkbox" onClick={this.onChange}
+        <input type="checkbox" onClick={this.onSelectUser}
         value={user.username} id={user.id} name="username"/>
         <label htmlFor={user.id}>{user.username}</label>
       </p>
