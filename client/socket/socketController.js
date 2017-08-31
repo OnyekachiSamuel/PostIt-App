@@ -17,7 +17,6 @@ class SocketController {
   init(d, s) {
     // TODO: Need to understand better way to create a singleton in JS
     this.dispatch = d;
-    console.log('object dispatcher is ', this.dispatch);
     this.socket = s;
     this.configureSocket(s);
     return this;
@@ -25,9 +24,7 @@ class SocketController {
 
   configureSocket(socket) {
     socket.on('message', this.handleMessage);
-    console.log('soc id - ', socket.id);
     socket.on('connect', () => {
-      console.log('socket connected - ', socket.id);
     })
   }
 

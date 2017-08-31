@@ -12,10 +12,8 @@ class GroupList extends Component {
    * @return {null} triggers the action that fetches groups a user belongs to on component mount
    */
   componentDidMount() {
-    if (localStorage.token) {
       const { signin } = this.props;
       this.props.fetchUserGroupRequest(signin.user.userId);
-    }
   }
   /**
  * @return {String} HTML markup for view component SignInModal
