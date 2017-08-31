@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-const requireAuth = (ComposedComponent) => {
+const requireAuthLogin = (ComposedComponent) => {
   class Authenticate extends React.Component {
     componentWillMount() {
-      if (!this.props.isAuthenticated) {
-        this.props.history.push('/');
+      if (this.props.isAuthenticated) {
+        this.props.history.push('/group');
       }
     }
     render() {
@@ -29,4 +29,4 @@ const requireAuth = (ComposedComponent) => {
 };
 
 
-export default requireAuth;
+export default requireAuthLogin;
