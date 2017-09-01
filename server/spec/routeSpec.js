@@ -32,7 +32,7 @@ describe('ROUTE TESTING', () => {
           expect('200').toEqual(res.status);
           expect('Account created').toBe(res.body.message);
           expect('Jane').toNotBe(res.body.data.name);
-          expect('Obinna').toBe(res.body.data.username);
+          expect('obinna').toBe(res.body.data.username);
           done(err);
         });
     }, 10000);
@@ -52,7 +52,7 @@ describe('ROUTE TESTING', () => {
           expect('200').toEqual(res.status);
           expect('Account created').toBe(res.body.message);
           expect('Jane').toNotBe(res.body.data.name);
-          expect('Kenet').toBe(res.body.data.username);
+          expect('kenet').toBe(res.body.data.username);
           done(err);
         });
     }, 10000);
@@ -179,7 +179,7 @@ describe('ROUTE TESTING', () => {
         .end((err, res) => {
           token = res.body.token;
           userId = res.body.data.id;
-          expect(res.body.data.username).toBe('Kenet');
+          expect(res.body.data.username).toBe('kenet');
           expect(res.body.message).toBe('Logged In');
           done(err);
         });
@@ -202,7 +202,7 @@ describe('ROUTE TESTING', () => {
     }, 16000);
     it('Should be able to add a user to a group', (done) => {
       user = {
-        username: 'Obinna'
+        username: 'obinna'
       };
       request.post(`/api/v1/group/${groupId}/user`)
       .set('x-access-token', token)
@@ -276,7 +276,7 @@ describe('ROUTE TESTING', () => {
         .end((err, res) => {
           token = res.body.token;
           expect(200).toBe(res.status);
-          expect(res.body.data.username).toBe('Obinna');
+          expect(res.body.data.username).toBe('obinna');
           expect(res.body.message).toBe('Logged In');
           done(err);
         });
