@@ -6,7 +6,7 @@ import { postRequest } from '../../actions/postAction';
 /**
  * @class ComposeMessage
  */
-class ComposeMessage extends Component {
+export class ComposeMessage extends Component {
     /**
    * @return {null} Initializes the state
    * @param {obj} props

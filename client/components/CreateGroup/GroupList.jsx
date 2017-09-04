@@ -7,13 +7,13 @@ import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
 /**
  * @class GroupList
  */
-class GroupList extends Component {
+export class GroupList extends Component {
   /**
    * @return {null} triggers the action that fetches groups a user belongs to on component mount
    */
   componentDidMount() {
-      const { signin } = this.props;
-      this.props.fetchUserGroupRequest(signin.user.userId);
+    const { signin } = this.props;
+    this.props.fetchUserGroupRequest(signin.user.userId);
   }
   /**
  * @return {String} HTML markup for view component SignInModal
@@ -48,7 +48,8 @@ class GroupList extends Component {
 }
 
 GroupList.propTypes = {
-  fetchGroupRequest: PropTypes.func
+  fetchGroupRequest: PropTypes.func,
+  fetchUserGroupRequest: PropTypes.func
 };
 
 const mapStateToProps = (state) => {

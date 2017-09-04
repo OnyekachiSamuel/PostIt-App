@@ -52,10 +52,15 @@ class SelectGroup extends React.Component {
       this.setState({ clicked: true });
     }
   }
+  /**
+   * @return {null} Returns null; Triggers action to archive read messages
+   */
   archiveHandler() {
     const { groupId } = this.props;
     if (groupId.Id) {
-      this.props.archiveMessageRequest(groupId.Id);
+      this.props.archiveMessageRequest(groupId.Id).then(() => {
+        Materialize.toast('Message(s) successfully archived', 2000, 'green white-text rounded');
+      });
       this.setState({ clicked: false });
     }
   }
