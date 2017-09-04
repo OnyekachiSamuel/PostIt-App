@@ -199,9 +199,9 @@ export default class MessageController {
   }
   static archiveMessage(req, res) {
     const groupId = req.params.groupId;
-    Messages.update({ archived: true }, { where: { groupId } }).then((result) => {
-      if (result) {
-        res.status(200).json({ result });
+    Messages.update({ archived: true }, { where: { groupId } }).then((data) => {
+      if (data) {
+        res.status(200).json({ data, groupCreator: true });
       }
     });
   }
