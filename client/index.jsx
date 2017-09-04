@@ -16,7 +16,6 @@ if (localStorage.token) {
   setAuthorizationToken(localStorage.getItem('token'));
   store.dispatch(signIn(jwt.decode(localStorage.token)));
 }
-console.log('socket is ', socket)
 ReactDOM.render(
     <Provider store={store}>
         <App socket={socket}/>

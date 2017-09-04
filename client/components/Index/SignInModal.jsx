@@ -32,11 +32,11 @@ export class SignInModal extends React.Component {
   }
   /**
    * @return {null} Triggers the signinRequest action on click of submit button
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
+  onSubmit(event) {
     this.setState({ errors: {} });
-    e.preventDefault();
+    event.preventDefault();
     if (!this.state.visible) {
       this.props.signInRequest(this.state);
     } else if (this.state.visible) {
@@ -53,11 +53,11 @@ export class SignInModal extends React.Component {
   }
   /**
    * @return {null} Updates the state as the user types into the input the fields
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
@@ -129,7 +129,7 @@ export class SignInModal extends React.Component {
               <Link to="#" onClick={this.onClick}> here
             </Link> to reset your password</span></div>}
             { this.state.visible &&
-              <div style={{ marginBottom: '7px' } }><span>Want to login ? Click
+              <div id="login" style={{ marginBottom: '7px' } }><span>Want to login ? Click
               <Link to="#" onClick={this.onClickLogin}> here
             </Link> to login</span></div>}
             <div className="center google-login">
