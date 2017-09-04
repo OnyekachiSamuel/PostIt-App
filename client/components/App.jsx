@@ -9,13 +9,9 @@ import requireAuthLogin from '../utils/requireAuthLogin';
 import ForgetPasswordPage from '../components//ForgetPasswordPage.jsx';
 
 /**
- * @class
+ * @function App
  */
-export default class App extends React.Component {
-  /**
-   * @return {String} HTML markup
-   */
-  render() {
+const App = () => {
     return (
       <BrowserRouter>
       <Switch>
@@ -27,5 +23,5 @@ export default class App extends React.Component {
       </Switch>
       </BrowserRouter>
     );
-  }
 }
+export default App;

@@ -24,8 +24,8 @@ export const userSignInRequest = (userData) => {
         const {
           token
         } = response.data;
-        window.localStorage.setItem('token', token);
         dispatch(signIn(jwt.decode(token)));
+        window.localStorage.setItem('token', token);
         location.href = '/group';
       }
     }).catch((error) => {

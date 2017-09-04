@@ -7,7 +7,7 @@ import { createGroupRequest } from '../../actions/groupAction';
 /**
  * @class
  */
-class SelectGroup extends Component {
+export class SelectGroup extends Component {
   /**
    * @return {null} Initializes the state
    * @param {obj} props
@@ -23,21 +23,21 @@ class SelectGroup extends Component {
   }
   /**
    * @return {null} Triggers the createGroup action that updates the store with group details
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.createGroupRequest(this.state)
     .then(() => {
     });
   }
   /**
    * @return {null} updates the state with group details as the user types into the input fields
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
