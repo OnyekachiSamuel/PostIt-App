@@ -7,7 +7,7 @@ import { addUserRequest } from '../../actions/addUserAction';
 /**
  * @class AddUser
  */
-class AddUser extends Component {
+export class AddUser extends Component {
   /**
    * Initialize the state and bind functions
    * @param {obj} props
@@ -65,25 +65,28 @@ class AddUser extends Component {
     state[event.target.name] = event.target.value;
     this.setState(state);
   }
+  /**
+   * @return {null} Updates the state and adds a user on click of checkbox
+   * @param {event} event
+   */
   onSelectUser(event) {
-  const state = this.state;
-  this.state.usernames.push(event.target.value);
-}
+    this.state.usernames.push(event.target.value);
+  }
   /**
    * @return {null} triggers an addUserRequest action on click of submit button
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     if (this.state.usernames && this.state.groupId) {
       this.state.usernames.forEach((user) => {
-       const ids = {
-        username: user,
-        groupId: this.state.groupId
-      };
-      this.props.addUserRequest(ids, this.state.groupId);
-    });
-    this.setState({ users: [], usernames: [] });
+        const ids = {
+          username: user,
+          groupId: this.state.groupId
+        };
+        this.props.addUserRequest(ids, this.state.groupId);
+      });
+      this.setState({ users: [], usernames: [] });
     } else {
       Materialize.toast('You must select a group and a user before clicking the add button',
        2000, 'green white-text rounded');

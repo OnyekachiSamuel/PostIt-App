@@ -10,7 +10,7 @@ import { googleAuthRequest } from '../../actions/googleAction';
 /**
  * @class SignUpModal
  */
-class SignUpModal extends React.Component {
+export class SignUpModal extends React.Component {
   /**
    * @return {null} Initializes the state and method binding
    * @param {obj} props
@@ -32,11 +32,11 @@ class SignUpModal extends React.Component {
   }
   /**
    * @return {null} Triggers the signupRequest action on submit button click
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
+  onSubmit(event) {
     this.setState({ errors: {} });
-    e.preventDefault();
+    event.preventDefault();
     this.props.signUpRequest(this.state);
     this.setState({
       name: '',
@@ -49,11 +49,11 @@ class SignUpModal extends React.Component {
   }
   /**
    * @return {null} Updates the state as the user types into the input field
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**

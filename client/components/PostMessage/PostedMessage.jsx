@@ -7,16 +7,14 @@ import { fetchPostRequest } from '../../actions/fetchPostAction';
 /**
  * @class PostedMessage
  */
-class PostedMessage extends Component {
+export class PostedMessage extends Component {
     /**
    * @return {null} Updates the store with group posts by triggering the fetchPostRequest action
    */
   componentDidMount() {
-    if (localStorage.token) {
-      const groupId = this.props.match.params.groupId;
-      const { signin } = this.props;
-      this.props.fetchPostRequest(groupId, signin.user.userId);
-    }
+    const groupId = this.props.match.params.groupId;
+    const { signin } = this.props;
+    this.props.fetchPostRequest(groupId, signin.user.userId);
   }
   /** object destructing of messages from the props
    * @return {String} HTML markup for view component of PostedMessage

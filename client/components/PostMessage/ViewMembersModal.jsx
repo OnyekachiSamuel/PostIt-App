@@ -8,7 +8,7 @@ import { fetchMembersRequest } from '../../actions/fetchMembers';
 /**
  * @class
  */
-class ViewMembers extends React.Component {
+export class ViewMembers extends React.Component {
   /**
    * Executes asyn operation to get all members in a particular group
    * @return {*} Triggers asyn action that updates the store with group members data
