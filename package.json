@@ -70,6 +70,7 @@
     "sass-loader": "^6.0.6",
     "sequelize": "^4.1.0",
     "shortid": "^2.2.8",
+    "sinon": "^3.2.1",
     "socket.io": "^2.0.3",
     "style-loader": "^0.18.2",
     "supertest": "^3.0.0",
@@ -88,7 +89,6 @@
     "jsdom-global": "3.0.2",
     "moxios": "^0.4.0",
     "react-addons-test-utils": "^15.6.0",
-    "sinon": "^3.1.0",
     "webpack-dev-middleware": "^1.11.0",
     "webpack-dev-server": "^2.5.0"
   },
