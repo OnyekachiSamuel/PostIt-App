@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createRequest } from '../../actions/groupAction';
+import { createGroupRequest } from '../../actions/groupAction';
 
 /**
  * @class
@@ -27,7 +27,7 @@ class SelectGroup extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.createRequest(this.state)
+    this.props.createGroupRequest(this.state)
     .then(() => {
     });
   }
@@ -49,7 +49,8 @@ class SelectGroup extends Component {
         <div className="modal-content">
           <div className="modal-title row">
             <div className="col s6 m6">
-              <h4>Group Details</h4></div>
+              <Link to="#" className="white-text">Group Details</Link>
+              </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
             </div>
@@ -69,7 +70,7 @@ class SelectGroup extends Component {
                 <label htmlFor="password">Description</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light modal-close"
+            <button className="btn waves-effect waves-light modal-close modal-btn"
             type="submit" name="action">Create</button>
             <div className="modal-footer">
               <Link to="#!"></Link>
@@ -82,8 +83,8 @@ class SelectGroup extends Component {
 }
 
 SelectGroup.propTypes = {
-  createRequest: PropTypes.func.isRequired
+  createGroupRequest: PropTypes.func.isRequired
 };
 
-export default connect(null, { createRequest })(SelectGroup);
+export default connect(null, { createGroupRequest })(SelectGroup);
 

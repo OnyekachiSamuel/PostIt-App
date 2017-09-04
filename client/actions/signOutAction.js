@@ -8,11 +8,9 @@ export const signout = (payload) => {
   };
 };
 
-export const signoutRequest = () => {
+export const signOutRequest = () => {
   return (dispatch) => {
     localStorage.removeItem('token');
-    localStorage.removeItem('username');
-    localStorage.removeItem('userId');
     setAuthorizationToken(false);
     dispatch(signout({}));
   };

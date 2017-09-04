@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { signoutRequest } from '../../actions/signoutAction';
+import { signOutRequest } from '../actions/signOutAction';
 
 /**
  * @class NavBar
@@ -22,7 +22,7 @@ class NavBar extends React.Component {
    * @return {null} Triggers the signOutRequest action to clear user data from the localStorage
    */
   onClick() {
-    this.props.signoutRequest(this.state);
+    this.props.signOutRequest(this.state);
     this.props.signOut();
   }
   /**
@@ -44,4 +44,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default connect(null, { signoutRequest })(NavBar);
+export default connect(null, { signOutRequest })(NavBar);

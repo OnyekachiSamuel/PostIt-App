@@ -1,7 +1,11 @@
 import Sequelize from 'sequelize';
-import config from '../config/db_url.json';
+import get from '../config/config';
 
-const sequelize = new Sequelize(config.url);
+const config = get(process.env.NODE_ENV);
+
+const sequelize = new Sequelize(config.database, {
+  dialect: 'postgres'
+});
 const Message = sequelize.define('Message', {
   id: {
     allowNull: false,
@@ -15,6 +19,10 @@ const Message = sequelize.define('Message', {
     validate: {
       notEmpty: true
     }
+  },
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   priority: {
     type: Sequelize.STRING
@@ -37,20 +45,17 @@ const Message = sequelize.define('Message', {
       as: 'groupId'
     }
   }
-}, {
-  classMethods: {
-    associate: (models) => {
-      // associations can be defined here
-      Message.belongsTo(models.User, {
-        foreignKey: 'userId',
-        onDelete: 'CASCADE',
-      });
-      Message.belongsTo(models.Group, {
-        foreignKey: 'groupId',
-        onDelete: 'CASCADE',
-      });
-    }
-  }
 });
+
+Message.associate = (models) => {
+  Message.belongsTo(models.User, {
+    foreignKey: 'userId',
+    onDelete: 'CASCADE'
+  });
+  Message.belongsTo(models.Group, {
+    foreignKey: 'groupId',
+    onDelete: 'CASCADE',
+  });
+};
 
 export default Message;

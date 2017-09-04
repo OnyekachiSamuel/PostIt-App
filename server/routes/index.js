@@ -2,6 +2,7 @@ import express from 'express';
 import controller from '../controllers/controller';
 import Validate from '../middlewares/validator';
 import Verify from '../middlewares/ensureToken';
+import { forgotPassword, resetPassword } from '../controllers/forgotPassword';
 
 const router = express.Router();
 
@@ -42,5 +43,15 @@ router.get('/posts/:groupId/:userId', Verify.token, controller.getUserMessages);
 // Route to get all posts in a particular group
 router.get('/post/messages/:groupId', Verify.token, controller.getMessages);
 
+// router.get('/find', controller.find);
+router.post('/forgot', forgotPassword);
 
+// Reset password route
+router.put('/reset/:token/:email', resetPassword);
+
+// Route to get groups a users has been added to or belongs to
+router.get('/groups/user/:userId', Verify.token, controller.usersGroup);
+
+// Route for google signup and  login
+router.post('/auth/google', controller.googleAuth);
 export default router;

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { postRequest } from '../../actions/postAction';
 
 /**
- * @class PostForm
+ * @class ComposeMessage
  */
-class PostForm extends React.Component {
-  /**
+class ComposeMessage extends Component {
+    /**
    * @return {null} Initializes the state
    * @param {obj} props
    */
@@ -41,37 +41,36 @@ class PostForm extends React.Component {
     this.setState({ message: '' });
   }
   /**
-   * @return {String} HTML markup for view component of PostForm
+   * @return {String} HTML markup for view component of ComposeMessage
    */
   render() {
     return (
-          <div className="container">
-            <br/>
-            <div className="post-title center">
-              <h3>Compose message</h3>
-              </div>
-              <div className="input-field col s12">
-                <form onSubmit={this.onSubmit} >
+      <div className="shift-left">
+        <button className="waves-effect waves-light btn create-btn"
+        data-target="modal4">View members</button>
+        <div className="input-field col s12 container">
+            <form onSubmit={this.onSubmit} >
                 <div>
-                  <textarea placeholder="Type in your message here" name="message"
+                    <textarea placeholder="Type in your message here" name="message"
                   value={this.state.message}
                   ref="message" onChange={this.onChange} className="type-text" required ></textarea>
-                      <label htmlFor="textarea1"></label>
-                     </div>
+                    <label htmlFor="textarea1"></label>
+                </div>
                 <div>
-                  <select className="browser-default" name="priority" onChange={this.onChange}>
-                       <option value="" defaultValue>Select priority option</option>
-                       <option value="Normal">Normal</option>
-                       <option value="Urgent">Urgent</option>
-                       <option value="Critical">Critical</option>
+                    <select className="browser-default" name="priority" onChange={this.onChange}>
+                        <option value="" defaultValue>Select priority option</option>
+                        <option value="Normal">Normal</option>
+                        <option value="Urgent">Urgent</option>
+                        <option value="Critical">Critical</option>
                     </select>
                 </div>
-                <input type="submit" className="btn waves-effect waves-light col s12" value="Post"/>
-                     </form>
-                      </div>
-                    </div>
+                <button type="submit"
+                className="btn waves-effect waves-light col s12 modal-btn">Post</button>
+            </form>
+        </div>
+    </div>
     );
   }
 }
 
-export default connect(null, { postRequest })(withRouter(PostForm));
+export default connect(null, { postRequest })(withRouter(ComposeMessage));

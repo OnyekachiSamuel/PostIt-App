@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/OnyekachiSamuel/PostIt-App.svg)](https://travis-ci.org/OnyekachiSamuel/PostIt-App)
 [![Coverage Status](https://coveralls.io/repos/github/OnyekachiSamuel/PostIt-App/badge.svg?branch=tests)](https://coveralls.io/github/OnyekachiSamuel/PostIt-App?branch=tests)
-[![Issue Count](https://codeclimate.com/github/OnyekachiSamuel/PostIt-App/badges/issue_count.svg)](https://codeclimate.com/github/OnyekachiSamuel/PostIt-App)
 [![Code Climate](https://codeclimate.com/github/OnyekachiSamuel/PostIt-App/badges/gpa.svg)](https://codeclimate.com/github/OnyekachiSamuel/PostIt-App)
 
 

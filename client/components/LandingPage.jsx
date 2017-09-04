@@ -6,13 +6,13 @@ import NavLink from './Index/NavLink.jsx';
 import SignUpModal from './Index/SignUpModal.jsx';
 import SignInModal from './Index/SignInModal.jsx';
 import Title from './Index/Title.jsx';
-import { userSignupRequest } from '../actions/signupAction';
-import { userSigninRequest } from '../actions/signinAction';
+import { userSignUpRequest } from '../actions/signUpAction';
+import { userSignInRequest } from '../actions/signInAction';
 
 /**
  * @class HomePage
  */
-export class HomePage extends React.Component {
+export class LandingPage extends React.Component {
   /**
    * @return {null} makes the jQuery function available on component mount
    */
@@ -31,8 +31,8 @@ export class HomePage extends React.Component {
    * @return {String} HTML markup for view component of HomePage
    */
   render() {
-    const signupRequest = this.props.userSignupRequest;
-    const signinRequest = this.props.userSigninRequest;
+    const signUpRequest = this.props.userSignUpRequest;
+    const signInRequest = this.props.userSignInRequest;
     return (
       <div>
         <header>
@@ -45,8 +45,8 @@ export class HomePage extends React.Component {
           <Title/>
           <SignUpModal
             loginSuccess={this.loginSuccess.bind(this)}
-           signupRequest={ signupRequest } />
-          <SignInModal signinRequest = { signinRequest }
+           signUpRequest={ signUpRequest } />
+          <SignInModal signInRequest = { signInRequest }
           loginSuccess={this.loginSuccess.bind(this)} />
         </header>
       </div>
@@ -54,10 +54,10 @@ export class HomePage extends React.Component {
   }
 }
 
-HomePage.propTypes = {
-  userSignupRequest: PropTypes.func,
-  userSigninpRequest: PropTypes.func
+LandingPage.propTypes = {
+  userSignUpRequest: PropTypes.func,
+  userSignInRequest: PropTypes.func
 };
 
-export default connect(null, { userSignupRequest, userSigninRequest })(HomePage);
+export default connect(null, { userSignUpRequest, userSignInRequest })(LandingPage);
 

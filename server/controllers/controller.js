@@ -1,13 +1,17 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
+import Jusibe from 'jusibe';
+import nodemailer from 'nodemailer';
 import User from '../models/user';
 import Group from '../models/group';
 import UsersGroup from '../models/usersgroup';
 import Messages from '../models/message';
+import { getUsersPhoneEmail } from '../controllers/helper/getUsersPhoneEmail';
 
 
 env.config();
+
 /**
  * @class ApiController
  */
@@ -22,37 +26,39 @@ export default class ApiController {
  */
   static signup(req, res) {
     const name = req.body.name,
-      username = req.body.username,
+      username = req.body.username.toLowerCase(),
       email = req.body.email,
-      password = req.body.password;
+      password = req.body.password,
+      phone = req.body.phone;
     return User.sync({ force: false }).then(() => {
       const saltRounds = 10;
       bcrypt.genSalt(saltRounds, (err, salt) => {
         bcrypt.hash(password, salt, (err, hash) => {
           User.create({
-            name, username, email, password: hash
+            name, username, email, phone, password: hash
           }).then((user) => {
             const payload = { username: user.username,
-              userId: user.id
+              userId: user.id,
+              email: user.email,
+              name: user.name
             };
             const token = jwt.sign(payload, process.env.SECRET_KEY, {
               expiresIn: 60 * 60 * 24
             });
             res.status(200).json({
-              status: 'success',
               data: {
                 id: user.id,
                 name: user.name,
                 username: user.username,
-                email: user.email
+                email: user.email,
+                phone: user.phone
               },
               message: 'Account created',
               token
             });
           }).catch((err) => {
             if (err) {
-              res.json({
-                status: 'failed',
+              res.status(409).json({
                 message: 'Record exists already' });
             }
           });
@@ -69,20 +75,21 @@ export default class ApiController {
  * @return {obj} Return success or failure message
  */
   static signin(req, res) {
-    const username = req.body.username,
+    const username = req.body.username.toLowerCase(),
       password = req.body.password;
     User.findOne({ where: { username } }).then((user) => {
       if (user && user.dataValues.username === username) {
         const check = bcrypt.compareSync(password, user.dataValues.password);
         const payload = { username: user.dataValues.username,
-          userId: user.dataValues.id
+          userId: user.dataValues.id,
+          email: user.dataValues.email,
+          name: user.dataValues.name
         };
         if (check) {
           const token = jwt.sign(payload, process.env.SECRET_KEY, {
             expiresIn: 60 * 60 * 24
           });
           res.status(200).json({
-            status: 'success',
             data: {
               userId: user.dataValues.id,
               username: user.dataValues.username,
@@ -97,7 +104,7 @@ export default class ApiController {
             message: 'Invalid Password' });
         }
       } else {
-        res.json({ status: 'failed',
+        res.status(404).json({
           message: 'User not found' });
       }
     });
@@ -121,8 +128,7 @@ export default class ApiController {
             return UsersGroup.sync({ force: false }).then(() => {
               UsersGroup.create({ groupId: group.id, userId });
             }).then(() => {
-              res.json({
-                status: 'success',
+              res.status(200).json({
                 data: {
                   groupId: group.id,
                   groupName: group.groupName,
@@ -134,7 +140,7 @@ export default class ApiController {
           }
         }).catch((error) => {
           if (error) {
-            res.status(422).json({ status: 'failed',
+            res.status(409).json({ status: 'failed',
               message: 'Group already exist' });
           }
         });
@@ -159,10 +165,10 @@ export default class ApiController {
           UsersGroup.findOrCreate({ where: { userId: user.id, groupId } })
           .spread((usergg, created) => {
             if (created) {
-              res.json({ status: 'success',
+              res.status(200).json({
                 message: 'User successfully added' });
             } else {
-              res.json({ status: 'failed',
+              res.status(409).json({ status: 'failed',
                 message: 'User already exist in this group' });
             }
           });
@@ -183,19 +189,102 @@ export default class ApiController {
     const message = req.body.message,
       priority = req.body.priority,
       groupId = req.params.groupId,
-      userId = req.decoded.userId;
-      // username = req.decoded.username;
+      userId = req.decoded.userId,
+      username = req.decoded.username;
     return Messages.sync({ force: false }).then(() => {
-      Messages.create({ userId, groupId, message, priority }).then((content) => {
+      Messages.create({ userId, groupId, message, priority, username }).then((content) => {
+        if (priority === 'Critical') {
+          // Fetch users emails and phone numbers
+          getUsersPhoneEmail(groupId, (result) => {
+            const { phoneNumbers, emails } = result;
+            const jusibe = new Jusibe(process.env.PUBLIC_KEY, process.env.ACCESS_TOKEN);
+            phoneNumbers.forEach((number) => {
+              const payload = {
+                to: number,
+                from: req.decoded.username,
+                message: content.message
+              };
+              jusibe.sendSMS(payload)
+            .then((res) => {
+              console.log(res.body);
+            })
+            .catch((err) => {
+              console.log(err.body);
+            });
+            });
+          // Send emails to users
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              port: 25,
+              secure: false, // secure:true for port 465, secure:false for port 587
+              auth: {
+                user: 'postit028@gmail.com',
+                pass: process.env.G_PASSWORD
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+            const mailOptions = {
+              from: `${req.decoded.name} <${req.decoded.email}>`, // sender address
+              to: emails.toString(), // list of receivers
+              subject: priority, // Subject line
+              // text: content.message, // plain text body
+              html: `<b>${content.message}</b>`
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log('Message %s sent: %s', info.messageId, info.response);
+            });
+          });
+        } else if (priority === 'Urgent') {
+          // Fetch users emails and phone numbers
+          getUsersPhoneEmail(groupId, (result) => {
+            const { emails } = result;
+          // Send emails to users
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              port: 25,
+              secure: false, // secure:true for port 465, secure:false for port 587
+              auth: {
+                user: 'postit028@gmail.com',
+                pass: process.env.G_PASSWORD
+              },
+              tls: {
+                rejectUnauthorized: false
+              }
+            });
+            const mailOptions = {
+              from: `${req.decoded.username} <${req.decoded.email}>`, // sender address
+              to: emails.toString(), // list of receivers
+              subject: priority, // Subject line
+              // text: content.message, // plain text body
+              html: `<b>${content.message}</b>`
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+              if (error) {
+                return console.log(error);
+              }
+              console.log('Message %s sent: %s', info.messageId, info.response);
+            });
+          });
+        }
         res.status(200).json({
-          status: 'success',
           data: {
+            username: content.username,
             groupId: content.groupId,
             message: content.message,
-            priority: content.priority
+            priority: content.priority,
+            createdAt: content.createdAt
           },
           message: 'Message sent'
         });
+      }).catch((error) => {
+        if (error) {
+          res.status(400).json({ message: 'Message sending failed' });
+        }
       });
     });
   }
@@ -211,14 +300,13 @@ export default class ApiController {
     const groupId = req.params.groupId;
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isGroupId) {
-      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority'],
+      Messages.findAll({ attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
         where: {
           groupId
         }
       }).then((data) => {
         if (data) {
           res.status(200).json({
-            status: 'success',
             data,
             message: 'Received'
           });
@@ -238,14 +326,13 @@ export default class ApiController {
     const isUserId = Number.isInteger(parseInt(userId, 10));
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isUserId && isGroupId) {
-      Messages.findAll({ attributes: ['groupId', 'message', 'priority'],
+      Messages.findAll({ attributes: ['groupId', 'message', 'priority', 'createdAt', 'username'],
         where: {
           groupId, userId
         }
       }).then((data) => {
         if (data) {
           res.status(200).json({
-            status: 'success',
             data,
             message: 'Received'
           });
@@ -276,7 +363,7 @@ export default class ApiController {
               id: allUsers
             }
           }).then((allUser) => {
-            res.json({ status: 'success', allUser });
+            res.status(200).json({ allUser });
           });
         }
       });
@@ -292,7 +379,7 @@ export default class ApiController {
     User.findAll({ attributes: ['id', 'username'] })
     .then((users) => {
       if (users) {
-        res.json({ status: 'success', users });
+        res.status(200).json({ users });
       }
     });
   }
@@ -309,9 +396,70 @@ export default class ApiController {
       Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { userId } })
     .then((groups) => {
       if (groups) {
-        res.json({ groups });
+        res.status(200).json({ groups });
       }
     });
+    });
+  }
+  static usersGroup(req, res) {
+    const userId = req.params.userId;
+    UsersGroup.findAll({ attributes: ['groupId'], where: { userId } })
+    .then((groupIds) => {
+      if (groupIds) {
+        const ids = [];
+        groupIds.forEach((group) => {
+          ids.push(group.dataValues.groupId);
+        });
+        Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { id: ids } })
+        .then((groups) => {
+          if (groups) {
+            res.status(200).json({ groups });
+          }
+        });
+      }
+    });
+  }
+  static googleAuth(req, res) {
+    const name = req.body.name, username = req.body.username.toLowerCase(), email = req.body.email;
+    User.findOne({ where: { email } }).then((user) => {
+      console.log(user, '========I got here ======');
+      if (!user) {
+        User.sync({ force: false }).then(() => {
+          User.create({ name, username, email }).then((userDetail) => {
+            const payload = { username: userDetail.username,
+              userId: userDetail.id,
+              email: userDetail.email,
+              name: userDetail.name
+            };
+            const token = jwt.sign(payload, process.env.SECRET_KEY, {
+              expiresIn: 60 * 60 * 24
+            });
+            res.status(200).json({
+              message: 'Account created',
+              token
+            });
+          }).catch((err) => {
+            if (err) {
+              res.status(500).json({
+                message: 'Oops, operation failed'
+              });
+            }
+          });
+        });
+      } else {
+        const payload = { username: user.dataValues.username,
+          userId: user.dataValues.id,
+          email: user.dataValues.email,
+          name: user.dataValues.name
+        };
+        const token = jwt.sign(payload, process.env.SECRET_KEY, {
+          expiresIn: 60 * 60 * 24
+        });
+        res.status(200).json({
+          message: 'Logged In',
+          token
+        });
+      }
     });
   }
 }

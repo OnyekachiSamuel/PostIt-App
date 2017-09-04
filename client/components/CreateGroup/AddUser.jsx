@@ -75,8 +75,6 @@ class AddUser extends Component {
         groupId: this.state.groupId
       };
       this.props.addUserRequest(ids, this.state.groupId);
-      this.state.groupId = '';
-      this.state.username = '';
       this.setState({ users: [] });
     } else {
       Materialize.toast('You must select a group and a user before clicking the add button',
@@ -112,31 +110,38 @@ class AddUser extends Component {
       );
     }
     );
-
     return (
-        <div className="container search">
-            <form id="search-site" onSubmit={this.onSubmit}>
+      <div className="shift-right">
+        <div className="container">
+            <h3 className="center">Select and add user to a group</h3>
+          <div className="select-margin">
                 <select className="browser-default" value={this.state.groupId}
                 name="groupId" onChange={ this.onChange }>
-                <option value="1" defaultValue>Select Group</option>
-                {groupComponent}
-            </select>
-                <div className="input-group">
-                    <div className="input-field">
-                    <input id="search" placeholder="Search users"
-                    onChange={this.handleSearch} type="search" name='q'/>
-                        <label className="label-icon" htmlFor="search">
-                            <i className="material-icons">search</i>
-                        </label>
-                    </div>
-                    <button type="submit" className="input-group-addon btn">Add</button>
-                </div>
-                {filteredUsers}
-            </form>
+                    <option value="1" defaultValue>Select Group</option>
+                    {groupComponent}
+                </select>
+          </div>
+          <div>
+          <form id="search-site" onSubmit={this.onSubmit}>
+              <div className="input-group">
+                  <div className="input-field">
+                      <input id="search" placeholder="Search users"
+                    onChange={this.handleSearch} type="search" name='q' />
+                      <label className="label-icon" htmlFor="search">
+                      <i className="material-icons" >search</i>
+                      </label>
+                  </div>
+                  <button type="submit" className="input-group-addon btn">Add</button>
+              </div>
+              {filteredUsers}
+          </form>
         </div>
+        </div>
+    </div>
     );
   }
 }
+
 
 AddUser.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
@@ -153,3 +158,4 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchUsersRequest, addUserRequest })(AddUser);
+

@@ -21,7 +21,7 @@ body {
   flex-direction: column; }
 
 header {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(http://i.imgur.com/5MD10l3.jpg);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.imgur.com/5MD10l3.jpg);
   background-size: cover;
   background-position: center;
   height: 100vh; }
@@ -133,6 +133,26 @@ h4 {
   .navbar .nav-item-style li a:hover, .navbar .nav-item-style li a:active {
     color: #fff; }
 
+.sign-btn {
+  background-color: #3e7293 !important;
+  height: 24px;
+  line-height: 24px;
+  padding: 0 0.5rem; }
+
+.sign-btn:hover,
+.signup-btn:active {
+  background-color: #3e7293 !important; }
+
+.signup-btn:link,
+.signup-btn:visited {
+  background-color: #3e7293 !important; }
+
+.google-login {
+  margin-bottom: 15px; }
+
+.test {
+  height: 60px; }
+
 /*---------------------------------------------*/
 /* Create Group Styling
 /*---------------------------------------------*/
@@ -166,8 +186,7 @@ h4 {
 
 .right {
   float: right;
-  padding-right: 10px;
-  padding-top: 10px; }
+  padding-right: 10px; }
 
 button .right {
   color: #56ad55; }
@@ -244,3 +263,70 @@ button .right {
   margin-left: 20% !important;
   margin-top: 40px;
   margin-bottom: 40px; }
+
+/*---------------------------------------------*/
+/* IMPLEMENT FEEDBACK ---- STYLE FOR CREATE GROUP PAGE
+/*---------------------------------------------*/
+.shift-left {
+  float: left;
+  height: 100vh;
+  width: 40%; }
+
+.shift-right {
+  float: right;
+  height: 100vh;
+  width: 50%; }
+
+.create-btn {
+  margin-top: 32px;
+  left: 30%;
+  background-color: #56ad55 !important;
+  color: #fff !important; }
+
+.btn-margin {
+  margin-bottom: 8px;
+  background-color: #fff; }
+
+.select-margin {
+  margin-bottom: 8px; }
+
+.input-group-addon {
+  background-color: #56ad55 !important;
+  color: #fff !important; }
+
+.modal-btn {
+  background-color: #56ad55 !important;
+  color: #fff !important; }
+
+#search-site {
+  background-color: #fff; }
+
+/*---------------------------------------------*/
+/* POST MESSAGE IMPLEMENTATION OF FEEDBACK
+/*---------------------------------------------*/
+.bottom-margin {
+  margin-bottom: 150px;
+  clear: both; }
+
+.post {
+  float: left; }
+
+.post-date {
+  float: right; }
+
+.whitespace {
+  margin-bottom: 50px; }
+
+.view-btn {
+  margin-top: 10px; }
+
+.view-btn button {
+  background-color: #56ad55;
+  color: #fff; }
+
+.align-middle {
+  top: 70%;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 90px;
+  color: #fff; }

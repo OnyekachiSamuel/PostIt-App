@@ -1,7 +1,11 @@
 import Sequelize from 'sequelize';
-import config from '../config/db_url.json';
+import get from '../config/config';
 
-const sequelize = new Sequelize(config.url);
+const config = get(process.env.NODE_ENV);
+const sequelize = new Sequelize(config.database, {
+  dialect: 'postgres'
+});
+
 const User = sequelize.define('User', {
   id: {
     allowNull: false,
@@ -18,6 +22,9 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true
   },
+  phone: {
+    type: Sequelize.STRING
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -27,24 +34,22 @@ const User = sequelize.define('User', {
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false
-  }
-}, {
-  classMethods: {
-    associate: (models) => {
-      User.hasMany(models.Group, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.belongsTo(models.UsersGroup, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-      User.hasMany(models.Message, {
-        foreignKey: 'userId',
-        as: 'userId'
-      });
-    }
   }
 });
+
+User.associate = (models) => {
+  User.hasMany(models.Group, {
+    foreignKey: 'userId',
+    as: 'userId'
+  });
+  User.belongsTo(models.UsersGroup, {
+    foreignKey: 'userId',
+    as: 'userId'
+  });
+  User.hasMany(models.Message, {
+    foreignKey: 'userId',
+    as: 'userId'
+  });
+};
 export default User;
+

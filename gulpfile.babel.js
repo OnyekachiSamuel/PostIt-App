@@ -46,15 +46,5 @@ gulp.task('coverage', () => {
     });
 });
 
-// Load code coverage to coveralls
-/* gulp.task('coveralls', ['coverage'], () => {
-  // If not running on CI environment it won't send lcov.info to coveralls
-  if (!process.env.CI) {
-    return;
-  }
-  return gulp.src('coverage/lcov.info')
-    .pipe(coveralls());
-});*/
-
 
 gulp.task('default', ['coverage']);

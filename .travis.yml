@@ -5,13 +5,10 @@ before_script:
   - npm install -g gulp
 script: 
   - npm install
-  - gulp
+  - npm run gulp
   - npm run test
 after_success:       
   - codeclimate-test-reporter < ./coverage/lcov.info
-env:
-   global: 
-    - SECRET_KEY=kskskskskkskddhhdhdhdhuwuwuuwuwuu
 addons:
   code_climate:
     repo_token:

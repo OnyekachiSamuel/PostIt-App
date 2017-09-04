@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { GROUP_MESSAGE_SUCCESS } from './actionTypes';
 
-const fetchPost = (payload) => {
+export const fetchPost = (payload) => {
   return {
     type: GROUP_MESSAGE_SUCCESS,
     payload
@@ -10,11 +10,16 @@ const fetchPost = (payload) => {
 };
 
 
-const fetchGroupPostRequest = (groupId) => {
+export const fetchGroupPostRequest = (groupId) => {
   return (dispatch) => {
-    return axios.get(`/api/group/${groupId}/messages`)
-    .then((payload) => {
-      dispatch(fetchPost(payload.data));
+    return axios.get(`/api/v1/group/${groupId}/messages`)
+    .then((response) => {
+      const { data } = response.data;
+      if (data.length > 0) {
+        dispatch(fetchPost(response.data));
+      } else {
+        Materialize.toast('No message posted to this group yet', 2000, 'yellow white-text rounded');
+      }
     });
   };
 };
