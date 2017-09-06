@@ -1,6 +1,9 @@
 {
   "name": "post-it-app",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.3"
+  },
   "description": "app to allow users post messages to groups",
   "main": "gulpfile.babel.js",
   "dependencies": {
