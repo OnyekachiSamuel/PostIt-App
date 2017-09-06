@@ -24,22 +24,21 @@ class ForgetPasswordPage extends Component {
   }
   /**
    * @return {null}  Updates the state as user types into the input fields
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
    * @return {null} triggers the action that makes asyn  call for password reset
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
-    e.preventDefault();
-    const token = this.props.match.params.token,
-      email = this.props.match.params.email;
-    this.props.resetPasswordRequest(token, email, this.state);
+  onSubmit(event) {
+    event.preventDefault();
+    const token = this.props.match.params.token;
+    this.props.resetPasswordRequest(token, this.state);
   }
     /**
    * @return {String} HTML markup for view component of forgetPasswordReducer

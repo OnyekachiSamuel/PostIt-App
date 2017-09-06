@@ -58,7 +58,6 @@ class CreateGroup extends React.Component {
           <AddUser />
          </div>
         <GroupModal/>
-        <Footer/>
       </div>
     );
   }

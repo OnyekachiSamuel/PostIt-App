@@ -36,7 +36,6 @@ class BroadcastMessage extends React.Component {
           <ViewMembers />
           <ComposeMessage />
           <PostedMessage />
-          <Footer />
       </div>
     );
   }

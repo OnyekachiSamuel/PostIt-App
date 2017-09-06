@@ -30,6 +30,9 @@ class NavBar extends React.Component {
     this.props.signOutRequest(this.state);
     this.props.signOut();
   }
+  /**
+   * @return {null} Updates the state on click of the notification icon
+   */
   handleClick() {
     if (this.state.visible === false) {
       this.setState({ visible: true, count: 0 });
@@ -44,9 +47,12 @@ class NavBar extends React.Component {
   render() {
     const { notificationReducer } = this.props;
     const alertUser = notificationReducer;
+    const { signin } = this.props;
+    const { user } = signin;
     const alertUserComponent = alertUser.map((alert, index) => {
       return (
-        <div key={index}> <span> {alert.username} posted in #{alert.groupId} on { new Date(alert.createdAt).toLocaleString()}
+        <div key={index}> <span> {alert.username} posted in #{alert.groupId} on
+          { new Date(alert.createdAt).toLocaleString()}
         </span>
           </div>
       );
@@ -58,12 +64,13 @@ class NavBar extends React.Component {
             navigate_before</i></Link>
           <Link to="#">POST IT</Link>
           <ul id="nav-mobile" className="right">
+           <li>{user.username}</li>
           <li><i className="large material-icons">notifications</i></li>
           { true && <li><Link to="#"><span className="new badge count"
           onClick={this.handleClick}>{ this.props.notificationReducer.length }</span></Link></li>
           }
           <li>
-            <Link to="#" onClick={this.onClick}>Sign Out</Link>
+            <Link to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
            </li>
           </ul>
         </div>
@@ -84,8 +91,10 @@ NavBar.propTypes = {
 
 const mapStateToProps = (state) => {
   const { notificationReducer } = state;
+  const { signin } = state;
   return {
     notificationReducer,
+    signin
   };
 };
 

@@ -2,7 +2,7 @@ import env from 'dotenv';
 import Jusibe from 'jusibe';
 import nodemailer from 'nodemailer';
 import Messages from '../models/message';
-import Group from '../models/group'
+import Group from '../models/group';
 import { getUsersPhoneEmail } from '../controllers/helper/getUsersPhoneEmail';
 
 env.config();

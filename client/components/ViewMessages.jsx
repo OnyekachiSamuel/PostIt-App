@@ -31,7 +31,6 @@ class ViewMessages extends React.Component {
         <NavBar signOut={this.signOut.bind(this)} redirectUrl = {'/group'} />
           <WhiteBar />
           <SelectGroup />
-          <Footer />
       </div>
     );
   }

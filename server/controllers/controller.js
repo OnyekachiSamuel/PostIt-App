@@ -96,7 +96,7 @@ export default class ApiController {
             token
           });
         } else {
-          res.json({ status: 'failed',
+          res.status(400).json({
             message: 'Invalid Password' });
         }
       } else {

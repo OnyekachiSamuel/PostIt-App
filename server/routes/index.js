@@ -52,7 +52,7 @@ router.get('/post/messages/:groupId', Verify.token, messageController.getMessage
 router.post('/forgot', forgotPassword);
 
 // Reset password route
-router.put('/reset/:token/:email', resetPassword);
+router.put('/reset/:token', resetPassword);
 
 // Route to get groups a users has been added to or belongs to
 router.get('/groups/user/:userId', Verify.token, controller.usersGroup);

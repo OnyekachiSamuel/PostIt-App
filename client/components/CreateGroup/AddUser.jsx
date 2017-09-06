@@ -124,7 +124,7 @@ export class AddUser extends Component {
     return (
       <div className="shift-right">
         <div className="container">
-            <h3 className="center">Select and add user to a group</h3>
+          <h3 className="center white green-text"> select and add user to a group</h3>
           <div className="select-margin">
                 <select className="browser-default" value={this.state.groupId}
                 name="groupId" onChange={ this.onChange }>
