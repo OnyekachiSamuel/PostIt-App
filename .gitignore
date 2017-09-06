@@ -7,7 +7,6 @@ server/OrigModel/
 server/models/index.js
 .DS_Store
 template/
-package-lock.json
 __tests__
 .env
 
