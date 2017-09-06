@@ -24,7 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(webpackMiddleware(webpack(webpackConfig)));
+app.use(webpackMiddleware(webpack(webpackConfig)));
 app.use(express.static('dist'));
 
 app.use(bodyParser.json());
@@ -35,16 +35,9 @@ app.use('/api/v1/', routes);
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
-server.listen('3000', () => {
+server.listen(port, () => {
   console.log(`Listening on port ${port} in ${app.get('env')}`);
 });
 SocketController.init(io);
-// io.on('connection', (socket) => {
-//   console.log(`Socket ID: ${socket.id}`);
-// });
-
-// app.listen(port, () => {
-//   console.log(`Listening on port ${port} in ${app.get('env')}`);
-// });
 export default server;
 
