@@ -6,7 +6,7 @@ node_modules/
 server/OrigModel/
 server/models/index.js
 .DS_Store
-.env
 template/
 package-lock.json
 __tests__
+.env
