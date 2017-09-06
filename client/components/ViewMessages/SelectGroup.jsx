@@ -35,11 +35,11 @@ class SelectGroup extends React.Component {
   }
   /**
    * @return {null} Updates the state
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
@@ -83,10 +83,10 @@ class SelectGroup extends React.Component {
       groupPostComponent = groupPost.data.map((post, index) => {
         return (
         <div className="input-field container" key={index}>
-            <input disabled value={post.message} id="disabled" type="text"
-            className="validate" />
-            <div className="post"><p><b>posted by {post.username}</b></p></div>
+           <div className="post"><p>Posted by <b>{post.username}</b></p></div>
             <div className="post-date"><p>{new Date(post.createdAt).toLocaleString()}</p></div>
+            <input disabled value={post.message} id="disabled" type="text"
+            className="validate" style={{ color: 'green' }} />
         </div>
         );
       });
@@ -106,10 +106,6 @@ class SelectGroup extends React.Component {
             <div className="center view-btn">
               <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
             </div>
-            {groupCreator && this.state.clicked &&
-            <div className="archive-div"> <Link to="#" onClick={this.archiveHandler}>
-            <i className="small material-icons">archive</i> </Link>
-            <div><span>Click the above icon to archive read message(s)</span></div></div>}
         </div>
     </div>
     </div>

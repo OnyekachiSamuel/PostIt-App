@@ -12,7 +12,7 @@ import { userSignInRequest } from '../actions/signInAction';
 /**
  * @class HomePage
  */
-export class LandingPage extends React.Component {
+class LandingPage extends React.Component {
   /**
    * @return {null} makes the jQuery function available on component mount
    */

@@ -26,10 +26,10 @@ export class PostedMessage extends Component {
       messageComponent = messages.map((element, index) => {
         return (
         <div className="input-field container" key={index}>
-            <input disabled value={element.message} id="disabled" type="text"
-            className="validate" />
-            <div className="post"><p><b>posted by {element.username}</b></p></div>
+          <div className="post"><p>Posted by <b>{element.username}</b></p></div>
             <div className="post-date"><p>{new Date(element.createdAt).toLocaleString()}</p></div>
+            <input disabled value={element.message} id="disabled" type="text"
+            className="validate" style={{ color: 'green' }} />
         </div>
         );
       });

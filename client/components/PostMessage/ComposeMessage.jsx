@@ -15,7 +15,7 @@ export class ComposeMessage extends Component {
     super(props);
     this.state = {
       message: '',
-      priority: ''
+      priority: 'Normal'
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -33,10 +33,10 @@ export class ComposeMessage extends Component {
   }
   /**
    * @return {null} Triggers the postRequest action on click of submit button
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.postRequest(this.state, this.groupId);
     this.setState({ message: '' });
   }
@@ -58,8 +58,7 @@ export class ComposeMessage extends Component {
                 </div>
                 <div>
                     <select className="browser-default" name="priority" onChange={this.onChange}>
-                        <option value="" defaultValue>Select priority option</option>
-                        <option value="Normal">Normal</option>
+                        <option value="Normal" defaultValue>Normal</option>
                         <option value="Urgent">Urgent</option>
                         <option value="Critical">Critical</option>
                     </select>

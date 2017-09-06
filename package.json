@@ -96,8 +96,7 @@
     "start": "NODE_ENV='production' babel-node server/app",
     "start-dev": "babel-node server/app",
     "build-dev": "webpack --config ./webpack.config.js --progress --colors --watch",
-    "build": "babel-node build/build.js",
-    "gulp": "NODE_ENV=test gulp coverage",
+    "build": "babel-node client/utils/build.js",
     "test": "jest --coverage cli"
   },
   "repository": {

@@ -9,3 +9,4 @@ server/models/index.js
 .env
 template/
 package-lock.json
+__tests__

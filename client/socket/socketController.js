@@ -1,6 +1,11 @@
 
-
+/**
+ * @class
+ */
 class SocketController {
+  /**
+   * @constructor
+   */
   constructor() {
     this.dispatch = null;
     this.socket = null;
@@ -8,7 +13,7 @@ class SocketController {
   }
 
   /**
-   * Factory method bla bla returns a socket to be used
+   * Factory method returns a socket to be used
    * by other components in the app
    * @param {Object} d - dispatcher for this class
    * @param {Object} s - Socket for this object
@@ -22,12 +27,19 @@ class SocketController {
     return this;
   }
 
+/**
+ * @return {null} Configure socket to listen for message event
+ * @param {obj} socket
+ */
   configureSocket(socket) {
     socket.on('message', this.handleMessage);
     socket.on('connect', () => {
-    })
+    });
   }
 
+/**
+ * @return {null} Returns socket object
+ */
   getSocket() {
     console.log('get socket called with socket ', this.socket.connected);
     if (this.socket === null) {
@@ -36,6 +48,10 @@ class SocketController {
     return this.socket;
   }
 
+/**
+ * @return {null} Dispatches message action
+ * @param {string} message
+ */
   handleMessage(message) {
     // at this point we have our dispatcher and can update our store
     this.dispatch({ type: 'SENT_MESSAGE', payload: message });
