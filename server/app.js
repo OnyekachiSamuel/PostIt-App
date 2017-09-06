@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(webpackMiddleware(webpack(webpackConfig)));
+app.use(webpackMiddleware(webpack(webpackConfig)));
 app.use(express.static('dist'));
 
 app.use(bodyParser.json());
@@ -37,4 +37,6 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port} in ${app.get('env')}`);
 });
-export default app;
+SocketController.init(io);
+export default server;
+
