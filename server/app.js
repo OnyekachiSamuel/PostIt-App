@@ -34,7 +34,11 @@ app.use('/api/v1/', routes);
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
+<<<<<<< HEAD
 app.listen(port, () => {
+=======
+server.listen(port, () => {
+>>>>>>> code clean-up in app.js file
   console.log(`Listening on port ${port} in ${app.get('env')}`);
 });
 SocketController.init(io);
