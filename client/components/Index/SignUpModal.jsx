@@ -147,7 +147,6 @@ export class SignUpModal extends React.Component {
           </form>
         </div>
       </div>
-
     );
   }
 }

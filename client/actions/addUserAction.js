@@ -8,6 +8,7 @@ export const addUserSuccess = (payload) => {
     payload
   };
 };
+
 export const testAction = (payload) => {
   const socket = sC.getSocket();
   setTimeout(() => {
@@ -44,4 +45,3 @@ export const addUserRequest = (userData, groupId) => {
     });
   };
 };
-
