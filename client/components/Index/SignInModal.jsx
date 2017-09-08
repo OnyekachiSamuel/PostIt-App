@@ -134,7 +134,7 @@ export class SignInModal extends React.Component {
             </Link> to login</span></div>}
             <div className="center google-login">
               <GoogleLogin
-                clientId="195109658910-hgbqa30ei6r1bd58o0i8q1u77j0l15vt.apps.googleusercontent.com"
+                clientId="1096080119344-dhkm3kesj85jq2au401j1ur243vo58np.apps.googleusercontent.com"
                 buttonText="+Google Login"
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}

@@ -37,7 +37,9 @@ export class ComposeMessage extends Component {
    */
   onSubmit(e) {
     e.preventDefault();
-    this.props.postRequest(this.state, this.groupId);
+    this.props.postRequest(this.state, this.groupId).then(() => {
+      Materialize.toast('Message sent', 2000, 'green white-text rounded');
+    });
     this.setState({ message: '' });
   }
   /**

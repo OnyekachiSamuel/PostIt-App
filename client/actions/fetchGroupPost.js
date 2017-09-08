@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { GROUP_MESSAGE_SUCCESS , UPDATE_GROUP_ID } from './actionTypes';
+import { GROUP_MESSAGE_SUCCESS, UPDATE_GROUP_ID } from './actionTypes';
 
 export const fetchPost = (payload) => {
   return {

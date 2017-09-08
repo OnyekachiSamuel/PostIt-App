@@ -31,7 +31,6 @@ export const postRequest = (userData, groupId) => {
         if (!(decoded.username === data.username)) {
           sC.handleMessage(data);
         }
-        Materialize.toast('Message sent', 2000, 'green white-text rounded');
       }
     });
   };

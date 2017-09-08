@@ -29,6 +29,8 @@ export class SelectGroup extends Component {
     event.preventDefault();
     this.props.createGroupRequest(this.state)
     .then(() => {
+    }).catch((error) => {
+      Materialize.toast(error.response.data.message, 2000, 'red white-text rounded');
     });
   }
   /**
