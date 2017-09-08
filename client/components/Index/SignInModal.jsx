@@ -79,9 +79,9 @@ export class SignInModal extends React.Component {
    */
   responseGoogle(response) {
     this.setState({
-      name: response.w3.ig.toLowerCase(),
-      username: response.w3.ofa,
-      email: response.w3.U3,
+      name: response.profileObj.name.toLowerCase(),
+      username: response.profileObj.givenName,
+      email: response.profileObj.email,
       password: '',
       confirmPassword: '',
       phone: ''

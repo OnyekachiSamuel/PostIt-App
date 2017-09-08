@@ -28,7 +28,6 @@ export const userSignUpRequest = (userData) => {
       }
     }).catch((error) => {
       const data = error.response.data;
-      console.log(data, '====data====');
       dispatch(signUpFailure(data));
       Materialize.toast(data.message, 2000, 'red white-text rounded');
     });

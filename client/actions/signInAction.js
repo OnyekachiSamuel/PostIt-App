@@ -20,7 +20,6 @@ export const signInFailure = (payload) => {
 export const userSignInRequest = (userData) => {
   return (dispatch) => {
     return axios.post('/api/v1/signin', userData).then((response) => {
-      console.log(response, '-----res----');
       const {
           token
         } = response.data;
