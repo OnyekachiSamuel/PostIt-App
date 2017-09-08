@@ -2,17 +2,18 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import env from 'dotenv';
 import webpack from 'webpack';
-import socket from 'socket.io';
 import { createServer } from 'http';
 import webpackMiddleware from 'webpack-dev-middleware';
 import routes from './routes/index';
 import webpackConfig from '../webpack.config';
+import SocketController from './socket/socketController';
 
 
 env.config();
 const app = express();
 const server = createServer(app);
-const io = socket(server);
+const io = require('socket.io')(server);
+
 const port = process.env.PORT || 3000;
 
 
@@ -38,4 +39,3 @@ server.listen(port, () => {
 });
 SocketController.init(io);
 export default server;
-
