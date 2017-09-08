@@ -9,9 +9,9 @@ import Footer from './Footer.jsx';
  * @class ViewMessages
  */
 class ViewMessages extends React.Component {
-/**
-   * @return {null} makes the jQuery function available on component mount
-   */
+  /**
+     * @return {null} makes the jQuery function available on component mount
+     */
   componentDidMount() {
     $('.collapsible').collapsible();
     $('.modal').modal();
@@ -28,9 +28,9 @@ class ViewMessages extends React.Component {
   render() {
     return (
       <div>
-        <NavBar signOut={this.signOut.bind(this)} redirectUrl = {'/group'} />
-          <WhiteBar />
-          <SelectGroup />
+        <NavBar signOut={this.signOut.bind(this)} redirectUrl={'/group'} />
+        <WhiteBar />
+        <SelectGroup />
       </div>
     );
   }

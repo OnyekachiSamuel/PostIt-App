@@ -40,9 +40,9 @@ class ForgetPasswordPage extends Component {
     const token = this.props.match.params.token;
     this.props.resetPasswordRequest(token, this.state);
   }
-    /**
-   * @return {String} HTML markup for view component of forgetPasswordReducer
-   */
+  /**
+ * @return {String} HTML markup for view component of forgetPasswordReducer
+ */
   render() {
     const { forgetPassword } = this.props;
     return (
@@ -53,27 +53,27 @@ class ForgetPasswordPage extends Component {
               <Link to="#">POST IT</Link>
             </div>
           </nav>
-        <div className="align-middle center-align">
-        { forgetPassword.message &&
-          <div><span>{forgetPassword.message}. Click <Link to="/">here </Link>to login</span></div>}
-        { forgetPassword.error &&
-          <div><span>{forgetPassword.error}</span></div>}
-          <div>
-         <form onSubmit={this.onSubmit}>
-          <div className="input-field">
-            <input id="password" type="password" placeholder="Password" name="password"
-            value={this.state.password} className="validate" onChange={this.onChange} required />
-          </div>
-            <div className="input-field">
-            <input id="confirmPassword" type="password" name="confirmPassword"
-            value={this.state.confirmPassword}
-            placeholder="Confirm password" className="validate" onChange={this.onChange} required />
+          <div className="align-middle center-align">
+            {forgetPassword.message &&
+              <div><span>{forgetPassword.message}. Click <Link to="/">here </Link>to login</span></div>}
+            {forgetPassword.error &&
+              <div><span>{forgetPassword.error}</span></div>}
+            <div>
+              <form onSubmit={this.onSubmit}>
+                <div className="input-field">
+                  <input id="password" type="password" placeholder="Password" name="password"
+                    value={this.state.password} className="validate" onChange={this.onChange} required />
+                </div>
+                <div className="input-field">
+                  <input id="confirmPassword" type="password" name="confirmPassword"
+                    value={this.state.confirmPassword}
+                    placeholder="Confirm password" className="validate" onChange={this.onChange} required />
+                </div>
+                <button className="btn waves-effect waves-light"
+                  type="submit" name="action">Submit</button>
+              </form>
             </div>
-            <button className="btn waves-effect waves-light"
-            type="submit" name="action">Submit</button>
-         </form>
-      </div>
-      </div>
+          </div>
         </header>
       </div>
     );

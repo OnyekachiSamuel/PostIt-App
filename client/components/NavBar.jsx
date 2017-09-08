@@ -52,9 +52,9 @@ class NavBar extends React.Component {
     const alertUserComponent = alertUser.map((alert, index) => {
       return (
         <div key={index}> <span> {alert.username} posted in #{alert.groupId} on
-          { new Date(alert.createdAt).toLocaleString()}
+          {new Date(alert.createdAt).toLocaleString()}
         </span>
-          </div>
+        </div>
       );
     });
     return (
@@ -64,19 +64,19 @@ class NavBar extends React.Component {
             navigate_before</i></Link>
           <Link to="#">POST IT</Link>
           <ul id="nav-mobile" className="right">
-           <li>{user.username}</li>
-          <li><i className="large material-icons">notifications</i></li>
-          { true && <li><Link to="#"><span className="new badge count"
-          onClick={this.handleClick}>{ this.props.notificationReducer.length }</span></Link></li>
-          }
-          <li>
-            <Link to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
-           </li>
+            <li>{user.username}</li>
+            <li><i className="large material-icons">notifications</i></li>
+            {true && <li><Link to="#"><span className="new badge count"
+              onClick={this.handleClick}>{this.props.notificationReducer.length}</span></Link></li>
+            }
+            <li>
+              <Link to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
+            </li>
           </ul>
         </div>
-        { this.state.visible &&
-        <div className="right notification">
-          { alertUserComponent }
+        {this.state.visible &&
+          <div className="right notification">
+            {alertUserComponent}
           </div>
         }
       </nav>

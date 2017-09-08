@@ -39,15 +39,15 @@ class LandingPage extends React.Component {
           <nav>
             <div className="nav-wrapper" >
               <Link to="#">POST IT</Link>
-              <NavLink/>
+              <NavLink />
             </div>
           </nav>
-          <Title/>
+          <Title />
           <SignUpModal
             loginSuccess={this.loginSuccess.bind(this)}
-           signUpRequest={ signUpRequest } />
-          <SignInModal signInRequest = { signInRequest }
-          loginSuccess={this.loginSuccess.bind(this)} />
+            signUpRequest={signUpRequest} />
+          <SignInModal signInRequest={signInRequest}
+            loginSuccess={this.loginSuccess.bind(this)} />
         </header>
       </div>
     );

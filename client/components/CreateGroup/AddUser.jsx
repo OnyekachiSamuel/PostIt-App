@@ -34,13 +34,13 @@ export class AddUser extends Component {
       this.props.fetchUsersRequest();
     }
   }
-/**
- *@return {null} Updates the state with array of filtered users matching search name
- */
+  /**
+   *@return {null} Updates the state with array of filtered users matching search name
+   */
   filterUsers() {
     const search = this.state.search.trim().toLowerCase();
     const filteredUsers = this.props.users
-    .filter((user) => { return user.username.toLowerCase().indexOf(search) !== -1; });
+      .filter((user) => { return user.username.toLowerCase().indexOf(search) !== -1; });
     this.setState({ users: filteredUsers });
   }
   /**
@@ -89,7 +89,7 @@ export class AddUser extends Component {
       this.setState({ users: [], usernames: [] });
     } else {
       Materialize.toast('You must select a group and a user before clicking the add button',
-       2000, 'green white-text rounded');
+        2000, 'green white-text rounded');
     }
   }
   /**
@@ -103,21 +103,21 @@ export class AddUser extends Component {
     if (groups && groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
-                <option value={group.groupId}
-                key= {index} ref= {group.groupId}>{group.groupName}</option>
+          <option value={group.groupId}
+            key={index} ref={group.groupId}>{group.groupName}</option>
         );
       });
     } else {
       groupComponent =
-                <option value="1" ref= "group">No Group Created yet</option>;
+        <option value="1" ref="group">No Group Created yet</option>;
     }
     const filteredUsers = users.map((user, index) => {
       return (
-      <p key={index}>
-        <input type="checkbox" onClick={this.onSelectUser}
-        value={user.username} id={user.id} name="username"/>
-        <label htmlFor={user.id}>{user.username}</label>
-      </p>
+        <p key={index}>
+          <input type="checkbox" onClick={this.onSelectUser}
+            value={user.username} id={user.id} name="username" />
+          <label htmlFor={user.id}>{user.username}</label>
+        </p>
       );
     }
     );
@@ -126,29 +126,29 @@ export class AddUser extends Component {
         <div className="container">
           <h3 className="center white green-text"> select and add user to a group</h3>
           <div className="select-margin">
-                <select className="browser-default" value={this.state.groupId}
-                name="groupId" onChange={ this.onChange }>
-                    <option value="1" defaultValue>Select Group</option>
-                    {groupComponent}
-                </select>
+            <select className="browser-default" value={this.state.groupId}
+              name="groupId" onChange={this.onChange}>
+              <option value="1" defaultValue>Select Group</option>
+              {groupComponent}
+            </select>
           </div>
           <div>
-          <form id="search-site" onSubmit={this.onSubmit}>
+            <form id="search-site" onSubmit={this.onSubmit}>
               <div className="input-group">
-                  <div className="input-field">
-                      <input id="search" placeholder="Search users"
+                <div className="input-field">
+                  <input id="search" placeholder="Search users"
                     onChange={this.handleSearch} type="search" name='q' />
-                      <label className="label-icon" htmlFor="search">
-                      <i className="material-icons" >search</i>
-                      </label>
-                  </div>
-                  <button type="submit" className="input-group-addon btn">Add</button>
+                  <label className="label-icon" htmlFor="search">
+                    <i className="material-icons" >search</i>
+                  </label>
+                </div>
+                <button type="submit" className="input-group-addon btn">Add</button>
               </div>
               {filteredUsers}
-          </form>
+            </form>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     );
   }
 }

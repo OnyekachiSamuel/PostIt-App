@@ -75,19 +75,19 @@ class SelectGroup extends React.Component {
     if (groups.length > 0) {
       selectGroup = groups.map((group, index) => {
         return (
-            <option value={group.groupId} key={index}>{group.groupName}</option>
+          <option value={group.groupId} key={index}>{group.groupName}</option>
         );
       });
     }
     if (!isEmpty(groupPost)) {
       groupPostComponent = groupPost.data.map((post, index) => {
         return (
-        <div className="input-field container" key={index}>
-           <div className="post"><p>Posted by <b>{post.username}</b></p></div>
+          <div className="input-field container" key={index}>
+            <div className="post"><p>Posted by <b>{post.username}</b></p></div>
             <div className="post-date"><p>{new Date(post.createdAt).toLocaleString()}</p></div>
             <input disabled value={post.message} id="disabled" type="text"
-            className="validate" style={{ color: 'green' }} />
-        </div>
+              className="validate" style={{ color: 'green' }} />
+          </div>
         );
       });
     } else {
@@ -95,30 +95,30 @@ class SelectGroup extends React.Component {
     }
     return (
       <div>
-      <div className="whitespace">
-    <div className="shift-left">
-        <div className="center container">
-            <select className="browser-default" name="groupId" onChange={this.onChange}>
+        <div className="whitespace">
+          <div className="shift-left">
+            <div className="center container">
+              <select className="browser-default" name="groupId" onChange={this.onChange}>
                 <option value="" defaultValue>Select Group</option>
                 {selectGroup}
-            </select>
-            <div/>
-            <div className="center view-btn">
-              <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
+              </select>
+              <div />
+              <div className="center view-btn">
+                <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-    </div>
-    <div className="whitespace">
-    <div className="shift-right">
-        <div>
-        <h3 className="center">Message Board</h3>
-        <div>
-          {groupPostComponent}
+        <div className="whitespace">
+          <div className="shift-right">
+            <div>
+              <h3 className="center">Message Board</h3>
+              <div>
+                {groupPostComponent}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-      </div>
       </div>
     );
   }
@@ -140,9 +140,11 @@ const mapStateToProps = (state) => {
 
 
 export default
-connect(mapStateToProps,
-  { fetchGroupPostRequest,
-    fetchUserGroupRequest,
-    archiveMessageRequest,
-    updateGroupId })(SelectGroup);
+  connect(mapStateToProps,
+    {
+      fetchGroupPostRequest,
+      fetchUserGroupRequest,
+      archiveMessageRequest,
+      updateGroupId
+    })(SelectGroup);
 

@@ -62,12 +62,14 @@ export class SignUpModal extends React.Component {
  * @param {obj} response
  */
   responseGoogle(response) {
-    this.setState({ name: response.w3.ig.toLowerCase(),
+    this.setState({
+      name: response.w3.ig.toLowerCase(),
       username: response.w3.ofa,
       email: response.w3.U3,
       password: '',
       confirmPassword: '',
-      phone: '' });
+      phone: ''
+    });
     this.props.googleAuthRequest(this.state);
   }
   /**
@@ -80,47 +82,50 @@ export class SignUpModal extends React.Component {
       <div className="row modal" id="modal1">
         <div className="modal-content">
           <div className="modal-title row">
-        <div className="col s6 m6">
-           <Link to="#" className="white-text">Sign up</Link>
-       </div>
-       <div className="close-modal">
-           <Link to="#" className="modal-close">Close</Link>
-       </div>
-       </div>
+            <div className="col s6 m6">
+              <Link to="#" className="white-text">Sign up</Link>
+            </div>
+            <div className="close-modal">
+              <Link to="#" className="modal-close">Close</Link>
+            </div>
+          </div>
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row test">
-              { !isEmpty(errors) && errors.name && <span className="err-msg">{errors.name}</span>}
+              {!isEmpty(errors) && errors.name && <span className="err-msg">{errors.name}</span>}
               <div className="input-field col s12 test">
                 <input id="name" name='name' value={this.state.name} placeholder="Full name"
-                type="text" onChange={this.onChange} className="validate" required/>
-                </div>
-              { !isEmpty(errors) && errors.username && <span className="err-msg">{errors.username}</span>}
+                  type="text" onChange={this.onChange} className="validate" required />
+              </div>
+              {!isEmpty(errors) && errors.username &&
+                <span className="err-msg">{errors.username}</span>}
               <div className="input-field col s12 test">
                 <input id="user_name" name="username" value={this.state.username}
-                onChange={this.onChange} type="text"
-                placeholder="Username" className="validate" required/>
+                  onChange={this.onChange} type="text"
+                  placeholder="Username" className="validate" required />
               </div>
-               { !isEmpty(errors) && errors.email && <span className="err-msg">{errors.email}</span>}
+              {!isEmpty(errors) && errors.email && <span className="err-msg">{errors.email}</span>}
               <div className="input-field col s12 test">
                 <input id="email" name="email" value={this.state.email} placeholder="Email"
-                onChange={this.onChange} type="email" className="validate" required/>
+                  onChange={this.onChange} type="email" className="validate" required />
               </div>
-               { !isEmpty(errors) && errors.phone && <span className="err-msg">{errors.phone}</span>}
-                 <div className="input-field col s12 test">
+              {!isEmpty(errors) && errors.phone && <span className="err-msg">{errors.phone}</span>}
+              <div className="input-field col s12 test">
                 <input id="phone" name="phone" value={this.state.phone} placeholder="Phone number"
-                onChange={this.onChange} type="tel" className="validate" required/>
+                  onChange={this.onChange} type="tel" className="validate" required />
               </div>
-               { !isEmpty(errors) && errors.password && <span className="err-msg">{errors.password}</span>}
+              {!isEmpty(errors) && errors.password &&
+                <span className="err-msg">{errors.password}</span>}
               <div className="input-field col s12 test">
                 <input id="password" name='password' value={this.state.password}
-                placeholder="Password"
-                onChange={this.onChange} type="password" className="validate" required/>
+                  placeholder="Password"
+                  onChange={this.onChange} type="password" className="validate" required />
               </div>
-               { !isEmpty(errors) && errors.confirmPassword && <span className="err-msg">{errors.confirmPassword}</span>}
+              {!isEmpty(errors) && errors.confirmPassword &&
+                <span className="err-msg">{errors.confirmPassword}</span>}
               <div className="input-field col s12 test" style={{ marginBottom: '10px' }}>
                 <input id="confirm_password" name='confirmPassword'
-                value={this.state.confirmPassword} placeholder="Confirm password"
-                onChange={this.onChange} type="password" className="validate" required/>
+                  value={this.state.confirmPassword} placeholder="Confirm password"
+                  onChange={this.onChange} type="password" className="validate" required />
               </div>
             </div>
             <div className="row">
@@ -131,11 +136,11 @@ export class SignUpModal extends React.Component {
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                   className="google-btn"
-                  />
+                />
               </div>
             </div>
             <div className="center"><button className="btn waves-effect waves-light"
-            type="submit" name="action">Submit</button></div>
+              type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>

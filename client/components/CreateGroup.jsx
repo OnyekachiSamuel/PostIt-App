@@ -34,7 +34,7 @@ class CreateGroup extends React.Component {
       },
       complete: function () { }
     }
-  );
+    );
     $('select').material_select();
   }
   /**
@@ -49,13 +49,13 @@ class CreateGroup extends React.Component {
   render() {
     return (
       <div>
-        <NavBar signOut={ this.signOut.bind(this)} redirectUrl = {'/'}/>
-        <WhiteBar/>
+        <NavBar signOut={this.signOut.bind(this)} redirectUrl={'/'} />
+        <WhiteBar />
         <div>
           <GroupList />
           <AddUser />
-         </div>
-        <GroupModal/>
+        </div>
+        <GroupModal />
       </div>
     );
   }
@@ -72,5 +72,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserGroupRequest, testAction })(withRouter(CreateGroup));
+export default connect(mapStateToProps,
+{ fetchUserGroupRequest, testAction })(withRouter(CreateGroup));
 

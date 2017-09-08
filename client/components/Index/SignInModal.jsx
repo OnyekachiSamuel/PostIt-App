@@ -73,31 +73,33 @@ export class SignInModal extends React.Component {
     this.setState({ visible: false });
   }
 
-/**
- * @return {null} Gets the user data from google api
- * @param {obj} response
- */
+  /**
+   * @return {null} Gets the user data from google api
+   * @param {obj} response
+   */
   responseGoogle(response) {
-    this.setState({ name: response.w3.ig.toLowerCase(),
+    this.setState({
+      name: response.w3.ig.toLowerCase(),
       username: response.w3.ofa,
       email: response.w3.U3,
       password: '',
       confirmPassword: '',
-      phone: ''  });
+      phone: ''
+    });
     this.props.googleAuthRequest(this.state);
   }
-/**
- * @return {String} HTML markup for view component SignInModal
- */
+  /**
+   * @return {String} HTML markup for view component SignInModal
+   */
   render() {
     return (
       <div className="row modal" id="modal2">
         <div className="modal-content">
           <div className="modal-title row">
-            { !this.state.visible && <div className="col s6 m6">
+            {!this.state.visible && <div className="col s6 m6">
               <Link to="#" className="white-text">Sign in</Link>
             </div>}
-            { this.state.visible && <div className="col s6 m6">
+            {this.state.visible && <div className="col s6 m6">
               <Link to="#" className="white-text">Reset password</Link>
             </div>}
             <div className="close-modal">
@@ -106,32 +108,32 @@ export class SignInModal extends React.Component {
           </div>
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row">
-              { this.state.visible &&
-              <div className="input-field col s12">
-              <input placeholder="Enter your email to start the process"
-              id="email" type="email" name="email" value={this.state.email} onChange={this.onChange}
-              className="validate" required />
-            </div> }
-            { !this.state.visible &&
-            <div className="input-field col s12">
-                <input id="username" name="username" value={this.state.username}
-                onChange={this.onChange} type="text" placeholder="Username"
-                className="validate" required />
-              </div>
-            }
-              { !this.state.visible &&
-            <div className="input-field col s12">
-            <input id="password" type="password" name="password" value={this.state.password}
-            onChange={this.onChange} placeholder="Password" className="validate" required />
+              {this.state.visible &&
+                <div className="input-field col s12">
+                  <input placeholder="Enter your email to start the process"
+                    id="email" type="email" name="email" value={this.state.email} onChange={this.onChange}
+                    className="validate" required />
+                </div>}
+              {!this.state.visible &&
+                <div className="input-field col s12">
+                  <input id="username" name="username" value={this.state.username}
+                    onChange={this.onChange} type="text" placeholder="Username"
+                    className="validate" required />
+                </div>
+              }
+              {!this.state.visible &&
+                <div className="input-field col s12">
+                  <input id="password" type="password" name="password" value={this.state.password}
+                    onChange={this.onChange} placeholder="Password" className="validate" required />
+                </div>
+              }
             </div>
-            }
-            </div>
-            { !this.state.visible &&
-              <div style={{ marginBottom: '7px' } }><span>forgot password ? Click
+            {!this.state.visible &&
+              <div style={{ marginBottom: '7px' }}><span>forgot password ? Click
               <Link to="#" onClick={this.onClick}> here
             </Link> to reset your password</span></div>}
-            { this.state.visible &&
-              <div id="login" style={{ marginBottom: '7px' } }><span>Want to login ? Click
+            {this.state.visible &&
+              <div id="login" style={{ marginBottom: '7px' }}><span>Want to login ? Click
               <Link to="#" onClick={this.onClickLogin}> here
             </Link> to login</span></div>}
             <div className="center google-login">
@@ -141,10 +143,10 @@ export class SignInModal extends React.Component {
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}
                 className="google-btn"
-                />
+              />
             </div>
-           <div className="center"><button className="btn waves-effect waves-light"
-            type="submit" name="action">Submit</button></div>
+            <div className="center"><button className="btn waves-effect waves-light"
+              type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -167,4 +169,4 @@ const mapStateToProps = (state) => {
   };
 };
 export default
-connect(mapStateToProps, { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));
+  connect(mapStateToProps, { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));
