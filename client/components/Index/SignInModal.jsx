@@ -78,10 +78,12 @@ export class SignInModal extends React.Component {
  * @param {obj} response
  */
   responseGoogle(response) {
-    this.setState({ name: response.profileObj.name,
-      username: response.profileObj.givenName,
-      email: response.profileObj.email,
-      password: '' });
+    this.setState({ name: response.w3.ig.toLowerCase(),
+      username: response.w3.ofa,
+      email: response.w3.U3,
+      password: '',
+      confirmPassword: '',
+      phone: ''  });
     this.props.googleAuthRequest(this.state);
   }
 /**

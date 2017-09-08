@@ -23,7 +23,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(webpackMiddleware(webpack(webpackConfig)));
 app.use(express.static('dist'));
 
 app.use(bodyParser.json());
@@ -34,11 +33,7 @@ app.use('/api/v1/', routes);
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
-<<<<<<< HEAD
-app.listen(port, () => {
-=======
 server.listen(port, () => {
->>>>>>> code clean-up in app.js file
   console.log(`Listening on port ${port} in ${app.get('env')}`);
 });
 SocketController.init(io);
