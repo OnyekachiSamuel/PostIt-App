@@ -62,9 +62,9 @@ export default class MessageController {
             const mailOptions = {
               from: `${req.decoded.name} <${req.decoded.email}>`, // sender address
               to: emails.toString(), // list of receivers
-              subject: priority, // Subject line
+              subject: `${priority} message`, // Subject line
               // text: content.message, // plain text body
-              html: `<b>${content.message}</b>`
+              html: `<b>${content.message}\n\n This message was sent through PostIt app.</b>`
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
@@ -93,9 +93,9 @@ export default class MessageController {
             const mailOptions = {
               from: `${req.decoded.username} <${req.decoded.email}>`, // sender address
               to: emails.toString(), // list of receivers
-              subject: priority, // Subject line
+              subject: `${priority} message`, // Subject line
               // text: content.message, // plain text body
-              html: `<b>${content.message}</b>`
+              html: `<b>${content.message}\n\n This message was sent through PostIt app.</b>`
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {

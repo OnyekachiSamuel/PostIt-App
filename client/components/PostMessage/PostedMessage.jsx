@@ -25,12 +25,12 @@ export class PostedMessage extends Component {
     if (messages && messages.length > 0) {
       messageComponent = messages.map((element, index) => {
         return (
-          <div className="input-field container" key={index}>
-            <div className="post"><p>Posted by <b>{element.username}</b></p></div>
+            <div key={index}>
+            <div><p>Posted by <b>{element.username}</b></p></div>
             <div className="post-date"><p>{new Date(element.createdAt).toLocaleString()}</p></div>
             <input disabled value={element.message} id="disabled" type="text"
               className="validate" style={{ color: 'green' }} />
-          </div>
+              </div>
         );
       });
     } else {
@@ -38,11 +38,11 @@ export class PostedMessage extends Component {
     }
     return (
       <div className="shift-right">
-        <Link className="waves-effect waves-light btn create-btn"
+        <Link className="waves-effect waves-light btn create-btn group-message"
           to="/messages">View message board</Link>
         <div>
           <h3 className="center">Messages</h3>
-          <div>
+          <div className="input-field container posts">
             {messageComponent}
           </div>
         </div>

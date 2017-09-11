@@ -24,6 +24,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(webpackMiddleware(webpack(webpackConfig)));
 app.use(express.static('dist'));
 
 app.use(bodyParser.json());

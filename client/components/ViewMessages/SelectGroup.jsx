@@ -82,12 +82,12 @@ class SelectGroup extends React.Component {
     if (!isEmpty(groupPost)) {
       groupPostComponent = groupPost.data.map((post, index) => {
         return (
-          <div className="input-field container" key={index}>
+            <div key={index}>
             <div className="post"><p>Posted by <b>{post.username}</b></p></div>
             <div className="post-date"><p>{new Date(post.createdAt).toLocaleString()}</p></div>
             <input disabled value={post.message} id="disabled" type="text"
               className="validate" style={{ color: 'green' }} />
-          </div>
+              </div>
         );
       });
     } else {
@@ -113,7 +113,7 @@ class SelectGroup extends React.Component {
           <div className="shift-right">
             <div>
               <h3 className="center">Message Board</h3>
-              <div>
+              <div className="input-field container posts" >
                 {groupPostComponent}
               </div>
             </div>

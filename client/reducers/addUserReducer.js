@@ -4,9 +4,11 @@ const initialState = {};
 const addUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER_SUCCESS:
-      return Object.assign({}, state, action.payload);
+    debugger;
+    console.log(action.payload, '======');
+      return {...action.payload}
     case ADD_USER_FAILURE:
-      return Object.assign({}, state, action.payload);
+      return {...action.payload};
     default:
       return state;
   }
