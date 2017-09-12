@@ -212,6 +212,9 @@ h4 {
     float: right;
     padding-right: 10px;
 }
+.right li {
+	display: inline-block;
+}
 button .right {
     color: #56ad55
 }
@@ -410,6 +413,10 @@ button .right {
 	background-color: #dd4b39 !important;
 	color: #fff;
 }
+.paginate-btn {
+	margin-left: 120px;
+	margin-top: 200px;
+}
 
 @media only screen and (max-width: 1284px) {
 	.group-box {
@@ -417,7 +424,7 @@ button .right {
 		overflow: scroll;
 	}
 	.posts {
-		max-height: 200px;
+		max-height: 400px;
 		overflow: scroll;
 	}
 	.create-btn {
@@ -584,3 +591,4 @@ button .right {
 	}
 
 }
+

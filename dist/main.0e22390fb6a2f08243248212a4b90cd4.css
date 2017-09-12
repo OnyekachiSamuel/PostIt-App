@@ -189,6 +189,9 @@ h4 {
   float: right;
   padding-right: 10px; }
 
+.right li {
+  display: inline-block; }
+
 button .right {
   color: #56ad55; }
 
@@ -380,12 +383,16 @@ button .right {
   background-color: #dd4b39 !important;
   color: #fff; }
 
+.paginate-btn {
+  margin-left: 120px;
+  margin-top: 200px; }
+
 @media only screen and (max-width: 1284px) {
   .group-box {
     max-height: 400px;
     overflow: scroll; }
   .posts {
-    max-height: 200px;
+    max-height: 400px;
     overflow: scroll; }
   .create-btn {
     padding: 0 16px; }
@@ -502,4 +509,4 @@ button .right {
     font-size: 0.8rem !important;
     padding: 0 18px !important; } }
 
-/*# sourceMappingURL=main.6902d338adaa2ca286056be16d28e5f9.css.map*/
+/*# sourceMappingURL=main.0e22390fb6a2f08243248212a4b90cd4.css.map*/
