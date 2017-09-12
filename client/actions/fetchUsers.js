@@ -10,10 +10,8 @@ export const fetchUsers = (payload) => {
 
 
 export const fetchUsersRequest = (userData) => {
-  console.log(userData.offset, 'userData====offset====');
   return (dispatch) => {
     return axios.get(`/api/v1/users?offset=${userData.offset}&search=${userData.search}`).then((response) => {
-      console.log(response, 'res');
       dispatch(fetchUsers(response));
     });
   };
