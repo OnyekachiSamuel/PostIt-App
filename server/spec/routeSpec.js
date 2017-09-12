@@ -256,8 +256,8 @@ describe('ROUTE TESTING', () => {
       .set('x-access-token', token)
       .expect(200)
       .end((err, res) => {
-        expect('Its working').toBe(res.body.data[0].message);
-        expect('Its pretty cool we consider React in this project').toBe(res.body.data[1].message);
+        expect('Its pretty cool we consider React in this project').toBe(res.body.data[0].message);
+        expect('Its working').toBe(res.body.data[1].message);
         done();
       });
     }, 1000);
@@ -317,7 +317,7 @@ describe('ROUTE TESTING', () => {
       request.post('/api/v1/signin')
         .send(user)
         .end((err, res) => {
-          expect('failed').toBe(res.body.status);
+          expect('Invalid Password').toBe(res.body.message);
           done(err);
         });
     }, 10000);
@@ -476,4 +476,3 @@ describe('ROUTE TESTING', () => {
     }, 10000);
   });
 });
-

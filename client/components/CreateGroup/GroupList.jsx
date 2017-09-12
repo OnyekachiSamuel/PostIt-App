@@ -24,7 +24,7 @@ export class GroupList extends Component {
     if (groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
-              <div className="btn-margin" key={index}><Link to={`${group.groupId}`}>{group.groupName}</Link></div>
+          <div className="btn-margin" key={index}><Link to={`${group.groupId}`}>{group.groupName}</Link></div>
         );
       });
     } else {
@@ -35,14 +35,14 @@ export class GroupList extends Component {
         <button className="waves-effect waves-light btn create-btn" data-target="modal3">
           Create group</button>
         <div>
-              <div>
-                <h3 className="center">Groups</h3>
-                  <div className="container center group-box">
-                    {groupComponent}
-                 </div>
-                 </div>
+          <div>
+            <h3 className="center">Groups</h3>
+            <div className="container center group-box">
+              {groupComponent}
             </div>
+          </div>
         </div>
+      </div>
     );
   }
 }

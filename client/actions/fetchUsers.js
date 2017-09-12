@@ -9,9 +9,9 @@ export const fetchUsers = (payload) => {
 };
 
 
-export const fetchUsersRequest = () => {
+export const fetchUsersRequest = (userData) => {
   return (dispatch) => {
-    return axios.get('/api/v1/users').then((response) => {
+    return axios.get(`/api/v1/users?offset=${userData.offset}&search=${userData.search}`).then((response) => {
       dispatch(fetchUsers(response));
     });
   };

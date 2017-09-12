@@ -173,7 +173,9 @@ h4 {
 }
 .test {
 	height: 60px;
+	margin-bottom: 0;
 }
+
 /*---------------------------------------------*/
 /* Create Group Styling
 /*---------------------------------------------*/
@@ -209,6 +211,9 @@ h4 {
 .right { 
     float: right;
     padding-right: 10px;
+}
+.right li {
+	display: inline-block;
 }
 button .right {
     color: #56ad55
@@ -388,4 +393,5 @@ button .right {
 .paginate {
 	max-height: 14px;
 }
+
 

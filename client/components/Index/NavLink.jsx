@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
  */
 const NavLink = () => {
   return (
-      <ul id="nav-mobile" className="right">
-        <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal1">
+    <ul id="nav-mobile" className="right">
+      <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal1">
         Sign Up</Link></li>
-        <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal2">
+      <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal2">
         Sign In</Link></li>
-      </ul>
+    </ul>
   );
 };
 

@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs';
 import User from '../models/user';
 
 export const forgotPassword = (req, res) => {
-  const payload = { message: 'Password reset' },
-    email = req.body.email,
+  const email = req.body.email;
+  const payload = { email },
     token = jwt.sign(payload, process.env.PASSWORD_RESET, {
       expiresIn: 5 * 60 * 60
     });
@@ -31,7 +31,8 @@ export const forgotPassword = (req, res) => {
         subject: 'Request for change of password',
         text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
           Please click on the following link, or paste this into your browser to complete the process:\n\n
-          http://${req.headers.host}/forgetPassword/${token}/${email}\n\n
+          This link will expire in 5 hours from the time it was sent.\n\n
+          http://${req.headers.host}/forgetPassword/${token}\n\n
           If you did not request this, please ignore this email and your password will remain unchanged.\n`
       };
       transporter.sendMail(mailOptions, (error, info) => {
@@ -48,7 +49,6 @@ export const forgotPassword = (req, res) => {
 export const resetPassword = (req, res) => {
   const password = req.body.password,
     confirmPassword = req.body.confirmPassword,
-    email = req.params.email,
     token = req.params.token;
   if (password && confirmPassword && (password === confirmPassword)) {
     if (token) {
@@ -57,6 +57,7 @@ export const resetPassword = (req, res) => {
         if (err) {
           return res.status(400).json({ message: 'Invalid token, try again' });
         }
+        const email = decoded.email;
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(password, salt, (err, hash) => {
         // Store hash in your password DB.
@@ -65,6 +66,8 @@ export const resetPassword = (req, res) => {
              if (result) {
                res.status(200).json({ message: 'You have successfully resetted your password.' });
              }
+           }).catch(() => {
+             res.status(500).json({ message: 'Internal server error' });
            });
           });
         });

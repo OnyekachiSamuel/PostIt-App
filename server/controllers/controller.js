@@ -96,7 +96,7 @@ export default class ApiController {
             token
           });
         } else {
-          res.json({ status: 'failed',
+          res.status(400).json({
             message: 'Invalid Password' });
         }
       } else {
@@ -204,17 +204,31 @@ export default class ApiController {
   }
 
 /**
- * @return {array} Returns array of objects
+ * @return {obj} Returns object containing pageCount and arrays of users
  * @param {*} req
  * @param {*} res
  */
-  static getAllUsers(req, res) {
-    User.findAll({ attributes: ['id', 'username'] })
-    .then((users) => {
-      if (users) {
-        res.status(200).json({ users });
-      }
-    });
+  static getUsers(req, res) {
+    const search = req.query.search;
+    const offset = req.query.offset;
+    if (search) {
+      User.findAndCountAll({
+        where: {
+          username: {
+            $like: `%${search}%`
+          }
+        },
+        offset,
+        limit: 5
+      })
+.then((result) => {
+  const pageCount = Math.ceil(result.count / 5),
+    users = result.rows;
+  res.status(200).json({ pageCount, users });
+});
+    } else {
+      res.status(200).json({ pageCount: 0, users: [] });
+    }
   }
 
 /**
@@ -234,6 +248,11 @@ export default class ApiController {
     });
     });
   }
+/**
+ * @return {Array} Returns arrays of groups a user belongs to
+ * @param {obj} req
+ * @param {obj} res
+ */
   static usersGroup(req, res) {
     const userId = req.params.userId;
     UsersGroup.findAll({ attributes: ['groupId'], where: { userId } })
@@ -252,6 +271,12 @@ export default class ApiController {
       }
     });
   }
+
+  /**
+   * @return {obj} Returns user token if a user is created
+   * @param {req} req
+   * @param {res} res
+   */
   static googleAuth(req, res) {
     const name = req.body.name, username = req.body.username.toLowerCase(), email = req.body.email;
     User.findOne({ where: { email } }).then((user) => {

@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 import colors from 'colors';
-import webpackConfig from '../webpack.config.prod';
+import webpackConfig from '../../webpack.config.prod';
 
 process.env.NODE_ENV = 'production';
 console.log('Generating minified bundle for production via webpack. This will take a moment...'.blue);

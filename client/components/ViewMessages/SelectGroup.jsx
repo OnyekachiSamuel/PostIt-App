@@ -1,7 +1,6 @@
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
 import { fetchGroupPostRequest, updateGroupId } from '../../actions/fetchGroupPost';
 import { archiveMessageRequest } from '../../actions/archiveMessage';
@@ -35,11 +34,11 @@ class SelectGroup extends React.Component {
   }
   /**
    * @return {null} Updates the state
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
@@ -70,24 +69,23 @@ class SelectGroup extends React.Component {
   render() {
     const { groups } = this.props;
     const { groupPost } = this.props;
-    const groupCreator = groupPost.groupCreator;
     let selectGroup, groupPostComponent;
     if (groups.length > 0) {
       selectGroup = groups.map((group, index) => {
         return (
-            <option value={group.groupId} key={index}>{group.groupName}</option>
+          <option value={group.groupId} key={index}>{group.groupName}</option>
         );
       });
     }
     if (!isEmpty(groupPost)) {
       groupPostComponent = groupPost.data.map((post, index) => {
         return (
-        <div className="input-field container" key={index}>
-            <input disabled value={post.message} id="disabled" type="text"
-            className="validate" />
-            <div className="post"><p><b>posted by {post.username}</b></p></div>
+            <div key={index}>
+            <div className="post"><p>Posted by <b>{post.username}</b></p></div>
             <div className="post-date"><p>{new Date(post.createdAt).toLocaleString()}</p></div>
-        </div>
+            <input disabled value={post.message} id="disabled" type="text"
+              className="validate" style={{ color: 'green' }} />
+              </div>
         );
       });
     } else {
@@ -95,34 +93,30 @@ class SelectGroup extends React.Component {
     }
     return (
       <div>
-      <div className="whitespace">
-    <div className="shift-left">
-        <div className="center container">
-            <select className="browser-default" name="groupId" onChange={this.onChange}>
+        <div className="whitespace">
+          <div className="shift-left">
+            <div className="center container">
+              <select className="browser-default" name="groupId" onChange={this.onChange}>
                 <option value="" defaultValue>Select Group</option>
                 {selectGroup}
-            </select>
-            <div/>
-            <div className="center view-btn">
+              </select>
+              <div />
+              <div className="center view-btn">
               <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
+              </div>
             </div>
-            {groupCreator && this.state.clicked &&
-            <div className="archive-div"> <Link to="#" onClick={this.archiveHandler}>
-            <i className="small material-icons">archive</i> </Link>
-            <div><span>Click the above icon to archive read message(s)</span></div></div>}
+          </div>
         </div>
-    </div>
-    </div>
-    <div className="whitespace">
-    <div className="shift-right">
-        <div>
-        <h3 className="center">Message Board</h3>
-        <div>
-          {groupPostComponent}
+        <div className="whitespace">
+          <div className="shift-right">
+            <div>
+              <h3 className="center">Message Board</h3>
+              <div className="input-field container posts" >
+                {groupPostComponent}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-      </div>
       </div>
     );
   }
@@ -142,11 +136,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-
-export default
-connect(mapStateToProps,
-  { fetchGroupPostRequest,
+export default connect(mapStateToProps,
+  {
+    fetchGroupPostRequest,
     fetchUserGroupRequest,
     archiveMessageRequest,
-    updateGroupId })(SelectGroup);
+    updateGroupId
+  })(SelectGroup);
 

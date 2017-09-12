@@ -16,6 +16,7 @@ export default class Validator {
       username = req.body.username,
       email = req.body.email,
       password = req.body.password,
+      phone = req.body.phone,
       confirmPassword = req.body.confirmPassword;
     if (name === undefined || username === undefined || password === undefined || email === undefined || confirmPassword === undefined) {
       res.json({ message: 'Name, Username, Email, Password and ConfirmPassword fields are required' });
@@ -45,7 +46,10 @@ export default class Validator {
         errors.confirmPassword = 'Confirm password field should not be empty';
       }
       if (!validator.equals(password, confirmPassword)) {
-        errors.confirmPassword = 'Password mismatch. Retype your password';
+        errors.confirmPassword = 'Password mismatch';
+      }
+      if (!validator.isInt(phone)) {
+        errors.phone = 'Invalid phone number';
       }
       const result = {
         errors,

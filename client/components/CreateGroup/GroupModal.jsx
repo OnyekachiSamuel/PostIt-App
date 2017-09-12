@@ -28,10 +28,8 @@ export class SelectGroup extends Component {
   onSubmit(event) {
     event.preventDefault();
     this.props.createGroupRequest(this.state)
-    .then(() => {
-    }).catch((error) => {
-      Materialize.toast(error.response.data.message, 2000, 'red white-text rounded');
-    });
+      .then(() => {
+      });
   }
   /**
    * @return {null} updates the state with group details as the user types into the input fields
@@ -52,7 +50,7 @@ export class SelectGroup extends Component {
           <div className="modal-title row">
             <div className="col s6 m6">
               <Link to="#" className="white-text">Group Details</Link>
-              </div>
+            </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
             </div>
@@ -61,19 +59,19 @@ export class SelectGroup extends Component {
             <div className="row">
               <div className="input-field col s12">
                 <input id="groupName" name="groupName" value={this.state.groupName}
-                onChange={this.onChange} type="text" className="validate"/>
+                  onChange={this.onChange} type="text" className="validate" />
                 <label htmlFor="groupName">Group name</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input id="description" name="description" value={this.state.description}
-                onChange={this.onChange} type="text" className="validate"/>
+                  onChange={this.onChange} type="text" className="validate" />
                 <label htmlFor="password">Description</label>
               </div>
             </div>
             <button className="btn waves-effect waves-light modal-close modal-btn"
-            type="submit" name="action">Create</button>
+              type="submit" name="action">Create</button>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>

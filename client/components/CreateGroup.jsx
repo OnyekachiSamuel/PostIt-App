@@ -8,7 +8,6 @@ import WhiteBar from '../components/WhiteBar.jsx';
 import GroupModal from './CreateGroup/GroupModal.jsx';
 import GroupList from './CreateGroup/GroupList.jsx';
 import AddUser from './CreateGroup/AddUser.jsx';
-import Footer from './Footer.jsx';
 import { fetchUserGroupRequest } from '../actions/fetchUserGroups';
 import { testAction } from '../actions/addUserAction';
 
@@ -20,8 +19,6 @@ class CreateGroup extends React.Component {
    * @return {null} makes the jQuery function available on component mount
    */
   componentDidMount() {
-    const token = localStorage.getItem('token');
-    this.props.testAction({ token });
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
     $('.modal').modal({
@@ -36,7 +33,7 @@ class CreateGroup extends React.Component {
       },
       complete: function () { }
     }
-  );
+    );
     $('select').material_select();
   }
   /**
@@ -58,7 +55,6 @@ class CreateGroup extends React.Component {
           <AddUser />
          </div>
         <GroupModal/>
-        <Footer/>
       </div>
     );
   }
@@ -76,5 +72,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUserGroupRequest, testAction })(withRouter(CreateGroup));
+
+export default connect(mapStateToProps,
+{ fetchUserGroupRequest, testAction })(withRouter(CreateGroup));
 

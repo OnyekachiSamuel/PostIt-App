@@ -1,10 +1,10 @@
 import { FETCH_USERS_SUCCESS } from '../actions/actionTypes';
 
-const initialState = [];
+const initialState = {};
 const fetchUsersReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_USERS_SUCCESS:
-      return [...state, ...action.payload.data.users];
+      return {...action.payload.data};
     default:
       return state;
   }
