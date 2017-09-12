@@ -7,7 +7,7 @@ import { addUserRequest } from '../../actions/addUserAction';
 /**
  * @class AddUser
  */
-class AddUser extends Component {
+export class AddUser extends Component {
   /**
    * Initialize the state and bind functions
    * @param {obj} props
@@ -19,10 +19,12 @@ class AddUser extends Component {
       users: [],
       username: '',
       groupId: '',
+      usernames: []
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSelectUser = this.onSelectUser.bind(this);
   }
   /**
    *@return {null} Triggers the action to fetch all users after the render method has been executed
@@ -32,13 +34,13 @@ class AddUser extends Component {
       this.props.fetchUsersRequest();
     }
   }
-/**
- *@return {null} Updates the state with array of filtered users matching search name
- */
+  /**
+   *@return {null} Updates the state with array of filtered users matching search name
+   */
   filterUsers() {
     const search = this.state.search.trim().toLowerCase();
     const filteredUsers = this.props.users
-    .filter((user) => { return user.username.toLowerCase().indexOf(search) !== -1; });
+      .filter((user) => { return user.username.toLowerCase().indexOf(search) !== -1; });
     this.setState({ users: filteredUsers });
   }
   /**
@@ -64,21 +66,30 @@ class AddUser extends Component {
     this.setState(state);
   }
   /**
-   * @return {null} triggers an addUserRequest action on click of submit button
-   * @param {e} e
+   * @return {null} Updates the state and adds a user on click of checkbox
+   * @param {event} event
    */
-  onSubmit(e) {
-    e.preventDefault();
-    if (this.state.username && this.state.groupId) {
-      const ids = {
-        username: this.state.username,
-        groupId: this.state.groupId
-      };
-      this.props.addUserRequest(ids, this.state.groupId);
-      this.setState({ users: [] });
+  onSelectUser(event) {
+    this.state.usernames.push(event.target.value);
+  }
+  /**
+   * @return {null} triggers an addUserRequest action on click of submit button
+   * @param {event} event
+   */
+  onSubmit(event) {
+    event.preventDefault();
+    if (this.state.usernames && this.state.groupId) {
+      this.state.usernames.forEach((user) => {
+        const ids = {
+          username: user,
+          groupId: this.state.groupId
+        };
+        this.props.addUserRequest(ids, this.state.groupId);
+      });
+      this.setState({ users: [], usernames: [] });
     } else {
       Materialize.toast('You must select a group and a user before clicking the add button',
-       2000, 'green white-text rounded');
+        2000, 'green white-text rounded');
     }
   }
   /**
@@ -92,52 +103,52 @@ class AddUser extends Component {
     if (groups && groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
-                <option value={group.groupId}
-                key= {index} ref= {group.groupId}>{group.groupName}</option>
+          <option value={group.groupId}
+            key={index} ref={group.groupId}>{group.groupName}</option>
         );
       });
     } else {
       groupComponent =
-                <option value="1" ref= "group">No Group Created yet</option>;
+        <option value="1" ref="group">No Group Created yet</option>;
     }
     const filteredUsers = users.map((user, index) => {
       return (
-      <p key={index}>
-        <input type="checkbox" onClick={this.onChange}
-        value={user.username} id={user.id} name="username"/>
-        <label htmlFor={user.id}>{user.username}</label>
-      </p>
+        <p key={index}>
+          <input type="checkbox" onClick={this.onSelectUser}
+            value={user.username} id={user.id} name="username" />
+          <label htmlFor={user.id}>{user.username}</label>
+        </p>
       );
     }
     );
     return (
       <div className="shift-right">
         <div className="container">
-            <h3 className="center">Select and add user to a group</h3>
+          <h3 className="center white green-text"> select and add user to a group</h3>
           <div className="select-margin">
-                <select className="browser-default" value={this.state.groupId}
-                name="groupId" onChange={ this.onChange }>
-                    <option value="1" defaultValue>Select Group</option>
-                    {groupComponent}
-                </select>
+            <select className="browser-default" value={this.state.groupId}
+              name="groupId" onChange={this.onChange}>
+              <option value="1" defaultValue>Select Group</option>
+              {groupComponent}
+            </select>
           </div>
           <div>
-          <form id="search-site" onSubmit={this.onSubmit}>
+            <form id="search-site" onSubmit={this.onSubmit}>
               <div className="input-group">
-                  <div className="input-field">
-                      <input id="search" placeholder="Search users"
+                <div className="input-field">
+                  <input id="search" placeholder="Search users"
                     onChange={this.handleSearch} type="search" name='q' />
-                      <label className="label-icon" htmlFor="search">
-                      <i className="material-icons" >search</i>
-                      </label>
-                  </div>
-                  <button type="submit" className="input-group-addon btn">Add</button>
+                  <label className="label-icon" htmlFor="search">
+                    <i className="material-icons" >search</i>
+                  </label>
+                </div>
+                <button type="submit" className="input-group-addon btn">Add</button>
               </div>
               {filteredUsers}
-          </form>
+            </form>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
     );
   }
 }

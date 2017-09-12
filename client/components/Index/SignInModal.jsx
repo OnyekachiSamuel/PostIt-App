@@ -32,11 +32,11 @@ export class SignInModal extends React.Component {
   }
   /**
    * @return {null} Triggers the signinRequest action on click of submit button
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
+  onSubmit(event) {
     this.setState({ errors: {} });
-    e.preventDefault();
+    event.preventDefault();
     if (!this.state.visible) {
       this.props.signInRequest(this.state);
     } else if (this.state.visible) {
@@ -53,11 +53,11 @@ export class SignInModal extends React.Component {
   }
   /**
    * @return {null} Updates the state as the user types into the input the fields
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
@@ -73,29 +73,33 @@ export class SignInModal extends React.Component {
     this.setState({ visible: false });
   }
 
-/**
- * @return {null} Gets the user data from google api
- * @param {obj} response
- */
+  /**
+   * @return {null} Gets the user data from google api
+   * @param {obj} response
+   */
   responseGoogle(response) {
-    this.setState({ name: response.profileObj.name,
+    this.setState({
+      name: response.profileObj.name.toLowerCase(),
       username: response.profileObj.givenName,
       email: response.profileObj.email,
-      password: '' });
+      password: '',
+      confirmPassword: '',
+      phone: ''
+    });
     this.props.googleAuthRequest(this.state);
   }
-/**
- * @return {String} HTML markup for view component SignInModal
- */
+  /**
+   * @return {String} HTML markup for view component SignInModal
+   */
   render() {
     return (
       <div className="row modal" id="modal2">
         <div className="modal-content">
           <div className="modal-title row">
-            { !this.state.visible && <div className="col s6 m6">
+            {!this.state.visible && <div className="col s6 m6">
               <Link to="#" className="white-text">Sign in</Link>
             </div>}
-            { this.state.visible && <div className="col s6 m6">
+            {this.state.visible && <div className="col s6 m6">
               <Link to="#" className="white-text">Reset password</Link>
             </div>}
             <div className="close-modal">
@@ -104,44 +108,45 @@ export class SignInModal extends React.Component {
           </div>
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row">
-              { this.state.visible &&
-              <div className="input-field col s12">
-              <input placeholder="Enter your email to start the process"
-              id="email" type="email" name="email" value={this.state.email} onChange={this.onChange}
-              className="validate" required />
-            </div> }
-            { !this.state.visible &&
-            <div className="input-field col s12">
-                <input id="username" name="username" value={this.state.username}
-                onChange={this.onChange} type="text" placeholder="Username"
-                className="validate" required />
-              </div>
-            }
-              { !this.state.visible &&
-            <div className="input-field col s12">
-            <input id="password" type="password" name="password" value={this.state.password}
-            onChange={this.onChange} placeholder="Password" className="validate" required />
+              {this.state.visible &&
+                <div className="input-field col s12">
+                  <input placeholder="Enter your email to start the process"
+                    id="email" type="email" name="email" value={this.state.email} onChange={this.onChange}
+                    className="validate" required />
+                </div>}
+              {!this.state.visible &&
+                <div className="input-field col s12">
+                  <input id="username" name="username" value={this.state.username}
+                    onChange={this.onChange} type="text" placeholder="Username"
+                    className="validate" required />
+                </div>
+              }
+              {!this.state.visible &&
+                <div className="input-field col s12">
+                  <input id="password" type="password" name="password" value={this.state.password}
+                    onChange={this.onChange} placeholder="Password" className="validate" required />
+                </div>
+              }
             </div>
-            }
-            </div>
-            { !this.state.visible &&
-              <div style={{ marginBottom: '7px' } }><span>forgot password ? Click
+            {!this.state.visible &&
+              <div style={{ marginBottom: '7px' }}><span>forgot password ? Click
               <Link to="#" onClick={this.onClick}> here
             </Link> to reset your password</span></div>}
-            { this.state.visible &&
-              <div style={{ marginBottom: '7px' } }><span>Want to login ? Click
+            {this.state.visible &&
+              <div id="login" style={{ marginBottom: '7px' }}><span>Want to login ? Click
               <Link to="#" onClick={this.onClickLogin}> here
             </Link> to login</span></div>}
             <div className="center google-login">
               <GoogleLogin
-                clientId="195109658910-hgbqa30ei6r1bd58o0i8q1u77j0l15vt.apps.googleusercontent.com"
+                clientId="1096080119344-dhkm3kesj85jq2au401j1ur243vo58np.apps.googleusercontent.com"
                 buttonText="+Google Login"
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}
-                />
+                className="google-btn"
+              />
             </div>
-            <button className="btn waves-effect waves-light modal-close"
-            type="submit" name="action">Submit</button>
+            <div className="center"><button className="btn waves-effect waves-light"
+              type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -164,4 +169,4 @@ const mapStateToProps = (state) => {
   };
 };
 export default
-connect(mapStateToProps, { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));
+  connect(mapStateToProps, { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));

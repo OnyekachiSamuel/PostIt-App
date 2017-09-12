@@ -4,18 +4,15 @@ import { Link } from 'react-router-dom';
 /**
  * @class
  */
-export class NavLink extends React.Component {
-  /**
-   * @return {String} HTML markup for view component of NavLink
-   */
-  render() {
-    return (
-      <ul id="nav-mobile" className="right">
-        <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal1">Sign Up</Link></li>
-        <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal2">Sign In</Link></li>
-      </ul>
-    );
-  }
-}
+const NavLink = () => {
+  return (
+    <ul id="nav-mobile" className="right">
+      <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal1">
+        Sign Up</Link></li>
+      <li><Link className="waves-effect waves-light btn sign-btn" to="#" data-target="modal2">
+        Sign In</Link></li>
+    </ul>
+  );
+};
 
 export default NavLink;

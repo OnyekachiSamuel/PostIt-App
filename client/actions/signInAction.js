@@ -20,12 +20,12 @@ export const signInFailure = (payload) => {
 export const userSignInRequest = (userData) => {
   return (dispatch) => {
     return axios.post('/api/v1/signin', userData).then((response) => {
-      if (response.status === 200) {
-        const {
+      const {
           token
         } = response.data;
-        window.localStorage.setItem('token', token);
+      if (response.status === 200 && token) {
         dispatch(signIn(jwt.decode(token)));
+        window.localStorage.setItem('token', token);
         location.href = '/group';
       }
     }).catch((error) => {

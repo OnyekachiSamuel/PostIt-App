@@ -12,7 +12,7 @@ import { userSignInRequest } from '../actions/signInAction';
 /**
  * @class HomePage
  */
-export class LandingPage extends React.Component {
+class LandingPage extends React.Component {
   /**
    * @return {null} makes the jQuery function available on component mount
    */
@@ -39,15 +39,15 @@ export class LandingPage extends React.Component {
           <nav>
             <div className="nav-wrapper" >
               <Link to="#">POST IT</Link>
-              <NavLink/>
+              <NavLink />
             </div>
           </nav>
-          <Title/>
+          <Title />
           <SignUpModal
             loginSuccess={this.loginSuccess.bind(this)}
-           signUpRequest={ signUpRequest } />
-          <SignInModal signInRequest = { signInRequest }
-          loginSuccess={this.loginSuccess.bind(this)} />
+            signUpRequest={signUpRequest} />
+          <SignInModal signInRequest={signInRequest}
+            loginSuccess={this.loginSuccess.bind(this)} />
         </header>
       </div>
     );

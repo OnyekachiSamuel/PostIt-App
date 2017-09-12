@@ -5,7 +5,7 @@ import WhiteBar from '../components/WhiteBar.jsx';
 import ComposeMessage from './PostMessage/ComposeMessage.jsx';
 import PostedMessage from './PostMessage/PostedMessage.jsx';
 import ViewMembers from './PostMessage/ViewMembersModal.jsx';
-import Footer from './Footer.jsx';
+
 
 /**
  * @class BroadcastMessage
@@ -19,9 +19,9 @@ class BroadcastMessage extends React.Component {
     $('select').material_select();
     $('.modal').modal();
   }
-/**
-   * @return {null} navigates to the landing page
-   */
+  /**
+     * @return {null} navigates to the landing page
+     */
   signOut() {
     this.props.history.push('/');
   }
@@ -31,12 +31,11 @@ class BroadcastMessage extends React.Component {
   render() {
     return (
       <div>
-        <NavBar signOut={this.signOut.bind(this)}/>
+        <NavBar signOut={this.signOut.bind(this)} redirectUrl = {'/group'}/>
           <WhiteBar />
           <ViewMembers />
           <ComposeMessage />
           <PostedMessage />
-          <Footer />
       </div>
     );
   }

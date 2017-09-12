@@ -7,7 +7,7 @@ import { createGroupRequest } from '../../actions/groupAction';
 /**
  * @class
  */
-class SelectGroup extends Component {
+export class SelectGroup extends Component {
   /**
    * @return {null} Initializes the state
    * @param {obj} props
@@ -23,21 +23,21 @@ class SelectGroup extends Component {
   }
   /**
    * @return {null} Triggers the createGroup action that updates the store with group details
-   * @param {e} e
+   * @param {event} event
    */
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.createGroupRequest(this.state)
-    .then(() => {
-    });
+      .then(() => {
+      });
   }
   /**
    * @return {null} updates the state with group details as the user types into the input fields
-   * @param {e} e
+   * @param {event} event
    */
-  onChange(e) {
+  onChange(event) {
     const state = this.state;
-    state[e.target.name] = e.target.value;
+    state[event.target.name] = event.target.value;
     this.setState(state);
   }
   /**
@@ -50,7 +50,7 @@ class SelectGroup extends Component {
           <div className="modal-title row">
             <div className="col s6 m6">
               <Link to="#" className="white-text">Group Details</Link>
-              </div>
+            </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
             </div>
@@ -59,19 +59,19 @@ class SelectGroup extends Component {
             <div className="row">
               <div className="input-field col s12">
                 <input id="groupName" name="groupName" value={this.state.groupName}
-                onChange={this.onChange} type="text" className="validate"/>
+                  onChange={this.onChange} type="text" className="validate" />
                 <label htmlFor="groupName">Group name</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
                 <input id="description" name="description" value={this.state.description}
-                onChange={this.onChange} type="text" className="validate"/>
+                  onChange={this.onChange} type="text" className="validate" />
                 <label htmlFor="password">Description</label>
               </div>
             </div>
             <button className="btn waves-effect waves-light modal-close modal-btn"
-            type="submit" name="action">Create</button>
+              type="submit" name="action">Create</button>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
