@@ -23,7 +23,7 @@ endpoints:
 - Navigate to your terminal and change your directory to the PostIt-App project directory.
 - Run `npm install` to install the dependencies in the package.json file 
 - Run `npm run start-dev` to start the app
-- Run `npm run test-server` to run the server-side tests
+- Run `gulp coverage` to run the server-side tests
 - Run `npm test` to run the client-side tests
 - Test for endpoints can be done with postman
 

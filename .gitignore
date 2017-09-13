@@ -7,5 +7,4 @@ server/OrigModel/
 server/models/index.js
 .DS_Store
 template/
-__tests__
 .env
