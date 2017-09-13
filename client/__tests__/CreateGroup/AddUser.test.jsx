@@ -8,7 +8,10 @@ const props = {
   fetchUsersRequest: jest.fn(),
   addUserRequest: jest.fn(),
   users: ['Ken', 'Ben', 'Ken'],
-  toLowerCase: jest.fn()
+  searchResult: {
+    pageCount: 6,
+    users: ['Samuel', 'Kachi', 'John']
+  }
 };
 describe('<AddUser />', () => {
   it('Component should render correctly', () => {

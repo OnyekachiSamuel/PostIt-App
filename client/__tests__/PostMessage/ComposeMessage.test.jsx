@@ -18,11 +18,11 @@ describe('<ComposeMessage />', () => {
     const wrapper = shallow(<ComposeMessage { ...props }/>);
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');
-    expect(tree.props).toEqual({ "className": "shift-left" });
+    expect(tree.props).toEqual({ className: 'shift-left' });
   });
   describe('Test for onChange event', () => {
     it('should update the state on in input', () => {
-      const wrapper = shallow(<ComposeMessage  {...props}/>);
+      const wrapper = shallow(<ComposeMessage {...props}/>);
       const event = {
         target: {
           name: 'message',

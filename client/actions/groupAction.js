@@ -22,7 +22,7 @@ export const createGroupRequest = (groupData) => {
         dispatch(createGroupSuccess(res.data.data));
       }
     }).catch((error) => {
-      dispatch(createGroupFailure(error.response.data));
+      dispatch(createGroupFailure(error.response.data.message));
       throw error;
     });
   };

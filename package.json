@@ -1,11 +1,9 @@
 {
   "name": "post-it-app",
   "jest": {
-    "coveragePathIgnorePatterns": ["<rootDir>/client/socket/socketController.js",
+    "coveragePathIgnorePatterns": [
     "<rootDir>/client/utils/setAuthorizationToken.js",
-    "<rootDir>/client/actions/fetchGroupPost.js",
-    "<rootDir>/client/actions/postAction.js",
-    "<rootDir>/client/actions/signOutAction.js"
+    "<rootDir>/client/actions/fetchGroupPost.js"
     ]
   },
   "version": "1.0.0",

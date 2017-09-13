@@ -6,7 +6,7 @@ import { signOutRequest } from '../../actions/signOutAction';
 /**
  * @class NavBar
  */
-class NavBar extends React.Component {
+export class NavBar extends React.Component {
   /**
    * @return {null} Initializes the state and method binding
    * @param {obj} props
@@ -22,6 +22,7 @@ class NavBar extends React.Component {
    * @return {null} Triggers the signoutRequest action on click of signout button
    */
   onClick() {
+    console.warn('MMSMSMSMSMMS');
     this.props.signOutRequest(this.state);
     this.props.signOut();
   }

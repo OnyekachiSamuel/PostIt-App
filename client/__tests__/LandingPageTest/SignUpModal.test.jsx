@@ -6,7 +6,15 @@ import { SignUpModal } from '../../components/Index/SignUpModal.jsx';
 
 const props = {
   signUpRequest: jest.fn(),
-  googleAuthRequest: jest.fn()
+  googleAuthRequest: jest.fn(),
+  signup: {
+    errors: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  }
 };
 describe('<SignUpModal />', () => {
   it('Component should render correctly', () => {

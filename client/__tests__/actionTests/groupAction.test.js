@@ -2,7 +2,7 @@ import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { createGroupRequest } from '../../actions/groupAction';
-import { GROUP_CREATION_SUCCESS, GROUP_CREATION_FAILURE } from '../../actions/actionTypes';
+import { GROUP_CREATION_SUCCESS } from '../../actions/actionTypes';
 
 
 const middleware = [thunk];
@@ -13,7 +13,7 @@ describe('CREATE GROUP ACTION', () => {
     const groupData = {
       groupName: 'Andela team 6',
       description: 'The winning team'
-    }
+    };
     const response = {
       status: 200,
       data: {
@@ -27,11 +27,11 @@ describe('CREATE GROUP ACTION', () => {
     };
     const expectedAction = {
       type: GROUP_CREATION_SUCCESS,
-      userData:  {
-          groupId: 67,
-          groupName: 'Andela team 6',
-          description: 'The winning team'
-        }
+      userData: {
+        groupId: 67,
+        groupName: 'Andela team 6',
+        description: 'The winning team'
+      }
     };
     axios.post = jest.fn(() => {
       return Promise.resolve(response);

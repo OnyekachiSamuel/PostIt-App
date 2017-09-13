@@ -8,7 +8,7 @@ import { archiveMessageRequest } from '../../actions/archiveMessage';
 /**
  * @class
  */
-class SelectGroup extends React.Component {
+export class SelectGroup extends React.Component {
   /**
    * @return {null} Initializes the state
    * @param {obj} props
@@ -21,7 +21,6 @@ class SelectGroup extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.archiveHandler = this.archiveHandler.bind(this);
   }
   /**
    * @return {null} Triggers the fetchGroupRequest action to fetch groups on component mount
@@ -49,18 +48,6 @@ class SelectGroup extends React.Component {
       this.props.fetchGroupPostRequest(this.state.groupId);
       this.props.updateGroupId({ Id: this.state.groupId });
       this.setState({ clicked: true });
-    }
-  }
-  /**
-   * @return {null} Returns null; Triggers action to archive read messages
-   */
-  archiveHandler() {
-    const { groupId } = this.props;
-    if (groupId.Id) {
-      this.props.archiveMessageRequest(groupId.Id).then(() => {
-        Materialize.toast('Message(s) successfully archived', 2000, 'green white-text rounded');
-      });
-      this.setState({ clicked: false });
     }
   }
   /**

@@ -37,7 +37,7 @@ describe('<SignInModal />', () => {
       const btn = wrapper.find('.btn');
       btn.simulate('click', mockOnSubmit());
       expect(mockOnSubmit.calledOnce).toBe(true);
-      expect(btn.node.props.className).toBe('btn waves-effect waves-light modal-close');
+      expect(btn.node.props.className).toBe('btn waves-effect waves-light');
       expect(btn.node.props.type).toBe('submit');
       expect(btn.node.props.name).toBe('action');
       expect(btn.node.props.children).toBe('Submit');

@@ -28,7 +28,7 @@ export const fetchGroupPostRequest = (groupId) => {
       if (data.length > 0) {
         dispatch(fetchPost(result));
       } else {
-        Materialize.toast('No message posted to this group yet', 2000, 'yellow white-text rounded');
+        Materialize.toast('No message posted to this group yet', 2000, 'red white-text rounded');
       }
     });
   };

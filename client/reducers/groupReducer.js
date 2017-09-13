@@ -7,6 +7,8 @@ const groupReducer = (state = initialState, action) => {
       return [...state, action.userData];
     case FETCH_USER_GROUPS:
       return [...action.payload.groups];
+    case GROUP_CREATION_FAILURE:
+      return [action.errors];
     default:
       return state;
   }
