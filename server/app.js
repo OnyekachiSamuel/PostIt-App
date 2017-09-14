@@ -1,18 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import env from 'dotenv';
-import webpack from 'webpack';
-import { createServer } from 'http';
-import webpackMiddleware from 'webpack-dev-middleware';
 import routes from './routes/index';
-import webpackConfig from '../webpack.config';
-import SocketController from './socket/socketController';
 
 
 env.config();
 const app = express();
-const server = createServer(app);
-const io = require('socket.io')(server);
 
 const port = process.env.PORT || 3000;
 
@@ -34,8 +27,8 @@ app.use('/api/v1/', routes);
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
-server.listen(port, () => {
+app.listen('3000', () => {
   console.log(`Listening on port ${port} in ${app.get('env')}`);
 });
-SocketController.init(io);
-export default server;
+export default app;
+

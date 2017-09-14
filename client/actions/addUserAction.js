@@ -1,21 +1,10 @@
 import axios from 'axios';
-import sC from '../socket/socketController';
 import { ADD_USER_SUCCESS, ADD_USER_FAILURE, RESET_COUNT } from './actionTypes';
 
 export const addUserSuccess = (payload) => {
   return {
     type: ADD_USER_SUCCESS,
     payload
-  };
-};
-
-export const testAction = (payload) => {
-  const socket = sC.getSocket();
-  setTimeout(() => {
-    socket.emit('register-groups', Object.assign({}, { socketId: socket.id }, payload));
-  }, 0);
-  return {
-    type: 'null'
   };
 };
 

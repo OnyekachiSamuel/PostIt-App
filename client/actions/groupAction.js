@@ -22,8 +22,7 @@ export const createGroupRequest = (groupData) => {
         dispatch(createGroupSuccess(res.data.data));
       }
     }).catch((error) => {
-      dispatch(createGroupFailure(error.response.data));
-      Materialize.toast(error.response.data.message, 2000, 'red white-text rounded');
+      dispatch(createGroupFailure(error.response.data.message));
       throw error;
     });
   };

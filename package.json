@@ -1,5 +1,11 @@
 {
   "name": "post-it-app",
+  "jest": {
+    "coveragePathIgnorePatterns": [
+    "<rootDir>/client/utils/setAuthorizationToken.js",
+    "<rootDir>/client/actions/fetchGroupPost.js"
+    ]
+  },
   "version": "1.0.0",
   "engines": {
     "node": "6.11.3"

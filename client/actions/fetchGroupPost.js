@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { GROUP_MESSAGE_SUCCESS , UPDATE_GROUP_ID } from './actionTypes';
+import { GROUP_MESSAGE_SUCCESS, UPDATE_GROUP_ID } from './actionTypes';
 
 export const fetchPost = (payload) => {
   return {
@@ -28,7 +28,7 @@ export const fetchGroupPostRequest = (groupId) => {
       if (data.length > 0) {
         dispatch(fetchPost(result));
       } else {
-        Materialize.toast('No message posted to this group yet', 2000, 'yellow white-text rounded');
+        Materialize.toast('No message posted to this group yet', 2000, 'red white-text rounded');
       }
     });
   };

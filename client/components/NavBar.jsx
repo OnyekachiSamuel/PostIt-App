@@ -30,6 +30,14 @@ class NavBar extends React.Component {
     this.props.signOutRequest(this.state);
     this.props.signOut();
   }
+  handleClick() {
+    if (this.state.visible === false) {
+      this.setState({ visible: true, count: 0 });
+    } else {
+      this.setState({ visible: false });
+    }
+    this.props.resetCount();
+  }
   /**
    * @return {null} Updates the state on click of the notification icon
    */
@@ -64,13 +72,9 @@ class NavBar extends React.Component {
             navigate_before</i></Link>
           <Link to="#">POST IT</Link>
           <ul id="nav-mobile" className="right">
-           <li>{user.username}</li>
-          <li><i className="large material-icons">notifications</i></li>
-          { true && <li><Link to="#"><span className="new badge count"
-          onClick={this.handleClick}>{ this.props.notificationReducer.length }</span></Link></li>
-          }
+           <li>{`hi, ${user.username}`}</li>
           <li>
-            <Link to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
+            <Link className="waves-effect waves-light btn sign-btn" to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
            </li>
           </ul>
         </div>
@@ -95,6 +99,7 @@ const mapStateToProps = (state) => {
   return {
     notificationReducer,
     signin
+
   };
 };
 

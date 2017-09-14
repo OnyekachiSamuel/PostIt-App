@@ -19,8 +19,6 @@ class CreateGroup extends React.Component {
    * @return {null} makes the jQuery function available on component mount
    */
   componentDidMount() {
-    const token = localStorage.getItem('token');
-    this.props.testAction({ token });
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
     $('.modal').modal({
@@ -74,5 +72,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+
 export default connect(mapStateToProps,
 { fetchUserGroupRequest, testAction })(withRouter(CreateGroup));
+
