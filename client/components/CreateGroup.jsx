@@ -20,7 +20,6 @@ class CreateGroup extends React.Component {
    */
   componentDidMount() {
     const token = localStorage.getItem('token');
-    this.props.testAction({ token });
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
     $('.modal').modal({

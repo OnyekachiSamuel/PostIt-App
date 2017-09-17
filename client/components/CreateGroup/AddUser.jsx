@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
+import ReactPaginate from 'react-paginate';
 import { fetchUsersRequest } from '../../actions/fetchUsers';
 import { addUserRequest } from '../../actions/addUserAction';
 
@@ -19,42 +21,15 @@ export class AddUser extends Component {
       users: [],
       username: '',
       groupId: '',
-      usernames: []
+      usernames: [],
+      offset: 0,
+      disabled: false
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onSelectUser = this.onSelectUser.bind(this);
-  }
-  /**
-   *@return {null} Triggers the action to fetch all users after the render method has been executed
-   */
-  componentDidMount() {
-    if (localStorage.token) {
-      this.props.fetchUsersRequest();
-    }
-  }
-  /**
-   *@return {null} Updates the state with array of filtered users matching search name
-   */
-  filterUsers() {
-    const search = this.state.search.trim().toLowerCase();
-    const filteredUsers = this.props.users
-      .filter((user) => { return user.username.toLowerCase().indexOf(search) !== -1; });
-    this.setState({ users: filteredUsers });
-  }
-  /**
-   * @return {null} Updates the state with filtered users
-   * @param {event} event handler for search
-   */
-  handleSearch(event) {
-    this.setState({ search: event.target.value }, () => {
-      if (this.state.search === '') {
-        this.setState({ users: [] });
-      } else {
-        this.filterUsers();
-      }
-    });
+    this.handlePageClick = this.handlePageClick.bind(this);
   }
   /**
    * @return {null} Updates the state as the user types into the input field
@@ -71,6 +46,7 @@ export class AddUser extends Component {
    */
   onSelectUser(event) {
     this.state.usernames.push(event.target.value);
+    this.setState({ disabled: true });
   }
   /**
    * @return {null} triggers an addUserRequest action on click of submit button
@@ -92,14 +68,29 @@ export class AddUser extends Component {
         2000, 'green white-text rounded');
     }
   }
+  handleSearch(event) {
+    const state = this.state;
+    state[event.target.name] = event.target.value;
+    this.props.fetchUsersRequest(state);
+
+  }
+  handlePageClick = (data) => {
+  let selected = data.selected;
+  let offset = Math.ceil(selected * 5);
+  this.setState({ offset }, () => {
+    this.props.fetchUsersRequest(this.state);
+  });
+};
   /**
    * @return {String} HTML markup for view component of AddUser
    * render method is meant to contain pure function and not mutate the state
    */
   render() {
-    const { groups } = this.props;
-    const { users } = this.state;
-    let groupComponent;
+    const { groups, searchResult } = this.props;
+    const pageCount = searchResult.pageCount;
+    const { users } = searchResult;
+    let groupComponent,
+    filteredUsers;
     if (groups && groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
@@ -111,7 +102,8 @@ export class AddUser extends Component {
       groupComponent =
         <option value="1" ref="group">No Group Created yet</option>;
     }
-    const filteredUsers = users.map((user, index) => {
+    if (!isEmpty(searchResult) && users.length > 0) {
+      filteredUsers = users.map((user, index) => {
       return (
         <p key={index}>
           <input type="checkbox" onClick={this.onSelectUser}
@@ -121,6 +113,7 @@ export class AddUser extends Component {
       );
     }
     );
+    }
     return (
       <div className="shift-right">
         <div className="container">
@@ -136,17 +129,30 @@ export class AddUser extends Component {
             <form id="search-site" onSubmit={this.onSubmit}>
               <div className="input-group">
                 <div className="input-field">
-                  <input id="search" placeholder="Search users"
-                    onChange={this.handleSearch} type="search" name='q' />
+                  <input id="search" placeholder="Search users" value={this.state.search}
+                    onChange={this.handleSearch} type="search" name='search' />
                   <label className="label-icon" htmlFor="search">
                     <i className="material-icons" >search</i>
                   </label>
                 </div>
                 <button type="submit" className="input-group-addon btn">Add</button>
               </div>
-              {filteredUsers}
+              { !isEmpty(searchResult) && filteredUsers}
             </form>
           </div>
+        </div>
+        <div className="paginate-btn">
+          <ReactPaginate previousLabel={"previous"}
+            nextLabel={"next"}
+            breakLabel={<a href="">...</a>}
+            breakClassName={"break-me"}
+            pageCount={pageCount || 0 }
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={5}
+            onPageChange={this.handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"} />
         </div>
       </div>
     );
@@ -161,10 +167,10 @@ AddUser.propTypes = {
 
 const mapStateToProps = (state) => {
   const { groups } = state;
-  const { users } = state;
+  const { searchResult } = state;
   return {
     groups,
-    users,
+    searchResult,
   };
 };
 

@@ -14,7 +14,7 @@ const Message = sequelize.define('Message', {
     type: Sequelize.INTEGER
   },
   message: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false,
     validate: {
       notEmpty: true
