@@ -30,7 +30,6 @@ export const googleAuthRequest = (userData) => {
     }).catch((error) => {
       const data = error.response.data;
       googleAuthFailure(data.message);
-      Materialize.toast(data.message, 2000, 'red white-text rounded');
     });
   };
 };

@@ -1,7 +1,6 @@
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
 import { fetchGroupPostRequest, updateGroupId } from '../../actions/fetchGroupPost';
 import { archiveMessageRequest } from '../../actions/archiveMessage';
@@ -9,7 +8,7 @@ import { archiveMessageRequest } from '../../actions/archiveMessage';
 /**
  * @class
  */
-class SelectGroup extends React.Component {
+export class SelectGroup extends React.Component {
   /**
    * @return {null} Initializes the state
    * @param {obj} props
@@ -22,7 +21,6 @@ class SelectGroup extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.archiveHandler = this.archiveHandler.bind(this);
   }
   /**
    * @return {null} Triggers the fetchGroupRequest action to fetch groups on component mount
@@ -53,24 +51,11 @@ class SelectGroup extends React.Component {
     }
   }
   /**
-   * @return {null} Returns null; Triggers action to archive read messages
-   */
-  archiveHandler() {
-    const { groupId } = this.props;
-    if (groupId.Id) {
-      this.props.archiveMessageRequest(groupId.Id).then(() => {
-        Materialize.toast('Message(s) successfully archived', 2000, 'green white-text rounded');
-      });
-      this.setState({ clicked: false });
-    }
-  }
-  /**
    * @return {String} HTML markup for view component of SelectGroup
    */
   render() {
     const { groups } = this.props;
     const { groupPost } = this.props;
-    const groupCreator = groupPost.groupCreator;
     let selectGroup, groupPostComponent;
     if (groups.length > 0) {
       selectGroup = groups.map((group, index) => {
@@ -104,7 +89,7 @@ class SelectGroup extends React.Component {
               </select>
               <div />
               <div className="center view-btn">
-                <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
+              <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
               </div>
             </div>
           </div>
@@ -138,12 +123,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-
 export default connect(mapStateToProps,
-    {
-      fetchGroupPostRequest,
-      fetchUserGroupRequest,
-      archiveMessageRequest,
-      updateGroupId
-    })(SelectGroup);
+  {
+    fetchGroupPostRequest,
+    fetchUserGroupRequest,
+    archiveMessageRequest,
+    updateGroupId
+  })(SelectGroup);
 

@@ -30,6 +30,14 @@ class NavBar extends React.Component {
     this.props.signOutRequest(this.state);
     this.props.signOut();
   }
+  handleClick() {
+    if (this.state.visible === false) {
+      this.setState({ visible: true, count: 0 });
+    } else {
+      this.setState({ visible: false });
+    }
+    this.props.resetCount();
+  }
   /**
    * @return {null} Updates the state on click of the notification icon
    */
@@ -91,6 +99,7 @@ const mapStateToProps = (state) => {
   return {
     notificationReducer,
     signin
+
   };
 };
 

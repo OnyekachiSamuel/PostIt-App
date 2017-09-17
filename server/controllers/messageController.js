@@ -6,7 +6,6 @@ import Group from '../models/group';
 import { getUsersPhoneEmail } from '../controllers/helper/getUsersPhoneEmail';
 
 env.config();
-// socket(app)
 
 /**
  * @class ApiController
@@ -197,6 +196,11 @@ export default class MessageController {
       });
     }
   }
+  /**
+   * @return {obj} Returns object of the number of messages that are archived
+   * @param {obj} req
+   * @param {obj} res
+   */
   static archiveMessage(req, res) {
     const groupId = req.params.groupId;
     Messages.update({ archived: true }, { where: { groupId } }).then((data) => {

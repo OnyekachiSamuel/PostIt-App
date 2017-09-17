@@ -72,15 +72,15 @@ export class AddUser extends Component {
     const state = this.state;
     state[event.target.name] = event.target.value;
     this.props.fetchUsersRequest(state);
-
   }
-  handlePageClick = (data) => {
-  let selected = data.selected;
-  let offset = Math.ceil(selected * 5);
-  this.setState({ offset }, () => {
-    this.props.fetchUsersRequest(this.state);
-  });
-};
+
+  handlePageClick(data) {
+    const selected = data.selected;
+    const offset = Math.ceil(selected * 5);
+    this.setState({ offset }, () => {
+      this.props.fetchUsersRequest(this.state);
+    });
+  }
   /**
    * @return {String} HTML markup for view component of AddUser
    * render method is meant to contain pure function and not mutate the state
@@ -90,7 +90,7 @@ export class AddUser extends Component {
     const pageCount = searchResult.pageCount;
     const { users } = searchResult;
     let groupComponent,
-    filteredUsers;
+      filteredUsers;
     if (groups && groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
@@ -104,14 +104,14 @@ export class AddUser extends Component {
     }
     if (!isEmpty(searchResult) && users.length > 0) {
       filteredUsers = users.map((user, index) => {
-      return (
+        return (
         <p key={index}>
           <input type="checkbox" onClick={this.onSelectUser}
             value={user.username} id={user.id} name="username" />
           <label htmlFor={user.id}>{user.username}</label>
         </p>
-      );
-    }
+        );
+      }
     );
     }
     return (
@@ -142,17 +142,17 @@ export class AddUser extends Component {
           </div>
         </div>
         <div className="paginate-btn">
-          <ReactPaginate previousLabel={"previous"}
-            nextLabel={"next"}
+          <ReactPaginate previousLabel={'previous'}
+            nextLabel={'next'}
             breakLabel={<a href="">...</a>}
-            breakClassName={"break-me"}
+            breakClassName={'break-me'}
             pageCount={pageCount || 0 }
             marginPagesDisplayed={1}
             pageRangeDisplayed={5}
             onPageChange={this.handlePageClick}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"} />
+            containerClassName={'pagination'}
+            subContainerClassName={'pages pagination'}
+            activeClassName={'active'} />
         </div>
       </div>
     );
