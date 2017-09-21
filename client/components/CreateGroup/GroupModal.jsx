@@ -68,7 +68,7 @@ export class SelectGroup extends Component {
                 <label htmlFor="password">Description</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light modal-btn"
+            <button className="btn waves-effect waves-light modal-close modal-btn"
               type="submit" name="action">Create</button>
             <div className="modal-footer">
               <Link to="#!"></Link>
