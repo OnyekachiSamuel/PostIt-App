@@ -70,7 +70,7 @@ class NavBar extends React.Component {
         <div className="nav-wrapper">
           <Link to={this.props.redirectUrl}><i className="left middle large material-icons">
             navigate_before</i></Link>
-          <Link to="#">POST IT</Link>
+          <Link to="/">POST IT</Link>
           <ul id="nav-mobile" className="right">
            <li>{`hi, ${user.username}`}</li>
           <li>

@@ -24,7 +24,7 @@ export class GroupList extends Component {
     if (groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
-          <div className="btn-margin" key={index}><Link to={`${group.groupId}`}>{group.groupName}</Link></div>
+          <div className="btn-margin" key={index}><Link to={`${group.groupId}/${group.groupName}/post`}>{group.groupName}</Link></div>
         );
       });
     } else {

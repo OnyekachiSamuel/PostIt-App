@@ -39,7 +39,8 @@
         "shouldComponentUpdate",
        "componentWillUpdate",
        "componentDidUpdate",
-       "componentWillUnmount"
+       "componentWillUnmount",
+       "formatPostTime"
      ]
    }],
     "react/jsx-uses-react": "error",

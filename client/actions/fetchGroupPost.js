@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { GROUP_MESSAGE_SUCCESS, UPDATE_GROUP_ID } from './actionTypes';
+import { GROUP_MESSAGE_SUCCESS, UPDATE_GROUP_INFO, VIEW_POST_SUCCESS, GROUP_MESSAGE_FAILURE } from './actionTypes';
 
 export const fetchPost = (payload) => {
   return {
@@ -8,9 +8,23 @@ export const fetchPost = (payload) => {
     payload
   };
 };
-export const updateGroupId = (payload) => {
+
+export const fetchPostFailure = (payload) => {
   return {
-    type: UPDATE_GROUP_ID,
+    type: GROUP_MESSAGE_FAILURE,
+    payload
+  };
+};
+export const updateGroupInfo = (payload) => {
+  return {
+    type: UPDATE_GROUP_INFO,
+    payload
+  };
+};
+
+export const viewPost = (payload) => {
+  return {
+    type: VIEW_POST_SUCCESS,
     payload
   };
 };
@@ -21,14 +35,19 @@ export const fetchGroupPostRequest = (groupId) => {
     return axios.get(`/api/v1/group/${groupId}/messages`)
     .then((response) => {
       const groupCreator = response.data.groupCreator;
-      const { data } = response.data;
+      const { data } = response.data,
+        clicked = false;
       const result = {
-        data, groupCreator
+        data, groupCreator, clicked
       };
       if (data.length > 0) {
         dispatch(fetchPost(result));
       } else {
         Materialize.toast('No message posted to this group yet', 2000, 'red white-text rounded');
+        const error = {
+          message: 'No message posted to this group yet'
+        };
+        dispatch(fetchPostFailure(error));
       }
     });
   };

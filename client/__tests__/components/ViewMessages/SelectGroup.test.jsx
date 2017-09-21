@@ -7,9 +7,16 @@ import localStorageMock from '../../../__mocks__/localStorageMock';
 
 window.localStorage = localStorageMock;
 const props = {
+  fetchUserGroupRequest: jest.fn(),
+  viewPost: jest.fn(),
   groups: ['Andela 23', 'Andela 32'],
   groupPost: {
-    data: ['Testing it out', 'Testing']
+    data: ['Testing it out', 'Testing'],
+  },
+  signin: {
+    user: {
+      userId: 9
+    }
   }
 };
 describe('<SelectGroup />', () => {

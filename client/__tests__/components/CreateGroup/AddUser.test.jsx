@@ -7,11 +7,13 @@ import { AddUser } from '../../../components/CreateGroup/AddUser.jsx';
 const props = {
   fetchUsersRequest: jest.fn(),
   addUserRequest: jest.fn(),
+  fetchGroupUsers: jest.fn(),
   users: ['Ken', 'Ben', 'Ken'],
   searchResult: {
     pageCount: 6,
     users: ['Samuel', 'Kachi', 'John']
-  }
+  },
+  userIds: [9, 10]
 };
 describe('<AddUser />', () => {
   it('Component should render correctly', () => {

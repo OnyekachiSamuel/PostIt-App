@@ -156,6 +156,9 @@ export default class Validator {
       if (validator.isEmpty(req.body.message)) {
         errors.message = 'Message field should not be empty';
       }
+      if (!req.body.message.trim().length) {
+        errors.message = 'Whitespace characters is not allowed. Please type in a message.';
+      }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
         res.status(422).json({ errors });

@@ -2,7 +2,7 @@ import axios from 'axios';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import * as actions from '../../actions/googleAction';
-import { GOOGLE_AUTH_SUCCESS } from '../../actions/actionTypes';
+import { GOOGLE_AUTH_SUCCESS, GOOGLE_AUTH_FAILURE } from '../../actions/actionTypes';
 import localStorageMock from '../../__mocks__/localStorageMock';
 
 const middleware = [thunk];
@@ -15,6 +15,9 @@ Object.defineProperty(window.location, 'href', {
 });
 
 describe('GOOGLE SIGN IN ACTION', () => {
+  beforeEach(() => {
+    global.Materialize = { toast: () => {} };
+  });
   it('should dispatch GOOGLE_AUTH_SUCCESS action', async () => {
     const userData = {
       name: 'henry',
@@ -45,6 +48,34 @@ describe('GOOGLE SIGN IN ACTION', () => {
     await store.dispatch(actions.googleAuthRequest(userData)).then(() => {
       const action = store.getActions();
       expect(action[0].type).toEqual(GOOGLE_AUTH_SUCCESS);
+      expect(action[0]).toEqual(expectedAction);
+    });
+  });
+  it('should dispatch GOOGLE_AUTH_FAILURE action', async () => {
+    const userData = {
+      name: 'henry',
+      username: 'henry',
+      email: 'henry@gmail.com'
+    };
+    const res = {
+      status: 200,
+      response: {
+        data: {
+          message: 'Oops, operation failed. Username exist already'
+        }
+      }
+    };
+    const expectedAction = {
+      type: GOOGLE_AUTH_FAILURE,
+      payload: 'Oops, operation failed. Username exist already'
+    };
+    axios.post = jest.fn(() => {
+      return Promise.reject(res);
+    });
+    const store = mockStore({ payload: {} }, expectedAction);
+    await store.dispatch(actions.googleAuthRequest(userData)).then(() => {
+      const action = store.getActions();
+      expect(action[0].type).toEqual(GOOGLE_AUTH_FAILURE);
       expect(action[0]).toEqual(expectedAction);
     });
   });

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADD_USER_SUCCESS, ADD_USER_FAILURE, RESET_COUNT } from './actionTypes';
+import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from './actionTypes';
 
 export const addUserSuccess = (payload) => {
   return {
@@ -8,11 +8,6 @@ export const addUserSuccess = (payload) => {
   };
 };
 
-export const resetCount = () => {
-  return {
-    type: RESET_COUNT
-  };
-};
 
 export const addUserFailure = (payload) => {
   return {

@@ -312,6 +312,7 @@ button .right {
     left: 30%;
     background-color: #56ad55 !important;
     color: #fff !important;
+	text-transform: capitalize;
 }
 .btn-margin {
     margin-bottom: 8px;
@@ -330,6 +331,7 @@ button .right {
 }
 #search-site {
     background-color: #fff;
+	text-transform: capitalize;
 }
 
 
@@ -346,6 +348,9 @@ button .right {
 }
 .post-date {
 	float: right;
+	font-weight: 300;
+	font-size: 14px;
+	margin-top: 6px;
 }
 .whitespace {
 	margin-bottom: 50px;
@@ -417,6 +422,12 @@ button .right {
 	margin-left: 120px;
 	margin-top: 200px;
 }
+.message-body {
+    word-wrap: break-word;
+}
+#check-box {
+	padding-left: 10px;
+}
 
 @media only screen and (max-width: 1284px) {
 	.group-box {
@@ -429,6 +440,7 @@ button .right {
 	}
 	.create-btn {
 		padding: 0 16px;
+		text-transform: capitalize;
 	}
 	.nav-wrapper a {
 		font-size: 16px;
@@ -449,6 +461,7 @@ button .right {
 	.create-btn {
 		padding: 0 14px;
 		margin-left: -34px;
+		text-transform: capitalize;
 	}
 	h3 {
 		font-size: 26px;
@@ -459,6 +472,7 @@ button .right {
 @media only screen and (max-width: 764px) {
 	.create-btn {
 		left: 45%;
+		text-transform: capitalize;
 	}
 	h3 {
 		margin-left: 3px;
@@ -468,6 +482,7 @@ button .right {
 @media only screen and (max-width: 727px) {
 	.create-btn {
 		margin-left: -1px;
+		text-transform: capitalize;
 	}
 	.btn-margin {
 		font-size: 14px;
@@ -499,6 +514,7 @@ button .right {
 	.create-btn {
 		font-weight: 300;
 		font-size: 14px;
+		text-transform: capitalize;
 	}
 	h3 {
 		font-size: 20px;
@@ -516,6 +532,7 @@ button .right {
 	.modal .modal-close .modal-btn {
 		padding: 0 8px !important;
 		font-size: 14px !important;
+		text-transform: capitalize;
 	} 
 	.green-text {
 		width: 96%;
@@ -530,6 +547,7 @@ button .right {
 	.modal-btn {
 		font-size: 14px;
 		padding: 0 12px;
+		text-transform: capitalize;
 	}
 
 }
@@ -544,6 +562,7 @@ button .right {
 		margin-left: -20px;
 		padding: 0 14px;
 		margin-top: 32px;
+		text-transform: capitalize;
 	}
 	h3 {
 		font-size: 20px;

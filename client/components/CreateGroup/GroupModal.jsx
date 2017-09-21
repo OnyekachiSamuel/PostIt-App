@@ -27,11 +27,7 @@ export class SelectGroup extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.createGroupRequest(this.state)
-      .then(() => {
-      }).catch((error) => {
-        Materialize.toast(error.response.data.message, 2000, 'yellow white-text rounded');
-      });
+    this.props.createGroupRequest(this.state);
   }
   /**
    * @return {null} updates the state with group details as the user types into the input fields
@@ -61,7 +57,7 @@ export class SelectGroup extends Component {
             <div className="row">
               <div className="input-field col s12">
                 <input id="groupName" name="groupName" value={this.state.groupName}
-                  onChange={this.onChange} type="text" className="validate" />
+                  onChange={this.onChange} type="text" className="validate" required />
                 <label htmlFor="groupName">Group name</label>
               </div>
             </div>
@@ -72,7 +68,7 @@ export class SelectGroup extends Component {
                 <label htmlFor="password">Description</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light modal-close modal-btn"
+            <button className="btn waves-effect waves-light modal-btn"
               type="submit" name="action">Create</button>
             <div className="modal-footer">
               <Link to="#!"></Link>

@@ -18,7 +18,7 @@ export default class MessageController {
  * @param {obj} next
  * @return {obj} Returns success message with data or failure message
  */
-  static messages(req, res) {
+  static postMessage(req, res) {
     const message = req.body.message,
       priority = req.body.priority,
       groupId = req.params.groupId,
@@ -38,11 +38,12 @@ export default class MessageController {
                 message: content.message
               };
               jusibe.sendSMS(payload)
-            .then((res) => {
-              console.log(res.body);
+            .then(() => {
             })
-            .catch((err) => {
-              console.log(err.body);
+            .catch((error) => {
+              if (error) {
+                throw error;
+              }
             });
             });
           // Send emails to users
@@ -67,9 +68,8 @@ export default class MessageController {
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
-                return console.log(error);
+                throw error;
               }
-              console.log('Message %s sent: %s', info.messageId, info.response);
             });
           });
         } else if (priority === 'Urgent') {
@@ -98,9 +98,8 @@ export default class MessageController {
             };
             transporter.sendMail(mailOptions, (error, info) => {
               if (error) {
-                return console.log(error);
+                throw error;
               }
-              console.log('Message %s sent: %s', info.messageId, info.response);
             });
           });
         }

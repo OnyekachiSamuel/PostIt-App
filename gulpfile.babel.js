@@ -28,7 +28,12 @@ gulp.task('client-test', () => {
 
 // Generate the coverage report
 gulp.task('coverage', () => {
-  gulp.src(['server/controllers/controller.js', 'server/middlewares/validator.js'])
+  gulp.src(['server/controllers/userController.js',
+    'server/controllers/groupController.js',
+    'server/controllers/messageController.js',
+    'server/controllers/helper/getUsersPhoneEmail.js',
+    'server/models/*.js',
+    'server/middlewares/validator.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {

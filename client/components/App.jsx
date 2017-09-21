@@ -23,7 +23,7 @@ const App = () => {
           <Route exact path="/" component={requireAuthLogin(LandingPage)} />
           <Route exact path="/group" component={requireAuth(CreateGroup)} />
           <Route exact path="/messages" component={requireAuth(ViewMessages)} />
-          <Route exact path="/:groupId" component={requireAuth(PostMessage)} />
+          <Route exact path="/:groupId/:groupName/post" component={requireAuth(PostMessage)} />
           <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>

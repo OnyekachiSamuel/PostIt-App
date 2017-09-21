@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
 import NavBar from '../components//NavBar.jsx';
 import WhiteBar from '../components/WhiteBar.jsx';
 import SelectGroup from './ViewMessages/SelectGroup.jsx';
@@ -26,9 +27,10 @@ class ViewMessages extends React.Component {
    * @return {String} HTML markup for view component of ViewMessages
    */
   render() {
+    const { groupInfo } = this.props;
     return (
       <div>
-        <NavBar signOut={this.signOut.bind(this)} redirectUrl = {'/group'} />
+        <NavBar signOut={this.signOut.bind(this)} redirectUrl = {`/${groupInfo.groupId}/${groupInfo.groupName}/post`} />
           <WhiteBar />
           <SelectGroup />
       </div>
@@ -36,4 +38,11 @@ class ViewMessages extends React.Component {
   }
 }
 
-export default withRouter(ViewMessages);
+const mapStateToProps = (state) => {
+  const { groupInfo } = state;
+  return {
+    groupInfo
+  };
+};
+
+export default connect(mapStateToProps, {})(withRouter(ViewMessages));

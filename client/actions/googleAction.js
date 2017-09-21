@@ -29,7 +29,8 @@ export const googleAuthRequest = (userData) => {
       }
     }).catch((error) => {
       const data = error.response.data;
-      googleAuthFailure(data.message);
+      dispatch(googleAuthFailure(data.message));
+      Materialize.toast(error.response.data.message, 2500, 'red white-text rounded');
     });
   };
 };

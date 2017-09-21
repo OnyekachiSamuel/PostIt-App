@@ -1,10 +1,17 @@
 import axios from 'axios';
-import { POST_MESSAGE_SUCCESSFUL } from './actionTypes';
+import { POST_MESSAGE_SUCCESSFUL, POST_MESSAGE_FAILURE } from './actionTypes';
 
 
 export const postedMessage = (payload) => {
   return {
     type: POST_MESSAGE_SUCCESSFUL,
+    payload
+  };
+};
+
+export const postedMessageFailure = (payload) => {
+  return {
+    type: POST_MESSAGE_FAILURE,
     payload
   };
 };
@@ -16,6 +23,9 @@ export const postRequest = (userData, groupId) => {
         const { data } = response.data;
         dispatch(postedMessage(data));
       }
+    }).catch((error) => {
+      dispatch(postedMessageFailure(error.response.data.errors.message));
+      Materialize.toast(error.response.data.errors.message, 2500, 'red white-text rounded');
     });
   };
 };

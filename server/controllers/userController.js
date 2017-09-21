@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import User from '../models/user';
-import Group from '../models/group';
 import UsersGroup from '../models/usersgroup';
 
 env.config();
@@ -11,7 +10,7 @@ env.config();
 /**
  * @class ApiController
  */
-export default class ApiController {
+export default class UserController {
   /**
  * Users details are captured by this method on signup and persisted on the database
  * @param {obj} req
@@ -105,44 +104,6 @@ export default class ApiController {
       }
     });
   }
-
-  /**
- * This method is used for creating groups
- * @param {obj} req
- * @param {obj} res
- * @param {obj} next
- * @return {obj} Returns success or failure message with data
- */
-  static createGroup(req, res) {
-    const groupName = req.body.groupName,
-      description = req.body.description,
-      userId = req.decoded.userId;
-    return Group.sync({ force: false }).then(() => {
-      Group.create({ groupName, description, userId })
-        .then((group) => {
-          if (group) {
-            return UsersGroup.sync({ force: false }).then(() => {
-              UsersGroup.create({ groupId: group.id, userId });
-            }).then(() => {
-              res.status(200).json({
-                data: {
-                  groupId: group.id,
-                  groupName: group.groupName,
-                  description: group.description
-                },
-                message: 'Group successfully created'
-              });
-            });
-          }
-        }).catch((error) => {
-          if (error) {
-            res.status(409).json({ status: 'failed',
-              message: 'Group already exist' });
-          }
-        });
-    });
-  }
-
   /**
    * This method maps users to groups they belong to
    * @param {*} req
@@ -210,7 +171,8 @@ export default class ApiController {
  */
   static getUsers(req, res) {
     const search = req.query.search;
-    const offset = req.query.offset;
+    const limit = req.query.limit;
+    const offset = req.query.offset || 0;
     if (search) {
       User.findAndCountAll({
         where: {
@@ -219,7 +181,7 @@ export default class ApiController {
           }
         },
         offset,
-        limit: 5
+        limit
       })
 .then((result) => {
   const pageCount = Math.ceil(result.count / 5),
@@ -229,47 +191,6 @@ export default class ApiController {
     } else {
       res.status(200).json({ pageCount: 0, users: [] });
     }
-  }
-
-/**
- * @return {Array} Array of objects containing groups a user belongs to
- * @param {obj} req
- * @param {obj} res
- */
-  static getUserGroups(req, res) {
-    User.findOne({ attributes: ['id'], where: { username: req.params.username } })
-    .then((user) => {
-      const userId = user.id;
-      Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { userId } })
-    .then((groups) => {
-      if (groups) {
-        res.status(200).json({ groups });
-      }
-    });
-    });
-  }
-/**
- * @return {Array} Returns arrays of groups a user belongs to
- * @param {obj} req
- * @param {obj} res
- */
-  static usersGroup(req, res) {
-    const userId = req.params.userId;
-    UsersGroup.findAll({ attributes: ['groupId'], where: { userId } })
-    .then((groupIds) => {
-      if (groupIds) {
-        const ids = [];
-        groupIds.forEach((group) => {
-          ids.push(group.dataValues.groupId);
-        });
-        Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { id: ids } })
-        .then((groups) => {
-          if (groups) {
-            res.status(200).json({ groups });
-          }
-        });
-      }
-    });
   }
 
   /**
@@ -298,7 +219,7 @@ export default class ApiController {
           }).catch((err) => {
             if (err) {
               res.status(500).json({
-                message: 'Oops, operation failed'
+                message: 'Oops, operation failed. Username exist already'
               });
             }
           });

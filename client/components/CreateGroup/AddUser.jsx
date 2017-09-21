@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import ReactPaginate from 'react-paginate';
 import { fetchUsersRequest } from '../../actions/fetchUsers';
 import { addUserRequest } from '../../actions/addUserAction';
+import { fetchGroupUsers } from '../../actions/groupAction';
 
 /**
  * @class AddUser
@@ -23,13 +24,13 @@ export class AddUser extends Component {
       groupId: '',
       usernames: [],
       offset: 0,
-      disabled: false
+      limit: 5
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onSelectUser = this.onSelectUser.bind(this);
-    this.handlePageClick = this.handlePageClick.bind(this);
+    this.handlePagination = this.handlePagination.bind(this);
   }
   /**
    * @return {null} Updates the state as the user types into the input field
@@ -39,14 +40,24 @@ export class AddUser extends Component {
     const state = this.state;
     state[event.target.name] = event.target.value;
     this.setState(state);
+    this.props.fetchGroupUsers(this.state.groupId);
   }
   /**
    * @return {null} Updates the state and adds a user on click of checkbox
    * @param {event} event
    */
   onSelectUser(event) {
-    this.state.usernames.push(event.target.value);
-    this.setState({ disabled: true });
+    let index;
+    const usernames = this.state.usernames,
+      item = event.target.value;
+    if ((usernames.length > 0) && (usernames.indexOf(item) === -1)) {
+      this.state.usernames.push(item);
+    } else if (usernames.length === 0) {
+      this.state.usernames.push(item);
+    } else if (usernames.indexOf(item) >= 0) {
+      index = this.state.usernames.indexOf(item);
+      this.state.usernames.splice(index, 1);
+    }
   }
   /**
    * @return {null} triggers an addUserRequest action on click of submit button
@@ -68,14 +79,21 @@ export class AddUser extends Component {
         2000, 'green white-text rounded');
     }
   }
+  /**
+   * @return {null} Updates the state as the user types
+   * @param {event} event
+   */
   handleSearch(event) {
     const state = this.state;
     state[event.target.name] = event.target.value;
     this.props.fetchUsersRequest(state);
   }
-
-  handlePageClick(data) {
-    const selected = data.selected;
+/**
+ * @return {null} Triggers action that fetches the search match
+ * @param {obj} item
+ */
+  handlePagination(item) {
+    const selected = item.selected;
     const offset = Math.ceil(selected * 5);
     this.setState({ offset }, () => {
       this.props.fetchUsersRequest(this.state);
@@ -86,16 +104,17 @@ export class AddUser extends Component {
    * render method is meant to contain pure function and not mutate the state
    */
   render() {
-    const { groups, searchResult } = this.props;
-    const pageCount = searchResult.pageCount;
-    const { users } = searchResult;
+    const { groups, searchResult } = this.props,
+      pageCount = searchResult.pageCount,
+      { users } = searchResult,
+      { userIds } = this.props;
     let groupComponent,
       filteredUsers;
     if (groups && groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
           <option value={group.groupId}
-            key={index} ref={group.groupId}>{group.groupName}</option>
+            key={index}>{group.groupName}</option>
         );
       });
     } else {
@@ -105,11 +124,12 @@ export class AddUser extends Component {
     if (!isEmpty(searchResult) && users.length > 0) {
       filteredUsers = users.map((user, index) => {
         return (
-        <p key={index}>
+         <p key={index} id="check-box">
           <input type="checkbox" onClick={this.onSelectUser}
-            value={user.username} id={user.id} name="username" />
+            value={user.username} id={user.id} name="username"
+            disabled = {userIds.indexOf(user.id) > 0}/>
           <label htmlFor={user.id}>{user.username}</label>
-        </p>
+         </p>
         );
       }
     );
@@ -117,7 +137,7 @@ export class AddUser extends Component {
     return (
       <div className="shift-right">
         <div className="container">
-          <h3 className="center white green-text"> select and add user to a group</h3>
+          <h3 className="center white green-text"> select and add user(s) to a group</h3>
           <div className="select-margin">
             <select className="browser-default" value={this.state.groupId}
               name="groupId" onChange={this.onChange}>
@@ -149,7 +169,7 @@ export class AddUser extends Component {
             pageCount={pageCount || 0 }
             marginPagesDisplayed={1}
             pageRangeDisplayed={5}
-            onPageChange={this.handlePageClick}
+            onPageChange={this.handlePagination}
             containerClassName={'pagination'}
             subContainerClassName={'pages pagination'}
             activeClassName={'active'} />
@@ -168,11 +188,14 @@ AddUser.propTypes = {
 const mapStateToProps = (state) => {
   const { groups } = state;
   const { searchResult } = state;
+  const { userIds } = state;
   return {
     groups,
     searchResult,
+    userIds
   };
 };
 
-export default connect(mapStateToProps, { fetchUsersRequest, addUserRequest })(AddUser);
+export default connect(mapStateToProps,
+{ fetchUsersRequest, addUserRequest, fetchGroupUsers })(AddUser);
 

@@ -165,7 +165,7 @@ SignInModal.propTypes = {
 const mapStateToProps = (state) => {
   const { forgetPassword } = state;
   return {
-    forgetPassword
+    forgetPassword,
   };
 };
 export default
