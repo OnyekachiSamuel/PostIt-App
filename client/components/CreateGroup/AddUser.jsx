@@ -125,7 +125,7 @@ export class AddUser extends Component {
       filteredUsers = users.map((user, index) => {
         return (
          <p key={index} id="check-box">
-          <input type="checkbox" onClick={this.onSelectUser}
+          <input type="checkbox" className="ch-box" onClick={this.onSelectUser}
             value={user.username} id={user.id} name="username"
             disabled = {userIds.indexOf(user.id) > 0}/>
           <label htmlFor={user.id}>{user.username}</label>

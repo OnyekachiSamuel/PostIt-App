@@ -23,8 +23,8 @@ describe('<GroupList />', () => {
     expect(tree.props.className).toEqual('shift-left');
     expect(tree.children[0].type).toEqual('button');
   });
-  describe('<GroupList />', () => {
-    it('calls componentDidMount', () => {
+  describe('Component', () => {
+    it('should call componentDidMount', () => {
       sinon.spy(GroupList.prototype, 'componentDidMount');
       const wrapper = mount(<GroupList {...props } />);
       expect(GroupList.prototype.componentDidMount.calledOnce).toBe(true);

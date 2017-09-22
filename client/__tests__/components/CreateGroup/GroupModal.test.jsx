@@ -14,8 +14,8 @@ describe('<SelectGroup />', () => {
     expect(tree.type).toBe('div');
     expect(tree.props).toEqual({ className: 'row modal', id: 'modal3' });
   });
-  describe('Test for onChange event', () => {
-    it('should update the state on in input', () => {
+  describe('Component: SelectGroup', () => {
+    it('should call onChange method on SelectGroup', () => {
       const wrapper = shallow(<SelectGroup { ...props }/>);
       const event = {
         target: {
@@ -28,8 +28,8 @@ describe('<SelectGroup />', () => {
       expect(wrapper.node.props.className).toEqual('row modal');
       expect(wrapper.node.props.id).toEqual('modal3');
     });
-    describe('Test for onSubmit function', () => {
-      it('should be called on button click', () => {
+    describe('Component: SelectGroup', () => {
+      it('should call onSubmit function on click of Add button', () => {
         const mockOnSubmit = sinon.spy(() => {});
         const wrapper = shallow(<SelectGroup onSubmit = { mockOnSubmit } {...props} />);
         const btn = wrapper.find('.btn');

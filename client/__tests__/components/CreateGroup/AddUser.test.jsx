@@ -22,7 +22,7 @@ describe('<AddUser />', () => {
     expect(tree.type).toBe('div');
     expect(tree.props.className).toBe('shift-right');
   });
-  describe('Respond to change event', () => {
+  describe('Component: AddUser', () => {
     it('should update the state on select of group', () => {
       const wrapper = shallow(<AddUser { ...props }/>);
       const event = {
@@ -32,10 +32,11 @@ describe('<AddUser />', () => {
         }
       };
       wrapper.instance().onChange(event);
-      expect(wrapper.state().groupId).toEqual('2');
+      wrapper.find('.browser-default').simulate('click');
+      expect(wrapper.state('groupId')).toEqual('2');
     });
   });
-  describe('Respond to change event', () => {
+  describe('Component: AddUser', () => {
     it('should update the state on select of a user', () => {
       const wrapper = shallow(<AddUser { ...props }/>);
       const event = {
@@ -48,8 +49,8 @@ describe('<AddUser />', () => {
       expect(wrapper.state().usernames).toEqual(['Ben']);
     });
   });
-  describe('Test for onSubmit function', () => {
-    it('should be called on button click', () => {
+  describe('Component: AddUser', () => {
+    it('should call onSubmit function on button click', () => {
       const mockOnSubmit = sinon.spy(() => {});
       const wrapper = shallow(<AddUser onSubmit = { mockOnSubmit } {...props} />);
       const btn = wrapper.find('.btn');
