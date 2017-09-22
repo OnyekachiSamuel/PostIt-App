@@ -74,8 +74,8 @@ export default class MessageController {
           });
         } else if (priority === 'Urgent') {
           // Fetch users emails and phone numbers
-          getUsersPhoneEmail(groupId, async (result) => {
-            const { emails } = await result;
+          getUsersPhoneEmail(groupId, (result) => {
+            const { emails } = result;
           // Send emails to users
             const transporter = nodemailer.createTransport({
               service: 'gmail',

@@ -23,9 +23,9 @@ export default class GroupController {
       userId = req.decoded.userId;
     return Group.sync({ force: false }).then(() => {
       Group.create({ groupName, description, userId })
-        .then(async (group) => {
+        .then((group) => {
           if (group) {
-            await UsersGroup.sync({ force: false }).then(() => {
+            return UsersGroup.sync({ force: false }).then(() => {
               UsersGroup.create({ groupId: group.id, userId });
             }).then(() => {
               res.status(200).json({

@@ -32,7 +32,6 @@ gulp.task('coverage', () => {
     'server/controllers/groupController.js',
     'server/controllers/messageController.js',
     'server/controllers/helper/getUsersPhoneEmail.js',
-    'server/models/*.js',
     'server/middlewares/validator.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
