@@ -23,7 +23,7 @@ describe('<SignUpModal />', () => {
     expect(tree.type).toBe('div');
     expect(tree.props).toEqual({ className: 'row modal', id: 'modal1' });
   });
-  describe('Test for onChange event', () => {
+  describe('Component: SignUpModal', () => {
     it('should update the state on in input', () => {
       const wrapper = shallow(<SignUpModal { ...props }/>);
       const event = {
@@ -37,7 +37,7 @@ describe('<SignUpModal />', () => {
       expect(wrapper.node.props.className).toEqual('row modal');
       expect(wrapper.node.props.id).toEqual('modal1');
     });
-    describe('Test for onSubmit function', () => {
+    describe('Component: SignUpModal', () => {
       it('should be called on button click', () => {
         const mockOnSubmit = sinon.spy(() => {});
         const wrapper = shallow(<SignUpModal onSubmit = { mockOnSubmit } {...props} />);
