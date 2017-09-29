@@ -41,9 +41,9 @@ export const forgetPasswordRequest = (userEmail) => {
   };
 };
 
-export const resetPasswordRequest = (token, userData) => {
+export const resetPasswordRequest = (token, userDetail) => {
   return (dispatch) => {
-    return axios.put(`/api/v1/reset/${token}`, userData).then((response) => {
+    return axios.put(`/api/v1/reset/${token}`, userDetail).then((response) => {
       if (response.status === 200) {
         dispatch(passwordResetSuccess(response.data.message));
       }

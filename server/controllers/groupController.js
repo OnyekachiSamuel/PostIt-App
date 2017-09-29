@@ -29,7 +29,7 @@ export default class GroupController {
               UsersGroup.create({ groupId: group.id, userId });
             }).then(() => {
               res.status(200).json({
-                data: {
+                group: {
                   groupId: group.id,
                   groupName: group.groupName,
                   description: group.description
@@ -40,8 +40,10 @@ export default class GroupController {
           }
         }).catch((error) => {
           if (error) {
-            res.status(409).json({ status: 'failed',
-              message: 'Group already exist' });
+            res.status(409).json({
+              status: 'failed',
+              message: 'Group already exist'
+            });
           }
         });
     });
@@ -53,38 +55,41 @@ export default class GroupController {
  */
   static getUserGroups(req, res) {
     User.findOne({ attributes: ['id'], where: { username: req.params.username } })
-    .then((user) => {
-      const userId = user.id;
-      Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { userId } })
-    .then((groups) => {
-      if (groups) {
-        res.status(200).json({ groups });
-      }
-    });
-    });
+      .then((user) => {
+        const userId = user.id;
+        Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { userId } })
+          .then((groups) => {
+            if (groups) {
+              res.status(200).json({ groups });
+            }
+          });
+      });
   }
-/**
- * @return {Array} Returns arrays of groups a user belongs to
- * @param {obj} req
- * @param {obj} res
- */
+  /**
+   * @return {Array} Returns arrays of groups a user belongs to
+   * @param {obj} req
+   * @param {obj} res
+   */
   static usersGroup(req, res) {
     const userId = req.params.userId;
-    UsersGroup.findAll({ attributes: ['groupId'], where: { userId } })
-    .then((groupIds) => {
-      if (groupIds) {
-        const ids = [];
-        groupIds.forEach((group) => {
-          ids.push(group.dataValues.groupId);
-        });
-        Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { id: ids } })
-        .then((groups) => {
-          if (groups) {
-            res.status(200).json({ groups });
+    const isUserId = Number.isInteger(parseInt(userId, 10));
+    if (isUserId) {
+      UsersGroup.findAll({ attributes: ['groupId'], where: { userId } })
+        .then((groupIds) => {
+          if (groupIds) {
+            const ids = [];
+            groupIds.forEach((group) => {
+              ids.push(group.dataValues.groupId);
+            });
+            Group.findAll({ attributes: [['id', 'groupId'], 'groupName', 'description'], where: { id: ids } })
+              .then((groups) => {
+                if (groups) {
+                  res.status(200).json({ groups });
+                }
+              });
           }
         });
-      }
-    });
+    }
   }
   /**
    * @return {obj} Returns object containing array of userIds
@@ -93,9 +98,27 @@ export default class GroupController {
    */
   static getAllUsersInGroup(req, res) {
     const groupId = req.params.groupId;
-    UsersGroup.findAll({ attributes: ['userId'], where: { groupId } }).then((userIds) => {
-      res.status(200).json({ userIds });
-    });
+    const isGroupId = Number.isInteger(parseInt(groupId, 10));
+    if (isGroupId) {
+      UsersGroup.findAll({ attributes: ['userId'], where: { groupId } }).then((users) => {
+        const userIds = [];
+        users.forEach((user) => {
+          userIds.push(user.dataValues.userId);
+        });
+        User.findAll({
+          attributes: ['username'],
+          where: {
+            id: userIds
+          }
+        }).then((allUser) => {
+          const groupMembers = [];
+          allUser.forEach((user) => {
+            groupMembers.push(user.username);
+          });
+          res.status(200).json({ groupMembers });
+        });
+      });
+    }
   }
 }
 

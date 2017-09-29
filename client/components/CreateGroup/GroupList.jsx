@@ -52,7 +52,7 @@ GroupList.propTypes = {
   fetchUserGroupRequest: PropTypes.func
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { groups } = state;
   const { signin } = state;
   return {

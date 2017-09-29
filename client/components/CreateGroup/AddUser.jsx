@@ -5,7 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 import ReactPaginate from 'react-paginate';
 import { fetchUsersRequest } from '../../actions/fetchUsers';
 import { addUserRequest } from '../../actions/addUserAction';
-import { fetchGroupUsers } from '../../actions/groupAction';
+import { fetchGroupUsers, updateGroupMembers } from '../../actions/groupAction';
+import { selectGroup } from '../../actions/fetchUserGroups';
 
 /**
  * @class AddUser
@@ -24,13 +25,27 @@ export class AddUser extends Component {
       groupId: '',
       usernames: [],
       offset: 0,
-      limit: 5
+      paginatedUsers: [],
+      pageCount: '',
+      selected: false
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onSelectUser = this.onSelectUser.bind(this);
     this.handlePagination = this.handlePagination.bind(this);
+  }
+  /**
+   * @return {null} Updates the local state when the searchResult props changes
+   * @param {obj} nextProps
+   */
+  componentWillReceiveProps(nextProps) {
+    if (this.props.searchResult !== nextProps.searchResult) {
+      this.setState({
+        paginatedUsers: nextProps.searchResult.paginatedUsers,
+        pageCount: nextProps.searchResult.pageCount
+      });
+    }
   }
   /**
    * @return {null} Updates the state as the user types into the input field
@@ -41,12 +56,18 @@ export class AddUser extends Component {
     state[event.target.name] = event.target.value;
     this.setState(state);
     this.props.fetchGroupUsers(this.state.groupId);
+    this.setState({
+      paginatedUsers: [],
+      pageCount: '',
+      search: ''
+    });
   }
   /**
    * @return {null} Updates the state and adds a user on click of checkbox
    * @param {event} event
    */
   onSelectUser(event) {
+    this.setState({ selected: true });
     let index;
     const usernames = this.state.usernames,
       item = event.target.value;
@@ -71,7 +92,11 @@ export class AddUser extends Component {
           username: user,
           groupId: this.state.groupId
         };
-        this.props.addUserRequest(ids, this.state.groupId);
+        this.props.addUserRequest(ids, this.state.groupId).then(() => {
+          const member = [];
+          member.push(user);
+          this.props.updateGroupMembers(member);
+        });
       });
       this.setState({ users: [], usernames: [] });
     } else {
@@ -87,11 +112,14 @@ export class AddUser extends Component {
     const state = this.state;
     state[event.target.name] = event.target.value;
     this.props.fetchUsersRequest(state);
+    if (this.state.search === '') {
+      this.setState({ selected: false });
+    }
   }
-/**
- * @return {null} Triggers action that fetches the search match
- * @param {obj} item
- */
+  /**
+   * @return {null} Triggers action that fetches the search match
+   * @param {obj} item
+   */
   handlePagination(item) {
     const selected = item.selected;
     const offset = Math.ceil(selected * 5);
@@ -105,9 +133,7 @@ export class AddUser extends Component {
    */
   render() {
     const { groups, searchResult } = this.props,
-      pageCount = searchResult.pageCount,
-      { users } = searchResult,
-      { userIds } = this.props;
+      { groupMembers } = this.props;
     let groupComponent,
       filteredUsers;
     if (groups && groups.length > 0) {
@@ -121,18 +147,18 @@ export class AddUser extends Component {
       groupComponent =
         <option value="1" ref="group">No Group Created yet</option>;
     }
-    if (!isEmpty(searchResult) && users.length > 0) {
-      filteredUsers = users.map((user, index) => {
+    if (!isEmpty(searchResult) && this.state.paginatedUsers.length > 0) {
+      filteredUsers = this.state.paginatedUsers.map((user, index) => {
         return (
-         <p key={index} id="check-box">
-          <input type="checkbox" className="ch-box" onClick={this.onSelectUser}
-            value={user.username} id={user.id} name="username"
-            disabled = {userIds.indexOf(user.id) > 0}/>
-          <label htmlFor={user.id}>{user.username}</label>
-         </p>
+          <p key={index} id="check-box">
+            <input type="checkbox" className="ch-box" onClick={this.onSelectUser}
+              value={user.username} id={user.id} name="username"
+              disabled={groupMembers.indexOf(user.username) >= 0} />
+            <label htmlFor={user.id}>{user.username}</label>
+          </p>
         );
       }
-    );
+      );
     }
     return (
       <div className="shift-right">
@@ -155,25 +181,26 @@ export class AddUser extends Component {
                     <i className="material-icons" >search</i>
                   </label>
                 </div>
-                <button type="submit" className="input-group-addon btn">Add</button>
+                { this.state.selected &&
+                 <button type="submit" className="input-group-addon btn">Add</button>}
               </div>
-              { !isEmpty(searchResult) && filteredUsers}
+              {!isEmpty(searchResult) && filteredUsers }
             </form>
           </div>
         </div>
-        <div className="paginate-btn">
-          <ReactPaginate previousLabel={'previous'}
-            nextLabel={'next'}
+        { this.state.pageCount && <div className="paginate-btn">
+          <ReactPaginate previousLabel={'<'}
+            nextLabel={'>'}
             breakLabel={<a href="">...</a>}
             breakClassName={'break-me'}
-            pageCount={pageCount || 0 }
+            pageCount={this.state.pageCount}
             marginPagesDisplayed={1}
             pageRangeDisplayed={5}
             onPageChange={this.handlePagination}
             containerClassName={'pagination'}
             subContainerClassName={'pages pagination'}
             activeClassName={'active'} />
-        </div>
+        </div>}
       </div>
     );
   }
@@ -185,17 +212,17 @@ AddUser.propTypes = {
   addUserRequest: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { groups } = state;
   const { searchResult } = state;
-  const { userIds } = state;
+  const { groupMembers } = state;
   return {
     groups,
     searchResult,
-    userIds
+    groupMembers
   };
 };
 
 export default connect(mapStateToProps,
-{ fetchUsersRequest, addUserRequest, fetchGroupUsers })(AddUser);
+  { fetchUsersRequest, addUserRequest, fetchGroupUsers, selectGroup, updateGroupMembers })(AddUser);
 

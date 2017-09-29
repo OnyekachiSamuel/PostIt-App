@@ -35,12 +35,12 @@ export const fetchGroupPostRequest = (groupId) => {
     return axios.get(`/api/v1/group/${groupId}/messages`)
     .then((response) => {
       const groupCreator = response.data.groupCreator;
-      const { data } = response.data,
+      const { posts } = response.data,
         clicked = false;
       const result = {
-        data, groupCreator, clicked
+        posts, groupCreator, clicked
       };
-      if (data.length > 0) {
+      if (posts.length > 0) {
         dispatch(fetchPost(result));
       } else {
         Materialize.toast('No message posted to this group yet', 2000, 'red white-text rounded');

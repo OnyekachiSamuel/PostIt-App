@@ -3,6 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { addUserRequest } from '../../actions/addUserAction';
 import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from '../../actions/actionTypes';
+import mockData from '../../__mocks__/actionsMockData';
 
 
 const middleware = [thunk];
@@ -15,25 +16,12 @@ describe('Add user action', () => {
   it('should dispatch ADD_USER_SUCCESS action', (done) => {
     const username = 'Amanda';
     const groupId = '33';
-    const response = {
-      status: 200,
-      data: {
-        message: 'User successfully added'
-      },
-      response: {
-        data: {
-          message: 'Error occcured'
-        }
-      }
-    };
     const expectedAction = {
       type: ADD_USER_SUCCESS,
-      payload: {
-        message: 'User successfully added'
-      }
+      payload: mockData.addUserAction.payload[1]
     };
     axios.post = jest.fn(() => {
-      return Promise.resolve(response);
+      return Promise.resolve(mockData.addUserAction.response[0]);
     });
     const store = mockStore({ payload: {} }, expectedAction);
     store.dispatch(addUserRequest(username, groupId)).then(() => {
@@ -51,23 +39,12 @@ describe('Add user action', () => {
   it('should dispatch ADD_USER_FAILURE action', (done) => {
     const username = 'Amanda';
     const groupId = '33';
-    const res = {
-      status: 200,
-      data: {
-        message: 'User successfully added'
-      },
-      response: {
-        data: {
-          message: 'User already exists'
-        }
-      }
-    };
     const expectedAction = {
       type: ADD_USER_FAILURE,
-      payload: 'User already exists'
+      payload: mockData.addUserAction.payload[0]
     };
     axios.post = jest.fn(() => {
-      return Promise.reject(res);
+      return Promise.reject(mockData.addUserAction.response[1]);
     });
     const store = mockStore({ payload: {} }, expectedAction);
     store.dispatch(addUserRequest(username, groupId)).then(() => {

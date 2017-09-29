@@ -3,6 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { forgetPasswordRequest, resetPasswordRequest } from '../../actions/forgetPasswordAction';
 import { RESET_LINK_SUCCESS, PASSWORD_RESET_SUCCESS, RESET_LINK_FAILURE, PASSWORD_RESET_FAILURE } from '../../actions/actionTypes';
+import mockData from '../../__mocks__/actionsMockData';
 
 
 const middleware = [thunk];
@@ -14,18 +15,12 @@ describe('ACTION TEST FOR', () => {
   describe('PASSWORD RESET ', () => {
     it('should dispatch RESET_LINK_SUCCESS action', async () => {
       const userEmail = 'ezeokesam@gmail.com';
-      const response = {
-        status: 200,
-        data: {
-          message: 'Check your email and use the link to reset your password'
-        }
-      };
       const expectedAction = {
         type: RESET_LINK_SUCCESS,
-        payload: 'Check your email and use the link to reset your password'
+        payload: mockData.resetLinkSuccess.payload
       };
       axios.post = jest.fn(() => {
-        return Promise.resolve(response);
+        return Promise.resolve(mockData.resetLinkSuccess.response);
       });
       const store = mockStore({ payload: {} }, expectedAction);
       await store.dispatch(forgetPasswordRequest(userEmail)).then(() => {
@@ -35,20 +30,12 @@ describe('ACTION TEST FOR', () => {
       });
     });
     it('should dispatch RESET_LINK_FAILURE action', async () => {
-      const res = {
-        status: 200,
-        response: {
-          data: {
-            message: 'User not found'
-          }
-        }
-      };
       const expectedAction = {
         type: RESET_LINK_FAILURE,
-        payload: 'User not found'
+        payload: mockData.resetLinkFailure.payload
       };
       axios.post = jest.fn(() => {
-        return Promise.reject(res);
+        return Promise.reject(mockData.resetLinkFailure.response);
       });
       const store = mockStore({ payload: {} }, expectedAction);
       await store.dispatch(forgetPasswordRequest(token)).then(() => {
@@ -60,18 +47,12 @@ describe('ACTION TEST FOR', () => {
   });
   describe('PASSWORD RESET', () => {
     it('should dispatch PASSWORD_RESET_SUCCESS action', async () => {
-      const response = {
-        status: 200,
-        data: {
-          message: 'You have successfully resetted your password.'
-        }
-      };
       const expectedAction = {
         type: PASSWORD_RESET_SUCCESS,
-        payload: 'You have successfully resetted your password.'
+        payload: mockData.passwordResetSuccess.payload
       };
       axios.put = jest.fn(() => {
-        return Promise.resolve(response);
+        return Promise.resolve(mockData.passwordResetSuccess.response);
       });
       const store = mockStore({ payload: {} }, expectedAction);
       await store.dispatch(resetPasswordRequest(token)).then(() => {
@@ -81,20 +62,12 @@ describe('ACTION TEST FOR', () => {
       });
     });
     it('should dispatch PASSWORD_RESET_FAILURE action', async () => {
-      const res = {
-        status: 200,
-        response: {
-          data: {
-            message: 'Password mismatch. Type in a new password'
-          }
-        }
-      };
       const expectedAction = {
         type: PASSWORD_RESET_FAILURE,
-        payload: 'Password mismatch. Type in a new password'
+        payload: mockData.passwordResetFailure.payload
       };
       axios.put = jest.fn(() => {
-        return Promise.reject(res);
+        return Promise.reject(mockData.passwordResetFailure.response);
       });
       const store = mockStore({ payload: {} }, expectedAction);
       await store.dispatch(resetPasswordRequest(token)).then(() => {

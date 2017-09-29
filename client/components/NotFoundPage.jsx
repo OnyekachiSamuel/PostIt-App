@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+ /**
+   * @return {String} HTML markup for NotFound page
+   */
 const NotFoundPage = () => {
   return (
     <div className="center notFound" style={{ margin: '0' }}>

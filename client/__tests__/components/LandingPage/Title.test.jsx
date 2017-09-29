@@ -4,7 +4,7 @@ import toJson from 'enzyme-to-json';
 import Title from '../../../components/Index/Title.jsx';
 
 describe('<Title />', () => {
-  it('Title component should render correctly', () => {
+  it('component should render correctly', () => {
     const wrapper = shallow(<Title />);
     const tree = toJson(wrapper);
     expect(true).toBe(true);

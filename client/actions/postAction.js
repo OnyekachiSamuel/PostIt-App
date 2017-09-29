@@ -16,12 +16,12 @@ export const postedMessageFailure = (payload) => {
   };
 };
 
-export const postRequest = (userData, groupId) => {
+export const postRequest = (messageContent, groupId) => {
   return (dispatch) => {
-    return axios.post(`/api/v1/group/${groupId}/messages`, userData).then((response) => {
+    return axios.post(`/api/v1/group/${groupId}/messages`, messageContent).then((response) => {
       if (response.status === 200) {
-        const { data } = response.data;
-        dispatch(postedMessage(data));
+        const { post } = response.data;
+        dispatch(postedMessage(post));
       }
     }).catch((error) => {
       dispatch(postedMessageFailure(error.response.data.errors.message));

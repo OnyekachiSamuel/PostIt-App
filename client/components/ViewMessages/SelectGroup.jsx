@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
 import { fetchGroupPostRequest, updateGroupId, viewPost } from '../../actions/fetchGroupPost';
-import { archiveMessageRequest } from '../../actions/archiveMessage';
 
 /**
  * @class
@@ -57,7 +56,7 @@ export class SelectGroup extends React.Component {
       this.props.fetchGroupPostRequest(this.state.groupId)
       .then(() => {
         this.setState({
-          posts: this.props.groupPost.data,
+          posts: this.props.groupPost.posts,
           viewed: true
         });
       });
@@ -84,7 +83,6 @@ export class SelectGroup extends React.Component {
    */
   render() {
     const { groups } = this.props;
-    // const { groupPost } = this.props;
     let selectGroup, groupPostComponent;
     if (groups.length > 0) {
       selectGroup = groups.map((group, index) => {
@@ -140,7 +138,7 @@ export class SelectGroup extends React.Component {
 }
 
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { groups } = state;
   const { groupPost } = state,
     { signin } = state,
@@ -157,7 +155,6 @@ export default connect(mapStateToProps,
   {
     fetchGroupPostRequest,
     fetchUserGroupRequest,
-    archiveMessageRequest,
     updateGroupId,
     viewPost
   })(SelectGroup);

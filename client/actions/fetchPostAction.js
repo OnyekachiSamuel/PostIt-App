@@ -15,8 +15,8 @@ export const fetchPostRequest = (id, userId) => {
     return axios.get(`/api/v1/posts/${groupId}/${userId}`)
     .then((response) => {
       if (response.status === 200) {
-        const { data } = response.data;
-        dispatch(fetchPostSuccess(data));
+        const { posts } = response.data;
+        dispatch(fetchPostSuccess(posts));
       }
     });
   };

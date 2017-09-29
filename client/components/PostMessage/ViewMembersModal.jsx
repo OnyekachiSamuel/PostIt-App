@@ -14,10 +14,8 @@ export class ViewMembers extends React.Component {
    * @return {*} Triggers asyn action that updates the store with group members data
    */
   componentDidMount() {
-    if (localStorage.token) {
-      const groupId = this.props.match.params.groupId;
-      this.props.fetchMembersRequest(groupId);
-    }
+    const groupId = this.props.match.params.groupId;
+    this.props.fetchMembersRequest(groupId);
   }
   /**
   * Renders view component of members
@@ -55,7 +53,7 @@ export class ViewMembers extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { fetchMembers } = state;
   return {
     fetchMembers

@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { SENT_MESSAGE, RESET_COUNT } from '../actions/actionTypes';
+import { SENT_MESSAGE } from '../actions/actionTypes';
 
 const notificationReducer = (state = [], action) => {
   switch (action.type) {

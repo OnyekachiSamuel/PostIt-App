@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 /**
- * @class Verify
+ * @class Middleware for verifying user token
  */
 export default class Verify {
     /**

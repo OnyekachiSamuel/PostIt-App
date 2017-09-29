@@ -72,7 +72,7 @@ export class PostedMessage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { post } = state;
   const { signin } = state;
   return {

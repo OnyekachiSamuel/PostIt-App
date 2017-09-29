@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/OnyekachiSamuel/PostIt-App.svg)](https://travis-ci.org/OnyekachiSamuel/PostIt-App)
-[![Coverage Status](https://coveralls.io/repos/github/OnyekachiSamuel/PostIt-App/badge.svg?branch=tests)](https://coveralls.io/github/OnyekachiSamuel/PostIt-App?branch=tests)
+[![Coverage Status](https://coveralls.io/repos/github/OnyekachiSamuel/PostIt-App/badge.svg?branch=feat/151550754/feedback)](https://coveralls.io/github/OnyekachiSamuel/PostIt-App?branch=feat/151550754/feedback)
 [![Code Climate](https://codeclimate.com/github/OnyekachiSamuel/PostIt-App/badges/gpa.svg)](https://codeclimate.com/github/OnyekachiSamuel/PostIt-App)
 
 
@@ -11,7 +11,7 @@ PostIt is a simple application that allows friends and colleagues create groups 
 The link to the **App** hosted on heruko is  [PostIt App](http://postico.herokuapp.com)
 
 
-# API DOCUMENTATION
+## API Documentation
 - Check out the link [PostIt API Documentation](https://onyekachisamuel.github.io/slate) for a detailed walk through on the API and how to consume it.
 
 ## Installation
@@ -52,7 +52,20 @@ endpoints:
 - PostgreSQL - PostgreSQL, often simply Postgres, is an object-relational database management system (ORDBMS) with an emphasis on extensibility and standards compliance.
 - Sequelize - Sequelize is a promise-based ORM for Node.js v4 and up. It supports the dialects PostgreSQL, MySQL, SQLite and MSSQL and features solid transaction support, relations, read replication and more.
 
+## Limitations
+- Currently, authenticated user can only create a group but cannot delete a group created
+- Users added to a group cannot be removed
+- Read messages by users are not being archived.
+- Real-time in-app notification for message posted to a group was not handled
 
+## Frequently Asked Questions
+- What is postIt app all about? 
+postIt app is a simple application that allows friends and colleagues create groups for notifications purpose. With this app,
+members in a group can interact with each other by posting their messages in the group.
+- What are the steps on how to use the app?
+* First, Sign up by creating a new account
+* Once account is created, proceed to  create a group and add your prefered users to the group you created
+* Then you can post message to the group you created for all members of the group.
 
 ## CONTRIBUTING
 
@@ -60,6 +73,8 @@ endpoints:
 - Create your feature branch: git checkout -b my-new-feature
 - Commit your changes: git commit -m 'Add some feature'
 - Push to the branch: git push origin my-new-feature
-- Submit a pull request 
+- Submit a pull request to the **development** branch
 
 Ensure your codes follow the [AirBnB Javascript Styles Guide](https://github.com/airbnb/javascript)
+
+Ezeoke Onyekachi Samuel &copy; 2017 [MIT License](https://github.com/OnyekachiSamuel/PostIt-App/blob/development/LICENSE)

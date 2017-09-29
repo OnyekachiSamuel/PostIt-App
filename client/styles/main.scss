@@ -30,6 +30,14 @@ header {
     }
 	height: 100vh;
 }
+.my-background {
+    background: {
+        image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.imgur.com/5MD10l3.jpg);
+        size: cover;
+        position: center;
+    }
+	height: 100vh;
+}
 footer {
 	position: absolute;
 	right: 0;
@@ -82,7 +90,7 @@ h4 {
 }
 .page-heading {
 	position: absolute;
-	width: 1140px;
+	width: 70vw;
 	top: 50%;
 	left: 50%;
 	text-align: center;
@@ -205,7 +213,7 @@ h4 {
 .left {
     float: left;
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 3px;
     font-size: 24px;
 }
 .right { 
@@ -300,16 +308,16 @@ button .right {
 .shift-left {
     float: left;
     height: 100vh;
-    width: 40%;
+    width: 49%;
 }
 .shift-right {
     float: right;
     height: 100vh;
-    width: 50%;
+    width: 49%;
 }
 .create-btn {
     margin-top: 32px;
-    left: 30%;
+    left: 39%;
     background-color: #56ad55 !important;
     color: #fff !important;
 	text-transform: capitalize;
@@ -419,14 +427,23 @@ button .right {
 	color: #fff;
 }
 .paginate-btn {
-	margin-left: 120px;
-	margin-top: 200px;
+	margin-left: 20px;
 }
 .message-body {
     word-wrap: break-word;
 }
 #check-box {
 	padding-left: 10px;
+}
+.white-text {
+	font-size: 17px;
+	margin-right: 100px;
+}
+.group-message {
+	margin-top: 32px;
+    left: 33%;
+    background-color: #56ad55 !important;
+    color: #fff !important;
 }
 
 @media only screen and (max-width: 1284px) {
@@ -609,4 +626,35 @@ button .right {
 		padding: 0 18px !important;
 	}
 
+}
+
+.landing-page {
+	width: 100vw;
+	height: 100vh;
+}
+
+nav a {
+	margin-left: 30px;
+}
+.pagination li.active {
+	background-color: #59ab59;
+	border-radius: 50%;
+}
+
+.pagination li a {
+	font-size: 19px !important;
+	cursor: pointer;
+}
+
+#search-site {
+	margin-bottom: 11px;
+}
+
+a {
+	outline: none;
+}
+
+.paginate-btn {
+    display: flex;
+    justify-content: center;
 }

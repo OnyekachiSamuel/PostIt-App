@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import NavLink from './Index/NavLink.jsx';
 import SignUpModal from './Index/SignUpModal.jsx';
 import SignInModal from './Index/SignInModal.jsx';
 import Title from './Index/Title.jsx';
@@ -19,6 +18,7 @@ class LandingPage extends React.Component {
   componentDidMount() {
     $('.modal').modal();
     $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
   }
   /**
    * @return {null} navigates to the group creation page
@@ -34,21 +34,40 @@ class LandingPage extends React.Component {
     const signUpRequest = this.props.userSignUpRequest;
     const signInRequest = this.props.userSignInRequest;
     return (
-      <div>
-        <header>
+      <div className="container-fluid my-background">
+        <div className="row">
           <nav>
-            <div className="nav-wrapper" >
+            <div className="nav-wrapper">
               <Link to="#">POST IT</Link>
-              <NavLink />
+              <a href="#" data-activates="mobile-demo" className="button-collapse">
+                <i className="material-icons">menu</i></a>
+              <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
+                data-target="modal1">
+                  Sign Up</Link></li>
+                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
+                data-target="modal2">
+                  Sign In</Link></li>
+              </ul>
+              <ul className="side-nav" id="mobile-demo">
+                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
+                 data-target="modal1">
+                  Sign Up</Link></li>
+                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
+                 data-target="modal2">
+                  Sign In</Link></li>
+              </ul>
             </div>
           </nav>
+        </div>
+        <div className="row">
           <Title />
-          <SignUpModal
-            loginSuccess={this.loginSuccess.bind(this)}
-            signUpRequest={signUpRequest} />
-          <SignInModal signInRequest={signInRequest}
-            loginSuccess={this.loginSuccess.bind(this)} />
-        </header>
+        </div>
+        <SignUpModal
+          loginSuccess={this.loginSuccess.bind(this)}
+          signUpRequest={signUpRequest} />
+        <SignInModal signInRequest={signInRequest}
+          loginSuccess={this.loginSuccess.bind(this)} />
       </div>
     );
   }

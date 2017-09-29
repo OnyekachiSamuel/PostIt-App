@@ -5,49 +5,31 @@ import toJson from 'enzyme-to-json';
 import { MemoryRouter } from 'react-router';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { PostedMessage } from '../../../components/PostMessage/PostedMessage.jsx';
+import { PostedMessage, mapStateToProps } from '../../../components/PostMessage/PostedMessage.jsx';
+import { mockData } from '../../../__mocks__/mockData';
 
-const initialState = {
-  post: {
-    message: 'Good one'
-  }
-};
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
-const props = {
-  fetchPostRequest: jest.fn(),
-  messages: ['I am going now', 'I will be with you']
-};
 describe('<PostMessage />', () => {
+  beforeEach(() => {
+    const setup = () => {
+      return mapStateToProps(mockData.postedMessage.state);
+    };
+    const state = setup();
+  });
   it('Component should render correctly', () => {
-    const wrapper = shallow(<PostedMessage { ...props }/>,
-    { context: { store: mockStore(initialState) } });
+    const wrapper = shallow(<PostedMessage { ...mockData.postedMessage.props } />,
+      { context: { store: mockStore(mockData.postedMessage.initialState) } });
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');
     expect(tree.props.className).toEqual('shift-right');
     expect(tree.children[0].type).toEqual('Link');
   });
   it('calls componentDidMount', () => {
-    const prop1 = {
-      fetchPostRequest: jest.fn(),
-      updateGroupInfo: jest.fn(),
-      signin: {
-        isAuthenticated: true,
-        user: {
-          userId: 7
-        }
-      },
-      match: {
-        params: {
-          groupId: 9
-        },
-        groupName: 'Andela'
-      }
-    };
     sinon.spy(PostedMessage.prototype, 'componentDidMount');
     const wrapper = mount(
       <MemoryRouter>
-        <PostedMessage {...prop1 } />
+        <PostedMessage {...mockData.postedMessage.props } />
       </MemoryRouter>
     );
     expect(PostedMessage.prototype.componentDidMount.calledOnce).toBe(true);

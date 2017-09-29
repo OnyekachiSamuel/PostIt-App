@@ -100,7 +100,7 @@ export class SignInModal extends React.Component {
               <Link to="#" className="white-text">Sign in</Link>
             </div>}
             {this.state.visible && <div className="col s6 m6">
-              <Link to="#" className="white-text">Reset password</Link>
+              <Link to="#" className="white-text">Reset Password</Link>
             </div>}
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
@@ -111,7 +111,8 @@ export class SignInModal extends React.Component {
               {this.state.visible &&
                 <div className="input-field col s12">
                   <input placeholder="Enter your email to start the process"
-                    id="email" type="email" name="email" value={this.state.email} onChange={this.onChange}
+                    id="email" type="email" name="email"
+                     value={this.state.email} onChange={this.onChange}
                     className="validate" required />
                 </div>}
               {!this.state.visible &&
@@ -133,10 +134,10 @@ export class SignInModal extends React.Component {
               <Link to="#" onClick={this.onClick}> here
             </Link> to reset your password</span></div>}
             {this.state.visible &&
-              <div id="login" style={{ marginBottom: '7px' }}><span>Want to login ? Click
+              <div id="login" style={{ marginBottom: '7px' }}><span> Want to login ? Click
               <Link to="#" onClick={this.onClickLogin}> here
             </Link> to login</span></div>}
-            <div className="center google-login">
+            { !this.state.visible && <div className="center google-login">
               <GoogleLogin
                 clientId="1096080119344-dhkm3kesj85jq2au401j1ur243vo58np.apps.googleusercontent.com"
                 buttonText="+Google Login"
@@ -144,7 +145,7 @@ export class SignInModal extends React.Component {
                 onFailure={this.responseGoogle}
                 className="google-btn"
               />
-            </div>
+            </div>}
             <div className="center"><button className="btn waves-effect waves-light"
               type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
@@ -162,7 +163,7 @@ SignInModal.propTypes = {
   forgetPasswordRequest: PropTypes.func,
   googleAuthRequest: PropTypes.func
 };
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { forgetPassword } = state;
   return {
     forgetPassword,

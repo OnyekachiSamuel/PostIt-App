@@ -89,7 +89,7 @@ export class SignUpModal extends React.Component {
               <Link to="#" className="modal-close">Close</Link>
             </div>
           </div>
-          <form className="col s12" method="post" onSubmit={this.onSubmit}>
+          <form className="col s12 formData" method="post" onSubmit={this.onSubmit}>
             <div className="row test">
               {!isEmpty(errors) && errors.name && <span className="err-msg">{errors.name}</span>}
               <div className="input-field col s12 test">

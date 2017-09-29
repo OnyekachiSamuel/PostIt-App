@@ -1,66 +1,53 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import toJson from 'enzyme-to-json';
-import { AddUser } from '../../../components/CreateGroup/AddUser.jsx';
+import { AddUser, mapStateToProps } from '../../../components/CreateGroup/AddUser.jsx';
+import { mockData } from '../../../__mocks__/mockData';
 
-const props = {
-  fetchUsersRequest: jest.fn(),
-  addUserRequest: jest.fn(),
-  fetchGroupUsers: jest.fn(),
-  users: ['Ken', 'Ben', 'Ken'],
-  searchResult: {
-    pageCount: 6,
-    users: ['Samuel', 'Kachi', 'John']
-  },
-  userIds: [9, 10]
-};
 describe('<AddUser />', () => {
+  beforeEach(() => {
+    const setup = () => {
+      return mapStateToProps(mockData.addUser.state);
+    };
+    const state = setup();
+    global.Materialize = { toast: () => { } };
+  });
   it('Component should render correctly', () => {
-    const wrapper = shallow(<AddUser { ...props }/>);
+    const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');
     expect(tree.props.className).toBe('shift-right');
   });
-  describe('Component: AddUser', () => {
-    it('should update the state on select of group', () => {
-      const wrapper = shallow(<AddUser { ...props }/>);
-      const event = {
-        target: {
-          name: 'groupId',
-          value: '2',
-        }
-      };
-      wrapper.instance().onChange(event);
-      wrapper.find('.browser-default').simulate('click');
-      expect(wrapper.state('groupId')).toEqual('2');
-    });
+  it('should update the state on select of group', () => {
+    const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
+    wrapper.instance().onChange(mockData.addUser.event);
+    wrapper.find('.browser-default').simulate('click');
+    expect(wrapper.state('groupId')).toEqual('2');
   });
-  describe('Component: AddUser', () => {
-    it('should update the state on select of a user', () => {
-      const wrapper = shallow(<AddUser { ...props }/>);
-      const event = {
-        target: {
-          name: 'usernames',
-          value: 'Ben',
-        }
-      };
-      wrapper.instance().onSelectUser(event);
-      expect(wrapper.state().usernames).toEqual(['Ben']);
+  it('should update the state on select of a user', () => {
+    const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
+    wrapper.setState({ paginatedUsers: mockData.addUser.props.searchResult.paginatedUsers });
+    const input = wrapper.find('.ch-box');
+    input.simulate('click', {
+      target: {
+        value: 'Sam'
+      }
     });
+    expect(wrapper.state().usernames).toEqual(['Sam']);
   });
-  describe('Component: AddUser', () => {
-    it('should call onSubmit function on button click', () => {
-      const mockOnSubmit = sinon.spy(() => {});
-      const wrapper = shallow(<AddUser onSubmit = { mockOnSubmit } {...props} />);
-      const btn = wrapper.find('.btn');
-      btn.simulate('click', mockOnSubmit());
-      expect(btn.node.type).toBe('button');
-      expect(btn.node.props.type).toBe('submit');
-      expect(btn.node.props.className).toBe('input-group-addon btn');
-      expect(btn.node.props.children).toBe('Add');
-      expect(mockOnSubmit.calledOnce).toBe(true);
+  it('should call onSubmit function on button click', () => {
+    const wrapper = shallow(<AddUser {...mockData.addUser.props} />);
+    wrapper.setState({
+      selected: true,
+      paginatedUsers: mockData.addUser.props.searchResult.paginatedUsers
     });
+    wrapper.setState({ usernames: ['John', 'Peter'], groupId: '9' });
+    const btn = wrapper.find('#search-site');
+    btn.simulate('submit', {
+      preventDefault: () => {
+      }
+    });
+    expect(wrapper.state().usernames).toEqual([]);
   });
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createGroupRequest } from '../../actions/groupAction';
+import { createGroup } from '../../actions/groupAction';
 
 /**
  * @class
@@ -27,7 +27,8 @@ export class SelectGroup extends Component {
    */
   onSubmit(event) {
     event.preventDefault();
-    this.props.createGroupRequest(this.state);
+    this.props.createGroup(this.state);
+    this.setState({ groupName: '', description: '' });
   }
   /**
    * @return {null} updates the state with group details as the user types into the input fields
@@ -81,8 +82,8 @@ export class SelectGroup extends Component {
 }
 
 SelectGroup.propTypes = {
-  createGroupRequest: PropTypes.func.isRequired
+  createGroup: PropTypes.func.isRequired
 };
 
-export default connect(null, { createGroupRequest })(SelectGroup);
+export default connect(null, { createGroup })(SelectGroup);
 

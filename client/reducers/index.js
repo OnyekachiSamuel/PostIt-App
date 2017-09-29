@@ -11,7 +11,7 @@ import forgetPassword from './forgetPasswordReducer';
 import notificationReducer from '../reducers/notificationReducer';
 import groupId from '../reducers/updateGroupId';
 import groupInfo from '../reducers/updateGroupInfo';
-import userIds from '../reducers/getUsersId';
+import groupMembers from '../reducers/getGroupMembers';
 
 
 const rootReducer = combineReducers({
@@ -27,7 +27,7 @@ const rootReducer = combineReducers({
   notificationReducer,
   groupId,
   groupInfo,
-  userIds
+  groupMembers
 });
 
 export default rootReducer;
