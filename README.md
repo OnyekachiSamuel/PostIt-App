@@ -11,7 +11,7 @@ PostIt is a simple application that allows friends and colleagues create groups 
 The link to the **App** hosted on heruko is  [PostIt App](http://postico.herokuapp.com)
 
 
-## API Documentation
+### API Documentation
 - Check out the link [PostIt API Documentation](https://onyekachisamuel.github.io/slate) for a detailed walk through on the API and how to consume it.
 
 ## Installation
