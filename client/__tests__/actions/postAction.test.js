@@ -22,11 +22,12 @@ describe('MESSAGE POST ACTION', () => {
       return Promise.resolve(mockData.postSuccess.response);
     });
     const store = mockStore({ payload: {} }, expectedAction);
-    await store.dispatch(postRequest(mockData.postSuccess.userData)).then(() => {
-      const action = store.getActions();
-      expect(action[0].type).toEqual(POST_MESSAGE_SUCCESSFUL);
-      expect(action[0]).toEqual(expectedAction);
-    });
+    await store.dispatch(
+      postRequest(mockData.postSuccess.userData)).then(() => {
+        const action = store.getActions();
+        expect(action[0].type).toEqual(POST_MESSAGE_SUCCESSFUL);
+        expect(action[0]).toEqual(expectedAction);
+      });
   });
   it('should dispatch POST_MESSAGE_FAILURE action', async () => {
     const expectedAction = {
@@ -37,10 +38,11 @@ describe('MESSAGE POST ACTION', () => {
       return Promise.reject(mockData.postFailure.response);
     });
     const store = mockStore({ payload: {} }, expectedAction);
-    await store.dispatch(postRequest(mockData.postFailure.userData)).then(() => {
-      const action = store.getActions();
-      expect(action[0].type).toEqual(POST_MESSAGE_FAILURE);
-      expect(action[0]).toEqual(expectedAction);
-    });
+    await store.dispatch(postRequest(
+      mockData.postFailure.userData)).then(() => {
+        const action = store.getActions();
+        expect(action[0].type).toEqual(POST_MESSAGE_FAILURE);
+        expect(action[0]).toEqual(expectedAction);
+      });
   });
 });

@@ -151,7 +151,8 @@ export class AddUser extends Component {
       filteredUsers = this.state.paginatedUsers.map((user, index) => {
         return (
           <p key={index} id="check-box">
-            <input type="checkbox" className="ch-box" onClick={this.onSelectUser}
+            <input type="checkbox" className="ch-box"
+            onClick={this.onSelectUser}
               value={user.username} id={user.id} name="username"
               disabled={groupMembers.indexOf(user.username) >= 0} />
             <label htmlFor={user.id}>{user.username}</label>
@@ -163,7 +164,8 @@ export class AddUser extends Component {
     return (
       <div className="shift-right">
         <div className="container">
-          <h3 className="center white green-text"> select and add user(s) to a group</h3>
+          <h3 className="center white green-text">
+             select and add user(s) to a group</h3>
           <div className="select-margin">
             <select className="browser-default" value={this.state.groupId}
               name="groupId" onChange={this.onChange}>
@@ -175,14 +177,16 @@ export class AddUser extends Component {
             <form id="search-site" onSubmit={this.onSubmit}>
               <div className="input-group">
                 <div className="input-field">
-                  <input id="search" placeholder="Search users" value={this.state.search}
+                  <input id="search" placeholder="Search users"
+                   value={this.state.search}
                     onChange={this.handleSearch} type="search" name='search' />
                   <label className="label-icon" htmlFor="search">
                     <i className="material-icons" >search</i>
                   </label>
                 </div>
                 { this.state.selected &&
-                 <button type="submit" className="input-group-addon btn">Add</button>}
+                 <button type="submit" className="input-group-addon btn">
+                   Add</button>}
               </div>
               {!isEmpty(searchResult) && filteredUsers }
             </form>
@@ -224,5 +228,10 @@ export const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps,
-  { fetchUsersRequest, addUserRequest, fetchGroupUsers, selectGroup, updateGroupMembers })(AddUser);
+  { fetchUsersRequest,
+    addUserRequest,
+    fetchGroupUsers,
+    selectGroup,
+    updateGroupMembers
+  })(AddUser);
 

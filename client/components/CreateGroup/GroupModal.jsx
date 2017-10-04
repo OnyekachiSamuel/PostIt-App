@@ -22,7 +22,8 @@ export class SelectGroup extends Component {
     this.onChange = this.onChange.bind(this);
   }
   /**
-   * @return {null} Triggers the createGroup action that updates the store with group details
+   * @return {null} Triggers the createGroup action that updates the store
+   *  with group details
    * @param {event} event
    */
   onSubmit(event) {
@@ -31,7 +32,8 @@ export class SelectGroup extends Component {
     this.setState({ groupName: '', description: '' });
   }
   /**
-   * @return {null} updates the state with group details as the user types into the input fields
+   * @return {null} updates the state with group details as the user types
+   * into the input fields
    * @param {event} event
    */
   onChange(event) {
@@ -57,19 +59,22 @@ export class SelectGroup extends Component {
           <form className="col s12" method="post" onSubmit={this.onSubmit}>
             <div className="row">
               <div className="input-field col s12">
-                <input id="groupName" name="groupName" value={this.state.groupName}
-                  onChange={this.onChange} type="text" className="validate" required />
+                <input id="groupName" name="groupName"
+                 value={this.state.groupName}
+                  onChange={this.onChange} type="text"
+                  className="validate" required />
                 <label htmlFor="groupName">Group name</label>
               </div>
             </div>
             <div className="row">
               <div className="input-field col s12">
-                <input id="description" name="description" value={this.state.description}
+                <input id="description" name="description"
+                value={this.state.description}
                   onChange={this.onChange} type="text" className="validate" />
                 <label htmlFor="password">Description</label>
               </div>
             </div>
-            <button className="btn waves-effect waves-light modal-close modal-btn"
+          <button className="btn waves-effect waves-light modal-close modal-btn"
               type="submit" name="action">Create</button>
             <div className="modal-footer">
               <Link to="#!"></Link>

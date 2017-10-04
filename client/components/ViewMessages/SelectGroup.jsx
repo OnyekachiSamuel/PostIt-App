@@ -23,7 +23,8 @@ export class SelectGroup extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * @return {null} Triggers the fetchGroupRequest action to fetch groups on component mount
+   * @return {null} Triggers the fetchGroupRequest action to fetch groups on
+   * component mount
    */
   componentDidMount() {
     const { signin } = this.props;
@@ -92,32 +93,37 @@ export class SelectGroup extends React.Component {
       });
     }
 
-    if (this.state.posts && !this.props.groupPost.clicked && this.state.posts.length > 0) {
+    if (this.state.posts && !this.props.groupPost.clicked
+    && this.state.posts.length > 0) {
       groupPostComponent = this.state.posts.map((post, index) => {
         return (
             <div key={index}>
             <div className="post"><p>Posted by <b>{post.username}</b></p></div>
-            <div className="post-date"><p>{this.formatPostTime(post.createdAt)}</p></div>
+            <div className="post-date"><p>{this.formatPostTime(post.createdAt)}
+              </p></div>
             <input disabled value={post.message} id="disabled" type="text"
               className="validate" style={{ color: 'green' }} />
               </div>
         );
       });
     } else {
-      groupPostComponent = <p className="center">Select a group to view posted messages</p>;
+      groupPostComponent =
+      <p className="center">Select a group to view posted messages</p>;
     }
     return (
       <div>
         <div className="whitespace">
           <div className="shift-left">
             <div className="center container">
-              <select className="browser-default" name="groupId" onChange={this.onChange}>
+              <select className="browser-default" name="groupId"
+              onChange={this.onChange}>
                 <option value="" defaultValue>Select Group</option>
                 {selectGroup}
               </select>
               <div />
               <div className="center view-btn">
-              <button className="btn waves-effect waves-light" onClick={this.onClick}>View</button>
+              <button className="btn waves-effect waves-light"
+              onClick={this.onClick}>View</button>
               </div>
             </div>
           </div>

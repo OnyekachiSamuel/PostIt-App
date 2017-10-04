@@ -19,7 +19,8 @@ export class NavBar extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * @return {null} Triggers the signoutRequest action on click of signout button
+   * @return {null} Triggers the signoutRequest action on click of
+   * signout button
    */
   onClick() {
     this.props.signOutRequest(this.state);

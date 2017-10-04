@@ -26,6 +26,7 @@
     "jquery": true
   },
   "rules": {
+    "max-len": ["error", 80, { "ignoreStrings": true, "ignoreTemplateLiterals": true  }],
     "one-var": 0,
     "arrow-body-style": ["error", "always"],
     "class-methods-use-this": ["error", {

@@ -11,7 +11,8 @@ import { fetchMembersRequest } from '../../actions/fetchMembers';
 export class ViewMembers extends React.Component {
   /**
    * Executes asyn operation to get all members in a particular group
-   * @return {*} Triggers asyn action that updates the store with group members data
+   * @return {*} Triggers asyn action that updates the store with
+   * group members data
    */
   componentDidMount() {
     const groupId = this.props.match.params.groupId;
@@ -28,7 +29,8 @@ export class ViewMembers extends React.Component {
     if (members.length > 0) {
       memberComponent = members.map((member, index) => {
         return (
-          <div className="center" key={index}><Link to="#">{member.username}</Link></div>
+          <div className="center" key={index}>
+            <Link to="#">{member.username}</Link></div>
 
         );
       });
@@ -61,4 +63,5 @@ export const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, { fetchMembersRequest })(withRouter(ViewMembers));
+export default connect(mapStateToProps,
+{ fetchMembersRequest })(withRouter(ViewMembers));

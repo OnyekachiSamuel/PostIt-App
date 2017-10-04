@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import toJson from 'enzyme-to-json';
 import { SignUpModal } from '../../../components/Index/SignUpModal.jsx';
 import { mockData } from '../../../__mocks__/mockData';

@@ -27,12 +27,13 @@ export default class MessageController {
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isGroupId) {
       return Messages.sync({ force: false }).then(() => {
-        Messages.create({ userId, groupId, message, priority, username }).then((content) => {
+        Messages.create({ userId, groupId, message, priority, username })
+        .then((content) => {
           if (priority === 'Critical') {
-            // Get users emails and phone numbers
             getUsersPhoneEmail(groupId, (result) => {
               const { phoneNumbers, emails } = result;
-              const jusibe = new Jusibe(process.env.PUBLIC_KEY, process.env.ACCESS_TOKEN);
+              const jusibe = new Jusibe(process.env.PUBLIC_KEY,
+               process.env.ACCESS_TOKEN);
               phoneNumbers.forEach((number) => {
                 const payload = {
                   to: number,
@@ -48,11 +49,10 @@ export default class MessageController {
                     }
                   });
               });
-              // Send emails to users
               const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 port: 25,
-                secure: false, // secure:true for port 465, secure:false for port 587
+                secure: false,
                 auth: {
                   user: 'postit028@gmail.com',
                   pass: process.env.G_PASSWORD
@@ -62,10 +62,9 @@ export default class MessageController {
                 }
               });
               const mailOptions = {
-                from: `${req.decoded.name} <${req.decoded.email}>`, // sender address
-                to: emails.toString(), // list of receivers
-                subject: `${priority} message`, // Subject line
-                // text: content.message, // plain text body
+                from: `${req.decoded.name} <${req.decoded.email}>`,
+                to: emails.toString(),
+                subject: `${priority} message`,
                 html: `<b>${content.message}\n\n This message was sent through PostIt app.</b>`
               };
               transporter.sendMail(mailOptions, (error, info) => {
@@ -75,14 +74,12 @@ export default class MessageController {
               });
             });
           } else if (priority === 'Urgent') {
-            // Fetch users emails and phone numbers
             getUsersPhoneEmail(groupId, (result) => {
               const { emails } = result;
-              // Send emails to users
               const transporter = nodemailer.createTransport({
                 service: 'gmail',
                 port: 25,
-                secure: false, // secure:true for port 465, secure:false for port 587
+                secure: false,
                 auth: {
                   user: 'postit028@gmail.com',
                   pass: process.env.G_PASSWORD
@@ -92,10 +89,9 @@ export default class MessageController {
                 }
               });
               const mailOptions = {
-                from: `${req.decoded.username} <${req.decoded.email}>`, // sender address
-                to: emails.toString(), // list of receivers
-                subject: `${priority} message`, // Subject line
-                // text: content.message, // plain text body
+                from: `${req.decoded.username} <${req.decoded.email}>`,
+                to: emails.toString(),
+                subject: `${priority} message`,
                 html: `<b>${content.message}\n\n </b>.\n\n This message was sent through PostIt app.`
               };
               transporter.sendMail(mailOptions, (error, info) => {
@@ -208,7 +204,8 @@ export default class MessageController {
    */
   static archiveMessage(req, res) {
     const groupId = req.params.groupId;
-    Messages.update({ archived: true }, { where: { groupId } }).then((message) => {
+    Messages.update({ archived: true }, { where: { groupId } })
+    .then((message) => {
       if (message) {
         res.status(200).json({ message, groupCreator: true });
       }

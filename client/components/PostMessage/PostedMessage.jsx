@@ -11,7 +11,8 @@ import { updateGroupInfo } from '../../actions/fetchGroupPost';
  */
 export class PostedMessage extends Component {
   /**
- * @return {null} Updates the store with group posts by triggering the fetchPostRequest action
+ * @return {null} Updates the store with group posts by triggering the
+ * fetchPostRequest action
  */
   componentDidMount() {
     const groupId = this.props.match.params.groupId;
@@ -46,7 +47,8 @@ export class PostedMessage extends Component {
       messageComponent = messages.map((element, index) => {
         return (
             <div key={index}>
-            <div className="post"><p>Posted by <b>{element.username}</b></p></div>
+            <div className="post"><p>Posted by <b>{element.username}
+              </b></p></div>
             <div className="post-date message-body">
               <p>{this.formatPostTime(element.createdAt)}</p></div>
             <input disabled value={element.message} id="disabled" type="text"

@@ -27,11 +27,12 @@ describe('GOOGLE SIGN IN ACTION', () => {
       return Promise.resolve(mockData.googleSignUp.response);
     });
     const store = mockStore({ payload: {} }, expectedAction);
-    await store.dispatch(actions.googleAuthRequest(mockData.googleSignUp.userData)).then(() => {
-      const action = store.getActions();
-      expect(action[0].type).toEqual(GOOGLE_AUTH_SUCCESS);
-      expect(action[0]).toEqual(expectedAction);
-    });
+    await store.dispatch(
+      actions.googleAuthRequest(mockData.googleSignUp.userData)).then(() => {
+        const action = store.getActions();
+        expect(action[0].type).toEqual(GOOGLE_AUTH_SUCCESS);
+        expect(action[0]).toEqual(expectedAction);
+      });
   });
   it('should dispatch GOOGLE_AUTH_FAILURE action', async () => {
     const expectedAction = {
@@ -42,10 +43,11 @@ describe('GOOGLE SIGN IN ACTION', () => {
       return Promise.reject(mockData.googleFailure.response);
     });
     const store = mockStore({ payload: {} }, expectedAction);
-    await store.dispatch(actions.googleAuthRequest(mockData.googleFailure.userData)).then(() => {
-      const action = store.getActions();
-      expect(action[0].type).toEqual(GOOGLE_AUTH_FAILURE);
-      expect(action[0]).toEqual(expectedAction);
-    });
+    await store.dispatch(
+      actions.googleAuthRequest(mockData.googleFailure.userData)).then(() => {
+        const action = store.getActions();
+        expect(action[0].type).toEqual(GOOGLE_AUTH_FAILURE);
+        expect(action[0]).toEqual(expectedAction);
+      });
   });
 });

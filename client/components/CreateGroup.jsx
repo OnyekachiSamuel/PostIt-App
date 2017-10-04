@@ -47,7 +47,8 @@ class CreateGroup extends React.Component {
     $('select').material_select();
   }
   /**
-   * @return {null} Triggers the signOutRequest action to clear user data from the localStorage
+   * @return {null} Triggers the signOutRequest action to clear user data from
+   * the localStorage
    */
   onClick() {
     this.props.signOutRequest(this.state);
@@ -73,7 +74,8 @@ class CreateGroup extends React.Component {
             <ul id="nav-mobile" className="right">
               <li>{`hi, ${user.username}`}</li>
               <li>
-                <Link className="waves-effect waves-light btn sign-btn" to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
+                <Link className="waves-effect waves-light btn sign-btn" to="#" style={{ fontSize: '15px' }}
+                onClick={this.onClick}>Sign Out</Link>
               </li>
             </ul>
           </div>

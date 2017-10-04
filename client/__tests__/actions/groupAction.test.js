@@ -23,7 +23,8 @@ describe('ACTION TEST FOR', () => {
         return Promise.resolve(mockData.createGroupSuccess.response);
       });
       const store = mockStore({ payload: {} }, expectedAction);
-      await store.dispatch(createGroup(mockData.createGroupSuccess.groupData)).then(() => {
+      await store.dispatch(createGroup(mockData.createGroupSuccess.groupData))
+      .then(() => {
         const action = store.getActions();
         expect(action[0].type).toEqual(GROUP_CREATION_SUCCESS);
         expect(action[0]).toEqual(expectedAction);
@@ -39,7 +40,8 @@ describe('ACTION TEST FOR', () => {
         );
       });
       const store = mockStore({ payload: {} }, expectedAction);
-      await store.dispatch(createGroup(mockData.createGroupFailure.groupData)).then(() => {
+      await store.dispatch(createGroup(mockData.createGroupFailure.groupData))
+      .then(() => {
         const action = store.getActions();
         expect(action[0].type).toEqual(GROUP_CREATION_FAILURE);
         expect(action[0]).toEqual(expectedAction);

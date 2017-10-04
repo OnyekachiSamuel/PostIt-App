@@ -25,7 +25,8 @@ describe('<SignInModal />', () => {
   });
   it('should be called on button click', () => {
     const mockOnSubmit = sinon.spy(() => { });
-    const wrapper = shallow(<SignInModal onSubmit={mockOnSubmit} {...mockData.signIn.props} />);
+    const wrapper = shallow(<SignInModal onSubmit={mockOnSubmit}
+     {...mockData.signIn.props} />);
     const btn = wrapper.find('.btn');
     btn.simulate('click', mockOnSubmit());
     expect(mockOnSubmit.calledOnce).toBe(true);

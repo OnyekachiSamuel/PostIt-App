@@ -9,7 +9,8 @@ import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
  */
 export class GroupList extends Component {
   /**
-   * @return {null} triggers the action that fetches groups a user belongs to on component mount
+   * @return {null} triggers the action that fetches groups a user belongs
+   * to on component mount
    */
   componentDidMount() {
     const { signin } = this.props;
@@ -32,7 +33,8 @@ export class GroupList extends Component {
     }
     return (
       <div className="shift-left">
-        <button className="waves-effect waves-light btn create-btn" data-target="modal3">
+        <button className="waves-effect waves-light btn create-btn"
+        data-target="modal3">
           Create group</button>
         <div>
           <div>

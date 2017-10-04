@@ -187,7 +187,7 @@ h4 {
 
 .left {
   float: left;
-  padding-left: 10px;
+  padding-left: 24px;
   padding-top: 3px;
   font-size: 24px; }
 
@@ -413,6 +413,9 @@ button .right {
   background-color: #56ad55 !important;
   color: #fff !important; }
 
+i.left {
+  margin-right: 1px; }
+
 @media only screen and (max-width: 1284px) {
   .group-box {
     max-height: 400px;
@@ -568,4 +571,4 @@ a {
   display: flex;
   justify-content: center; }
 
-/*# sourceMappingURL=main.531881f66bb4c1d989e3df8a11b0d5d7.css.map*/
+/*# sourceMappingURL=main.ef68f2a9ca13feeedfcbfa4462fab63a.css.map*/

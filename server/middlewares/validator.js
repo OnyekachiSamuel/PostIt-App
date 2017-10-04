@@ -18,7 +18,8 @@ export default class Validator {
       password = req.body.password,
       phone = req.body.phone,
       confirmPassword = req.body.confirmPassword;
-    if (name === undefined || username === undefined || password === undefined || email === undefined || confirmPassword === undefined) {
+    if (name === undefined || username === undefined || password === undefined
+     || email === undefined || confirmPassword === undefined) {
       res.json({ message: 'Name, Username, Email, Password and ConfirmPassword fields are required' });
     } else {
       if (validator.toInt(req.body.name)) {

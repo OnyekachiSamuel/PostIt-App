@@ -23,7 +23,8 @@ describe('Create group reducer', () => {
     const initialState = {};
     const action = createGroupFailure(mockData.groupFailure.payload);
     const newState = groupCreateFailure(initialState, action);
-    expect(newState.data.message).toEqual(mockData.groupFailure.payload.data.message);
+    expect(newState.data.message)
+    .toEqual(mockData.groupFailure.payload.data.message);
   });
   it('should return default state when no action Type is matched', () => {
     const newState = groupReducer({}, {

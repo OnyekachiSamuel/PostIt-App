@@ -20,7 +20,8 @@ class NavBar extends React.Component {
     this.onClick = this.onClick.bind(this);
   }
   /**
-   * @return {null} Triggers the signOutRequest action to clear user data from the localStorage
+   * @return {null} Triggers the signOutRequest action to clear user data
+   *  from the localStorage
    */
   onClick() {
     this.props.signOutRequest(this.state);
@@ -35,13 +36,15 @@ class NavBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link to={this.props.redirectUrl}><i className="left middle large material-icons">
+          <Link to={this.props.redirectUrl}>
+          <i className="left middle large material-icons">
             navigate_before</i></Link>
           <Link to="/">POST IT</Link>
           <ul id="nav-mobile" className="right">
            <li>{`hi, ${user.username}`}</li>
           <li>
-            <Link className="waves-effect waves-light btn sign-btn" to="#" style={{ fontSize: '15px' }} onClick={this.onClick}>Sign Out</Link>
+            <Link className="waves-effect waves-light btn sign-btn" to="#" style={{ fontSize: '15px' }}
+            onClick={this.onClick}>Sign Out</Link>
            </li>
           </ul>
         </div>

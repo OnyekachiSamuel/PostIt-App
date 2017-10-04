@@ -39,22 +39,23 @@ class LandingPage extends React.Component {
           <nav>
             <div className="nav-wrapper">
               <Link to="#">POST IT</Link>
-              <a href="#" data-activates="mobile-demo" className="button-collapse">
+              <a href="#" data-activates="mobile-demo"
+              className="button-collapse">
                 <i className="material-icons">menu</i></a>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
-                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
-                data-target="modal1">
+                <li><Link className="waves-effect waves-light btn sign-btn"
+                to="#" data-target="modal1">
                   Sign Up</Link></li>
-                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
-                data-target="modal2">
+                <li><Link className="waves-effect waves-light btn sign-btn"
+                 to="#" data-target="modal2">
                   Sign In</Link></li>
               </ul>
               <ul className="side-nav" id="mobile-demo">
-                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
-                 data-target="modal1">
+                <li><Link className="waves-effect waves-light btn sign-btn"
+                 to="#" data-target="modal1">
                   Sign Up</Link></li>
-                <li><Link className="waves-effect waves-light btn sign-btn" to="#"
-                 data-target="modal2">
+                <li><Link className="waves-effect waves-light btn sign-btn"
+                 to="#" data-target="modal2">
                   Sign In</Link></li>
               </ul>
             </div>
@@ -78,5 +79,6 @@ LandingPage.propTypes = {
   userSignInRequest: PropTypes.func
 };
 
-export default connect(null, { userSignUpRequest, userSignInRequest })(LandingPage);
+export default connect(null,
+{ userSignUpRequest, userSignInRequest })(LandingPage);
 

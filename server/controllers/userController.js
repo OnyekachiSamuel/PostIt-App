@@ -13,7 +13,8 @@ env.config();
  */
 export default class UserController {
   /**
- * Users details are captured by this method on signup and persisted on the database
+ * Users details are captured by this method on signup and
+ *  persisted on the database
  * @param {obj} req
  * @param {obj} res
  * @param {obj} next
@@ -171,7 +172,8 @@ export default class UserController {
   }
 
   /**
-   * @return {obj} Returns object containing pageCount and arrays of users and searchMetadata
+   * @return {obj} Returns object containing pageCount and arrays
+   *  of users and searchMetadata
    * @param {*} req
    * @param {*} res
    */
@@ -213,7 +215,8 @@ export default class UserController {
    * @param {res} res
    */
   static googleAuth(req, res) {
-    const name = req.body.name, username = req.body.username.toLowerCase(), email = req.body.email;
+    const name = req.body.name, username = req.body.username.toLowerCase(),
+      email = req.body.email;
     User.findOne({ where: { email } }).then((user) => {
       if (!user) {
         User.sync({ force: false }).then(() => {

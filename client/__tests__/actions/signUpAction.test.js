@@ -9,7 +9,6 @@ import localStorageMock from '../../__mocks__/localStorageMock';
 const middleware = [thunk];
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbnJ5IiwidXNlcklkIjo0MiwiZW1haWwiOiJoZW5yeUBnbWFpbC5jb20iLCJuYW1lIjoiSGVucnkiLCJpYXQiOjE1MDQzOTM0NjIsImV4cCI6MTUwNDQ3OTg2Mn0.xuDJd-NUXg8--utHKOTFPiTv7s8HMOy9QRl61QoxSws';
 const mockStore = configureMockStore(middleware);
-// Mock the localstorage
 window.localStorage = localStorageMock;
 Object.defineProperty(window.location, 'href', {
   writable: true,

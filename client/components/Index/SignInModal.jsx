@@ -52,7 +52,8 @@ export class SignInModal extends React.Component {
     this.setState({ username: '', email: '', password: '' });
   }
   /**
-   * @return {null} Updates the state as the user types into the input the fields
+   * @return {null} Updates the state as the user types into the
+   * input the fields
    * @param {event} event
    */
   onChange(event) {
@@ -116,16 +117,18 @@ export class SignInModal extends React.Component {
                     className="validate" required />
                 </div>}
               {!this.state.visible &&
-                <div className="input-field col s12">
-                  <input id="username" name="username" value={this.state.username}
-                    onChange={this.onChange} type="text" placeholder="Username"
-                    className="validate" required />
-                </div>
+              <div className="input-field col s12">
+                <input id="username" name="username" value={this.state.username}
+                  onChange={this.onChange} type="text" placeholder="Username"
+                  className="validate" required />
+              </div>
               }
               {!this.state.visible &&
                 <div className="input-field col s12">
-                  <input id="password" type="password" name="password" value={this.state.password}
-                    onChange={this.onChange} placeholder="Password" className="validate" required />
+                  <input id="password" type="password" name="password"
+                  value={this.state.password}
+                    onChange={this.onChange} placeholder="Password"
+                    className="validate" required />
                 </div>
               }
             </div>
@@ -146,7 +149,8 @@ export class SignInModal extends React.Component {
                 className="google-btn"
               />
             </div>}
-            <div className="center"><button className="btn waves-effect waves-light"
+                <div className="center">
+                  <button className="btn waves-effect waves-light"
               type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
@@ -170,4 +174,5 @@ export const mapStateToProps = (state) => {
   };
 };
 export default
-  connect(mapStateToProps, { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));
+  connect(mapStateToProps,
+  { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));

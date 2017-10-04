@@ -1,11 +1,12 @@
 import jwt from 'jsonwebtoken';
 
 /**
- * @class Middleware for verifying user token
+ * @class
  */
 export default class Verify {
     /**
- * @return {json} Returns request object containing message of if request is granted or denied
+ * @return {json} Returns request object containing message of
+ *  if request is granted or denied
  * @param {obj} req
  * @param {obj} res
  * @param {obj} next

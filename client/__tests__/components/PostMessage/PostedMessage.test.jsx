@@ -18,7 +18,8 @@ describe('<PostMessage />', () => {
     const state = setup();
   });
   it('Component should render correctly', () => {
-    const wrapper = shallow(<PostedMessage { ...mockData.postedMessage.props } />,
+    const wrapper = shallow(<PostedMessage
+     { ...mockData.postedMessage.props } />,
       { context: { store: mockStore(mockData.postedMessage.initialState) } });
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');

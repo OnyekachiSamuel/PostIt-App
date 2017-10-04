@@ -26,7 +26,8 @@ describe('<AddUser />', () => {
   });
   it('should update the state on select of a user', () => {
     const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
-    wrapper.setState({ paginatedUsers: mockData.addUser.props.searchResult.paginatedUsers });
+    wrapper.setState({ paginatedUsers:
+       mockData.addUser.props.searchResult.paginatedUsers });
     const input = wrapper.find('.ch-box');
     input.simulate('click', {
       target: {
