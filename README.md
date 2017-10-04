@@ -63,8 +63,8 @@ endpoints:
 postIt app is a simple application that allows friends and colleagues create groups for notifications purpose. With this app,
 members in a group can interact with each other by posting their messages in the group.
 - What are the steps on how to use the app?
- First, Sign up by creating a new account
- Once account is created, proceed to  create a group and add your prefered users to the group you created
+ First, Sign up by creating a new account. 
+ Once account is created, proceed to  create a group and add your prefered users to the group you created. 
  Then you can post message to the group you created for all members of the group.
 
 ## CONTRIBUTING
