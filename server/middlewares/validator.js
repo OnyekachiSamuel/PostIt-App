@@ -18,7 +18,8 @@ export default class Validator {
       password = req.body.password,
       phone = req.body.phone,
       confirmPassword = req.body.confirmPassword;
-    if (name === undefined || username === undefined || password === undefined || email === undefined || confirmPassword === undefined) {
+    if (name === undefined || username === undefined || password === undefined
+     || email === undefined || confirmPassword === undefined) {
       res.json({ message: 'Name, Username, Email, Password and ConfirmPassword fields are required' });
     } else {
       if (validator.toInt(req.body.name)) {
@@ -155,6 +156,9 @@ export default class Validator {
     } else {
       if (validator.isEmpty(req.body.message)) {
         errors.message = 'Message field should not be empty';
+      }
+      if (!req.body.message.trim().length) {
+        errors.message = 'Whitespace characters is not allowed. Please type in a message.';
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {

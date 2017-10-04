@@ -1,42 +1,29 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import toJson from 'enzyme-to-json';
 import { SelectGroup } from '../../../components/CreateGroup/GroupModal.jsx';
+import { mockData } from '../../../__mocks__/mockData';
 
-const props = {
-  createGroupRequest: jest.fn(),
-};
 describe('<SelectGroup />', () => {
   it('Component should render correctly', () => {
-    const wrapper = shallow(<SelectGroup { ...props }/>);
+    const wrapper = shallow(<SelectGroup { ...mockData.groupModal.props } />);
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');
     expect(tree.props).toEqual({ className: 'row modal', id: 'modal3' });
   });
-  describe('Test for onChange event', () => {
-    it('should update the state on in input', () => {
-      const wrapper = shallow(<SelectGroup { ...props }/>);
-      const event = {
-        target: {
-          name: 'groupName',
-          value: 'Andela Team 08',
-        }
-      };
-      wrapper.instance().onChange(event);
-      expect(wrapper.state().groupName).toEqual('Andela Team 08');
-      expect(wrapper.node.props.className).toEqual('row modal');
-      expect(wrapper.node.props.id).toEqual('modal3');
-    });
-    describe('Test for onSubmit function', () => {
-      it('should be called on button click', () => {
-        const mockOnSubmit = sinon.spy(() => {});
-        const wrapper = shallow(<SelectGroup onSubmit = { mockOnSubmit } {...props} />);
-        const btn = wrapper.find('.btn');
-        btn.simulate('click', mockOnSubmit());
-        expect(mockOnSubmit.calledOnce).toBe(true);
-      });
-    });
+  it('should call onChange method on SelectGroup', () => {
+    const wrapper = shallow(<SelectGroup { ...mockData.groupModal.props } />);
+    wrapper.instance().onChange(mockData.groupModal.event);
+    expect(wrapper.state().groupName).toEqual('Andela Team 08');
+    expect(wrapper.node.props.className).toEqual('row modal');
+    expect(wrapper.node.props.id).toEqual('modal3');
+  });
+  it('should call onSubmit function on click of Add button', () => {
+    const wrapper = shallow(<SelectGroup {...mockData.groupModal.props } />);
+    wrapper.instance().onSubmit(mockData.groupModal.event);
+    const btn = wrapper.find('.btn');
+    btn.simulate('click');
+    expect(wrapper.state().groupName).toEqual('');
   });
 });
 

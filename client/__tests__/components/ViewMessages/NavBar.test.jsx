@@ -23,10 +23,6 @@ describe('<NavBar />', () => {
       const btn = wrapper.find('li');
       btn.simulate('click', mockOnClick());
       expect(mockOnClick.calledOnce).toBe(true);
-      // expect(btn.node.props.className).toBe('btn waves-effect waves-light');
-      // expect(btn.node.props.type).toBe('submit');
-      // expect(btn.node.props.name).toBe('action');
-      // expect(btn.node.props.children).toBe('Submit');
     });
   });
 });

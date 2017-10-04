@@ -30,7 +30,7 @@ export const userSignInRequest = (userData) => {
       }
     }).catch((error) => {
       const data = error.response.data;
-      signInFailure(data.message);
+      dispatch(signInFailure(data.message));
       Materialize.toast(data.message, 2000, 'red white-text rounded');
     });
   };

@@ -4,12 +4,22 @@ import PropTypes from 'prop-types';
 
 
 const requireAuth = (ComposedComponent) => {
+  /**
+   * @class
+   */
   class Authenticate extends React.Component {
+    /**
+     * @return {null} Checks if the user is authenticated
+     */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
         this.props.history.push('/');
       }
     }
+      /**
+   * @return {String} HTML markup for view component
+   *
+   */
     render() {
       return (
             <ComposedComponent {...this.props} />

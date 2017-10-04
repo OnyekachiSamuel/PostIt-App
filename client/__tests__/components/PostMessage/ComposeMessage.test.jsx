@@ -20,28 +20,24 @@ describe('<ComposeMessage />', () => {
     expect(tree.type).toBe('div');
     expect(tree.props).toEqual({ className: 'shift-left' });
   });
-  describe('Test for onChange event', () => {
-    it('should update the state on in input', () => {
-      const wrapper = shallow(<ComposeMessage {...props}/>);
-      const event = {
-        target: {
-          name: 'message',
-          value: 'I will be with you in a moment',
-        }
-      };
-      wrapper.instance().onChange(event);
-      expect(wrapper.state().message).toEqual('I will be with you in a moment');
-      expect(wrapper.node.props.className).toEqual('shift-left');
-    });
-    describe('Test for onSubmit function', () => {
-      it('should be called on button click', () => {
-        const mockOnSubmit = sinon.spy(() => {});
-        const wrapper = shallow(<ComposeMessage onSubmit = { mockOnSubmit } />);
-        const btn = wrapper.find('.modal-btn');
-        btn.simulate('click', mockOnSubmit());
-        expect(mockOnSubmit.calledOnce).toBe(true);
-      });
-    });
+  it('should update the state on in input', () => {
+    const wrapper = shallow(<ComposeMessage {...props}/>);
+    const event = {
+      target: {
+        name: 'message',
+        value: 'I will be with you in a moment',
+      }
+    };
+    wrapper.instance().onChange(event);
+    expect(wrapper.state().message).toEqual('I will be with you in a moment');
+    expect(wrapper.node.props.className).toEqual('shift-left');
+  });
+  it('should be called on button click', () => {
+    const mockOnSubmit = sinon.spy(() => {});
+    const wrapper = shallow(<ComposeMessage onSubmit = { mockOnSubmit } />);
+    const btn = wrapper.find('.modal-btn');
+    btn.simulate('click', mockOnSubmit());
+    expect(mockOnSubmit.calledOnce).toBe(true);
   });
 });
 

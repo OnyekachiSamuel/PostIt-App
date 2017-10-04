@@ -9,13 +9,14 @@ export const fetchPostSuccess = (payload) => {
   };
 };
 
-export const fetchPostRequest = (groupId, userId) => {
+export const fetchPostRequest = (id, userId) => {
+  const groupId = parseInt(id, 10);
   return (dispatch) => {
-    return axios.get(`api/v1/posts/${groupId}/${userId}`)
+    return axios.get(`/api/v1/posts/${groupId}/${userId}`)
     .then((response) => {
       if (response.status === 200) {
-        const { data } = response.data;
-        dispatch(fetchPostSuccess(data));
+        const { posts } = response.data;
+        dispatch(fetchPostSuccess(posts));
       }
     });
   };

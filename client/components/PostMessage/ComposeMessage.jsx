@@ -51,20 +51,25 @@ export class ComposeMessage extends Component {
         <div className="input-field col s12 container">
           <form onSubmit={this.onSubmit} >
             <div>
-              <textarea placeholder="Type in your message here" name="message"
+              <textarea placeholder=" type in your message to post here"
+               name="message"
                 value={this.state.message}
-                ref="message" onChange={this.onChange} className="type-text" required ></textarea>
+                ref="message" onChange={this.onChange} className="type-text"
+                required ></textarea>
               <label htmlFor="textarea1"></label>
             </div>
+            <p>Select message priority below</p>
             <div>
-              <select className="browser-default" name="priority" onChange={this.onChange}>
+              <select className="browser-default" name="priority"
+              onChange={this.onChange}>
                 <option value="Normal" defaultValue>Normal</option>
                 <option value="Urgent">Urgent</option>
                 <option value="Critical">Critical</option>
               </select>
             </div>
             <button type="submit"
-              className="btn waves-effect waves-light col s12 modal-btn">Post</button>
+              className="btn waves-effect waves-light col s12 modal-btn">
+              Post</button>
           </form>
         </div>
       </div>
