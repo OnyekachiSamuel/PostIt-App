@@ -45,11 +45,13 @@ export class ComposeMessage extends Component {
    */
   render() {
     return (
-      <div className="shift-left">
+      <div>
+        <div className="center">
         <button className="waves-effect waves-light btn create-btn"
           data-target="modal4">View members</button>
+          </div>
         <div className="input-field col s12 container">
-          <form onSubmit={this.onSubmit} >
+          <form onSubmit={this.onSubmit} id="formData" >
             <div>
               <textarea placeholder=" type in your message to post here"
                name="message"
@@ -61,14 +63,14 @@ export class ComposeMessage extends Component {
             <p>Select message priority below</p>
             <div>
               <select className="browser-default" name="priority"
-              onChange={this.onChange}>
+              onChange={this.onChange} id="select">
                 <option value="Normal" defaultValue>Normal</option>
                 <option value="Urgent">Urgent</option>
                 <option value="Critical">Critical</option>
               </select>
             </div>
             <button type="submit"
-              className="btn waves-effect waves-light col s12 modal-btn">
+              className="btn waves-effect waves-light col s5 modal-btn">
               Post</button>
           </form>
         </div>

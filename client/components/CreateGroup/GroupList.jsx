@@ -16,6 +16,9 @@ export class GroupList extends Component {
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
   }
+  onClick() {
+
+  }
   /**
  * @return {String} HTML markup for view component SignInModal
  */
@@ -25,21 +28,25 @@ export class GroupList extends Component {
     if (groups.length > 0) {
       groupComponent = groups.map((group, index) => {
         return (
-          <div className="btn-margin" key={index}><Link to={`${group.groupId}/${group.groupName}/post`}>{group.groupName}</Link></div>
+          <div className="card center" key={index}>
+            <Link to={`${group.groupId}/${group.groupName}/post`}>{group.groupName}</Link>
+          </div>
         );
       });
     } else {
-      groupComponent = <div className="center">No group created yet</div>;
+      groupComponent = <div>No group created yet</div>;
     }
     return (
-      <div className="shift-left">
-        <button className="waves-effect waves-light btn create-btn"
-        data-target="modal3">
-          Create group</button>
+      <div>
+        <div className="center">
+          <button className="waves-effect waves-light create-btn btn"
+            data-target="modal3">
+            Create group</button>
+        </div>
         <div>
           <div>
             <h3 className="center">Groups</h3>
-            <div className="container center group-box">
+            <div className="scroll">
               {groupComponent}
             </div>
           </div>

@@ -7,7 +7,15 @@ const initialState = {
   user: {}
 };
 
-
+/**
+ *
+ * @param {obj} state
+ * @param {obj} action
+ * @return {obj} This reducer updates the state with
+ * the login detail of the user
+ *  Here the state is reduced based on the action object and
+ *  a new start returned
+ */
 const signinReducer = (state = initialState, action) => {
   switch (action.type) {
     case SIGN_IN_SUCCESS:

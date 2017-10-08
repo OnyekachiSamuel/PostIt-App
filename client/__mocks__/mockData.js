@@ -1,3 +1,4 @@
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbnJ5IiwidXNlcklkIjo0MiwiZW1haWwiOiJoZW5yeUBnbWFpbC5jb20iLCJuYW1lIjoiSGVucnkiLCJpYXQiOjE1MDQ3ODQ3NDYsImV4cCI6MTUwNDg3MTE0Nn0.Uad3SxnImwsXnjFI6ECTlSMt8Cpxamn0jD9NrlMxlW0';
 export const mockData = {
   signIn: {
     state: {
@@ -48,6 +49,13 @@ export const mockData = {
       target: {
         name: 'username',
         value: 'Samuel'
+      }
+    },
+    state: {
+      signup: {
+        errors: {
+          password: 'Password field should not be empty'
+        }
       }
     }
   },
@@ -256,6 +264,66 @@ export const mockData = {
         params: {
           groupId: 8
         }
+      }
+    }
+  },
+  navBar: {
+    props: {
+      signOutRequest: jest.fn(),
+      signOut: jest.fn(),
+      signin: {
+        user: [{ userId: 2, username: 'Henk' }]
+      },
+      show: jest.fn(),
+      redirectUrl: '/'
+    },
+    state: {
+      signin: {
+        user: [{
+          userId: 9,
+          userName: 'Sam'
+        }]
+      }
+    }
+  },
+  composeMessage: {
+    props: {
+      postRequest: jest.fn(),
+      match: {
+        params: {
+          groupId: 9
+        },
+        groupName: 'Andela'
+      }
+    },
+    target: {
+      target: {
+        name: 'priority',
+        value: 'Urgent',
+      }
+    }
+  },
+  forgetPasswordPage: {
+    props: {
+      resetPasswordRequest: jest.fn(),
+      match: {
+        params: {
+          token
+        }
+      },
+      forgetPassword: {
+        message: 'Successfully resetted your password'
+      }
+    },
+    state: {
+      forgetPassword: {
+        message: 'Successfully resetted your password'
+      }
+    },
+    target: {
+      target: {
+        name: 'password',
+        value: 'admin',
       }
     }
   }

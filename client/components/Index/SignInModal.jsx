@@ -107,40 +107,43 @@ export class SignInModal extends React.Component {
               <Link to="#" className="modal-close">Close</Link>
             </div>
           </div>
-          <form className="col s12" method="post" onSubmit={this.onSubmit}>
+          <form className="col s12 formData"
+            method="post"
+            onSubmit={this.onSubmit}>
             <div className="row">
               {this.state.visible &&
                 <div className="input-field col s12">
                   <input placeholder="Enter your email to start the process"
                     id="email" type="email" name="email"
-                     value={this.state.email} onChange={this.onChange}
+                    value={this.state.email} onChange={this.onChange}
                     className="validate" required />
                 </div>}
               {!this.state.visible &&
-              <div className="input-field col s12">
-                <input id="username" name="username" value={this.state.username}
-                  onChange={this.onChange} type="text" placeholder="Username"
-                  className="validate" required />
-              </div>
+                <div className="input-field col s12">
+                  <input id="username" name="username"
+                   value={this.state.username}
+                    onChange={this.onChange} type="text" placeholder="Username"
+                    className="validate" required />
+                </div>
               }
               {!this.state.visible &&
                 <div className="input-field col s12">
                   <input id="password" type="password" name="password"
-                  value={this.state.password}
+                    value={this.state.password}
                     onChange={this.onChange} placeholder="Password"
                     className="validate" required />
                 </div>
               }
             </div>
             {!this.state.visible &&
-              <div style={{ marginBottom: '7px' }}><span>forgot password ? Click
-              <Link to="#" onClick={this.onClick}> here
+              <div className="toggle"><span>forgot password ? Click
+              <Link to="#" onClick={this.onClick} id="toggle"> here
             </Link> to reset your password</span></div>}
             {this.state.visible &&
-              <div id="login" style={{ marginBottom: '7px' }}><span> Want to login ? Click
-              <Link to="#" onClick={this.onClickLogin}> here
+              <div id="login" className="toggle"><span> Want to login ? Click
+              <Link to="#" onClick={this.onClickLogin} id="loginLink"> here
             </Link> to login</span></div>}
-            { !this.state.visible && <div className="center google-login">
+            {!this.state.visible && <div className="center google-login">
               <GoogleLogin
                 clientId="1096080119344-dhkm3kesj85jq2au401j1ur243vo58np.apps.googleusercontent.com"
                 buttonText="+Google Login"
@@ -149,9 +152,9 @@ export class SignInModal extends React.Component {
                 className="google-btn"
               />
             </div>}
-                <div className="center">
-                  <button className="btn waves-effect waves-light"
-              type="submit" name="action">Submit</button></div>
+            <div className="center">
+              <button className="btn waves-effect waves-light"
+                type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -175,4 +178,4 @@ export const mapStateToProps = (state) => {
 };
 export default
   connect(mapStateToProps,
-  { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));
+    { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));

@@ -129,11 +129,10 @@ export default class MessageController {
  */
   static getMessages(req, res) {
     const groupId = req.params.groupId;
-    const userId = req.decoded.userId;
     const isGroupId = Number.isInteger(parseInt(groupId, 10));
     if (isGroupId) {
       Group.findOne({ attributes: ['groupName', 'userId'], where: { id: groupId } }).then((groupCreator) => {
-        if (groupCreator.dataValues.userId === userId) {
+        if (groupCreator.dataValues.userId) {
           Messages.findAll({
             attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
             where: {
@@ -146,22 +145,6 @@ export default class MessageController {
                 posts,
                 message: 'Received',
                 groupCreator: true
-              });
-            }
-          });
-        } else {
-          Messages.findAll({
-            attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
-            where: {
-              groupId, archived: false
-            },
-            order: [['createdAt', 'DESC']]
-          }).then((posts) => {
-            if (posts) {
-              res.status(200).json({
-                posts,
-                message: 'Received',
-                groupCreator: false
               });
             }
           });
@@ -196,20 +179,6 @@ export default class MessageController {
         }
       });
     }
-  }
-  /**
-   * @return {obj} Returns object of the number of messages that are archived
-   * @param {obj} req
-   * @param {obj} res
-   */
-  static archiveMessage(req, res) {
-    const groupId = req.params.groupId;
-    Messages.update({ archived: true }, { where: { groupId } })
-    .then((message) => {
-      if (message) {
-        res.status(200).json({ message, groupCreator: true });
-      }
-    });
   }
 }
 

@@ -1,7 +1,14 @@
 import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from '../actions/actionTypes';
 
-const initialState = {};
-const addUserReducer = (state = initialState, action) => {
+/**
+ *
+ * @param {obj} state
+ * @param {obj} action
+ * @return {obj} This reducer handles adding a user to a group.
+ * Here the state is reduced based on the action object and
+ *  a new start returned
+ */
+const addUserReducer = (state = {}, action) => {
   switch (action.type) {
     case ADD_USER_SUCCESS:
       return { ...action.payload };

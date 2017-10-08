@@ -9,7 +9,7 @@ import { fetchGroupPostRequest, updateGroupId, viewPost } from '../../actions/fe
  */
 export class SelectGroup extends React.Component {
   /**
-   * @return {null} Initializes the state
+   * @return {null} Initializes the state and bind methods
    * @param {obj} props
    */
   constructor(props) {
@@ -21,6 +21,7 @@ export class SelectGroup extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.formatPostTime = this.formatPostTime.bind(this);
   }
   /**
    * @return {null} Triggers the fetchGroupRequest action to fetch groups on
@@ -102,7 +103,7 @@ export class SelectGroup extends React.Component {
             <div className="post-date"><p>{this.formatPostTime(post.createdAt)}
               </p></div>
             <input disabled value={post.message} id="disabled" type="text"
-              className="validate" style={{ color: 'green' }} />
+              className="validate posted-text" />
               </div>
         );
       });
@@ -111,11 +112,12 @@ export class SelectGroup extends React.Component {
       <p className="center">Select a group to view posted messages</p>;
     }
     return (
-      <div>
+      <div className="container-fluid">
+        <div className="row">
         <div className="whitespace">
-          <div className="shift-left">
-            <div className="center container">
-              <select className="browser-default" name="groupId"
+          <div className="col m4 col s12">
+            <div className="center">
+              <select className="browser-default center" name="groupId"
               onChange={this.onChange}>
                 <option value="" defaultValue>Select Group</option>
                 {selectGroup}
@@ -129,14 +131,16 @@ export class SelectGroup extends React.Component {
           </div>
         </div>
         <div className="whitespace">
-          <div className="shift-right">
+          <div className="col m8 col s12">
             <div>
-              <h3 className="center">Message Board</h3>
-              <div className="input-field container posts" >
+              <div className="card center green-text group-name">
+                Message Board</div>
+              <div className="input-field container posts scroll" >
                 {groupPostComponent}
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     );

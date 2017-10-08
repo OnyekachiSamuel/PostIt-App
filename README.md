@@ -67,7 +67,7 @@ members in a group can interact with each other by posting their messages in the
 * Once account is created, proceed to  create a group and add your prefered users to the group you created
 * Then you can post message to the group you created for all members of the group.
 
-## CONTRIBUTING
+## Contributing
 
 - Fork the repository from https://github.com/OnyekachiSamuel/PostIt-App
 - Create your feature branch: git checkout -b my-new-feature

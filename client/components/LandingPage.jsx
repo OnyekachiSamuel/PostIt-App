@@ -13,6 +13,15 @@ import { userSignInRequest } from '../actions/signInAction';
  */
 class LandingPage extends React.Component {
   /**
+   *
+   * @param {obj} props
+   * @return {null} This constructor handles method binding
+   */
+  constructor(props) {
+    super(props);
+    this.loginSuccess = this.loginSuccess.bind(this);
+  }
+  /**
    * @return {null} makes the jQuery function available on component mount
    */
   componentDidMount() {
@@ -65,10 +74,10 @@ class LandingPage extends React.Component {
           <Title />
         </div>
         <SignUpModal
-          loginSuccess={this.loginSuccess.bind(this)}
+          loginSuccess={this.loginSuccess}
           signUpRequest={signUpRequest} />
         <SignInModal signInRequest={signInRequest}
-          loginSuccess={this.loginSuccess.bind(this)} />
+          loginSuccess={this.loginSuccess} />
       </div>
     );
   }

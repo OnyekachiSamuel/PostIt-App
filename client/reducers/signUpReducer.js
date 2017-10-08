@@ -1,5 +1,14 @@
 import { SIGN_UP_FAILURE, GOOGLE_AUTH_FAILURE, GROUP_CREATION_FAILURE } from '../actions/actionTypes';
 
+/**
+ *
+ * @param {obj} state
+ * @param {obj} action
+ * @return {obj} This reducer updates the state with
+ * the details of the user that created a new account.
+ *  Here the state is reduced based on the action object and
+ *  a new start returned
+ */
 const signupReducer = (state = {}, action) => {
   switch (action.type) {
     case SIGN_UP_FAILURE:

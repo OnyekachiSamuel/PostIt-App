@@ -1,6 +1,12 @@
 import axios from 'axios';
 import { GROUP_CREATION_SUCCESS, GROUP_CREATION_FAILURE, FETCH_USERS_ID, GROUP_MEMBERS_UPDATE } from './actionTypes';
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched when group
+ * creation is successful
+ */
 export const createGroupSuccess = (payload) => {
   return {
     type: GROUP_CREATION_SUCCESS,
@@ -8,6 +14,11 @@ export const createGroupSuccess = (payload) => {
   };
 };
 
+/**
+ *
+ * @param {obj} errors
+ * @return {obj} Action dispatched when group creation fails
+ */
 export const createGroupFailure = (errors) => {
   return {
     type: GROUP_CREATION_FAILURE,
@@ -15,6 +26,12 @@ export const createGroupFailure = (errors) => {
   };
 };
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched when get request
+ * for group members is successful
+ */
 export const getMembers = (payload) => {
   return {
     type: FETCH_USERS_ID,
@@ -22,6 +39,12 @@ export const getMembers = (payload) => {
   };
 };
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched to handle users added to a
+ * group
+ */
 export const updateGroupMembers = (payload) => {
   return {
     type: GROUP_MEMBERS_UPDATE,
@@ -29,6 +52,14 @@ export const updateGroupMembers = (payload) => {
   };
 };
 
+/**
+ *
+ * @param {obj} groupDetails
+ * @return {promise} Makes an axios call to create a new group.
+ * createGroupSuccess action is dispatched on successful group
+ * creation and createGroupFailure is dispatched on failed
+ * operation
+ */
 export const createGroup = (groupDetails) => {
   return (dispatch) => {
     return axios.post('/api/v1/group', groupDetails).then((res) => {
@@ -42,7 +73,12 @@ export const createGroup = (groupDetails) => {
   };
 };
 
-
+/**
+ *
+ * @param {obj} groupId
+ * @return {promise} Makes an axios call to get members that belongs to a
+ * particular group.
+ */
 export const fetchGroupUsers = (groupId) => {
   return (dispatch) => {
     return axios.post(`/api/v1/group/${groupId}/userIds`).then((response) => {

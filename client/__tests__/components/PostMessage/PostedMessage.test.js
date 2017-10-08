@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
-import toJson from 'enzyme-to-json';
 import { MemoryRouter } from 'react-router';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -21,10 +20,8 @@ describe('<PostMessage />', () => {
     const wrapper = shallow(<PostedMessage
      { ...mockData.postedMessage.props } />,
       { context: { store: mockStore(mockData.postedMessage.initialState) } });
-    const tree = toJson(wrapper);
-    expect(tree.type).toBe('div');
-    expect(tree.props.className).toEqual('shift-right');
-    expect(tree.children[0].type).toEqual('Link');
+    expect(wrapper.contains('View message board')).toBe(true);
+    expect(wrapper.contains('Messages')).toBe(true);
   });
   it('calls componentDidMount', () => {
     sinon.spy(PostedMessage.prototype, 'componentDidMount');

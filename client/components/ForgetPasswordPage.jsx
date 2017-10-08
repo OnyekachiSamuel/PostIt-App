@@ -8,7 +8,7 @@ import { resetPasswordRequest } from '../actions/forgetPasswordAction';
 /**
  * @class ForgetPasswordPage
  */
-class ForgetPasswordPage extends Component {
+export class ForgetPasswordPage extends Component {
   /**
    * @return {null} Initializes the state and binds the functions
    *  used in the component
@@ -61,7 +61,7 @@ class ForgetPasswordPage extends Component {
             {forgetPassword.error &&
               <div><span>{forgetPassword.error}</span></div>}
             <div>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit} id="formData">
                 <div className="input-field">
                   <input id="password" type="password" placeholder="Password"
                   name="password"
@@ -90,7 +90,7 @@ ForgetPasswordPage.propTypes = {
   forgetPasswordRequest: PropTypes.func
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { forgetPassword } = state;
   return {
     forgetPassword

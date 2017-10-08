@@ -2,6 +2,12 @@ import axios from 'axios';
 import { POST_MESSAGE_SUCCESSFUL, POST_MESSAGE_FAILURE } from './actionTypes';
 
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched when message post
+ * is successful
+ */
 export const postedMessage = (payload) => {
   return {
     type: POST_MESSAGE_SUCCESSFUL,
@@ -9,6 +15,11 @@ export const postedMessage = (payload) => {
   };
 };
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched when message posting fails
+ */
 export const postedMessageFailure = (payload) => {
   return {
     type: POST_MESSAGE_FAILURE,
@@ -16,6 +27,12 @@ export const postedMessageFailure = (payload) => {
   };
 };
 
+/**
+ *
+ * @param {obj} messageContent
+ * @param {int} groupId
+ * @return {obj} Makes an axios call to create a post in a group
+ */
 export const postRequest = (messageContent, groupId) => {
   return (dispatch) => {
     return axios.post(`/api/v1/group/${groupId}/messages`, messageContent).then((response) => {

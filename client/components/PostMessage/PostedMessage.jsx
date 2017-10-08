@@ -11,6 +11,15 @@ import { updateGroupInfo } from '../../actions/fetchGroupPost';
  */
 export class PostedMessage extends Component {
   /**
+   *
+   * @param {obj} props
+   * @return {null} This constructor handles method binding
+   */
+  constructor(props) {
+    super(props);
+    this.formatPostTime = this.formatPostTime.bind(this);
+  }
+  /**
  * @return {null} Updates the store with group posts by triggering the
  * fetchPostRequest action
  */
@@ -52,7 +61,7 @@ export class PostedMessage extends Component {
             <div className="post-date message-body">
               <p>{this.formatPostTime(element.createdAt)}</p></div>
             <input disabled value={element.message} id="disabled" type="text"
-              className="validate" style={{ color: 'green' }} />
+              className="validate posted-text" />
               </div>
         );
       });
@@ -60,12 +69,14 @@ export class PostedMessage extends Component {
       messageComponent = <p className="center">No message posted yet</p>;
     }
     return (
-      <div className="shift-right">
-        <Link className="waves-effect waves-light btn create-btn group-message"
+      <div>
+        <div className="center">
+        <Link className="waves-effect waves-light btn create-btn"
           to="/messages">View message board</Link>
+          </div>
         <div>
           <h3 className="center">Messages</h3>
-          <div className="input-field container posts">
+          <div className="input-field container posts scroll">
             {messageComponent}
           </div>
         </div>

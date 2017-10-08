@@ -152,7 +152,7 @@ export class AddUser extends Component {
         return (
           <p key={index} id="check-box">
             <input type="checkbox" className="ch-box"
-            onClick={this.onSelectUser}
+              onClick={this.onSelectUser}
               value={user.username} id={user.id} name="username"
               disabled={groupMembers.indexOf(user.username) >= 0} />
             <label htmlFor={user.id}>{user.username}</label>
@@ -162,12 +162,14 @@ export class AddUser extends Component {
       );
     }
     return (
-      <div className="shift-right">
-        <div className="container">
+      <div>
+        <div className="container-fluid space">
           <h3 className="center white green-text">
-             select and add user(s) to a group</h3>
+            select and add user(s) to a group</h3>
           <div className="select-margin">
-            <select className="browser-default" value={this.state.groupId}
+            <select className="browser-default"
+            id="select"
+             value={this.state.groupId}
               name="groupId" onChange={this.onChange}>
               <option value="1" defaultValue>Select Group</option>
               {groupComponent}
@@ -178,33 +180,33 @@ export class AddUser extends Component {
               <div className="input-group">
                 <div className="input-field">
                   <input id="search" placeholder="Search users"
-                   value={this.state.search}
+                    value={this.state.search}
                     onChange={this.handleSearch} type="search" name='search' />
                   <label className="label-icon" htmlFor="search">
                     <i className="material-icons" >search</i>
                   </label>
                 </div>
-                { this.state.selected &&
-                 <button type="submit" className="input-group-addon btn">
-                   Add</button>}
+                {this.state.selected &&
+                  <button type="submit" className="input-group-addon btn">
+                    Add</button>}
               </div>
-              {!isEmpty(searchResult) && filteredUsers }
+              {!isEmpty(searchResult) && filteredUsers}
             </form>
           </div>
+          {this.state.pageCount && <div className="paginate-btn">
+            <ReactPaginate previousLabel={'<'}
+              nextLabel={'>'}
+              breakLabel={<a href="">...</a>}
+              breakClassName={'break-me'}
+              pageCount={this.state.pageCount}
+              marginPagesDisplayed={1}
+              pageRangeDisplayed={5}
+              onPageChange={this.handlePagination}
+              containerClassName={'pagination'}
+              subContainerClassName={'pages pagination'}
+              activeClassName={'active'} />
+          </div>}
         </div>
-        { this.state.pageCount && <div className="paginate-btn">
-          <ReactPaginate previousLabel={'<'}
-            nextLabel={'>'}
-            breakLabel={<a href="">...</a>}
-            breakClassName={'break-me'}
-            pageCount={this.state.pageCount}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={5}
-            onPageChange={this.handlePagination}
-            containerClassName={'pagination'}
-            subContainerClassName={'pages pagination'}
-            activeClassName={'active'} />
-        </div>}
       </div>
     );
   }
@@ -228,7 +230,8 @@ export const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps,
-  { fetchUsersRequest,
+  {
+    fetchUsersRequest,
     addUserRequest,
     fetchGroupUsers,
     selectGroup,

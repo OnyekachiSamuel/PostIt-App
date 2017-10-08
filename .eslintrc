@@ -15,7 +15,8 @@
     "location": true,
     "localStorage": true,
     "expect": true,
-    "jest": true
+    "jest": true,
+    "document": true
   },
   "root": true,
   "extends": "airbnb-base",
@@ -41,7 +42,8 @@
        "componentWillUpdate",
        "componentDidUpdate",
        "componentWillUnmount",
-       "formatPostTime"
+       "formatPostTime",
+       "show"
      ]
    }],
     "react/jsx-uses-react": "error",

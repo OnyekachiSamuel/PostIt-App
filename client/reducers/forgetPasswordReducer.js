@@ -4,6 +4,15 @@ const initialState = {
   message: '',
   error: ''
 };
+/**
+ *
+ * @param {obj} state
+ * @param {obj} action
+ * @return {obj}
+ * This reducer handles password reset function.
+ *  Here the state is reduced based on the action object and
+ *  a new start returned
+ */
 const forgetPasswordReducer = (state = initialState, action) => {
   switch (action.type) {
     case RESET_LINK_SUCCESS:

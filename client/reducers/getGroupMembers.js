@@ -1,7 +1,16 @@
 import { FETCH_USERS_ID, GROUP_MEMBERS_UPDATE } from '../actions/actionTypes';
 
-const initialState = [];
-const getGroupMembers = (state = initialState, action) => {
+/**
+ *
+ * @param {obj} state
+ * @param {obj} action
+ * @return {obj}
+ * This reducer handles updating the state with members that belongs
+ * to same group.
+ * Here the state is reduced based on the action object and
+ *  a new start returned
+ */
+const getGroupMembers = (state = [], action) => {
   switch (action.type) {
     case FETCH_USERS_ID:
       return [...action.payload];

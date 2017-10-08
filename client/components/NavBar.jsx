@@ -7,7 +7,7 @@ import { signOutRequest } from '../actions/signOutAction';
 /**
  * @class NavBar
  */
-class NavBar extends React.Component {
+export class NavBar extends React.Component {
   /**
    * @return {null} Initializes the state and binds the onClick method
    * @param {props} props
@@ -18,6 +18,15 @@ class NavBar extends React.Component {
       isLoggedOut: false,
     };
     this.onClick = this.onClick.bind(this);
+  }
+  /**
+   * @return {null} makes the jQuery function available on component mount
+   */
+  componentDidMount() {
+    $('.button-collapse').sideNav({
+      closeOnClick: true
+    }
+    );
   }
   /**
    * @return {null} Triggers the signOutRequest action to clear user data
@@ -36,16 +45,30 @@ class NavBar extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link to={this.props.redirectUrl}>
-          <i className="left middle large material-icons">
-            navigate_before</i></Link>
-          <Link to="/">POST IT</Link>
-          <ul id="nav-mobile" className="right">
-           <li>{`hi, ${user.username}`}</li>
-          <li>
-            <Link className="waves-effect waves-light btn sign-btn" to="#" style={{ fontSize: '15px' }}
-            onClick={this.onClick}>Sign Out</Link>
-           </li>
+          {
+            this.props.show() &&
+            <Link to={this.props.redirectUrl}>
+              <i className="left middle large material-icons">
+                navigate_before</i></Link>
+          }
+          <Link to={this.props.redirectUrl}>POST IT</Link>
+          <a href="#!" data-activates="mobile-demo-two"
+            className="button-collapse">
+            <i className="material-icons">menu</i></a>
+          <ul id="nav-mobile" className="right hide-on-med-and-down">
+            <li>{`hi, ${user.username}`}</li>
+            <li>
+              <Link className="waves-effect waves-light btn sign-btn" to="#"
+                id="sign-btn"
+                onClick={this.onClick}>Sign Out</Link>
+            </li>
+          </ul>
+          <ul className="side-nav" id="mobile-demo-two">
+            <li className="green-text center">{`hi, ${user.username}`}</li>
+            <li>
+              <Link className="waves-effect waves-light btn sign-btn" to="#"
+                onClick={this.onClick}>Sign Out</Link>
+            </li>
           </ul>
         </div>
       </nav>
@@ -57,7 +80,7 @@ NavBar.propTypes = {
   signOutRequest: PropTypes.func,
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { signin } = state;
   return {
     signin

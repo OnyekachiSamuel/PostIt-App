@@ -17,8 +17,8 @@ describe('<GroupList />', () => {
     const wrapper = shallow(<GroupList { ...mockData.groupList.props } />);
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');
-    expect(tree.props.className).toEqual('shift-left');
-    expect(tree.children[0].type).toEqual('button');
+    expect(tree.children[0].type).toEqual('div');
+    expect(wrapper.contains('Create group')).toBe(true);
   });
   it('should call componentDidMount', () => {
     sinon.spy(GroupList.prototype, 'componentDidMount');

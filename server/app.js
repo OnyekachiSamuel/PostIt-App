@@ -26,8 +26,6 @@ app.use('/api/v1/', routes);
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
-app.listen(port, () => {
-  console.log(`Listening on port ${port} in ${app.get('env')}`);
-});
+app.listen(port);
 export default app;
 

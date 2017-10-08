@@ -10,6 +10,16 @@ import SelectGroup from './ViewMessages/SelectGroup.jsx';
  * @class ViewMessages
  */
 class ViewMessages extends React.Component {
+    /**
+   *
+   * @param {obj} props
+   * @return {null} method binding is done here
+   */
+  constructor(props) {
+    super(props);
+    this.signOut = this.signOut.bind(this);
+    this.show = this.show.bind(this);
+  }
   /**
      * @return {null} makes the jQuery function available on component mount
      */
@@ -23,14 +33,23 @@ class ViewMessages extends React.Component {
   signOut() {
     this.props.history.push('/');
   }
-  /**
+
+/**
+ * @return {null} Function used to show navigation icon
+ *  for navigating the webpages
+ */
+  show() {
+    return true;
+  }
+    /**
    * @return {String} HTML markup for view component of ViewMessages
    */
   render() {
     const { groupInfo } = this.props;
     return (
       <div>
-        <NavBar signOut={this.signOut.bind(this)} redirectUrl = {`/${groupInfo.groupId}/${groupInfo.groupName}/post`} />
+        <NavBar signOut={this.signOut} show={this.show}
+         redirectUrl = {`/${groupInfo.groupId}/${groupInfo.groupName}/post`} />
           <WhiteBar />
           <SelectGroup />
       </div>

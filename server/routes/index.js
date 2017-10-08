@@ -24,10 +24,10 @@ router.post('/group/:groupId/user', Validate.groupsInputs, Verify.token, userCon
 router.post('/group/:groupId/messages', Validate.messagesInputs, Verify.token, messageController.postMessage);
 
 // Route to get messages posted to groups
-router.get('/group/:groupId/messages', Verify.token, messageController.getMessages);
+router.get('/group/:groupId/messages', Validate.validateGroupId, Verify.token, messageController.getMessages);
 
 // Route to fetch all users in a group
-router.get('/group/:groupId', Verify.token, userController.getUsersInGroup);
+router.get('/group/:groupId', Validate.validateGroupId, Verify.token, userController.getUsersInGroup);
 
 // Route to fetch all users
 router.get('/users', Verify.token, userController.searchUsers);
@@ -36,7 +36,7 @@ router.get('/users', Verify.token, userController.searchUsers);
 router.get('/groups/:username', Verify.token, groupController.getUserGroups);
 
 // Route to get all posts by a particular user
-router.get('/posts/:groupId/:userId', Verify.token, messageController.getUserMessages);
+router.get('/posts/:groupId/:userId', Validate.groupIdAndUserId, Verify.token, messageController.getUserMessages);
 
 // Route to get all posts in a particular group
 router.get('/post/messages/:groupId', Verify.token, messageController.getMessages);
@@ -48,14 +48,11 @@ router.post('/forgot', forgotPassword);
 router.put('/reset/:token', resetPassword);
 
 // Route to get groups a users has been added to or belongs to
-router.get('/groups/user/:userId', Verify.token, groupController.usersGroup);
+router.get('/groups/user/:userId', Validate.validateUserId, Verify.token, groupController.usersGroup);
 
 // Route for google signup and  login
 router.post('/auth/google', userController.googleAuth);
 
-// Route for archive message
-router.put('/group/archive/messages/:groupId', messageController.archiveMessage);
-
 // Route to get the Id's of all user in a particular group
-router.post('/group/:groupId/userIds', Verify.token, groupController.getAllUsersInGroup);
+router.post('/group/:groupId/userIds', Validate.validateGroupId, Verify.token, groupController.getAllUsersInGroup);
 export default router;

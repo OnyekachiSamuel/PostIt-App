@@ -7,7 +7,7 @@ import { createGroup } from '../../actions/groupAction';
 /**
  * @class
  */
-export class SelectGroup extends Component {
+export class GroupModal extends Component {
   /**
    * @return {null} Initializes the state
    * @param {obj} props
@@ -46,36 +46,43 @@ export class SelectGroup extends Component {
    */
   render() {
     return (
-      <div className="row modal" id="modal3">
+      <div className="modal" id="modal3">
         <div className="modal-content">
-          <div className="modal-title row">
-            <div className="col s6 m6">
-              <Link to="#" className="white-text">Group Details</Link>
-            </div>
-            <div className="close-modal">
-              <Link to="#" className="modal-close">Close</Link>
+          <div className="modal-title">
+            <div className="row">
+              <div className="col m8 s8">
+                <Link to="#" className="white-text">Group Details</Link>
+              </div>
+              <div className="close-modal col m2 s2">
+                <Link to="#" className="modal-close white-text">Close</Link>
+              </div>
             </div>
           </div>
-          <form className="col s12" method="post" onSubmit={this.onSubmit}>
+          <form method="post" onSubmit={this.onSubmit} id="formData">
             <div className="row">
               <div className="input-field col s12">
                 <input id="groupName" name="groupName"
-                 value={this.state.groupName}
-                  onChange={this.onChange} type="text"
+                  value={this.state.groupName}
+                  onChange={this.onChange}
+                  type="text"
                   className="validate" required />
-                <label htmlFor="groupName">Group name</label>
+                  <label htmlFor="groupName">Group name</label>
               </div>
             </div>
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="description" name="description"
-                value={this.state.description}
-                  onChange={this.onChange} type="text" className="validate" />
-                <label htmlFor="password">Description</label>
+              <div className="row">
+                <div className="input-field col s12">
+                  <input id="description" name="description"
+                    value={this.state.description}
+                    onChange={this.onChange} type="text" className="validate" />
+                  <label htmlFor="description">Description</label>
+                </div>
               </div>
-            </div>
-          <button className="btn waves-effect waves-light modal-close modal-btn"
-              type="submit" name="action">Create</button>
+              <div className="row">
+                <div className="col s12">
+                  <button className="btn waves-effect waves-light modal-close modal-btn col s12"
+                    type="submit" name="action">Create</button>
+                </div>
+                </div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -86,9 +93,10 @@ export class SelectGroup extends Component {
   }
 }
 
-SelectGroup.propTypes = {
+
+GroupModal.propTypes = {
   createGroup: PropTypes.func.isRequired
 };
 
-export default connect(null, { createGroup })(SelectGroup);
+export default connect(null, { createGroup })(GroupModal);
 

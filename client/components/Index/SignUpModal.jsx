@@ -82,7 +82,7 @@ export class SignUpModal extends React.Component {
       <div className="row modal" id="modal1">
         <div className="modal-content">
           <div className="modal-title row">
-            <div className="col s6 m6">
+            <div className="col s8 m8">
               <Link to="#" className="white-text">Sign up</Link>
             </div>
             <div className="close-modal">
@@ -171,7 +171,7 @@ SignUpModal.propTypes = {
   googleAuthRequest: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { signup } = state;
   return {
     signup

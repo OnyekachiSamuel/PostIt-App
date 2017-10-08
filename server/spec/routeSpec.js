@@ -139,6 +139,16 @@ describe('ROUTE TESTING', () => {
           done();
         });
     }, 10000);
+    it('Should be able to get all members in a group', (done) => {
+      request.post(`/api/v1/group/${groupId}/userIds`)
+    .set('x-access-token', token)
+    .expect(200)
+    .end((err, res) => {
+      const groupMembers = res.body.groupMembers;
+      expect(groupMembers).toEqual(['obinna', 'kenet']);
+      done();
+    });
+    }, 10000);
     it('Should be able to post message to created group', (done) => {
       user = {
         message: 'Its working',

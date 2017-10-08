@@ -2,6 +2,12 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import { SIGN_IN_SUCCESS, SIGN_IN_FAILURE } from './actionTypes';
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched when sign in action
+ * is successful
+ */
 export const signIn = (payload) => {
   return {
     type: SIGN_IN_SUCCESS,
@@ -9,6 +15,11 @@ export const signIn = (payload) => {
   };
 };
 
+/**
+ *
+ * @param {obj} payload
+ * @return {obj} Action dispatched when sign in operation fails
+ */
 export const signInFailure = (payload) => {
   return {
     type: SIGN_IN_FAILURE,
@@ -16,7 +27,12 @@ export const signInFailure = (payload) => {
   };
 };
 
-
+/**
+ *
+ * @param {obj} userData
+ * @return {promise} Makes an axios call to authenticate the user and log the
+ * user in
+ */
 export const userSignInRequest = (userData) => {
   return (dispatch) => {
     return axios.post('/api/v1/signin', userData).then((response) => {

@@ -128,7 +128,10 @@ export default class Validator {
      */
   static groupsInputs(req, res, next) {
     const errors = {};
-    if (req.body.username === undefined) {
+    const groupId = req.params.groupId;
+    if (isNaN(groupId) || groupId === undefined) {
+      res.json({ message: 'groupId must be an integer' });
+    } else if (req.body.username === undefined) {
       res.json({ message: 'Username field is required' });
     } else {
       if (validator.isEmpty(req.body.username)) {
@@ -150,9 +153,12 @@ export default class Validator {
      * @param {obj} next
      */
   static messagesInputs(req, res, next) {
-    const errors = {};
+    const errors = {},
+      groupId = req.params.groupId;
     if (req.body.message === undefined) {
       res.json({ message: 'Message field is required' });
+    } else if (isNaN(groupId) || groupId === undefined) {
+      res.json({ message: 'groupId must be an integer' });
     } else {
       if (validator.isEmpty(req.body.message)) {
         errors.message = 'Message field should not be empty';
@@ -166,6 +172,54 @@ export default class Validator {
       } else {
         next();
       }
+    }
+  }
+  /**
+   * @return {obj} Validates the request params to ensure only integer value
+   *  is supplied as the groupId
+   * @param {obj} req
+   * @param {obj} res
+   * @param {obj} next
+   */
+  static validateGroupId(req, res, next) {
+    const groupId = req.params.groupId;
+    if (isNaN(groupId) || groupId === undefined) {
+      res.json({ message: 'groupId must be an integer' });
+    } else {
+      next();
+    }
+  }
+  /**
+   * @return {obj} Validates the request params to ensure only integer
+   *  values are passed as the userId and groupId
+   * @param {obj} req
+   * @param {obj} res
+   * @param {obj} next
+   */
+  static groupIdAndUserId(req, res, next) {
+    const groupId = req.params.groupId,
+      userId = req.params.userId;
+    if (isNaN(groupId) || groupId === undefined) {
+      res.json({ message: 'groupId must be an integer' });
+    } else if (isNaN(userId) || userId === undefined) {
+      res.json({ message: 'userId must be an integer' });
+    } else {
+      next();
+    }
+  }
+    /**
+   * @return {obj} Validates the request params to ensure only integer value
+   *  is supplied as the userId
+   * @param {obj} req
+   * @param {obj} res
+   * @param {obj} next
+   */
+  static validateUserId(req, res, next) {
+    const userId = req.params.userId;
+    if (isNaN(userId) || userId === undefined) {
+      res.json({ message: 'userId must be an integer' });
+    } else {
+      next();
     }
   }
 }
