@@ -18,7 +18,8 @@ export default class Validator {
       password = req.body.password,
       phone = req.body.phone,
       confirmPassword = req.body.confirmPassword;
-    if (name === undefined || username === undefined || password === undefined || email === undefined || confirmPassword === undefined) {
+    if (name === undefined || username === undefined || password === undefined
+     || email === undefined || confirmPassword === undefined) {
       res.json({ message: 'Name, Username, Email, Password and ConfirmPassword fields are required' });
     } else {
       if (validator.toInt(req.body.name)) {
@@ -127,7 +128,10 @@ export default class Validator {
      */
   static groupsInputs(req, res, next) {
     const errors = {};
-    if (req.body.username === undefined) {
+    const groupId = req.params.groupId;
+    if (isNaN(groupId) || groupId === undefined) {
+      res.json({ message: 'groupId must be an integer' });
+    } else if (req.body.username === undefined) {
       res.json({ message: 'Username field is required' });
     } else {
       if (validator.isEmpty(req.body.username)) {
@@ -149,12 +153,19 @@ export default class Validator {
      * @param {obj} next
      */
   static messagesInputs(req, res, next) {
-    const errors = {};
+    const errors = {},
+      groupId = req.params.groupId;
     if (req.body.message === undefined) {
       res.json({ message: 'Message field is required' });
+    } else if (isNaN(groupId) || groupId === undefined) {
+      errors.message = 'groupId must be an integer';
+      res.status(422).json({ errors });
     } else {
       if (validator.isEmpty(req.body.message)) {
         errors.message = 'Message field should not be empty';
+      }
+      if (!req.body.message.trim().length) {
+        errors.message = 'Whitespace characters is not allowed. Please type in a message.';
       }
       const result = { errors, isValid: isEmpty(errors) };
       if (!result.isValid) {
@@ -162,6 +173,61 @@ export default class Validator {
       } else {
         next();
       }
+    }
+  }
+  /**
+   * @return {obj} Validates the request params to ensure only integer value
+   *  is supplied as the groupId
+   * @param {obj} req
+   * @param {obj} res
+   * @param {obj} next
+   */
+  static validateGroupId(req, res, next) {
+    const groupId = req.params.groupId;
+    const errors = {};
+    if (isNaN(groupId) || groupId === undefined) {
+      errors.message = 'groupId must be an integer';
+      res.status(422).json({ errors });
+    } else {
+      next();
+    }
+  }
+  /**
+   * @return {obj} Validates the request params to ensure only integer
+   *  values are passed as the userId and groupId
+   * @param {obj} req
+   * @param {obj} res
+   * @param {obj} next
+   */
+  static groupIdAndUserId(req, res, next) {
+    const groupId = req.params.groupId,
+      userId = req.params.userId,
+      errors = {};
+    if (isNaN(groupId) || groupId === undefined) {
+      errors.message = 'groupId must be an integer';
+      res.status(422).json({ errors });
+    } else if (isNaN(userId) || userId === undefined) {
+      errors.message = 'userId must be an integer';
+      res.status(422).json({ errors });
+    } else {
+      next();
+    }
+  }
+    /**
+   * @return {obj} Validates the request params to ensure only integer value
+   *  is supplied as the userId
+   * @param {obj} req
+   * @param {obj} res
+   * @param {obj} next
+   */
+  static validateUserId(req, res, next) {
+    const userId = req.params.userId,
+      errors = {};
+    if (isNaN(userId) || userId === undefined) {
+      errors.message = 'userId must be an integer';
+      res.status(422).json({ errors });
+    } else {
+      next();
     }
   }
 }

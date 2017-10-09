@@ -26,6 +26,12 @@ header {
   background-position: center;
   height: 100vh; }
 
+.my-background {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://i.imgur.com/5MD10l3.jpg);
+  background-size: cover;
+  background-position: center;
+  height: 100vh; }
+
 footer {
   position: absolute;
   right: 0;
@@ -74,7 +80,7 @@ h4 {
 
 .page-heading {
   position: absolute;
-  width: 1140px;
+  width: 70vw;
   top: 50%;
   left: 50%;
   text-align: center;
@@ -137,6 +143,7 @@ h4 {
   background-color: #3e7293 !important;
   height: 24px;
   line-height: 24px;
+  font-size: 15px;
   padding: 0 0.5rem; }
 
 .sign-btn:hover,
@@ -181,8 +188,8 @@ h4 {
 
 .left {
   float: left;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding-left: 24px;
+  padding-top: 3px;
   font-size: 24px; }
 
 .right {
@@ -274,18 +281,18 @@ button .right {
 .shift-left {
   float: left;
   height: 100vh;
-  width: 40%; }
+  width: 49%; }
 
 .shift-right {
   float: right;
   height: 100vh;
-  width: 50%; }
+  width: 49%; }
 
 .create-btn {
   margin-top: 32px;
-  left: 30%;
   background-color: #56ad55 !important;
-  color: #fff !important; }
+  color: #fff !important;
+  text-transform: capitalize; }
 
 .btn-margin {
   margin-bottom: 8px;
@@ -303,7 +310,8 @@ button .right {
   color: #fff !important; }
 
 #search-site {
-  background-color: #fff; }
+  background-color: #fff;
+  text-transform: capitalize; }
 
 /*---------------------------------------------*/
 /* POST MESSAGE IMPLEMENTATION OF FEEDBACK
@@ -316,7 +324,10 @@ button .right {
   float: left; }
 
 .post-date {
-  float: right; }
+  float: right;
+  font-weight: 300;
+  font-size: 14px;
+  margin-top: 6px; }
 
 .whitespace {
   margin-bottom: 50px; }
@@ -366,7 +377,8 @@ button .right {
 
 .notFound {
   background-color: #3e7293;
-  color: #fff; }
+  color: #fff;
+  margin: 0; }
 
 .center-align {
   text-align: center; }
@@ -384,129 +396,81 @@ button .right {
   color: #fff; }
 
 .paginate-btn {
-  margin-left: 120px;
-  margin-top: 200px; }
+  margin-left: 20px; }
 
-@media only screen and (max-width: 1284px) {
-  .group-box {
-    max-height: 400px;
-    overflow: scroll; }
-  .posts {
-    max-height: 400px;
-    overflow: scroll; }
-  .create-btn {
-    padding: 0 16px; }
-  .nav-wrapper a {
-    font-size: 16px; } }
+.message-body {
+  word-wrap: break-word; }
 
-@media only screen and (max-width: 948px) {
-  .btn-margin {
-    padding: 0 40px; }
-  .nav-wrapper a {
-    font-size: 12px; } }
+#check-box {
+  padding-left: 10px; }
 
-@media only screen and (max-width: 830px) {
-  .create-btn {
-    padding: 0 14px;
-    margin-left: -34px; }
-  h3 {
-    font-size: 26px;
-    margin-left: -30px; } }
+.white-text {
+  font-size: 17px;
+  margin-right: 100px; }
 
-@media only screen and (max-width: 764px) {
-  .create-btn {
-    left: 45%; }
-  h3 {
-    margin-left: 3px; } }
+.group-message {
+  margin-top: 32px;
+  left: 33%;
+  background-color: #56ad55 !important;
+  color: #fff !important; }
 
-@media only screen and (max-width: 727px) {
-  .create-btn {
-    margin-left: -1px; }
-  .btn-margin {
-    font-size: 14px;
-    margin-left: 60px; } }
+i.left {
+  margin-right: 1px; }
 
-@media only screen and (max-width: 767px) {
-  body {
-    font-family: 'Lato', 'Arial', sans-serif;
-    font-weight: 300 !important;
-    font-size: 14px !important; }
-  h1 {
-    font-size: 4.9vw; }
-  nav ul a.btn {
-    font-size: 15px !important; }
+.landing-page {
+  width: 100vw;
+  height: 100vh; }
+
+nav a {
+  margin-left: 30px; }
+
+.pagination li.active {
+  background-color: #59ab59;
+  border-radius: 50%; }
+
+.pagination li a {
+  font-size: 19px !important;
+  cursor: pointer; }
+
+#search-site {
+  margin-bottom: 11px; }
+
+a {
+  outline: none; }
+
+.paginate-btn {
+  display: flex;
+  justify-content: center; }
+
+#sidenav-overlay {
+  display: none; }
+
+.side-nav {
+  width: 70vw; }
+
+.group-name {
+  margin-left: 30%;
+  margin-right: 30%; }
+
+@media screen and (max-width: 790px) and (min-width: 360px) {
   .modal {
-    width: 48% !important;
-    max-height: 80% !important; }
-  .close-modal {
-    font-size: 12px !important; }
-  .create-btn {
-    font-weight: 300;
-    font-size: 14px; }
-  h3 {
-    font-size: 20px;
-    width: 360px; }
-  .input-group .input-group-addon {
-    padding-left: 12px;
-    padding-right: 12px;
-    font-weight: 300;
-    font-size: 14px; }
-  .container {
-    width: 70%; }
-  .modal .modal-close .modal-btn {
-    padding: 0 8px !important;
-    font-size: 14px !important; }
-  .green-text {
-    width: 96%;
-    padding-bottom: 8px; }
-  .btn-margin {
-    margin-left: 45px; }
-  .input-field.col label {
-    font-size: 14px; }
-  .modal-btn {
-    font-size: 14px;
-    padding: 0 12px; } }
+    width: 80% !important; } }
 
-@media only screen and (max-width: 400px) {
-  .shift-left {
-    width: 100%;
-    max-height: 400px;
-    overflow: scroll; }
-  .create-btn {
-    margin-left: -20px;
-    padding: 0 14px;
-    margin-top: 32px; }
-  h3 {
-    font-size: 20px;
-    margin-left: 39px; }
-  .btn-margin {
-    margin-left: 49px;
-    padding: 0 14px;
-    font-size: 16px; }
-  .modal {
-    width: 66% !important;
-    max-height: 70% !important; }
-  .container {
-    width: 50%; }
-  .shift-right {
-    width: 96% !important; }
-  .input-field input[type=search] {
-    padding-left: 3rem;
-    width: calc(100% - 3rem);
-    font-size: 12px; }
-  textarea {
-    margin-right: 30px !important; }
-  .group-message {
-    margin-left: -28px !important; }
-  h3 {
-    margin-left: 38px !important; }
-  .posts {
-    max-height: 400px;
-    overflow: scroll; }
-  .green-text {
-    width: 80%; }
-  .btn {
-    font-size: 0.8rem !important;
-    padding: 0 18px !important; } }
+.scroll {
+  max-height: 370px;
+  overflow-y: scroll;
+  margin-bottom: 60px; }
 
-/*# sourceMappingURL=main.0e22390fb6a2f08243248212a4b90cd4.css.map*/
+.space {
+  margin-bottom: 50px; }
+
+.toggle {
+  margin-bottom: 7px; }
+
+.notFoundText {
+  margin-top: 230px; }
+
+.posted-text {
+  color: green !important; }
+
+/*# sourceMappingURL=main.301a636d5b47c349a5dd284af5793037.css.map*/

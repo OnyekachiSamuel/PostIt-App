@@ -3,6 +3,11 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import User from '../models/user';
 
+/**
+ * @return {obj} Returns appropriate message for success or failure request
+ * @param {obj} req
+ * @param {obj} res
+ */
 export const forgotPassword = (req, res) => {
   const email = req.body.email;
   const payload = { email },
@@ -29,23 +34,23 @@ export const forgotPassword = (req, res) => {
         from: 'postit028@gmail.com', // sender address
         to: email, // receiver address
         subject: 'Request for change of password',
-        text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
-          Please click on the following link, or paste this into your browser to complete the process:\n\n
-          This link will expire in 5 hours from the time it was sent.\n\n
-          http://${req.headers.host}/forgetPassword/${token}\n\n
-          If you did not request this, please ignore this email and your password will remain unchanged.\n`
+        text: `You are receiving this email because you have requested the reset of the password for your account.Please click on the link below, or copy and paste this link into your browser to complete the process:  
+        This link will expire in 5 hours from the time it was sent.
+          http://${req.headers.host}/forgetPassword/${token}`
       };
       transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return console.log(error);
-        }
-        console.log('Message %s sent: %s', info.messageId, info.response);
       });
       res.status(200).json({ message: 'Check your email and use the link to reset your password' });
     }
   });
 };
 
+
+/**
+ * @return {obj} Returns appropriate message for success or failure request
+ * @param {obj} req
+ * @param {obj} res
+ */
 export const resetPassword = (req, res) => {
   const password = req.body.password,
     confirmPassword = req.body.confirmPassword,

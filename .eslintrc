@@ -15,7 +15,8 @@
     "location": true,
     "localStorage": true,
     "expect": true,
-    "jest": true
+    "jest": true,
+    "document": true
   },
   "root": true,
   "extends": "airbnb-base",
@@ -26,6 +27,7 @@
     "jquery": true
   },
   "rules": {
+    "max-len": ["error", 80, { "ignoreStrings": true, "ignoreTemplateLiterals": true  }],
     "one-var": 0,
     "arrow-body-style": ["error", "always"],
     "class-methods-use-this": ["error", {
@@ -39,7 +41,9 @@
         "shouldComponentUpdate",
        "componentWillUpdate",
        "componentDidUpdate",
-       "componentWillUnmount"
+       "componentWillUnmount",
+       "formatPostTime",
+       "show"
      ]
    }],
     "react/jsx-uses-react": "error",

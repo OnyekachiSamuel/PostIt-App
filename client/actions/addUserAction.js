@@ -1,6 +1,11 @@
 import axios from 'axios';
-import { ADD_USER_SUCCESS, ADD_USER_FAILURE, RESET_COUNT } from './actionTypes';
+import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from './actionTypes';
 
+/**
+ * @return {obj} Action dispatched when adding a user
+ * to a group is succesful
+ * @param {obj} payload
+ */
 export const addUserSuccess = (payload) => {
   return {
     type: ADD_USER_SUCCESS,
@@ -8,12 +13,11 @@ export const addUserSuccess = (payload) => {
   };
 };
 
-export const resetCount = () => {
-  return {
-    type: RESET_COUNT
-  };
-};
-
+/**
+ * @return {obj} Action dispatched when adding a user to a group fails.
+ * Payload here is the error message.
+ * @param {string} payload
+ */
 export const addUserFailure = (payload) => {
   return {
     type: ADD_USER_FAILURE,
@@ -21,6 +25,12 @@ export const addUserFailure = (payload) => {
   };
 };
 
+/**
+ * @return {promise} Makes an axios call and dispatches an action addUserSuccess
+ *  if api call is successful or addUserFailure if error occcured
+ * @param {obj} userData
+ * @param {int} groupId
+ */
 export const addUserRequest = (userData, groupId) => {
   return (dispatch) => {
     return axios.post(`/api/v1/group/${groupId}/user`, userData).then((response) => {

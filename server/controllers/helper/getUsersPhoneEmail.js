@@ -1,6 +1,11 @@
 import User from '../../models/user';
 import UsersGroup from '../../models/usersgroup';
 
+/**
+ * @return {obj} Returns object of array of phone contacts and email of users in a group
+ * @param {*} groupId
+ * @param {func} done
+ */
 export const getUsersPhoneEmail = (groupId, done) => {
   const usersIds = [], phoneNumbers = [], emails = [];
   UsersGroup.findAll({ attributes: { exclude: ['groupId'] }, where: { groupId } })

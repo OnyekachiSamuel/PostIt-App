@@ -8,9 +8,10 @@ import { resetPasswordRequest } from '../actions/forgetPasswordAction';
 /**
  * @class ForgetPasswordPage
  */
-class ForgetPasswordPage extends Component {
+export class ForgetPasswordPage extends Component {
   /**
-   * @return {null} Initializes the state and binds the functions  used in the component
+   * @return {null} Initializes the state and binds the functions
+   *  used in the component
    * @param {obj} props
    */
   constructor(props) {
@@ -55,19 +56,24 @@ class ForgetPasswordPage extends Component {
           </nav>
           <div className="align-middle center-align">
             {forgetPassword.message &&
-              <div><span>{forgetPassword.message}. Click <Link to="/">here </Link>to login</span></div>}
+              <div><span>{forgetPassword.message}. Click
+                 <Link to="/">here </Link>to login</span></div>}
             {forgetPassword.error &&
               <div><span>{forgetPassword.error}</span></div>}
             <div>
-              <form onSubmit={this.onSubmit}>
+              <form onSubmit={this.onSubmit} id="formData">
                 <div className="input-field">
-                  <input id="password" type="password" placeholder="Password" name="password"
-                    value={this.state.password} className="validate" onChange={this.onChange} required />
+                  <input id="password" type="password" placeholder="Password"
+                  name="password"
+                    value={this.state.password} className="validate"
+                    onChange={this.onChange} required />
                 </div>
                 <div className="input-field">
-                  <input id="confirmPassword" type="password" name="confirmPassword"
+                  <input id="confirmPassword" type="password"
+                  name="confirmPassword"
                     value={this.state.confirmPassword}
-                    placeholder="Confirm password" className="validate" onChange={this.onChange} required />
+                    placeholder="Confirm password" className="validate"
+                    onChange={this.onChange} required />
                 </div>
                 <button className="btn waves-effect waves-light"
                   type="submit" name="action">Submit</button>
@@ -84,11 +90,12 @@ ForgetPasswordPage.propTypes = {
   forgetPasswordRequest: PropTypes.func
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { forgetPassword } = state;
   return {
     forgetPassword
   };
 };
 
-export default connect(mapStateToProps, { resetPasswordRequest })(withRouter(ForgetPasswordPage));
+export default connect(mapStateToProps,
+{ resetPasswordRequest })(withRouter(ForgetPasswordPage));

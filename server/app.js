@@ -10,7 +10,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 
-// Middlewares used
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, x-access-token');
@@ -27,8 +26,6 @@ app.use('/api/v1/', routes);
 app.get('*', (req, res) => {
   res.sendFile(`${process.cwd()}/dist/index.html`);
 });
-app.listen('3000', () => {
-  console.log(`Listening on port ${port} in ${app.get('env')}`);
-});
+app.listen(port);
 export default app;
 
