@@ -34,7 +34,7 @@ export class GroupList extends Component {
         );
       });
     } else {
-      groupComponent = <div>No group created yet</div>;
+      groupComponent = <div className="center">No group created yet</div>;
     }
     return (
       <div>

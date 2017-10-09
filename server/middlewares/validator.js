@@ -158,7 +158,8 @@ export default class Validator {
     if (req.body.message === undefined) {
       res.json({ message: 'Message field is required' });
     } else if (isNaN(groupId) || groupId === undefined) {
-      res.json({ message: 'groupId must be an integer' });
+      errors.message = 'groupId must be an integer';
+      res.status(422).json({ errors });
     } else {
       if (validator.isEmpty(req.body.message)) {
         errors.message = 'Message field should not be empty';
@@ -183,8 +184,10 @@ export default class Validator {
    */
   static validateGroupId(req, res, next) {
     const groupId = req.params.groupId;
+    const errors = {};
     if (isNaN(groupId) || groupId === undefined) {
-      res.json({ message: 'groupId must be an integer' });
+      errors.message = 'groupId must be an integer';
+      res.status(422).json({ errors });
     } else {
       next();
     }
@@ -198,11 +201,14 @@ export default class Validator {
    */
   static groupIdAndUserId(req, res, next) {
     const groupId = req.params.groupId,
-      userId = req.params.userId;
+      userId = req.params.userId,
+      errors = {};
     if (isNaN(groupId) || groupId === undefined) {
-      res.json({ message: 'groupId must be an integer' });
+      errors.message = 'groupId must be an integer';
+      res.status(422).json({ errors });
     } else if (isNaN(userId) || userId === undefined) {
-      res.json({ message: 'userId must be an integer' });
+      errors.message = 'userId must be an integer';
+      res.status(422).json({ errors });
     } else {
       next();
     }
@@ -215,9 +221,11 @@ export default class Validator {
    * @param {obj} next
    */
   static validateUserId(req, res, next) {
-    const userId = req.params.userId;
+    const userId = req.params.userId,
+      errors = {};
     if (isNaN(userId) || userId === undefined) {
-      res.json({ message: 'userId must be an integer' });
+      errors.message = 'userId must be an integer';
+      res.status(422).json({ errors });
     } else {
       next();
     }
