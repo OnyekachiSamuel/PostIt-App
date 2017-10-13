@@ -13,6 +13,7 @@ describe('<ViewMembers />', () => {
     };
     const state = setup();
   });
+
   it('Component should render correctly', () => {
     const wrapper = shallow(<ViewMembers { ...mockData.viewMembers.props } />);
     const tree = toJson(wrapper);
@@ -20,6 +21,7 @@ describe('<ViewMembers />', () => {
     expect(tree.props.className).toEqual('row modal');
     expect(tree.children[0].type).toEqual('div');
   });
+
   it('should call componentDidMount', () => {
     sinon.spy(ViewMembers.prototype, 'componentDidMount');
     const wrapper = mount(

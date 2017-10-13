@@ -51,7 +51,7 @@ export class GroupModal extends Component {
           <div className="modal-title">
             <div className="row">
               <div className="col m8 s8">
-                <Link to="#" className="white-text">Group Details</Link>
+                <Link to="#" className="white-text notClickable">Group Details</Link>
               </div>
               <div className="close-modal col m2 s2">
                 <Link to="#" className="modal-close white-text">Close</Link>

@@ -40,7 +40,7 @@ export class ViewMembers extends React.Component {
         <div className="modal-content">
           <div className="modal-title row">
             <div className="col s6 m6 center">
-              <Link to="#" className="white-text">Members</Link>
+              <Link to="#" className="white-text notClickable">Members</Link>
             </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>

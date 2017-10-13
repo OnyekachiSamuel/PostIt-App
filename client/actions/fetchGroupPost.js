@@ -69,7 +69,6 @@ export const fetchGroupPostRequest = (groupId) => {
       if (posts.length > 0) {
         dispatch(fetchPost(result));
       } else {
-        Materialize.toast('No message posted to this group yet', 2000, 'red white-text rounded');
         const error = {
           message: 'No message posted to this group yet'
         };

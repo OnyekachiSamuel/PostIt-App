@@ -1,10 +1,12 @@
 import User from '../../models/user';
 import UsersGroup from '../../models/usersgroup';
 
-/**
- * @return {obj} Returns object of array of phone contacts and email of users in a group
+/** This method is used to get the email and
+ * phone numbers of members in a group
  * @param {*} groupId
  * @param {func} done
+  * @return {obj} Returns object of array of phone
+ * contacts and email of users in a group
  */
 export const getUsersPhoneEmail = (groupId, done) => {
   const usersIds = [], phoneNumbers = [], emails = [];

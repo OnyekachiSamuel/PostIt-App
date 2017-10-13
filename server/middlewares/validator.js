@@ -4,13 +4,15 @@ import isEmpty from 'lodash/isEmpty';
  * @class Validator
  */
 export default class Validator {
-    /**
-     * @return {json} Validates the inputs before allowing access to the db
+    /** This method is used to validate form inputs
+     *  when the user tries to sign up with the app
      * @param {obj} req
      * @param {obj} res
      * @param {obj} next
+     * @return {json} Returns object containing error message
+     *  if validation fails
      */
-  static signupInputs(req, res, next) {
+  static signUpInputs(req, res, next) {
     const errors = {};
     const name = req.body.name,
       username = req.body.username,
@@ -65,13 +67,15 @@ export default class Validator {
   }
 
 
-/**
-     * @return {json} Validates the inputs before allowing access to the db
+   /** This method validates the form inputs when the
+    *  user tries to login into the app
      * @param {obj} req
      * @param {obj} res
      * @param {obj} next
+     * @return {json} Returns object containing error
+     *   message if input validation fails
      */
-  static signinInputs(req, res, next) {
+  static signInInputs(req, res, next) {
     const errors = {};
     if (req.body.username === undefined || req.body.password === undefined) {
       res.json({ message: 'Username and Password fields are required' });
@@ -94,11 +98,13 @@ export default class Validator {
     }
   }
 
-/**
-     * @return {json} Validates the inputs before allowing access to the db
+   /** This method is used to validate form
+    *  inputs when the user wants to create a new group
      * @param {obj} req
      * @param {obj} res
      * @param {obj} next
+     * @return {json} Returns object containing error message
+     * if form validation fails
      */
   static createGroupInputs(req, res, next) {
     const errors = {};
@@ -120,11 +126,13 @@ export default class Validator {
     }
   }
 
-/**
-     * @return {json} Validates the inputs before allowing access to the db
+   /** This method is used to validate inputs when
+    *  adding a user to a group
      * @param {obj} req
      * @param {obj} res
      * @param {obj} next
+     * @return {json} Returns object containing error
+     * if form validation fails
      */
   static groupsInputs(req, res, next) {
     const errors = {};
@@ -146,11 +154,13 @@ export default class Validator {
     }
   }
 
-/**
-     * @return {json} Validates the inputs before allowing access to the db
+   /** This method is used to validate users input
+     *  when posting a message to a group
      * @param {obj} req
      * @param {obj} res
      * @param {obj} next
+     * @return {json} Returns object containing error message
+     *  if validation fails
      */
   static messagesInputs(req, res, next) {
     const errors = {},
@@ -175,12 +185,14 @@ export default class Validator {
       }
     }
   }
-  /**
-   * @return {obj} Validates the request params to ensure only integer value
-   *  is supplied as the groupId
+
+  /** This method is used to ensure that a user does
+   * not use string where integer is required for ID
    * @param {obj} req
    * @param {obj} res
    * @param {obj} next
+   * @return {obj} Returns object containing error message
+   *  if validation fails
    */
   static validateGroupId(req, res, next) {
     const groupId = req.params.groupId;
@@ -192,12 +204,15 @@ export default class Validator {
       next();
     }
   }
+
   /**
-   * @return {obj} Validates the request params to ensure only integer
-   *  values are passed as the userId and groupId
+   * This method is used to ensure that a user does
+   * not use string where integer is required for ID
    * @param {obj} req
    * @param {obj} res
    * @param {obj} next
+   * @return {obj} Returns object containing error message
+   *  if validation fails
    */
   static groupIdAndUserId(req, res, next) {
     const groupId = req.params.groupId,
@@ -213,12 +228,15 @@ export default class Validator {
       next();
     }
   }
-    /**
-   * @return {obj} Validates the request params to ensure only integer value
-   *  is supplied as the userId
+
+  /**
+   * This method is used to ensure that a user does
+   * not use string where integer is required for ID
    * @param {obj} req
    * @param {obj} res
    * @param {obj} next
+   * @return {obj} Returns object containing error message
+   *  if validation fails
    */
   static validateUserId(req, res, next) {
     const userId = req.params.userId,

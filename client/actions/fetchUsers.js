@@ -17,16 +17,17 @@ export const fetchUsers = (payload) => {
 
 /**
  *
- * @param {obj} userData
+ * @param {obj} userSearch
  * @return {promise} Makes axios call on search for users
  * and dispatches a fetUsers action on successful search action
  */
-export const fetchUsersRequest = (userData) => {
+export const fetchUsersRequest = (userSearch) => {
   return (dispatch) => {
-    return axios.get(`/api/v1/users?offset=${userData.offset}&search=${userData.search}`).then((response) => {
+    return axios.get(`/api/v1/users?offset=${userSearch.offset}&search=${userSearch.search}&limit=${userSearch.limit}`)
+    .then((response) => {
       const { searchMetaData, paginatedUsers } = response.data;
       let data;
-      if (!isEmpty(searchMetaData)) {
+      if (!isEmpty(searchMetaData) && paginatedUsers.length > 0) {
         const limit = searchMetaData.limit,
           count = searchMetaData.total_count,
           pageCount = Math.ceil(count / limit);

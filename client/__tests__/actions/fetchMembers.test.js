@@ -10,7 +10,7 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('FETCH MEMBERS ACTION', () => {
-  it('should dispatch FETCH_MEMBERS action', (done) => {
+  it('should dispatch FETCH_MEMBERS action on successful request', (done) => {
     const groupId = '33';
     const expectedAction = {
       type: FETCH_MEMBERS,

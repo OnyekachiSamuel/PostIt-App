@@ -98,10 +98,10 @@ export class SignInModal extends React.Component {
         <div className="modal-content">
           <div className="modal-title row">
             {!this.state.visible && <div className="col s6 m6">
-              <Link to="#" className="white-text">Sign in</Link>
+              <Link to="#" className="white-text notClickable">Sign in</Link>
             </div>}
             {this.state.visible && <div className="col s6 m6">
-              <Link to="#" className="white-text">Reset Password</Link>
+              <Link to="#" className="white-text notClickable">Reset Password</Link>
             </div>}
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
@@ -121,7 +121,7 @@ export class SignInModal extends React.Component {
               {!this.state.visible &&
                 <div className="input-field col s12">
                   <input id="username" name="username"
-                   value={this.state.username}
+                    value={this.state.username}
                     onChange={this.onChange} type="text" placeholder="Username"
                     className="validate" required />
                 </div>
@@ -143,6 +143,9 @@ export class SignInModal extends React.Component {
               <div id="login" className="toggle"><span> Want to login ? Click
               <Link to="#" onClick={this.onClickLogin} id="loginLink"> here
             </Link> to login</span></div>}
+            <div className="center submit">
+              <button className="btn waves-effect waves-light"
+                type="submit" name="action">Submit</button></div>
             {!this.state.visible && <div className="center google-login">
               <GoogleLogin
                 clientId="1096080119344-dhkm3kesj85jq2au401j1ur243vo58np.apps.googleusercontent.com"
@@ -152,9 +155,6 @@ export class SignInModal extends React.Component {
                 className="google-btn"
               />
             </div>}
-            <div className="center">
-              <button className="btn waves-effect waves-light"
-                type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
