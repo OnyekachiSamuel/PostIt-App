@@ -9,7 +9,8 @@ const requireAuthLogin = (ComposedComponent) => {
    */
   class Authenticate extends React.Component {
     /**
-     * @return {null} checks if the user is authenticated
+     * @return {null}
+     * checks if the user is authenticated
      */
     componentWillMount() {
       if (this.props.isAuthenticated) {

@@ -13,8 +13,9 @@ describe('ACTION TEST FOR', () => {
   beforeEach(() => {
     global.Materialize = { toast: () => {} };
   });
+
   describe('CREATE GROUP', () => {
-    it('should dispatch GROUP_CREATION_SUCCESS action', async () => {
+    it('should dispatch GROUP_CREATION_SUCCESS action on successful request', async () => {
       const expectedAction = {
         type: GROUP_CREATION_SUCCESS,
         payload: mockData.createGroupSuccess.payload
@@ -30,7 +31,8 @@ describe('ACTION TEST FOR', () => {
         expect(action[0]).toEqual(expectedAction);
       });
     });
-    it('should dispatch GROUP_CREATION_FAILURE action', async () => {
+
+    it('should dispatch GROUP_CREATION_FAILURE action on failed request', async () => {
       const expectedAction = {
         type: GROUP_CREATION_FAILURE,
         errors: mockData.createGroupFailure.errors
@@ -48,8 +50,9 @@ describe('ACTION TEST FOR', () => {
       });
     });
   });
+
   describe('FETCH GROUP USERS ACTION', () => {
-    it('should dispatch FETCH_USERS_ID action', async () => {
+    it('should dispatch FETCH_USERS_ID action on successful request', async () => {
       const groupId = 9;
       const expectedAction = {
         type: FETCH_USERS_ID,

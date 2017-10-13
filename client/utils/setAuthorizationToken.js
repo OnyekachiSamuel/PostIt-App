@@ -3,7 +3,8 @@ import axios from 'axios';
 /**
  *
  * @param {string} token
- * @return {null} This function handles setting the request header with
+ * @return {null}
+ * This function handles setting the request header with
  * the user token
  */
 const setAuthorizationToken = (token) => {

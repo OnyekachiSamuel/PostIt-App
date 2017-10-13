@@ -473,4 +473,18 @@ a {
 .posted-text {
   color: green !important; }
 
-/*# sourceMappingURL=main.301a636d5b47c349a5dd284af5793037.css.map*/
+.notClickable {
+  pointer-events: none;
+  cursor: default; }
+
+.submit {
+  margin-bottom: 10px; }
+
+.confirm {
+  margin-bottom: 10px; }
+
+.group {
+  background-color: #417391;
+  color: #fff !important; }
+
+/*# sourceMappingURL=main.cabf196fbc1acd4ca3f5efa8da306fdb.css.map*/

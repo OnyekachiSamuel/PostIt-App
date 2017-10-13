@@ -1,9 +1,8 @@
 import env from 'dotenv';
 import Jusibe from 'jusibe';
-import nodemailer from 'nodemailer';
 import Messages from '../models/message';
-import Group from '../models/group';
 import { getUsersPhoneEmail } from '../controllers/helper/getUsersPhoneEmail';
+import emailTransporter from '../services/emailTransporter';
 
 env.config();
 
@@ -12,7 +11,7 @@ env.config();
  */
 export default class MessageController {
   /**
- *
+ * This method is used for posting message to a group a user belongs to
  * @param {obj} req
  * @param {obj} res
  * @param {obj} next
@@ -28,157 +27,111 @@ export default class MessageController {
     if (isGroupId) {
       return Messages.sync({ force: false }).then(() => {
         Messages.create({ userId, groupId, message, priority, username })
-        .then((content) => {
-          if (priority === 'Critical') {
-            getUsersPhoneEmail(groupId, (result) => {
-              const { phoneNumbers, emails } = result;
-              const jusibe = new Jusibe(process.env.PUBLIC_KEY,
-               process.env.ACCESS_TOKEN);
-              phoneNumbers.forEach((number) => {
-                const payload = {
-                  to: number,
-                  from: req.decoded.username,
-                  message: content.message
-                };
-                jusibe.sendSMS(payload)
-                  .then(() => {
-                  })
-                  .catch((error) => {
-                    if (error) {
-                      throw error;
-                    }
-                  });
+          .then((content) => {
+            if (priority === 'Critical') {
+              getUsersPhoneEmail(groupId, (result) => {
+                const { phoneNumbers, emails } = result;
+                const jusibe = new Jusibe(process.env.PUBLIC_KEY,
+                  process.env.ACCESS_TOKEN);
+                phoneNumbers.forEach((number) => {
+                  const payload = {
+                    to: number,
+                    from: req.decoded.username,
+                    message: content.message
+                  };
+                  jusibe.sendSMS(payload)
+                    .then(() => {
+                    })
+                    .catch((error) => {
+                      if (error) {
+                        throw error;
+                      }
+                    });
+                });
+                emailTransporter(
+                  req.decoded.name,
+                  req.decoded.email,
+                  priority,
+                  content.message,
+                  emails);
               });
-              const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                port: 25,
-                secure: false,
-                auth: {
-                  user: 'postit028@gmail.com',
-                  pass: process.env.G_PASSWORD
-                },
-                tls: {
-                  rejectUnauthorized: false
-                }
+            } else if (priority === 'Urgent') {
+              getUsersPhoneEmail(groupId, (result) => {
+                const { emails } = result;
+                emailTransporter(
+                  req.decoded.name,
+                  req.decoded.email,
+                  priority,
+                  content.message,
+                  emails);
               });
-              const mailOptions = {
-                from: `${req.decoded.name} <${req.decoded.email}>`,
-                to: emails.toString(),
-                subject: `${priority} message`,
-                html: `<b>${content.message}\n\n This message was sent through PostIt app.</b>`
-              };
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  throw error;
-                }
-              });
+            }
+            res.status(200).json({
+              post: {
+                username: content.username,
+                groupId: content.groupId,
+                message: content.message,
+                priority: content.priority,
+                createdAt: content.createdAt
+              },
+              message: 'Message sent'
             });
-          } else if (priority === 'Urgent') {
-            getUsersPhoneEmail(groupId, (result) => {
-              const { emails } = result;
-              const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                port: 25,
-                secure: false,
-                auth: {
-                  user: 'postit028@gmail.com',
-                  pass: process.env.G_PASSWORD
-                },
-                tls: {
-                  rejectUnauthorized: false
-                }
-              });
-              const mailOptions = {
-                from: `${req.decoded.username} <${req.decoded.email}>`,
-                to: emails.toString(),
-                subject: `${priority} message`,
-                html: `<b>${content.message}\n\n </b>.\n\n This message was sent through PostIt app.`
-              };
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  throw error;
-                }
-              });
-            });
-          }
-          res.status(200).json({
-            post: {
-              username: content.username,
-              groupId: content.groupId,
-              message: content.message,
-              priority: content.priority,
-              createdAt: content.createdAt
-            },
-            message: 'Message sent'
+          }).catch((error) => {
+            if (error) {
+              res.status(500).json({ message: 'Message sending failed' });
+            }
           });
-        }).catch((error) => {
-          if (error) {
-            res.status(500).json({ message: 'Message sending failed' });
-          }
-        });
       });
     }
   }
 
-  /**
- * @return {json} Returns array of message objects posted in a group
+  /** This method is for getting messages posted in a particular group
  * @param {obj} req
  * @param {obj} res
  * @param {obj} next
- *
+ * @return {json} Returns array of message objects posted in a group
  */
   static getMessages(req, res) {
     const groupId = req.params.groupId;
-    const isGroupId = Number.isInteger(parseInt(groupId, 10));
-    if (isGroupId) {
-      Group.findOne({ attributes: ['groupName', 'userId'], where: { id: groupId } }).then((groupCreator) => {
-        if (groupCreator.dataValues.userId) {
-          Messages.findAll({
-            attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
-            where: {
-              groupId, archived: false
-            },
-            order: [['createdAt', 'DESC']]
-          }).then((posts) => {
-            if (posts) {
-              res.status(200).json({
-                posts,
-                message: 'Received',
-                groupCreator: true
-              });
-            }
-          });
-        }
-      });
-    }
+    Messages.findAll({
+      attributes: ['id', 'message', 'groupId', 'userId', 'priority', 'username', 'createdAt'],
+      where: {
+        groupId, archived: false
+      },
+      order: [['createdAt', 'DESC']]
+    }).then((posts) => {
+      if (posts) {
+        res.status(200).json({
+          posts,
+          message: 'Received',
+          groupCreator: true
+        });
+      }
+    });
   }
 
-  /**
-   * @return {array} It returns array of objects of messages of the user
+  /** This method is for getting all messages posted by a particular user
    * @param {obj} req
    * @param {obj} res
+   * @return {array} It returns array of objects of messages of the user
    */
   static getUserMessages(req, res) {
     const userId = req.params.userId,
       groupId = req.params.groupId;
-    const isUserId = Number.isInteger(parseInt(userId, 10));
-    const isGroupId = Number.isInteger(parseInt(groupId, 10));
-    if (isUserId && isGroupId) {
-      Messages.findAll({
-        attributes: ['groupId', 'message', 'priority', 'createdAt', 'username'],
-        where: {
-          groupId, userId, archived: false
-        },
-        order: [['createdAt', 'DESC']]
-      }).then((posts) => {
-        if (posts) {
-          res.status(200).json({
-            posts,
-            message: 'Received'
-          });
-        }
-      });
-    }
+    Messages.findAll({
+      attributes: ['groupId', 'message', 'priority', 'createdAt', 'username'],
+      where: {
+        groupId, userId, archived: false
+      },
+      order: [['createdAt', 'DESC']]
+    }).then((posts) => {
+      if (posts) {
+        res.status(200).json({
+          posts,
+          message: 'Received'
+        });
+      }
+    });
   }
 }
 

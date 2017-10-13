@@ -12,12 +12,14 @@ describe('<AddUser />', () => {
     const state = setup();
     global.Materialize = { toast: () => { } };
   });
+
   it('Component should render correctly', () => {
     const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
     const tree = toJson(wrapper);
     expect(wrapper.contains('select and add user(s) to a group')).toBe(true);
     expect(wrapper.contains('Select Group')).toBe(true);
   });
+
   it(`should call the onChange method and
    update the state with groupId on select of a group`, () => {
     const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
@@ -25,6 +27,7 @@ describe('<AddUser />', () => {
     select.simulate('change', mockData.addUser.event);
     expect(wrapper.state('groupId')).toEqual('2');
   });
+
   it('should call onSelectUser method and update the state with selected users', () => {
     const wrapper = shallow(<AddUser { ...mockData.addUser.props } />);
     wrapper.setState({ paginatedUsers:
@@ -38,6 +41,7 @@ describe('<AddUser />', () => {
     });
     expect(wrapper.state().usernames).toEqual(['dan', 'Sam']);
   });
+
   it('should call onSubmit function on button click', () => {
     const wrapper = shallow(<AddUser {...mockData.addUser.props} />);
     wrapper.setState({
@@ -52,6 +56,7 @@ describe('<AddUser />', () => {
     });
     expect(wrapper.state().usernames).toEqual([]);
   });
+
   it(`should call handleSearch function to update the state
    and dispatch action on typing into the search bar`, () => {
     const wrapper = shallow(<AddUser {...mockData.addUser.props} />);

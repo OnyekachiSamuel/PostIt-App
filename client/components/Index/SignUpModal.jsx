@@ -83,20 +83,20 @@ export class SignUpModal extends React.Component {
         <div className="modal-content">
           <div className="modal-title row">
             <div className="col s8 m8">
-              <Link to="#" className="white-text">Sign up</Link>
+              <Link to="#" className="white-text notClickable">Sign up</Link>
             </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
             </div>
           </div>
           <form className="col s12 formData" method="post"
-          onSubmit={this.onSubmit}>
+            onSubmit={this.onSubmit}>
             <div className="row test">
               {!isEmpty(errors) && errors.name && <span className="err-msg">
                 {errors.name}</span>}
               <div className="input-field col s12 test">
                 <input id="name" name='name' value={this.state.name}
-                placeholder="Full name"
+                  placeholder="Full name"
                   type="text" onChange={this.onChange}
                   className="validate" required />
               </div>
@@ -104,7 +104,7 @@ export class SignUpModal extends React.Component {
                 <span className="err-msg">{errors.username}</span>}
               <div className="input-field col s12 test">
                 <input id="user_name" name="username"
-                value={this.state.username}
+                  value={this.state.username}
                   onChange={this.onChange} type="text"
                   placeholder="Username" className="validate" required />
               </div>
@@ -112,7 +112,7 @@ export class SignUpModal extends React.Component {
                 {errors.email}</span>}
               <div className="input-field col s12 test">
                 <input id="email" name="email" value={this.state.email}
-                placeholder="Email"
+                  placeholder="Email"
                   onChange={this.onChange} type="email"
                   className="validate" required />
               </div>
@@ -120,7 +120,7 @@ export class SignUpModal extends React.Component {
                 {errors.phone}</span>}
               <div className="input-field col s12 test">
                 <input id="phone" name="phone" value={this.state.phone}
-                placeholder="Phone number"
+                  placeholder="Phone number"
                   onChange={this.onChange} type="tel"
                   className="validate" required />
               </div>
@@ -134,7 +134,7 @@ export class SignUpModal extends React.Component {
               </div>
               {!isEmpty(errors) && errors.confirmPassword &&
                 <span className="err-msg">{errors.confirmPassword}</span>}
-              <div className="input-field col s12 test" style={{ marginBottom: '10px' }}>
+              <div className="input-field col s12 test confirm">
                 <input id="confirm_password" name='confirmPassword'
                   value={this.state.confirmPassword}
                   placeholder="Confirm password"
@@ -142,6 +142,9 @@ export class SignUpModal extends React.Component {
                   required />
               </div>
             </div>
+            <div className="center submit">
+              <button className="btn waves-effect waves-light"
+                type="submit" name="action">Submit</button></div>
             <div className="row">
               <div>
                 <GoogleLogin
@@ -153,9 +156,6 @@ export class SignUpModal extends React.Component {
                 />
               </div>
             </div>
-            <div className="center">
-              <button className="btn waves-effect waves-light"
-              type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -179,5 +179,5 @@ export const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps,
-{ googleAuthRequest })(withRouter(SignUpModal));
+  { googleAuthRequest })(withRouter(SignUpModal));
 

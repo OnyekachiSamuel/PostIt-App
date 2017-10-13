@@ -10,7 +10,7 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('FETCH USERS ACTION', () => {
-  it('should dispatch FETCH_USERS_SUCCEES action', async () => {
+  it('should dispatch FETCH_USERS_SUCCEES action on successful request', async () => {
     const userData = {
       offset: 0,
       search: 'adam'

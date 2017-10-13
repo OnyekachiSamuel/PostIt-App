@@ -3,7 +3,7 @@ import React from 'react';
 /**
  * @return {String} HTML markup for view component of TitleHeader
  */
-const TitleHeader = () => {
+const WhiteBar = () => {
   return (
     <div>
       <div className="heading">
@@ -16,4 +16,4 @@ const TitleHeader = () => {
   );
 };
 
-export default TitleHeader;
+export default WhiteBar;

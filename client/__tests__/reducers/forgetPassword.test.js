@@ -9,6 +9,7 @@ describe('Forget password reducer', () => {
     const newState = forgetPasswordReducer(initialState, action);
     expect(newState.message).toEqual('Check your email and use the link to reset your password');
   });
+
   it('should update the state on PASSWORD_RESET_SUCCESS', () => {
     const data = 'You have successfully resetted your password.';
     const initialState = {};
@@ -16,6 +17,7 @@ describe('Forget password reducer', () => {
     const newState = forgetPasswordReducer(initialState, action);
     expect(newState.message).toEqual('You have successfully resetted your password.');
   });
+
   it('should return default state when no action Type is matched', () => {
     const newState = forgetPasswordReducer({}, {
       type: 'NO_ACTION_MATCH'

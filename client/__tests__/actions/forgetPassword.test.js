@@ -13,7 +13,7 @@ const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbnJ5Iiwi
 
 describe('ACTION TEST FOR', () => {
   describe('PASSWORD RESET ', () => {
-    it('should dispatch RESET_LINK_SUCCESS action', async () => {
+    it('should dispatch RESET_LINK_SUCCESS action on successful request', async () => {
       const userEmail = 'ezeokesam@gmail.com';
       const expectedAction = {
         type: RESET_LINK_SUCCESS,
@@ -29,7 +29,8 @@ describe('ACTION TEST FOR', () => {
         expect(action[0]).toEqual(expectedAction);
       });
     });
-    it('should dispatch RESET_LINK_FAILURE action', async () => {
+
+    it('should dispatch RESET_LINK_FAILURE action on failed request', async () => {
       const expectedAction = {
         type: RESET_LINK_FAILURE,
         payload: mockData.resetLinkFailure.payload
@@ -45,8 +46,9 @@ describe('ACTION TEST FOR', () => {
       });
     });
   });
+
   describe('PASSWORD RESET', () => {
-    it('should dispatch PASSWORD_RESET_SUCCESS action', async () => {
+    it('should dispatch PASSWORD_RESET_SUCCESS action on successful request', async () => {
       const expectedAction = {
         type: PASSWORD_RESET_SUCCESS,
         payload: mockData.passwordResetSuccess.payload
@@ -61,7 +63,8 @@ describe('ACTION TEST FOR', () => {
         expect(action[0]).toEqual(expectedAction);
       });
     });
-    it('should dispatch PASSWORD_RESET_FAILURE action', async () => {
+
+    it('should dispatch PASSWORD_RESET_FAILURE action on failed request', async () => {
       const expectedAction = {
         type: PASSWORD_RESET_FAILURE,
         payload: mockData.passwordResetFailure.payload

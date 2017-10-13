@@ -77,8 +77,6 @@ class CreateGroup extends React.Component {
    * @return {String} HTML markup for view component of CreateGroup
    */
   render() {
-    const { signin } = this.props;
-    const { user } = signin;
     return (
       <div>
         <NavBar redirectUrl = {'#'}

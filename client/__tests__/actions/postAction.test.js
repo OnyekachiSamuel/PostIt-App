@@ -13,7 +13,8 @@ describe('MESSAGE POST ACTION', () => {
   beforeEach(() => {
     global.Materialize = { toast: () => {} };
   });
-  it('should dispatch POST_MESSAGE_SUCCESSFUL action', async () => {
+
+  it('should dispatch POST_MESSAGE_SUCCESSFUL action on successful request', async () => {
     const expectedAction = {
       type: POST_MESSAGE_SUCCESSFUL,
       payload: mockData.postSuccess.payload
@@ -29,7 +30,8 @@ describe('MESSAGE POST ACTION', () => {
         expect(action[0]).toEqual(expectedAction);
       });
   });
-  it('should dispatch POST_MESSAGE_FAILURE action', async () => {
+
+  it('should dispatch POST_MESSAGE_FAILURE action on failed request', async () => {
     const expectedAction = {
       type: POST_MESSAGE_FAILURE,
       payload: mockData.postFailure.payload

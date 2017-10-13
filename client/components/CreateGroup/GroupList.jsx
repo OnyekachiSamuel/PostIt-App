@@ -8,6 +8,7 @@ import { fetchUserGroupRequest } from '../../actions/fetchUserGroups';
  * @class GroupList
  */
 export class GroupList extends Component {
+
   /**
    * @return {null} triggers the action that fetches groups a user belongs
    * to on component mount
@@ -16,9 +17,7 @@ export class GroupList extends Component {
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
   }
-  onClick() {
 
-  }
   /**
  * @return {String} HTML markup for view component SignInModal
  */

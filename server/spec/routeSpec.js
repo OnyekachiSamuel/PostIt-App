@@ -11,9 +11,8 @@ describe('ROUTE TESTING', () => {
   beforeAll((done) => {
     User.destroy({ where: {} }, { truncate: true }).then((destroyed) => {
       if (destroyed) {
-        console.log('Done deleting');
+        done();
       }
-      done();
     });
   });
   describe('SIGNUP/ POSITIVE TEST', () => {
@@ -104,7 +103,6 @@ describe('ROUTE TESTING', () => {
     let token;
     let groupId;
     let user;
-    let id;
     it('Should be able to login to account created', (done) => {
       request.post('/api/v1/signin')
         .send(mockData.signIn[0])
@@ -112,7 +110,6 @@ describe('ROUTE TESTING', () => {
         .end((err, res) => {
           token = res.body.token;
           userId = res.body.user.id;
-          id = res.body.user.userId;
           expect(res.body.message).toBe('Logged In');
           done(err);
         });
@@ -141,13 +138,13 @@ describe('ROUTE TESTING', () => {
     }, 10000);
     it('Should be able to get all members in a group', (done) => {
       request.post(`/api/v1/group/${groupId}/userIds`)
-    .set('x-access-token', token)
-    .expect(200)
-    .end((err, res) => {
-      const groupMembers = res.body.groupMembers;
-      expect(groupMembers).toEqual(['obinna', 'kenet']);
-      done();
-    });
+        .set('x-access-token', token)
+        .expect(200)
+        .end((err, res) => {
+          const groupMembers = res.body.groupMembers;
+          expect(groupMembers).toEqual(['obinna', 'kenet']);
+          done();
+        });
     }, 10000);
     it('Should be able to post message to created group', (done) => {
       user = {
@@ -256,6 +253,16 @@ describe('ROUTE TESTING', () => {
         .expect(200)
         .end((err, res) => {
           expect(res.body.groups[0].groupName).toBe('ANDELA21');
+          done();
+        });
+    }, 1000);
+    it('Should be able to get paginated groups fetched', (done) => {
+      request.get(`/api/v1/groups/paginated/${userId}`)
+        .set('x-access-token', token)
+        .expect(200)
+        .end((err, res) => {
+          const paginatedGroups = res.body.paginatedGroups;
+          expect(paginatedGroups[0].groupName).toBe('ANDELA21');
           done();
         });
     }, 1000);
