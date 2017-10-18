@@ -1,9 +1,10 @@
 import React from 'react';
 
 /**
- * @return {String} HTML markup for view component of TitleHeader
+ * Renders the HTML markup for view component of WhiteBar
+ * @return {String} Returns html markup for WhiteBar component
  */
-const TitleHeader = () => {
+const WhiteBar = () => {
   return (
     <div>
       <div className="heading">
@@ -16,4 +17,4 @@ const TitleHeader = () => {
   );
 };
 
-export default TitleHeader;
+export default WhiteBar;

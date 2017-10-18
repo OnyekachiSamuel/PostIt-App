@@ -10,7 +10,7 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('FETCH POST ACTION', () => {
-  it('should dispatch FETCH_POST_SUCCESS action', async () => {
+  it('should dispatch FETCH_POST_SUCCESS action on successful request', async () => {
     const groupId = '33',
       userId = 89;
     const expectedAction = {

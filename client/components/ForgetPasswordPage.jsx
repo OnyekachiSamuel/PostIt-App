@@ -10,9 +10,10 @@ import { resetPasswordRequest } from '../actions/forgetPasswordAction';
  */
 export class ForgetPasswordPage extends Component {
   /**
-   * @return {null} Initializes the state and binds the functions
-   *  used in the component
+   * Initializes the state and binds the functions
+   * used in the component
    * @param {obj} props
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
@@ -23,26 +24,33 @@ export class ForgetPasswordPage extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
   /**
-   * @return {null}  Updates the state as user types into the input fields
+   * Updates the state as user types into the input fields
    * @param {event} event
+   * @return {null} This method returns nothing
+   *
    */
   onChange(event) {
     const state = this.state;
     state[event.target.name] = event.target.value;
     this.setState(state);
   }
+
   /**
-   * @return {null} triggers the action that makes asyn  call for password reset
+   * Triggers the action that makes asyn  call for password reset
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onSubmit(event) {
     event.preventDefault();
     const token = this.props.match.params.token;
     this.props.resetPasswordRequest(token, this.state);
   }
-  /**
- * @return {String} HTML markup for view component of forgetPasswordReducer
+
+/**
+ * Renders HTML markup for view component of forgetPasswordReducer
+ * @return {String} Returns html markup
  */
   render() {
     const { forgetPassword } = this.props;

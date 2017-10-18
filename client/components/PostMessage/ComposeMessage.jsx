@@ -7,9 +7,10 @@ import { postRequest } from '../../actions/postAction';
  * @class ComposeMessage
  */
 export class ComposeMessage extends Component {
-  /**
- * @return {null} Initializes the state
+/**
+ * Initializes the state
  * @param {obj} props
+ * @return {null} This method returns nothing
  */
   constructor(props) {
     super(props);
@@ -21,9 +22,11 @@ export class ComposeMessage extends Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.groupId = '';
   }
+
   /**
-   * @return {null} Updates the state as the user types into the input field
+   * Updates the state as the user types into the input field
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onChange(event) {
     this.groupId = this.props.match.params.groupId;
@@ -31,17 +34,21 @@ export class ComposeMessage extends Component {
     state[event.target.name] = event.target.value;
     this.setState(state);
   }
+
   /**
-   * @return {null} Triggers the postRequest action on click of submit button
+   * Triggers the postRequest action on click of submit button
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onSubmit(event) {
     event.preventDefault();
     this.props.postRequest(this.state, this.groupId);
     this.setState({ message: '' });
   }
+
   /**
-   * @return {String} HTML markup for view component of ComposeMessage
+   * HTML markup for view component of ComposeMessage
+   * @return {String} Returns html markup
    */
   render() {
     return (

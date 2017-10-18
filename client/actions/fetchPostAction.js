@@ -2,10 +2,10 @@ import axios from 'axios';
 import { FETCH_POST_SUCCESS } from './actionTypes';
 
 /**
- *
- * @param {array} payload
- * @return {obj} Action to be dispatched if axios call to
+ * Action to be dispatched if axios call to
  * fetch post is successful
+ * @param {array} payload
+ * @return {obj} Returns a promise
  */
 export const fetchPostSuccess = (payload) => {
   return {
@@ -15,15 +15,14 @@ export const fetchPostSuccess = (payload) => {
 };
 
 /**
- *
- * @param {int} groupId
- * @param {int} userId
- * @return {promise} Makes an axios call to get messages
+ * Makes an axios call to get messages
  * posted in a group. It dispatches a fetchPostSuccess action
  * on successful api call
+ * @param {int} groupId
+ * @param {int} userId
+ * @return {promise} Returns a promise
  */
 export const fetchPostRequest = (groupId, userId) => {
-  // const groupId = parseInt(id, 10);
   return (dispatch) => {
     return axios.get(`/api/v1/posts/${groupId}/${userId}`)
     .then((response) => {

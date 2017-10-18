@@ -2,9 +2,11 @@ import axios from 'axios';
 import { ADD_USER_SUCCESS, ADD_USER_FAILURE } from './actionTypes';
 
 /**
- * @return {obj} Action dispatched when adding a user
+ * This is the action dispatched when adding a user
  * to a group is succesful
  * @param {obj} payload
+ * @return {obj} Returns object with payload
+ *
  */
 export const addUserSuccess = (payload) => {
   return {
@@ -14,9 +16,10 @@ export const addUserSuccess = (payload) => {
 };
 
 /**
- * @return {obj} Action dispatched when adding a user to a group fails.
- * Payload here is the error message.
+ * This is the action dispatched when adding a user to a group fails.
+ * Payload here is the error message
  * @param {string} payload
+ * @return {obj} Returns object with payload
  */
 export const addUserFailure = (payload) => {
   return {
@@ -26,10 +29,12 @@ export const addUserFailure = (payload) => {
 };
 
 /**
- * @return {promise} Makes an axios call and dispatches an action addUserSuccess
- *  if api call is successful or addUserFailure if error occcured
+ * Makes an axios call and dispatches an action addUserSuccess
+ * if api call is successful or addUserFailure if error occcured
  * @param {obj} userData
  * @param {int} groupId
+ * @return {promise} Returns a promise
+ *
  */
 export const addUserRequest = (userData, groupId) => {
   return (dispatch) => {

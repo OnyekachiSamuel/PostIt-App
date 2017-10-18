@@ -13,6 +13,7 @@ describe('SignIn reducer', () => {
     expect(newState.user).toEqual(mockData.signIn.payload);
     expect(newState.isAuthenticated).toEqual(true);
   });
+
   it('should update the state on SIGN_UP_SUCCESS ', () => {
     const initialState = {};
     const action = signUp(mockData.signUp.payload);
@@ -20,6 +21,7 @@ describe('SignIn reducer', () => {
     expect(newState.user).toEqual(mockData.signUp.payload);
     expect(newState.isAuthenticated).toEqual(true);
   });
+
   it('should update the state on GOOGLE_AUTH_SUCCESS ', () => {
     const initialState = {};
     const action = googleAuthSuccess(mockData.googleSignUp.payload);
@@ -27,12 +29,14 @@ describe('SignIn reducer', () => {
     expect(newState.user).toEqual(mockData.googleSignUp.payload);
     expect(newState.isAuthenticated).toEqual(true);
   });
+
   it('should update the state on SIGNOUT_SUCCESS ', () => {
     const initialState = {};
     const action = signout(mockData.signOut.payload);
     const newState = signInReducer(initialState, action);
     expect(newState.user).toEqual({});
   });
+
   it('should return default state when no action Type is matched', () => {
     const newState = signInReducer({}, {
       type: 'NO_ACTION_MATCH'

@@ -11,8 +11,9 @@ import NotFound from '../components/NotFoundPage.jsx';
 import Footer from '../components/Footer.jsx';
 
 /**
- * @return {string} HTML markup for view component of Title
- * @function App
+ * Renders the returned html markup
+ * @return {string} Returns html markup for the component
+ * to be rendered
  */
 const App = () => {
   return (

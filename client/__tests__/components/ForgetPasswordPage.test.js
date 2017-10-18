@@ -11,12 +11,14 @@ describe('<ForgetPasswordPage />', () => {
     };
     const state = setup();
   });
+
   it('Component should render correctly', () => {
     const wrapper = shallow(
       <ForgetPasswordPage {...mockData.forgetPasswordPage.props} />);
     expect(wrapper.node.type).toEqual('div');
     expect(wrapper.contains('POST IT')).toBe(true);
   });
+
   it(`should call onChange function to
    update the password state on typing into the password field`, () => {
     const wrapper = shallow(
@@ -25,6 +27,7 @@ describe('<ForgetPasswordPage />', () => {
     input.simulate('change', mockData.forgetPasswordPage.target);
     expect(wrapper.state().password).toEqual('admin');
   });
+
   it('should call onSubmit function on click of submit button', () => {
     const wrapper = shallow(
     <ForgetPasswordPage {...mockData.forgetPasswordPage.props} />);

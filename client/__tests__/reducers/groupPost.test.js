@@ -13,6 +13,7 @@ describe('Fetch group post reducer', () => {
     expect(newState.data).toEqual([]);
     expect(newState.groupCreator).toBe(true);
   });
+
   it('should update the state on GROUP_MESSAGE_SUCCESS', () => {
     const data = {
       message: 'No message posted to this group yet'
@@ -22,6 +23,7 @@ describe('Fetch group post reducer', () => {
     const newState = groupPostReducer(initialState, action);
     expect(newState.message).toEqual('No message posted to this group yet');
   });
+
   it('should update the state on VIEW_POST_SUCCESS', () => {
     const data = {
       clicked: true
@@ -31,6 +33,7 @@ describe('Fetch group post reducer', () => {
     const newState = groupPostReducer(initialState, action);
     expect(newState.clicked).toEqual(true);
   });
+
   it('should return default state when no action Type is matched', () => {
     const newState = groupPostReducer({}, {
       type: 'NO_ACTION_MATCH'

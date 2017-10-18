@@ -10,12 +10,14 @@ describe('Post message reducer', () => {
     const newState = postReducer(initialState, action);
     expect(newState[0]).toEqual(mockData.postMessage.payload);
   });
+
   it('should update the state on FETCH_POST_SUCCESS', () => {
     const initialState = {};
     const action = fetchPostSuccess(mockData.fetchPost.payload);
     const newState = postReducer(initialState, action);
     expect(newState).toEqual(mockData.fetchPost.payload);
   });
+
   it('should return default state when no action Type is matched', () => {
     const newState = postReducer({}, {
       type: 'NO_ACTION_MATCH'

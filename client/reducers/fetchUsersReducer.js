@@ -1,12 +1,10 @@
 import { FETCH_USERS_SUCCESS } from '../actions/actionTypes';
 
 /**
- *
+ * This reducer handles updating the state with fetched users details
  * @param {obj} state
  * @param {obj} action
- * @return {obj}
- * This reducer handles updating the state with fetched users details
- *  Here the state is reduced based on the action object and
+ * @return {obj} Here the state is reduced based on the action object and
  *  a new start returned
  */
 const fetchUsersReducer = (state = {}, action) => {

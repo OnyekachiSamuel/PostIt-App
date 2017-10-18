@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers/index';
 
 /**
+ * Store configuration happens here
  * @return {obj} returns the object of stores
  */
 export default function configureStore() {

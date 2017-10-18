@@ -13,33 +13,38 @@ import ViewMembers from './PostMessage/ViewMembersModal.jsx';
  */
 class BroadcastMessage extends React.Component {
   /**
-   *
+   * Initializes the state and binds methods
    * @param {obj} props
-   * @return {null} Initializes the state and binds methods
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
     this.signOut = this.signOut.bind(this);
     this.show = this.show.bind(this);
   }
+
   /**
-   * @return {null} makes the jQuery function available on component mount
+   * Makes the jQuery function available on component mount
+   * @return {null} This method returns nothing
    */
   componentDidMount() {
     $('.collapsible').collapsible();
     $('select').material_select();
     $('.modal').modal();
   }
+
   /**
-     * @return {null} navigates to the landing page
-     */
+   *  Handles navigation to the landing page
+   * @return {boolean} This method returns nothing
+   */
   signOut() {
     this.props.history.push('/');
   }
 
 /**
- * @return {null} Function used to show navigation icon
+ * This method is used to show navigation icon
  *  for navigating the webpages
+ * @return {null} This method returns boolean value
  */
   show() {
     return true;

@@ -13,7 +13,7 @@ describe('Add user action', () => {
   beforeEach(() => {
     global.Materialize = { toast: () => {} };
   });
-  it('should dispatch ADD_USER_SUCCESS action', (done) => {
+  it('should dispatch ADD_USER_SUCCESS action on successful request', (done) => {
     const username = 'Amanda';
     const groupId = '33';
     const expectedAction = {
@@ -36,7 +36,7 @@ describe('Add user action', () => {
   beforeEach(() => {
     global.Materialize = { toast: () => {} };
   });
-  it('should dispatch ADD_USER_FAILURE action', (done) => {
+  it('should dispatch ADD_USER_FAILURE action on failed request', (done) => {
     const username = 'Amanda';
     const groupId = '33';
     const expectedAction = {

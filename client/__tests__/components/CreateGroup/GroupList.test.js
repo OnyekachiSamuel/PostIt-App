@@ -13,6 +13,7 @@ describe('<GroupList />', () => {
     };
     const state = setup();
   });
+
   it('Component should render correctly', () => {
     const wrapper = shallow(<GroupList { ...mockData.groupList.props } />);
     const tree = toJson(wrapper);
@@ -20,6 +21,7 @@ describe('<GroupList />', () => {
     expect(tree.children[0].type).toEqual('div');
     expect(wrapper.contains('Create group')).toBe(true);
   });
+
   it('should call componentDidMount', () => {
     sinon.spy(GroupList.prototype, 'componentDidMount');
     const wrapper = mount(<MemoryRouter>

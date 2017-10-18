@@ -11,17 +11,19 @@ import { updateGroupInfo } from '../../actions/fetchGroupPost';
  */
 export class PostedMessage extends Component {
   /**
-   *
+   * This constructor handles method binding
    * @param {obj} props
-   * @return {null} This constructor handles method binding
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
     this.formatPostTime = this.formatPostTime.bind(this);
   }
-  /**
- * @return {null} Updates the store with group posts by triggering the
+
+/**
+ * Updates the store with group posts by triggering the
  * fetchPostRequest action
+ * @return {null} This method returns nothing
  */
   componentDidMount() {
     const groupId = this.props.match.params.groupId;
@@ -30,9 +32,11 @@ export class PostedMessage extends Component {
     this.props.fetchPostRequest(groupId, signin.user.userId);
     this.props.updateGroupInfo({ groupId, groupName });
   }
+
   /**
-   * @return {string} Returns the string output for the formatted date
+   * This method is used to format time string
    * @param {string} date
+   * @return {string} Returns the string output for the formatted date
    */
   formatPostTime(date) {
     if (date) {
@@ -46,8 +50,11 @@ export class PostedMessage extends Component {
       return time;
     }
   }
-  /** object destructing of messages from the props
-   * @return {String} HTML markup for view component of PostedMessage
+
+  /**
+   * This renders the HTML markup for view component
+   * of PostedMessage.
+   * @return {String} Returns html markup
    */
   render() {
     const { messages } = this.props;

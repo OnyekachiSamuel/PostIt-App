@@ -11,6 +11,7 @@ describe('Fetch members reducer', () => {
     expect(newState[0].username).toEqual('Ken');
     expect(newState[1].username).toEqual('Peter');
   });
+
   it('should return default state when no action Type is matched', () => {
     const newState = fetchGroupMembers({}, {
       type: 'NO_ACTION_MATCH'

@@ -3,10 +3,11 @@ import jwt from 'jsonwebtoken';
 import { SIGN_UP_SUCCESS, SIGN_UP_FAILURE } from './actionTypes';
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched when sign up operation
+ * Action dispatched when sign up operation
  * is successful
+ * @param {obj} payload
+ * @return {obj} Returns a object containing
+ * payload of user details
  */
 export const signUp = (payload) => {
   return {
@@ -16,9 +17,10 @@ export const signUp = (payload) => {
 };
 
 /**
- *
+ * Action dispatched when sign up operation fails
  * @param {obj} payload
- * @return {obj} Action dispatched when sign up operation fails
+ * @return {obj} Returns object containing
+ * payload of failure message
  */
 export const signUpFailure = (payload) => {
   return {
@@ -28,9 +30,9 @@ export const signUpFailure = (payload) => {
 };
 
 /**
- *
+ * Makes an axios call to create account for the user
  * @param {obj} userData
- * @return {promise} Makes an axios call to create account for the user
+ * @return {promise} Returns a promise
  */
 export const userSignUpRequest = (userData) => {
   return (dispatch) => {

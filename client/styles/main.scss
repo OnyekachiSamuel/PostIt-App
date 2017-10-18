@@ -516,3 +516,17 @@ a {
 .posted-text {
 	color: green !important;
 }
+.notClickable {
+	pointer-events: none;
+    cursor: default;
+}
+.submit {
+	margin-bottom: 10px;
+}
+.confirm {
+	margin-bottom: 10px;
+}
+.group {
+	background-color: #417391;
+	color: #fff !important;
+}

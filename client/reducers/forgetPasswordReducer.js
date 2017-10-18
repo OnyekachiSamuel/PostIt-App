@@ -5,12 +5,10 @@ const initialState = {
   error: ''
 };
 /**
- *
+ * This reducer handles password reset function.
  * @param {obj} state
  * @param {obj} action
- * @return {obj}
- * This reducer handles password reset function.
- *  Here the state is reduced based on the action object and
+ * @return {obj} Here the state is reduced based on the action object and
  *  a new start returned
  */
 const forgetPasswordReducer = (state = initialState, action) => {

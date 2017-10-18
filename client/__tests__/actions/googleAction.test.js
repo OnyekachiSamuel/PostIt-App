@@ -18,7 +18,8 @@ describe('GOOGLE SIGN IN ACTION', () => {
   beforeEach(() => {
     global.Materialize = { toast: () => {} };
   });
-  it('should dispatch GOOGLE_AUTH_SUCCESS action', async () => {
+
+  it('should dispatch GOOGLE_AUTH_SUCCESS action on successful request', async () => {
     const expectedAction = {
       type: GOOGLE_AUTH_SUCCESS,
       payload: mockData.googleSignUp.payload
@@ -34,7 +35,8 @@ describe('GOOGLE SIGN IN ACTION', () => {
         expect(action[0]).toEqual(expectedAction);
       });
   });
-  it('should dispatch GOOGLE_AUTH_FAILURE action', async () => {
+
+  it('should dispatch GOOGLE_AUTH_FAILURE action on successful request', async () => {
     const expectedAction = {
       type: GOOGLE_AUTH_FAILURE,
       payload: mockData.googleFailure.payload

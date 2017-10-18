@@ -9,8 +9,9 @@ import { signOutRequest } from '../actions/signOutAction';
  */
 export class NavBar extends React.Component {
   /**
-   * @return {null} Initializes the state and binds the onClick method
+   * Initializes the state and binds the onClick method
    * @param {props} props
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
@@ -19,8 +20,10 @@ export class NavBar extends React.Component {
     };
     this.onClick = this.onClick.bind(this);
   }
+
   /**
-   * @return {null} makes the jQuery function available on component mount
+   * Makes the jQuery function available on component mount
+   * @return {null} This method returns nothing
    */
   componentDidMount() {
     $('.button-collapse').sideNav({
@@ -28,16 +31,20 @@ export class NavBar extends React.Component {
     }
     );
   }
+
   /**
-   * @return {null} Triggers the signOutRequest action to clear user data
+   * Triggers the signOutRequest action to clear user data
    *  from the localStorage
+   * @return {null} This method returns nothing
    */
   onClick() {
     this.props.signOutRequest(this.state);
     this.props.signOut();
   }
+
   /**
-   * @return {String} HTML markup for view component of NavLink
+   * Renders HTML markup for view component of NavLink
+   * @return {String} Returns html markup for NavLink component
    */
   render() {
     const { signin } = this.props;

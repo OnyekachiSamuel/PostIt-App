@@ -2,9 +2,10 @@ import axios from 'axios';
 import { FETCH_MEMBERS } from './actionTypes';
 
 /**
- * @param {array} payload
- * @return {obj} Action dispatched when fetchMembersRequest
+ * Action dispatched when fetchMembersRequest
  * request is successful
+ * @param {array} payload
+ * @return {obj} Returns object with array of members payload
  */
 export const fetchMembers = (payload) => {
   return {
@@ -14,10 +15,12 @@ export const fetchMembers = (payload) => {
 };
 
 /**
- * @param {int} groupId
- * @return {promise} Makes an axios call to fetch
+ * Makes an axios call to fetch
  * members in a group. fetchMembers action is dispatched
  * if a success response is received.
+ * @param {int} groupId
+ * @return {promise} Returns a promise
+ *
  */
 export const fetchMembersRequest = (groupId) => {
   return (dispatch) => {

@@ -5,7 +5,8 @@ import React from 'react';
  */
 export default class Footer extends React.Component {
   /**
-   * @return {String} HTML markup for view component of Footer
+   * Renders HTML markup for view component of Footer
+   * @return {String} Returns html markup
    */
   render() {
     return (

@@ -13,31 +13,37 @@ import { userSignInRequest } from '../actions/signInAction';
  */
 class LandingPage extends React.Component {
   /**
-   *
+   * This constructor handles method binding
    * @param {obj} props
-   * @return {null} This constructor handles method binding
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
     this.loginSuccess = this.loginSuccess.bind(this);
   }
+
   /**
-   * @return {null} makes the jQuery function available on component mount
+   * Makes the jQuery function available on component mount
+   * @return {null} This method returns nothing
    */
   componentDidMount() {
     $('.modal').modal();
     $('.collapsible').collapsible();
     $('.button-collapse').sideNav();
   }
+
   /**
-   * @return {null} navigates to the group creation page
+   * Handles navigation to the group creation page
+   * @return {null} This method returns nothing
    */
   loginSuccess() {
     this.props.history.push('/group');
     window.location.reload();
   }
+
   /**
-   * @return {String} HTML markup for view component of HomePage
+   * Renders HTML markup for view component of HomePage
+   * @return {String} Returns html markup for HomePage
    */
   render() {
     const signUpRequest = this.props.userSignUpRequest;

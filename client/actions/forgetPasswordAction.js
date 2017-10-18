@@ -2,11 +2,12 @@ import axios from 'axios';
 import { RESET_LINK_SUCCESS, RESET_LINK_FAILURE, PASSWORD_RESET_SUCCESS, PASSWORD_RESET_FAILURE } from './actionTypes';
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action to dispatch when a user requests
+ * Action to dispatch when a user requests
  * for password reset. The payload is a success message
  * telling the user to check his email
+ * @param {obj} payload
+ * @return {obj} Returns object containing success message
+ * payload
  */
 export const sendResetLinkSuccess = (payload) => {
   return {
@@ -16,10 +17,11 @@ export const sendResetLinkSuccess = (payload) => {
 };
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched if error occured.
+ * Action dispatched if error occured.
  * The payload is the error response message
+ * @param {obj} payload
+ * @return {obj} Returns object containing failure
+ * message payload
  */
 export const sendResetLinkFailure = (payload) => {
   return {
@@ -30,10 +32,12 @@ export const sendResetLinkFailure = (payload) => {
 
 /**
  *
- * @param {obj} payload
- * @return {obj} Action dispatched when password reset
+ * Action dispatched when password reset
  * is successful. Payload is a success message telling the user
  * to login with new password
+ * @param {obj} payload
+ * @return {obj} Returns object containing success
+ * message payload
  */
 export const passwordResetSuccess = (payload) => {
   return {
@@ -43,10 +47,11 @@ export const passwordResetSuccess = (payload) => {
 };
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched if the password
+ * Action dispatched if the password
  * reset process fails. The payload contains the error message
+ * @param {obj} payload
+ * @return {obj} Returns object with payload of failure
+ * message
  */
 export const passwordResetFailure = (payload) => {
   return {
@@ -56,10 +61,10 @@ export const passwordResetFailure = (payload) => {
 };
 
 /**
- *
- * @param {obj} userEmail
- * @return {promise} Makes an axios call to send a user a password
+ * Makes an axios call to send a user a password
  * reset link via email
+ * @param {obj} userEmail
+ * @return {promise} Returns a promise
  */
 export const forgetPasswordRequest = (userEmail) => {
   return (dispatch) => {
@@ -74,11 +79,11 @@ export const forgetPasswordRequest = (userEmail) => {
 };
 
 /**
- *
+ * Makes an axios call to reset the users password
  * @param {string} token
  * @param {obj} userDetail
- * @return {promise} Makes an axios call to reset the users
- * password
+ * @return {promise} Returns a promise
+ *
  */
 export const resetPasswordRequest = (token, userDetail) => {
   return (dispatch) => {
