@@ -3,10 +3,10 @@ import isEmpty from 'lodash/isEmpty';
 import { FETCH_USERS_SUCCESS } from './actionTypes';
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched when a user searches
+ * Action dispatched when a user searches
  * other users to be added to a group
+ * @param {obj} payload
+ * @return {obj} Returns object containing array of users payload
  */
 export const fetchUsers = (payload) => {
   return {
@@ -16,22 +16,23 @@ export const fetchUsers = (payload) => {
 };
 
 /**
- *
- * @param {obj} userData
- * @return {promise} Makes axios call on search for users
+ * Makes axios call on search for users
  * and dispatches a fetUsers action on successful search action
+ * @param {obj} userSearch
+ * @return {promise} Returns a promise
  */
-export const fetchUsersRequest = (userData) => {
+export const fetchUsersRequest = (userSearch) => {
   return (dispatch) => {
-    return axios.get(`/api/v1/users?offset=${userData.offset}&search=${userData.search}`).then((response) => {
+    return axios.get(`/api/v1/users?offset=${userSearch.offset}&search=${userSearch.search}&limit=${userSearch.limit}`)
+    .then((response) => {
       const { searchMetaData, paginatedUsers } = response.data;
-      let data;
-      if (!isEmpty(searchMetaData)) {
+      let result;
+      if (!isEmpty(searchMetaData) && paginatedUsers.length > 0) {
         const limit = searchMetaData.limit,
           count = searchMetaData.total_count,
           pageCount = Math.ceil(count / limit);
-        data = { pageCount, paginatedUsers };
-        dispatch(fetchUsers(data));
+        result = { pageCount, paginatedUsers };
+        dispatch(fetchUsers(result));
       } else {
         dispatch(fetchUsers({ pageCount: '', paginatedUsers: [] }));
       }

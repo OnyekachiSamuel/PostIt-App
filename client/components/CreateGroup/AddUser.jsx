@@ -25,6 +25,7 @@ export class AddUser extends Component {
       groupId: '',
       usernames: [],
       offset: 0,
+      limit: 5,
       paginatedUsers: [],
       pageCount: '',
       selected: false
@@ -36,8 +37,9 @@ export class AddUser extends Component {
     this.handlePagination = this.handlePagination.bind(this);
   }
   /**
-   * @return {null} Updates the local state when the searchResult props changes
+   * Updates the local state when the searchResult props changes
    * @param {obj} nextProps
+   * @return {null} Returns nothing
    */
   componentWillReceiveProps(nextProps) {
     if (this.props.searchResult !== nextProps.searchResult) {
@@ -48,8 +50,9 @@ export class AddUser extends Component {
     }
   }
   /**
-   * @return {null} Updates the state as the user types into the input field
-   * @param {event} event onChange handler function
+   *  Updates the state as the user types into the input field
+   * @param {event} event
+   * @return {null} Returns nothing
    */
   onChange(event) {
     const state = this.state;
@@ -63,8 +66,9 @@ export class AddUser extends Component {
     });
   }
   /**
-   * @return {null} Updates the state and adds a user on click of checkbox
+   * Updates the state and adds a user on click of checkbox
    * @param {event} event
+   * @return {null} Returns nothing
    */
   onSelectUser(event) {
     this.setState({ selected: true });
@@ -81,8 +85,9 @@ export class AddUser extends Component {
     }
   }
   /**
-   * @return {null} triggers an addUserRequest action on click of submit button
+   * Tiggers an addUserRequest action on click of submit button
    * @param {event} event
+   * @return {null} Returns nothing
    */
   onSubmit(event) {
     event.preventDefault();
@@ -105,8 +110,9 @@ export class AddUser extends Component {
     }
   }
   /**
-   * @return {null} Updates the state as the user types
+   * Updates the state as the user types
    * @param {event} event
+   * @return {null} Returns nothing
    */
   handleSearch(event) {
     const state = this.state;
@@ -117,8 +123,9 @@ export class AddUser extends Component {
     }
   }
   /**
-   * @return {null} Triggers action that fetches the search match
+   * Triggers action that fetches the search match
    * @param {obj} item
+   * @return {null} Returns nothing
    */
   handlePagination(item) {
     const selected = item.selected;
@@ -128,8 +135,9 @@ export class AddUser extends Component {
     });
   }
   /**
-   * @return {String} HTML markup for view component of AddUser
+   * HTML markup for view component of AddUser
    * render method is meant to contain pure function and not mutate the state
+   * @return {String} Returns html markup
    */
   render() {
     const { groups, searchResult } = this.props,
@@ -148,9 +156,9 @@ export class AddUser extends Component {
         <option value="1" ref="group">No Group Created yet</option>;
     }
     if (!isEmpty(searchResult) && this.state.paginatedUsers.length > 0) {
-      filteredUsers = this.state.paginatedUsers.map((user, index) => {
+      filteredUsers = this.state.paginatedUsers.map((user) => {
         return (
-          <p key={index} id="check-box">
+          <p key={user.id} id="check-box">
             <input type="checkbox" className="ch-box"
               onClick={this.onSelectUser}
               value={user.username} id={user.id} name="username"
@@ -168,8 +176,8 @@ export class AddUser extends Component {
             select and add user(s) to a group</h3>
           <div className="select-margin">
             <select className="browser-default"
-            id="select"
-             value={this.state.groupId}
+              id="select"
+              value={this.state.groupId}
               name="groupId" onChange={this.onChange}>
               <option value="1" defaultValue>Select Group</option>
               {groupComponent}
@@ -186,11 +194,13 @@ export class AddUser extends Component {
                     <i className="material-icons" >search</i>
                   </label>
                 </div>
-                {this.state.selected &&
-                  <button type="submit" className="input-group-addon btn">
-                    Add</button>}
+
               </div>
               {!isEmpty(searchResult) && filteredUsers}
+              {this.state.selected &&
+                <button type="submit" className="input-group-addon btn"
+                 onChange={this.handleSearch}>
+                  Add</button>}
             </form>
           </div>
           {this.state.pageCount && <div className="paginate-btn">

@@ -3,10 +3,10 @@ import jwt from 'jsonwebtoken';
 import { SIGN_IN_SUCCESS, SIGN_IN_FAILURE } from './actionTypes';
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched when sign in action
+ * Action dispatched when sign in action
  * is successful
+ * @param {obj} payload
+ * @return {obj} Returns  object containing user detail payload
  */
 export const signIn = (payload) => {
   return {
@@ -16,9 +16,10 @@ export const signIn = (payload) => {
 };
 
 /**
- *
+ * Action dispatched when sign in operation fails
  * @param {obj} payload
- * @return {obj} Action dispatched when sign in operation fails
+ * @return {obj} Returns object containing failure
+ * message payload
  */
 export const signInFailure = (payload) => {
   return {
@@ -28,10 +29,10 @@ export const signInFailure = (payload) => {
 };
 
 /**
- *
- * @param {obj} userData
- * @return {promise} Makes an axios call to authenticate the user and log the
+ *  Makes an axios call to authenticate the user and log the
  * user in
+ * @param {obj} userData
+ * @return {promise} Returns a promise
  */
 export const userSignInRequest = (userData) => {
   return (dispatch) => {

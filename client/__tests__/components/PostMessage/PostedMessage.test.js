@@ -16,6 +16,7 @@ describe('<PostMessage />', () => {
     };
     const state = setup();
   });
+
   it('Component should render correctly', () => {
     const wrapper = shallow(<PostedMessage
      { ...mockData.postedMessage.props } />,
@@ -23,6 +24,7 @@ describe('<PostMessage />', () => {
     expect(wrapper.contains('View message board')).toBe(true);
     expect(wrapper.contains('Messages')).toBe(true);
   });
+
   it('calls componentDidMount', () => {
     sinon.spy(PostedMessage.prototype, 'componentDidMount');
     const wrapper = mount(

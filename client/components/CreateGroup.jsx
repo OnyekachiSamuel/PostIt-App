@@ -16,8 +16,9 @@ import NavBar from '../components/NavBar.jsx';
  */
 class CreateGroup extends React.Component {
   /**
-   * @return {null} Initializes the state and binds the onClick method
+   * Initializes the state and binds the onClick method
    * @param {props} props
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
@@ -28,8 +29,10 @@ class CreateGroup extends React.Component {
     this.signOut = this.signOut.bind(this);
     this.show = this.show.bind(this);
   }
+
   /**
-   * @return {null} makes the jQuery function available on component mount
+   * Makes the jQuery function available on component mount
+   * @return {null} This method returns nothing
    */
   componentDidMount() {
     const { signin } = this.props;
@@ -50,39 +53,46 @@ class CreateGroup extends React.Component {
     $('.button-collapse').sideNav({
       closeOnClick: true
     }
-  );
+    );
   }
+
   /**
-   * @return {null} Triggers the signOutRequest action to clear user data from
+   * Triggers the signOutRequest action to clear user data from
    * the localStorage
+   * @return {null} This method returns nothing
    */
   onClick() {
     this.props.signOutRequest(this.state);
     this.signOut();
   }
+
   /**
-   * @return {null} navigates to the landing page
+   * Handles page navigation to the landing page
+   * @return {null} This method returns nothing
    */
   signOut() {
     this.props.history.push('/');
   }
-  /**
- * @return {null} Function used to show navigation icon
- *  for navigating the webpages
+
+/**
+ * Method used to show navigation icon
+ * for navigating the webpages
+ * @return {boolean} This method returns boolean value
+ *
  */
   show() {
     return false;
   }
-    /**
-   * @return {String} HTML markup for view component of CreateGroup
-   */
+
+/**
+ * Renders HTML markup for view component of CreateGroup
+ * @return {String} Returns html markup
+ */
   render() {
-    const { signin } = this.props;
-    const { user } = signin;
     return (
       <div>
-        <NavBar redirectUrl = {'#'}
-        signOut={this.signOut} show={this.show}/>
+        <NavBar redirectUrl={'#'}
+          signOut={this.signOut} show={this.show} />
         <WhiteBar />
         <div className="container-fluid">
           <div className="row">

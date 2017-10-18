@@ -2,10 +2,10 @@ import axios from 'axios';
 import { FETCH_USER_GROUPS } from './actionTypes';
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched when an
+ * Action dispatched when an
  * axios call is made to get all groups a user belongs to
+ * @param {obj} payload
+ * @return {obj} Returns object with payload of user groups
  */
 export const fetchUserGroups = (payload) => {
   return {
@@ -15,11 +15,11 @@ export const fetchUserGroups = (payload) => {
 };
 
 /**
- *
- * @param {int} userId
- * @return {promise} Makes an axios call to get all groups
+ * Makes an axios call to get all groups
  * a user belongs to. fetchUserGroups action is dispatched on a
  * successful get request
+ * @param {int} userId
+ * @return {promise} Returns a promise
  */
 export const fetchUserGroupRequest = (userId) => {
   return (dispatch) => {

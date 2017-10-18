@@ -1,18 +1,17 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
-import util from 'util';
 import User from '../models/user';
 import UsersGroup from '../models/usersgroup';
+import paginate from './helper/paginate';
 
 env.config();
-// socket(app)
 
 /**
- * @class ApiController
+ * @class UserController
  */
 export default class UserController {
-  /**
+/**
  * Users details are captured by this method on signup and
  *  persisted on the database
  * @param {obj} req
@@ -59,8 +58,8 @@ export default class UserController {
     });
   }
 
-  /**
- *
+/**
+ * This method is used to grant the user access to the application
  * @param {obj} req
  * @param {obj} res
  * @param {obj} next
@@ -105,8 +104,9 @@ export default class UserController {
       }
     });
   }
+
   /**
-   * This method maps users to groups they belong to
+   * This method is used to add user to a particular group
    * @param {*} req
    * @param {*} res
    * @param {*} next
@@ -141,10 +141,12 @@ export default class UserController {
       );
     }
   }
+
   /**
-   * @return {array} Returns arrays of all users in a group
+   * This method is used to get all users in a particular group
    * @param {obj} req
    * @param {obj} res
+   * @return {array} Returns arrays of all users in a group
    */
   static getUsersInGroup(req, res) {
     const groupId = req.params.groupId;
@@ -172,16 +174,18 @@ export default class UserController {
   }
 
   /**
+   * This method handles pagination for searching and adding
+   * user to a group
+   * @param {obj} req
+   * @param {obj} res
    * @return {obj} Returns object containing pageCount and arrays
    *  of users and searchMetadata
-   * @param {*} req
-   * @param {*} res
    */
   static searchUsers(req, res) {
-    const PER_PAGE = 5;
-    const offset = req.query.offset ? parseInt(req.query.offset, 10) : 0,
-      nextOffset = offset + PER_PAGE,
-      previousOffset = (offset - PER_PAGE < 1) ? 0 : offset - PER_PAGE;
+    const limit = req.query.limit || 5,
+      offset = req.query.offset ? parseInt(req.query.offset, 10) : 0,
+      nextOffset = offset + limit,
+      previousOffset = (offset - limit < 1) ? 0 : offset - limit;
     const search = req.query.search.toLowerCase();
     if (search) {
       User.findAndCountAll({
@@ -194,14 +198,13 @@ export default class UserController {
       })
         .then((result) => {
           const users = result.rows;
-          const paginatedUsers = users.slice(offset, offset + PER_PAGE);
-          const searchMetaData = {
-            limit: PER_PAGE,
-            next: util.format('?limit=%s&offset=%s', PER_PAGE, nextOffset),
-            offset: req.query.offset,
-            previous: util.format('?limit=%s&offset=%s', PER_PAGE, previousOffset),
-            total_count: result.count
-          };
+          const paginatedUsers = users.slice(offset, offset + limit);
+          const searchMetaData = paginate(
+            limit,
+            offset,
+            nextOffset,
+            previousOffset,
+            result);
           res.status(200).json({ searchMetaData, paginatedUsers });
         });
     } else {
@@ -210,9 +213,11 @@ export default class UserController {
   }
 
   /**
-   * @return {obj} Returns user token if a user is created
+   * This method is used for google authentication to create account for
+   * the user
    * @param {req} req
    * @param {res} res
+   * @return {obj} Returns user token if a user is created
    */
   static googleAuth(req, res) {
     const name = req.body.name, username = req.body.username.toLowerCase(),

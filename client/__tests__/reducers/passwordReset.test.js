@@ -11,6 +11,7 @@ describe('forget password reducer', () => {
     const newState = forgetPassword(initialState, action);
     expect(newState.message).toBe('Check your email and use the link to reset your password');
   });
+
   it('should update the state on RESET_LINK_FAILURE', () => {
     const data = {
       message: 'User does not exist'
@@ -20,6 +21,7 @@ describe('forget password reducer', () => {
     const newState = forgetPassword(initialState, action);
     expect(newState.error).toBe('User does not exist');
   });
+
   it('should update the state on PASSWORD_RESET_SUCCESS', () => {
     const data = {
       message: 'You have successfully resetted your password'
@@ -29,6 +31,7 @@ describe('forget password reducer', () => {
     const newState = forgetPassword(initialState, action);
     expect(newState.message).toBe('You have successfully resetted your password');
   });
+
   it('should update the state on PASSWORD_RESET_FAILURE', () => {
     const data = {
       message: 'Password mismatch. Retype your password'

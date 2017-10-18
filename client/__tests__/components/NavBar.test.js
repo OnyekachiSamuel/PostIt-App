@@ -11,6 +11,7 @@ describe('<NavBar />', () => {
     };
     const state = setup();
   });
+
   it('NavBar should render correctly ', () => {
     const wrapper = shallow(<NavBar { ...mockData.navBar.props} />);
     const tree = toJson(wrapper);
@@ -18,6 +19,7 @@ describe('<NavBar />', () => {
     expect(tree.children[0].type).toEqual('div');
     expect(wrapper.contains('Sign Out')).toBe(true);
   });
+
   it('should call onClick function on click of signOut button', () => {
     const wrapper = shallow(<NavBar {...mockData.navBar.props} />);
     const button = wrapper.find('#sign-btn');

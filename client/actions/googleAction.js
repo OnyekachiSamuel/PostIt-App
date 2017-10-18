@@ -3,9 +3,10 @@ import jwt from 'jsonwebtoken';
 import { GOOGLE_AUTH_SUCCESS, GOOGLE_AUTH_FAILURE } from './actionTypes';
 
 /**
+ * Action dispatched when signup with google is successful
  * @param {obj} payload
- * @return {obj} Action dispatched when signup with
- * google is successful
+ * @return {obj} Returns object containing the the user object
+ *
  */
 export const googleAuthSuccess = (payload) => {
   return {
@@ -15,10 +16,10 @@ export const googleAuthSuccess = (payload) => {
 };
 
 /**
- *
+ * Action dispatched when signup with google fails
  * @param {obj} payload
- * @return {obj} Action dispatched when signup with
- * google fails
+ * @return {obj} Returns object containing failure
+ * message
  */
 export const googleAuthFailure = (payload) => {
   return {
@@ -28,10 +29,10 @@ export const googleAuthFailure = (payload) => {
 };
 
 /**
- *
- * @param {obj} userData
- * @return {promise} Makes an axios call when a user tries to
+ * Makes an axios call when a user tries to
  * signup or signin with google authentication
+ * @param {obj} userData
+ * @return {promise} Returns a promise
  */
 export const googleAuthRequest = (userData) => {
   return (dispatch) => {

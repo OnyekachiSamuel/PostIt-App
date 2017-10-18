@@ -12,8 +12,9 @@ import { googleAuthRequest } from '../../actions/googleAction';
  */
 export class SignInModal extends React.Component {
   /**
-   * @return {null} Initializes the state and methods bindings
+   * Initializes the state and methods bindings
    * @param {props} props
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
@@ -31,8 +32,9 @@ export class SignInModal extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this);
   }
   /**
-   * @return {null} Triggers the signinRequest action on click of submit button
+   * Triggers the signinRequest action on click of submit button
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onSubmit(event) {
     this.setState({ errors: {} });
@@ -52,9 +54,10 @@ export class SignInModal extends React.Component {
     this.setState({ username: '', email: '', password: '' });
   }
   /**
-   * @return {null} Updates the state as the user types into the
+   * Updates the state as the user types into the
    * input the fields
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onChange(event) {
     const state = this.state;
@@ -62,21 +65,25 @@ export class SignInModal extends React.Component {
     this.setState(state);
   }
   /**
-   * @return {null} updates the component state
+   * Updates the component state for toggle action
+   * in the login form
+   * @return {null} This method returns nothing
    */
   onClick() {
     this.setState({ visible: true });
   }
   /**
-   * @return {null} updates the component state
+   * Updates the component state on click action
+   * @return {null} This method returns nothing
    */
   onClickLogin() {
     this.setState({ visible: false });
   }
 
   /**
-   * @return {null} Gets the user data from google api
+   * Gets the user data from google api
    * @param {obj} response
+   * @return {null} This method returns nothing
    */
   responseGoogle(response) {
     this.setState({
@@ -90,7 +97,8 @@ export class SignInModal extends React.Component {
     this.props.googleAuthRequest(this.state);
   }
   /**
-   * @return {String} HTML markup for view component SignInModal
+   * HTML markup for view component SignInModal
+   * @return {String} Returns html markup
    */
   render() {
     return (
@@ -98,10 +106,11 @@ export class SignInModal extends React.Component {
         <div className="modal-content">
           <div className="modal-title row">
             {!this.state.visible && <div className="col s6 m6">
-              <Link to="#" className="white-text">Sign in</Link>
+              <Link to="#" className="white-text notClickable">Sign in</Link>
             </div>}
             {this.state.visible && <div className="col s6 m6">
-              <Link to="#" className="white-text">Reset Password</Link>
+              <Link to="#"
+              className="white-text notClickable">Reset Password</Link>
             </div>}
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
@@ -121,7 +130,7 @@ export class SignInModal extends React.Component {
               {!this.state.visible &&
                 <div className="input-field col s12">
                   <input id="username" name="username"
-                   value={this.state.username}
+                    value={this.state.username}
                     onChange={this.onChange} type="text" placeholder="Username"
                     className="validate" required />
                 </div>
@@ -143,6 +152,9 @@ export class SignInModal extends React.Component {
               <div id="login" className="toggle"><span> Want to login ? Click
               <Link to="#" onClick={this.onClickLogin} id="loginLink"> here
             </Link> to login</span></div>}
+            <div className="center submit">
+              <button className="btn waves-effect waves-light"
+                type="submit" name="action">Submit</button></div>
             {!this.state.visible && <div className="center google-login">
               <GoogleLogin
                 clientId="1096080119344-dhkm3kesj85jq2au401j1ur243vo58np.apps.googleusercontent.com"
@@ -152,9 +164,6 @@ export class SignInModal extends React.Component {
                 className="google-btn"
               />
             </div>}
-            <div className="center">
-              <button className="btn waves-effect waves-light"
-                type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -178,4 +187,5 @@ export const mapStateToProps = (state) => {
 };
 export default
   connect(mapStateToProps,
-    { forgetPasswordRequest, googleAuthRequest })(withRouter(SignInModal));
+    { forgetPasswordRequest,
+      googleAuthRequest })(withRouter(SignInModal));

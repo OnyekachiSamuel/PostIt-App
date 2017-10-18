@@ -9,8 +9,9 @@ import { createGroup } from '../../actions/groupAction';
  */
 export class GroupModal extends Component {
   /**
-   * @return {null} Initializes the state
+   * Initializes the state
    * @param {obj} props
+   * @return {null} Returns nothing
    */
   constructor(props) {
     super(props);
@@ -22,9 +23,10 @@ export class GroupModal extends Component {
     this.onChange = this.onChange.bind(this);
   }
   /**
-   * @return {null} Triggers the createGroup action that updates the store
+   * Triggers the createGroup action that updates the store
    *  with group details
    * @param {event} event
+   * @return {null} Returns nothing
    */
   onSubmit(event) {
     event.preventDefault();
@@ -32,9 +34,10 @@ export class GroupModal extends Component {
     this.setState({ groupName: '', description: '' });
   }
   /**
-   * @return {null} updates the state with group details as the user types
+   * Updates the state with group details as the user types
    * into the input fields
    * @param {event} event
+   * @return {null} Returns nothing
    */
   onChange(event) {
     const state = this.state;
@@ -42,7 +45,8 @@ export class GroupModal extends Component {
     this.setState(state);
   }
   /**
-   * @return {String} HTML markup for view component of GroupModal
+   * HTML markup for view component of GroupModal
+   * @return {String} Returns html markup
    */
   render() {
     return (
@@ -51,7 +55,8 @@ export class GroupModal extends Component {
           <div className="modal-title">
             <div className="row">
               <div className="col m8 s8">
-                <Link to="#" className="white-text">Group Details</Link>
+                <Link to="#" className="white-text notClickable">
+                Group Details</Link>
               </div>
               <div className="close-modal col m2 s2">
                 <Link to="#" className="modal-close white-text">Close</Link>
@@ -79,8 +84,10 @@ export class GroupModal extends Component {
               </div>
               <div className="row">
                 <div className="col s12">
-                  <button className="btn waves-effect waves-light modal-close modal-btn col s12"
-                    type="submit" name="action">Create</button>
+                  <button
+          className="btn waves-effect waves-light modal-close modal-btn col s12"
+                    type="submit" name="action">Create
+                  </button>
                 </div>
                 </div>
             <div className="modal-footer">

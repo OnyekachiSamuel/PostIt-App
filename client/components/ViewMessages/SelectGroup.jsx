@@ -9,13 +9,15 @@ import { fetchGroupPostRequest, updateGroupId, viewPost } from '../../actions/fe
  */
 export class SelectGroup extends React.Component {
   /**
-   * @return {null} Initializes the state and bind methods
+   * Initializes the state and bind methods
    * @param {obj} props
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
     this.state = {
       groupId: '',
+      groupName: '',
       viewed: false,
       posts: []
     };
@@ -23,17 +25,21 @@ export class SelectGroup extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.formatPostTime = this.formatPostTime.bind(this);
   }
+
   /**
-   * @return {null} Triggers the fetchGroupRequest action to fetch groups on
+   * Triggers the fetchGroupRequest action to fetch groups on
    * component mount
+   * @return {null} This method returns nothing
    */
   componentDidMount() {
     const { signin } = this.props;
     this.props.fetchUserGroupRequest(signin.user.userId);
     this.props.viewPost({ clicked: true });
   }
+
   /**
-   * @return {null} Updates the state with empty posts array
+   * Updates the state with empty posts array
+   * @return {null} This method returns nothing
    */
   componentWillUnmount() {
     this.setState({
@@ -41,32 +47,41 @@ export class SelectGroup extends React.Component {
     });
   }
 
-/**
- * @return {null} Updates the state with groupId as the user selects a group
- * @param {event} event
- */
+  /**
+   * Updates the state with groupId as the user selects a group
+   * @param {event} event
+   * @return {null} This method returns nothinf
+   */
   onChange(event) {
     const state = this.state;
-    state[event.target.name] = event.target.value;
+    const value = event.target.value.split('*');
+    const groupId = Number(value[0]);
+    const groupName = value[1];
+    state[event.target.name] = groupId;
+    state.groupName = groupName;
     this.setState(state);
   }
+
   /**
-   * @return {null} Triggers the action to fetch all posts in a particular group
+   * Triggers the action to fetch all posts in a particular group
+   * @return {null} This method returns nothing
    */
   onClick() {
-    if (this.state.groupId) {
+    if (this.state.groupId && this.state.groupName !== 'Select Group') {
       this.props.fetchGroupPostRequest(this.state.groupId)
-      .then(() => {
-        this.setState({
-          posts: this.props.groupPost.posts,
-          viewed: true
+        .then(() => {
+          this.setState({
+            posts: this.props.groupPost.posts,
+            viewed: true
+          });
         });
-      });
     }
   }
-    /**
-   * @return {string} Returns the string output for the formatted date
+
+  /**
+   * This method is used to format time string
    * @param {string} date
+   * @return {string} Returns the string output for the formatted date
    */
   formatPostTime(date) {
     if (date) {
@@ -80,67 +95,78 @@ export class SelectGroup extends React.Component {
       return time;
     }
   }
+
   /**
+   * Renders the html markup for SelectGroup component
    * @return {String} HTML markup for view component of SelectGroup
    */
   render() {
     const { groups } = this.props;
-    let selectGroup, groupPostComponent;
+    let groupPostComponent = <p className="center">
+      Select and click the view button to view posted messages</p>;
+    let selectGroup;
     if (groups.length > 0) {
       selectGroup = groups.map((group, index) => {
         return (
-          <option value={group.groupId} key={index}>{group.groupName}</option>
+          <option value={`${group.groupId} * ${group.groupName} `}
+           key={index}>{group.groupName}</option>
         );
       });
     }
 
     if (this.state.posts && !this.props.groupPost.clicked
-    && this.state.posts.length > 0) {
+      && this.state.posts.length > 0) {
       groupPostComponent = this.state.posts.map((post, index) => {
         return (
-            <div key={index}>
+          <div key={index}>
             <div className="post"><p>Posted by <b>{post.username}</b></p></div>
             <div className="post-date"><p>{this.formatPostTime(post.createdAt)}
-              </p></div>
+            </p></div>
             <input disabled value={post.message} id="disabled" type="text"
               className="validate posted-text" />
-              </div>
+          </div>
         );
       });
-    } else {
-      groupPostComponent =
-      <p className="center">Select a group to view posted messages</p>;
+    } else if (this.props.groupPost.message !== undefined) {
+      groupPostComponent = <p className="center">
+        {this.props.groupPost.message}</p>;
     }
+
     return (
       <div className="container-fluid">
         <div className="row">
-        <div className="whitespace">
-          <div className="col m4 col s12">
-            <div className="center">
-              <select className="browser-default center" name="groupId"
-              onChange={this.onChange}>
-                <option value="" defaultValue>Select Group</option>
-                {selectGroup}
-              </select>
-              <div />
-              <div className="center view-btn">
-              <button className="btn waves-effect waves-light"
-              onClick={this.onClick}>View</button>
+          <div className="whitespace">
+            <div className="col m4 col s12">
+              <div className="center">
+                <select className="browser-default center" name="groupId"
+                  onChange={this.onChange}>
+                  <option value={'0 * '} defaultValue>Select Group</option>
+                  {selectGroup}
+                </select>
+                <div />
+                <div className="center view-btn">
+                  <button className="btn waves-effect waves-light"
+                    onClick={this.onClick}>View</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className="whitespace">
-          <div className="col m8 col s12">
-            <div>
-              <div className="card center green-text group-name">
-                Message Board</div>
-              <div className="input-field container posts scroll" >
-                {groupPostComponent}
+          <div className="whitespace">
+            <div className="col m8 col s12">
+              <div>
+                {!this.state.viewed &&
+                  <div className="card center green-text group-name">
+                    Message Board</div>}
+                {this.state.viewed &&
+                  <div className="card center green-text group-name">
+                    {`${this.state.groupName} Message Board`}
+                  </div>}
+                <div className="input-field container posts scroll" >
+                  {groupPostComponent}
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
       </div>
     );

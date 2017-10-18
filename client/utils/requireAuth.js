@@ -9,15 +9,18 @@ const requireAuth = (ComposedComponent) => {
    */
   class Authenticate extends React.Component {
     /**
-     * @return {null} Checks if the user is authenticated
+     * Checks if the user is authenticated
+     * @return {null} This method returns nothing
      */
     componentWillMount() {
       if (!this.props.isAuthenticated) {
         this.props.history.push('/');
       }
     }
-      /**
-   * @return {String} HTML markup for view component
+
+  /**
+   * Renders HTML markup for view component
+   * @return {String} Returns html markup for view component
    *
    */
     render() {

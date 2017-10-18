@@ -12,7 +12,7 @@ The link to the **App** hosted on heruko is  [PostIt App](http://postico.herokua
 
 
 ### API Documentation
-- Check out the link [PostIt API Documentation](https://onyekachisamuel.github.io/slate) for a detailed walk through on the API and how to consume it.
+- Check out the link [PostIt API Documentation](http://postit-doc.getforge.io) for a detailed walk through on the API and how to consume it.
 
 ## Installation
 

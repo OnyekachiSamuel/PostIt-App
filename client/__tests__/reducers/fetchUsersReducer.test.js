@@ -15,6 +15,7 @@ describe('Fetch  User Reducer', () => {
     expect(newState.pagenatedUsers[2].id).toEqual(8);
     expect(newState.pagenatedUsers[2].username).toEqual('Jane');
   });
+
   it('should return default state when no action Type is matched', () => {
     const newState = fetchUsersReducer([], {
       type: 'NO_ACTION_MATCH'

@@ -13,6 +13,7 @@ describe('<ComposeMessage />', () => {
     expect(tree.type).toBe('div');
     expect(wrapper.contains('View members')).toBe(true);
   });
+
   it(`should call the onChange method to update t
   he state on the selection of message priority`, () => {
     const wrapper = shallow(
@@ -21,6 +22,7 @@ describe('<ComposeMessage />', () => {
     select.simulate('change', mockData.composeMessage.target);
     expect(wrapper.state().priority).toEqual('Urgent');
   });
+
   it('should call onSubmit function on click of post botton', () => {
     const wrapper = shallow(
     <ComposeMessage {...mockData.composeMessage.props} />);

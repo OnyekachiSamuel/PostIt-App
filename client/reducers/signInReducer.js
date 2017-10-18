@@ -8,12 +8,11 @@ const initialState = {
 };
 
 /**
- *
+ * This reducer updates the state with
+ * the login detail of the user
  * @param {obj} state
  * @param {obj} action
- * @return {obj} This reducer updates the state with
- * the login detail of the user
- *  Here the state is reduced based on the action object and
+ * @return {obj} Here the state is reduced based on the action object and
  *  a new start returned
  */
 const signinReducer = (state = initialState, action) => {

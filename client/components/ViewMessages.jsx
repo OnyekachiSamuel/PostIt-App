@@ -35,14 +35,17 @@ class ViewMessages extends React.Component {
   }
 
 /**
- * @return {null} Function used to show navigation icon
+ * This method is used to show navigation icon
  *  for navigating the webpages
+ *  @return {null} This method returns boolean value
  */
   show() {
     return true;
   }
-    /**
-   * @return {String} HTML markup for view component of ViewMessages
+
+  /**
+   * Renders HTML markup for view component of ViewMessages
+   * @return {String} Returns html markup for ViewMessage component
    */
   render() {
     const { groupInfo } = this.props;

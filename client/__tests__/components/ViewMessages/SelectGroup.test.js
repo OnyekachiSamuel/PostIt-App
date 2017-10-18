@@ -14,24 +14,28 @@ describe('<SelectGroup />', () => {
     };
     const state = setup();
   });
+
   it('Component should render correctly', () => {
     const wrapper = shallow(<SelectGroup { ...mockData.selectGroup.props } />);
     const tree = toJson(wrapper);
     expect(tree.type).toBe('div');
     expect(tree.children[0].type).toEqual('div');
   });
+
   it('should call componentDidMount', () => {
     sinon.spy(SelectGroup.prototype, 'componentDidMount');
     const wrapper = mount(<SelectGroup {...mockData.selectGroup.props } />);
     expect(SelectGroup.prototype.componentDidMount.calledOnce).toBe(true);
     expect(wrapper.node.state.groupId).toEqual('');
   });
+
   it('should call onChange event on the selection of group', () => {
     const wrapper = shallow(<SelectGroup { ...mockData.selectGroup.props } />);
     const btn = wrapper.find('.browser-default');
     btn.simulate('change', mockData.selectGroup.target);
-    expect(wrapper.state().groupId).toEqual('23');
+    expect(wrapper.state().groupId).toEqual(23);
   });
+
   it('should call onClick function on the click of view button', () => {
     const wrapper = shallow(<SelectGroup { ...mockData.selectGroup.props } />);
     const btn = wrapper.find('.btn');

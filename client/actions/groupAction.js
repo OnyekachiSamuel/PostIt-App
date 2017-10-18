@@ -2,10 +2,11 @@ import axios from 'axios';
 import { GROUP_CREATION_SUCCESS, GROUP_CREATION_FAILURE, FETCH_USERS_ID, GROUP_MEMBERS_UPDATE } from './actionTypes';
 
 /**
- *
+ * Action dispatched when group creation is successful
  * @param {obj} payload
- * @return {obj} Action dispatched when group
- * creation is successful
+ * @return {obj} Returns object with payload
+ *
+ *
  */
 export const createGroupSuccess = (payload) => {
   return {
@@ -15,9 +16,10 @@ export const createGroupSuccess = (payload) => {
 };
 
 /**
- *
+ * Action dispatched when group creation fails
  * @param {obj} errors
- * @return {obj} Action dispatched when group creation fails
+ * @return {obj} Returns object with error message payload
+ *
  */
 export const createGroupFailure = (errors) => {
   return {
@@ -27,10 +29,11 @@ export const createGroupFailure = (errors) => {
 };
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched when get request
+ * Action dispatched when get request
  * for group members is successful
+ * @param {obj} payload
+ * @return {obj} Returns object with array of members payload
+ *
  */
 export const getMembers = (payload) => {
   return {
@@ -40,10 +43,10 @@ export const getMembers = (payload) => {
 };
 
 /**
- *
+ * Action dispatched to handle users added to a group
  * @param {obj} payload
- * @return {obj} Action dispatched to handle users added to a
- * group
+ * @return {obj} Returns object with payload
+ *
  */
 export const updateGroupMembers = (payload) => {
   return {
@@ -53,12 +56,13 @@ export const updateGroupMembers = (payload) => {
 };
 
 /**
- *
- * @param {obj} groupDetails
- * @return {promise} Makes an axios call to create a new group.
+ * Makes an axios call to create a new group.
  * createGroupSuccess action is dispatched on successful group
  * creation and createGroupFailure is dispatched on failed
  * operation
+ * @param {obj} groupDetails
+ * @return {promise} Returns a promise
+ *
  */
 export const createGroup = (groupDetails) => {
   return (dispatch) => {
@@ -74,10 +78,11 @@ export const createGroup = (groupDetails) => {
 };
 
 /**
- *
- * @param {obj} groupId
- * @return {promise} Makes an axios call to get members that belongs to a
+ * Makes an axios call to get members that belongs to a
  * particular group.
+ * @param {obj} groupId
+ * @return {promise} Returns a promise
+ *
  */
 export const fetchGroupUsers = (groupId) => {
   return (dispatch) => {

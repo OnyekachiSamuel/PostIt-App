@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
  /**
-   * @return {String} HTML markup for NotFound page
+  * Renders HTML markup for NotFound page
+   * @return {String} Returns html markup for NotFoundPage component
    */
 export const NotFoundPage = () => {
   return (

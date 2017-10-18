@@ -2,9 +2,9 @@ import { SIGN_OUT_SUCCESS } from './actionTypes';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 
 /**
- *
+ * Action dispatched to log the user out
  * @param {obj} payload
- * @return {obj} Action dispatched to log the user out
+ * @return {obj} Returns empty object as payload
  */
 export const signout = (payload) => {
   return {
@@ -14,8 +14,9 @@ export const signout = (payload) => {
 };
 
 /**
- * @return {null} Handles removing the token from the
+ * Handles removing the token from the
  * localStorage to log the user out
+ * @return {null} Returns a promise
  */
 export const signOutRequest = () => {
   return (dispatch) => {

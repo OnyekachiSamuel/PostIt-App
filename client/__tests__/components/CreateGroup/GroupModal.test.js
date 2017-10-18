@@ -11,12 +11,14 @@ describe('<GroupModal />', () => {
     expect(tree.type).toBe('div');
     expect(tree.props).toEqual({ className: 'modal', id: 'modal3' });
   });
+
   it('should call onChange method on change in input for group creation modal', () => {
     const wrapper = shallow(<GroupModal { ...mockData.groupModal.props } />);
     const input = wrapper.find('#groupName');
     input.simulate('change', mockData.groupModal.event);
     expect(wrapper.state().groupName).toEqual('Andela Team 08');
   });
+
   it('should call onSubmit function on click of create button', () => {
     const wrapper = shallow(<GroupModal {...mockData.groupModal.props } />);
     const btn = wrapper.find('#formData');

@@ -1,13 +1,11 @@
 import { FETCH_USERS_ID, GROUP_MEMBERS_UPDATE } from '../actions/actionTypes';
 
 /**
- *
- * @param {obj} state
- * @param {obj} action
- * @return {obj}
  * This reducer handles updating the state with members that belongs
  * to same group.
- * Here the state is reduced based on the action object and
+ * @param {obj} state
+ * @param {obj} action
+ * @return {obj} Here the state is reduced based on the action object and
  *  a new start returned
  */
 const getGroupMembers = (state = [], action) => {

@@ -1,5 +1,6 @@
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbnJ5IiwidXNlcklkIjo0MiwiZW1haWwiOiJoZW5yeUBnbWFpbC5jb20iLCJuYW1lIjoiSGVucnkiLCJpYXQiOjE1MDQ3ODQ3NDYsImV4cCI6MTUwNDg3MTE0Nn0.Uad3SxnImwsXnjFI6ECTlSMt8Cpxamn0jD9NrlMxlW0';
+const token1 = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhlbnJ5IiwidXNlcklkIjo0MiwiZW1haWwiOiJoZW5yeUBnbWFpbC5jb20iLCJuYW1lIjoiSGVucnkiLCJpYXQiOjE1MDQzOTY2NjgsImV4cCI6MTUwNDQ4MzA2OH0.-vPaGB4OsnJc8e_Ini4nq4COog71q-zh1EAIim35GOw';
 const actionsMockData = {
   addUserAction: {
     response: [
@@ -271,6 +272,71 @@ const actionsMockData = {
       }
     },
     payload: 'Whitespace character is not allowed'
+  },
+  signIn: {
+    userToken: token1,
+    userData: {
+      username: 'henry',
+      password: 'hen'
+    },
+    response: {
+      status: 200,
+      email: 'henry@gmail.com',
+      userId: 42,
+      username: 'henry',
+      data: {
+        token1
+      }
+    },
+    payload: {
+      username: 'henry',
+      userId: 42,
+      email: 'henry@gmail.com',
+      name: 'Henry',
+      iat: 1504396668,
+      exp: 1504483068
+    },
+    userData1: {
+      username: 'henry',
+      password: 'hen'
+    },
+    res: {
+      status: 200,
+      response: {
+        data: {
+          message: 'Invalid password'
+        }
+      }
+    }
+  },
+  signUp: {
+    userData: {
+      name: 'Henry',
+      username: 'hen',
+      email: 'henry@gmail.com',
+      phone: '07062489846',
+      password: 'hen',
+      confirmPassword: 'hem'
+    },
+    payload: {
+      username: 'henry',
+      userId: 42,
+      email: 'henry@gmail.com',
+      name: 'Henry',
+      iat: 1504393462,
+      exp: 1504479862
+    },
+    userData2: {
+      status: 200,
+      id: 42,
+      name: 'henry',
+      username: 'hen',
+      email: 'henry@gmail.com',
+      phone: '07062489846',
+      password: 'hen',
+      confirmPassword: 'hen'
+    },
+    
   }
 };
 export default actionsMockData;

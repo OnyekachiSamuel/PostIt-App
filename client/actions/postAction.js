@@ -3,10 +3,10 @@ import { POST_MESSAGE_SUCCESSFUL, POST_MESSAGE_FAILURE } from './actionTypes';
 
 
 /**
- *
- * @param {obj} payload
- * @return {obj} Action dispatched when message post
+ * Action dispatched when message post
  * is successful
+ * @param {obj} payload
+ * @return {obj} Returns object containing user message
  */
 export const postedMessage = (payload) => {
   return {
@@ -16,9 +16,10 @@ export const postedMessage = (payload) => {
 };
 
 /**
- *
+ * Action dispatched when message posting fails
  * @param {obj} payload
- * @return {obj} Action dispatched when message posting fails
+ * @return {obj} Returns object containing failure
+ * message payload
  */
 export const postedMessageFailure = (payload) => {
   return {
@@ -28,10 +29,10 @@ export const postedMessageFailure = (payload) => {
 };
 
 /**
- *
+ * Makes an axios call to create a post in a group
  * @param {obj} messageContent
  * @param {int} groupId
- * @return {obj} Makes an axios call to create a post in a group
+ * @return {obj} Returns a promise
  */
 export const postRequest = (messageContent, groupId) => {
   return (dispatch) => {
