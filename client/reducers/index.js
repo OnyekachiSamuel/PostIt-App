@@ -8,11 +8,13 @@ import addUser from './addUserReducer';
 import fetchMembers from './fetchGroupMembers';
 import groupPost from './groupPostReducer';
 import forgetPassword from './forgetPasswordReducer';
-import notificationReducer from '../reducers/notificationReducer';
 import groupId from '../reducers/updateGroupId';
+import groupInfo from '../reducers/updateGroupInfo';
+import groupMembers from '../reducers/getGroupMembers';
 
 
-const rootReducer = combineReducers({ signup,
+const rootReducer = combineReducers({
+  signup,
   signin,
   groups,
   searchResult,
@@ -21,8 +23,9 @@ const rootReducer = combineReducers({ signup,
   fetchMembers,
   groupPost,
   forgetPassword,
-  notificationReducer,
-  groupId
+  groupId,
+  groupInfo,
+  groupMembers
 });
 
 export default rootReducer;

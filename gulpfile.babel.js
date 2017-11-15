@@ -1,14 +1,12 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
-// import nodemon from 'gulp-nodemon';
 import coveralls from 'gulp-coveralls';
 import istanbul from 'gulp-babel-istanbul';
 import injectModules from 'gulp-inject-modules';
 import jasmine from 'gulp-jasmine';
-// import cover from 'gulp-coverage';
 import exit from 'gulp-exit';
 
-// Run the tests
+
 gulp.task('run-test', () => {
   gulp.src(['server/spec/routesSpec.js'])
     .pipe(babel())
@@ -17,7 +15,7 @@ gulp.task('run-test', () => {
     .pipe(exit());
 });
 
-// Run client-side test
+
 gulp.task('client-test', () => {
   gulp.src(['client/tests/HomePage.test.js'])
     .pipe(babel())
@@ -26,9 +24,14 @@ gulp.task('client-test', () => {
     .pipe(exit());
 });
 
-// Generate the coverage report
+
 gulp.task('coverage', () => {
-  gulp.src(['server/controllers/controller.js', 'server/middlewares/validator.js'])
+  gulp.src(['server/controllers/UserController.js',
+    'server/controllers/GroupController.js',
+    'server/controllers/MessageController.js',
+    'server/models/*.js',
+    'server/middlewares/Validator.js',
+    'server/middlewares/EnsureToken.js'])
     .pipe(istanbul())
     .pipe(istanbul.hookRequire())
     .on('finish', () => {

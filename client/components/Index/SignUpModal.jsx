@@ -13,8 +13,9 @@ import { googleAuthRequest } from '../../actions/googleAction';
  */
 export class SignUpModal extends React.Component {
   /**
-   * @return {null} Initializes the state and method binding
+   * Initializes the state and method binding
    * @param {obj} props
+   * @return {null} This method returns nothing
    */
   constructor(props) {
     super(props);
@@ -32,8 +33,9 @@ export class SignUpModal extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this);
   }
   /**
-   * @return {null} Triggers the signupRequest action on submit button click
+   * Triggers the signupRequest action on submit button click
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onSubmit(event) {
     this.setState({ errors: {} });
@@ -48,18 +50,22 @@ export class SignUpModal extends React.Component {
       confirmPassword: ''
     });
   }
+
   /**
-   * @return {null} Updates the state as the user types into the input field
+   * Updates the state as the user types into the input field
    * @param {event} event
+   * @return {null} This method returns nothing
    */
   onChange(event) {
     const state = this.state;
     state[event.target.name] = event.target.value;
     this.setState(state);
   }
-  /**
- * @return {null} Gets the user data from google api
+
+/**
+ * Gets the user data from google api
  * @param {obj} response
+ * @return {null} This method returns nothing
  */
   responseGoogle(response) {
     this.setState({
@@ -72,8 +78,10 @@ export class SignUpModal extends React.Component {
     });
     this.props.googleAuthRequest(this.state);
   }
+
   /**
-   * @return {String} HTML markup for view component of SignUpModal
+   * HTML markup for view component of SignUpModal
+   * @return {String} Returns html markup
    */
   render() {
     const { signup } = this.props;
@@ -82,52 +90,69 @@ export class SignUpModal extends React.Component {
       <div className="row modal" id="modal1">
         <div className="modal-content">
           <div className="modal-title row">
-            <div className="col s6 m6">
-              <Link to="#" className="white-text">Sign up</Link>
+            <div className="col s8 m8">
+              <Link to="#" className="white-text notClickable">Sign up</Link>
             </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
             </div>
           </div>
-          <form className="col s12" method="post" onSubmit={this.onSubmit}>
+          <form className="col s12 formData" method="post"
+            onSubmit={this.onSubmit}>
             <div className="row test">
-              {!isEmpty(errors) && errors.name && <span className="err-msg">{errors.name}</span>}
+              {!isEmpty(errors) && errors.name && <span className="err-msg">
+                {errors.name}</span>}
               <div className="input-field col s12 test">
-                <input id="name" name='name' value={this.state.name} placeholder="Full name"
-                  type="text" onChange={this.onChange} className="validate" required />
+                <input id="name" name='name' value={this.state.name}
+                  placeholder="Full name"
+                  type="text" onChange={this.onChange}
+                  className="validate" required />
               </div>
               {!isEmpty(errors) && errors.username &&
                 <span className="err-msg">{errors.username}</span>}
               <div className="input-field col s12 test">
-                <input id="user_name" name="username" value={this.state.username}
+                <input id="user_name" name="username"
+                  value={this.state.username}
                   onChange={this.onChange} type="text"
                   placeholder="Username" className="validate" required />
               </div>
-              {!isEmpty(errors) && errors.email && <span className="err-msg">{errors.email}</span>}
+              {!isEmpty(errors) && errors.email && <span className="err-msg">
+                {errors.email}</span>}
               <div className="input-field col s12 test">
-                <input id="email" name="email" value={this.state.email} placeholder="Email"
-                  onChange={this.onChange} type="email" className="validate" required />
+                <input id="email" name="email" value={this.state.email}
+                  placeholder="Email"
+                  onChange={this.onChange} type="email"
+                  className="validate" required />
               </div>
-              {!isEmpty(errors) && errors.phone && <span className="err-msg">{errors.phone}</span>}
+              {!isEmpty(errors) && errors.phone && <span className="err-msg">
+                {errors.phone}</span>}
               <div className="input-field col s12 test">
-                <input id="phone" name="phone" value={this.state.phone} placeholder="Phone number"
-                  onChange={this.onChange} type="tel" className="validate" required />
+                <input id="phone" name="phone" value={this.state.phone}
+                  placeholder="Phone number"
+                  onChange={this.onChange} type="tel"
+                  className="validate" required />
               </div>
               {!isEmpty(errors) && errors.password &&
                 <span className="err-msg">{errors.password}</span>}
               <div className="input-field col s12 test">
                 <input id="password" name='password' value={this.state.password}
                   placeholder="Password"
-                  onChange={this.onChange} type="password" className="validate" required />
+                  onChange={this.onChange} type="password"
+                  className="validate" required />
               </div>
               {!isEmpty(errors) && errors.confirmPassword &&
                 <span className="err-msg">{errors.confirmPassword}</span>}
-              <div className="input-field col s12 test" style={{ marginBottom: '10px' }}>
+              <div className="input-field col s12 test confirm">
                 <input id="confirm_password" name='confirmPassword'
-                  value={this.state.confirmPassword} placeholder="Confirm password"
-                  onChange={this.onChange} type="password" className="validate" required />
+                  value={this.state.confirmPassword}
+                  placeholder="Confirm password"
+                  onChange={this.onChange} type="password" className="validate"
+                  required />
               </div>
             </div>
+            <div className="center submit">
+              <button className="btn waves-effect waves-light"
+                type="submit" name="action">Submit</button></div>
             <div className="row">
               <div>
                 <GoogleLogin
@@ -139,8 +164,6 @@ export class SignUpModal extends React.Component {
                 />
               </div>
             </div>
-            <div className="center"><button className="btn waves-effect waves-light"
-              type="submit" name="action">Submit</button></div>
             <div className="modal-footer">
               <Link to="#!"></Link>
             </div>
@@ -156,12 +179,13 @@ SignUpModal.propTypes = {
   googleAuthRequest: PropTypes.func.isRequired
 };
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { signup } = state;
   return {
     signup
   };
 };
 
-export default connect(mapStateToProps, { googleAuthRequest })(withRouter(SignUpModal));
+export default connect(mapStateToProps,
+  { googleAuthRequest })(withRouter(SignUpModal));
 

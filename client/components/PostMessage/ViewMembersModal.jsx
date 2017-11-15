@@ -6,22 +6,22 @@ import { fetchMembersRequest } from '../../actions/fetchMembers';
 
 
 /**
- * @class
+ * @class ViewMembers
  */
 export class ViewMembers extends React.Component {
   /**
    * Executes asyn operation to get all members in a particular group
-   * @return {*} Triggers asyn action that updates the store with group members data
+   * Triggers asyn action that updates the store with
+   * group members data
+   * @return {null} This method returns nothing
    */
   componentDidMount() {
-    if (localStorage.token) {
-      const groupId = this.props.match.params.groupId;
-      this.props.fetchMembersRequest(groupId);
-    }
+    const groupId = this.props.match.params.groupId;
+    this.props.fetchMembersRequest(groupId);
   }
+
   /**
   * Renders view component of members
-  *
   * @return {String} HTML markup for view component of members
   */
   render() {
@@ -30,7 +30,8 @@ export class ViewMembers extends React.Component {
     if (members.length > 0) {
       memberComponent = members.map((member, index) => {
         return (
-          <div className="center" key={index}><Link to="#">{member.username}</Link></div>
+          <div className="center" key={index}>
+            <Link to="#">{member.username}</Link></div>
 
         );
       });
@@ -40,7 +41,7 @@ export class ViewMembers extends React.Component {
         <div className="modal-content">
           <div className="modal-title row">
             <div className="col s6 m6 center">
-              <Link to="#" className="white-text">Members</Link>
+              <Link to="#" className="white-text notClickable">Members</Link>
             </div>
             <div className="close-modal">
               <Link to="#" className="modal-close">Close</Link>
@@ -55,7 +56,7 @@ export class ViewMembers extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { fetchMembers } = state;
   return {
     fetchMembers
@@ -63,4 +64,5 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps, { fetchMembersRequest })(withRouter(ViewMembers));
+export default connect(mapStateToProps,
+{ fetchMembersRequest })(withRouter(ViewMembers));

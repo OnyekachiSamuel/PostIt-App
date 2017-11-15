@@ -11,7 +11,7 @@ const setAuthorizationToken = jest.fn();
 setAuthorizationToken(false);
 
 describe('Sign out action', () => {
-  it('should dispatch SIGN_OUT_SUCCESS action', async () => {
+  it('should dispatch SIGN_OUT_SUCCESS action on succesful logout', async () => {
     const expectedAction = {
       type: SIGN_OUT_SUCCESS,
       payload: {}

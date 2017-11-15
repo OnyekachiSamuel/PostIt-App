@@ -3,41 +3,24 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { fetchUsersRequest } from '../../actions/fetchUsers';
 import { FETCH_USERS_SUCCESS } from '../../actions/actionTypes';
+import mockData from '../../__mocks__/actionsMockData';
 
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('FETCH USERS ACTION', () => {
-  it('should dispatch FETCH_USERS_SUCCEES action', async () => {
+  it('should dispatch FETCH_USERS_SUCCEES action on successful request', async () => {
     const userData = {
       offset: 0,
       search: 'adam'
     };
-    const response = {
-      data: {
-        pageCount: 3,
-        users: [
-          { id: 34, username: 'Helen' },
-          { id: 35, username: 'Adam' }
-
-        ]
-      }
-    };
     const expectedAction = {
       type: FETCH_USERS_SUCCESS,
-      payload: {
-        data: {
-          pageCount: 3,
-          users: [
-          { id: 34, username: 'Helen' },
-          { id: 35, username: 'Adam' }
-          ]
-        }
-      }
+      payload: mockData.fetchUsers.payload
     };
     axios.get = jest.fn(() => {
-      return Promise.resolve(response);
+      return Promise.resolve(mockData.fetchUsers.response);
     });
     const store = mockStore({ payload: {} }, expectedAction);
     await store.dispatch(fetchUsersRequest(userData)).then(() => {
